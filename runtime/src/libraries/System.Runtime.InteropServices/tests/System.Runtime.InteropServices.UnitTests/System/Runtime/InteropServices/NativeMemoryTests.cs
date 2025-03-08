@@ -48,20 +48,30 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void AlignedAllocOOMTest()
         {
-            Assert.Throws<OutOfMemoryException>(() => NativeMemory.AlignedAlloc(nuint.MaxValue - ((uint)sizeof(nuint) - 1), (uint)sizeof(nuint)));
+            Assert.Throws<OutOfMemoryException>(() =>
+                NativeMemory.AlignedAlloc(
+                    nuint.MaxValue - ((uint)sizeof(nuint) - 1),
+                    (uint)sizeof(nuint)
+                )
+            );
         }
 
         [Fact]
         public void AlignedAllocZeroAlignmentTest()
         {
-            Assert.Throws<ArgumentException>(() => NativeMemory.AlignedAlloc((uint)sizeof(nuint), 0));
+            Assert.Throws<ArgumentException>(() => NativeMemory.AlignedAlloc((uint)sizeof(nuint), 0)
+            );
         }
 
         [Fact]
         public void AlignedAllocNonPowerOfTwoAlignmentTest()
         {
-            Assert.Throws<ArgumentException>(() => NativeMemory.AlignedAlloc((uint)sizeof(nuint), (uint)sizeof(nuint) + 1));
-            Assert.Throws<ArgumentException>(() => NativeMemory.AlignedAlloc((uint)sizeof(nuint), (uint)sizeof(nuint) * 3));
+            Assert.Throws<ArgumentException>(() =>
+                NativeMemory.AlignedAlloc((uint)sizeof(nuint), (uint)sizeof(nuint) + 1)
+            );
+            Assert.Throws<ArgumentException>(() =>
+                NativeMemory.AlignedAlloc((uint)sizeof(nuint), (uint)sizeof(nuint) * 3)
+            );
         }
 
         [Fact]
@@ -85,9 +95,13 @@ namespace System.Runtime.InteropServices.Tests
             // *       ulong.MaxValue + 7 == 6, so overflows and is less than alignment
 
             nuint maxAlignment = (nuint)1 << ((sizeof(nuint) * 8) - 1);
-            Assert.Throws<OutOfMemoryException>(() => NativeMemory.AlignedAlloc(maxAlignment + 1, maxAlignment));
+            Assert.Throws<OutOfMemoryException>(() =>
+                NativeMemory.AlignedAlloc(maxAlignment + 1, maxAlignment)
+            );
 
-            Assert.Throws<OutOfMemoryException>(() => NativeMemory.AlignedAlloc(nuint.MaxValue, (uint)sizeof(nuint)));
+            Assert.Throws<OutOfMemoryException>(() =>
+                NativeMemory.AlignedAlloc(nuint.MaxValue, (uint)sizeof(nuint))
+            );
         }
 
         [Fact]
@@ -168,7 +182,9 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void AlignedReallocNullPtrOOMTest()
         {
-            Assert.Throws<OutOfMemoryException>(() => NativeMemory.AlignedRealloc(null, nuint.MaxValue, (uint)sizeof(nuint)));
+            Assert.Throws<OutOfMemoryException>(() =>
+                NativeMemory.AlignedRealloc(null, nuint.MaxValue, (uint)sizeof(nuint))
+            );
         }
 
         [Fact]
@@ -190,7 +206,9 @@ namespace System.Runtime.InteropServices.Tests
             Assert.True(ptr != null);
             Assert.True((nuint)ptr % (uint)sizeof(nuint) == 0);
 
-            Assert.Throws<ArgumentException>(() => NativeMemory.AlignedRealloc(ptr, (uint)sizeof(nuint), 0));
+            Assert.Throws<ArgumentException>(() =>
+                NativeMemory.AlignedRealloc(ptr, (uint)sizeof(nuint), 0)
+            );
             NativeMemory.AlignedFree(ptr);
         }
 
@@ -202,8 +220,12 @@ namespace System.Runtime.InteropServices.Tests
             Assert.True(ptr != null);
             Assert.True((nuint)ptr % (uint)sizeof(nuint) == 0);
 
-            Assert.Throws<ArgumentException>(() => NativeMemory.AlignedRealloc(ptr, (uint)sizeof(nuint), (uint)sizeof(nuint) + 1));
-            Assert.Throws<ArgumentException>(() => NativeMemory.AlignedRealloc(ptr, (uint)sizeof(nuint), (uint)sizeof(nuint) * 3));
+            Assert.Throws<ArgumentException>(() =>
+                NativeMemory.AlignedRealloc(ptr, (uint)sizeof(nuint), (uint)sizeof(nuint) + 1)
+            );
+            Assert.Throws<ArgumentException>(() =>
+                NativeMemory.AlignedRealloc(ptr, (uint)sizeof(nuint), (uint)sizeof(nuint) * 3)
+            );
             NativeMemory.AlignedFree(ptr);
         }
 
@@ -276,7 +298,9 @@ namespace System.Runtime.InteropServices.Tests
         {
             Assert.Throws<OutOfMemoryException>(() => NativeMemory.Alloc(1, nuint.MaxValue));
             Assert.Throws<OutOfMemoryException>(() => NativeMemory.Alloc(nuint.MaxValue, 1));
-            Assert.Throws<OutOfMemoryException>(() => NativeMemory.Alloc(nuint.MaxValue, nuint.MaxValue));
+            Assert.Throws<OutOfMemoryException>(() =>
+                NativeMemory.Alloc(nuint.MaxValue, nuint.MaxValue)
+            );
         }
 
         [Fact]
@@ -336,7 +360,9 @@ namespace System.Runtime.InteropServices.Tests
         {
             Assert.Throws<OutOfMemoryException>(() => NativeMemory.AllocZeroed(1, nuint.MaxValue));
             Assert.Throws<OutOfMemoryException>(() => NativeMemory.AllocZeroed(nuint.MaxValue, 1));
-            Assert.Throws<OutOfMemoryException>(() => NativeMemory.AllocZeroed(nuint.MaxValue, nuint.MaxValue));
+            Assert.Throws<OutOfMemoryException>(() =>
+                NativeMemory.AllocZeroed(nuint.MaxValue, nuint.MaxValue)
+            );
         }
 
         [Fact]
@@ -524,9 +550,18 @@ namespace System.Runtime.InteropServices.Tests
 
             NativeMemory.Clear(ptr + bodyOffset, (nuint)bodyLength);
 
-            Assert.Equal(-1, new Span<byte>(ptr + headOffset, headLength).IndexOfAnyExcept((byte)0b10101010));
-            Assert.Equal(-1, new Span<byte>(ptr + bodyOffset, bodyLength).IndexOfAnyExcept((byte)0));
-            Assert.Equal(-1, new Span<byte>(ptr + tailOffset, tailLength).IndexOfAnyExcept((byte)0b10101010));
+            Assert.Equal(
+                -1,
+                new Span<byte>(ptr + headOffset, headLength).IndexOfAnyExcept((byte)0b10101010)
+            );
+            Assert.Equal(
+                -1,
+                new Span<byte>(ptr + bodyOffset, bodyLength).IndexOfAnyExcept((byte)0)
+            );
+            Assert.Equal(
+                -1,
+                new Span<byte>(ptr + tailOffset, tailLength).IndexOfAnyExcept((byte)0b10101010)
+            );
 
             NativeMemory.AlignedFree(ptr);
         }
@@ -593,7 +628,10 @@ namespace System.Runtime.InteropServices.Tests
 
             NativeMemory.Copy(source, destination, (nuint)byteCount);
 
-            Equals(byteCount - 1, new Span<byte>(destination, destinationSize).LastIndexOf<byte>(0b10101010));
+            Equals(
+                byteCount - 1,
+                new Span<byte>(destination, destinationSize).LastIndexOf<byte>(0b10101010)
+            );
 
             NativeMemory.Free(source);
             NativeMemory.Free(destination);
@@ -613,7 +651,11 @@ namespace System.Runtime.InteropServices.Tests
 
             NativeMemory.Copy(source, source + offset, (nuint)byteCount);
 
-            Assert.True(expectedBlock.AsSpan().SequenceEqual(new ReadOnlySpan<byte>(source + offset, byteCount)));
+            Assert.True(
+                expectedBlock
+                    .AsSpan()
+                    .SequenceEqual(new ReadOnlySpan<byte>(source + offset, byteCount))
+            );
 
             NativeMemory.Free(source);
         }

@@ -7,25 +7,33 @@ using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Globalization;
 using System.Security.Permissions;
+using System.Workflow.Activities.Common;
 using System.Workflow.ComponentModel;
 using System.Workflow.ComponentModel.Design;
-using System.Workflow.Activities.Common;
 
 namespace System.Workflow.Activities.Rules.Design
 {
-
     internal abstract class RuleDefinitionDynamicPropertyDescriptor : DynamicPropertyDescriptor
     {
-        public RuleDefinitionDynamicPropertyDescriptor(IServiceProvider serviceProvider, PropertyDescriptor descriptor)
-            : base(serviceProvider, descriptor)
-        {
-        }
+        public RuleDefinitionDynamicPropertyDescriptor(
+            IServiceProvider serviceProvider,
+            PropertyDescriptor descriptor
+        )
+            : base(serviceProvider, descriptor) { }
 
         protected RuleDefinitions GetRuleDefinitions(object component)
         {
-            IReferenceService referenceService = ((IReferenceService)this.ServiceProvider.GetService(typeof(IReferenceService)));
+            IReferenceService referenceService = (
+                (IReferenceService)this.ServiceProvider.GetService(typeof(IReferenceService))
+            );
             if (referenceService == null)
-                throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, Messages.MissingService, typeof(IReferenceService).FullName));
+                throw new InvalidOperationException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.MissingService,
+                        typeof(IReferenceService).FullName
+                    )
+                );
 
             Activity activity = referenceService.GetComponent(component) as Activity;
             if (activity == null)
@@ -46,14 +54,45 @@ namespace System.Workflow.Activities.Rules.Design
     #region Class RuleConditionReferenceTypeConverter
     internal class RuleConditionReferenceTypeConverter : TypeConverter
     {
-        public override PropertyDescriptorCollection GetProperties(ITypeDescriptorContext context, object value, Attribute[] attributes)
+        public override PropertyDescriptorCollection GetProperties(
+            ITypeDescriptorContext context,
+            object value,
+            Attribute[] attributes
+        )
         {
             PropertyDescriptorCollection newProps = new PropertyDescriptorCollection(null);
-            newProps.Add(new RuleConditionReferenceNamePropertyDescriptor(context, TypeDescriptor.CreateProperty(typeof(RuleConditionReference), "ConditionName", typeof(string), new DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Content), DesignOnlyAttribute.Yes)));
-            newProps.Add(new RuleConditionReferencePropertyDescriptor(context, TypeDescriptor.CreateProperty(typeof(RuleConditionReference), "Expression", typeof(CodeExpression), new DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Content), DesignOnlyAttribute.Yes)));
+            newProps.Add(
+                new RuleConditionReferenceNamePropertyDescriptor(
+                    context,
+                    TypeDescriptor.CreateProperty(
+                        typeof(RuleConditionReference),
+                        "ConditionName",
+                        typeof(string),
+                        new DesignerSerializationVisibilityAttribute(
+                            DesignerSerializationVisibility.Content
+                        ),
+                        DesignOnlyAttribute.Yes
+                    )
+                )
+            );
+            newProps.Add(
+                new RuleConditionReferencePropertyDescriptor(
+                    context,
+                    TypeDescriptor.CreateProperty(
+                        typeof(RuleConditionReference),
+                        "Expression",
+                        typeof(CodeExpression),
+                        new DesignerSerializationVisibilityAttribute(
+                            DesignerSerializationVisibility.Content
+                        ),
+                        DesignOnlyAttribute.Yes
+                    )
+                )
+            );
 
             return newProps.Sort(new string[] { "ConditionName", "Expression" });
         }
+
         public override bool GetPropertiesSupported(ITypeDescriptorContext context)
         {
             return true;
@@ -64,9 +103,7 @@ namespace System.Workflow.Activities.Rules.Design
     #region Class CodeDomRuleExpressionTypeConverter
     internal class RuleConditionReferenceExpressionTypeConverter : TypeConverter
     {
-        internal RuleConditionReferenceExpressionTypeConverter()
-        {
-        }
+        internal RuleConditionReferenceExpressionTypeConverter() { }
 
         public override bool CanConvertTo(ITypeDescriptorContext context, Type destinationType)
         {
@@ -76,7 +113,12 @@ namespace System.Workflow.Activities.Rules.Design
             return base.CanConvertTo(context, destinationType);
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             if (context == null)
                 throw new ArgumentNullException("context");
@@ -113,7 +155,11 @@ namespace System.Workflow.Activities.Rules.Design
                 return base.CanConvertFrom(context, sourceType);
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object valueToConvert)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object valueToConvert
+        )
         {
             if (context == null)
                 throw new ArgumentNullException("context");
@@ -125,22 +171,36 @@ namespace System.Workflow.Activities.Rules.Design
             ISite site = PropertyDescriptorUtils.GetSite(context, context.Instance);
             if (site == null)
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.MissingService, typeof(ISite).FullName);
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.MissingService,
+                    typeof(ISite).FullName
+                );
                 throw new InvalidOperationException(message);
             }
 
             RuleSetCollection ruleSetCollection = null;
-            RuleDefinitions rules = ConditionHelper.Load_Rules_DT(site, Helpers.GetRootActivity(site.Component as Activity));
+            RuleDefinitions rules = ConditionHelper.Load_Rules_DT(
+                site,
+                Helpers.GetRootActivity(site.Component as Activity)
+            );
             if (rules != null)
                 ruleSetCollection = rules.RuleSets;
 
-            if (ruleSetCollection != null && ruleSetName.Length != 0 && !ruleSetCollection.Contains(ruleSetName))
+            if (
+                ruleSetCollection != null
+                && ruleSetName.Length != 0
+                && !ruleSetCollection.Contains(ruleSetName)
+            )
             {
-                //in this case, RuleExpressionCondition is the only type allowed in the ruleConditionCollection 
+                //in this case, RuleExpressionCondition is the only type allowed in the ruleConditionCollection
                 RuleSet newRuleSet = new RuleSet();
                 newRuleSet.Name = ruleSetName;
                 ruleSetCollection.Add(newRuleSet);
-                ConditionHelper.Flush_Rules_DT(site, Helpers.GetRootActivity(site.Component as Activity));
+                ConditionHelper.Flush_Rules_DT(
+                    site,
+                    Helpers.GetRootActivity(site.Component as Activity)
+                );
             }
 
             RuleSetReference ruleSetReference = new RuleSetReference();
@@ -149,7 +209,12 @@ namespace System.Workflow.Activities.Rules.Design
             return ruleSetReference;
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             if (destinationType == null)
                 throw new ArgumentNullException("destinationType");
@@ -165,7 +230,11 @@ namespace System.Workflow.Activities.Rules.Design
             return null;
         }
 
-        public override PropertyDescriptorCollection GetProperties(ITypeDescriptorContext context, object value, Attribute[] attributes)
+        public override PropertyDescriptorCollection GetProperties(
+            ITypeDescriptorContext context,
+            object value,
+            Attribute[] attributes
+        )
         {
             ISite site = null;
             IComponent component = PropertyDescriptorUtils.GetComponent(context);
@@ -173,7 +242,20 @@ namespace System.Workflow.Activities.Rules.Design
                 site = component.Site;
 
             PropertyDescriptorCollection newProps = new PropertyDescriptorCollection(null);
-            newProps.Add(new RuleSetPropertyDescriptor(site, TypeDescriptor.CreateProperty(typeof(RuleSet), "RuleSet Definition", typeof(RuleSet), new DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Content), DesignOnlyAttribute.Yes)));
+            newProps.Add(
+                new RuleSetPropertyDescriptor(
+                    site,
+                    TypeDescriptor.CreateProperty(
+                        typeof(RuleSet),
+                        "RuleSet Definition",
+                        typeof(RuleSet),
+                        new DesignerSerializationVisibilityAttribute(
+                            DesignerSerializationVisibility.Content
+                        ),
+                        DesignOnlyAttribute.Yes
+                    )
+                )
+            );
 
             return newProps;
         }
@@ -196,7 +278,12 @@ namespace System.Workflow.Activities.Rules.Design
             return base.CanConvertTo(context, destinationType);
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             if (context == null)
                 throw new ArgumentNullException("context");
@@ -214,10 +301,11 @@ namespace System.Workflow.Activities.Rules.Design
     #region Class CodeDomRuleNamePropertyDescriptor
     internal class RuleConditionReferenceNamePropertyDescriptor : DynamicPropertyDescriptor
     {
-        public RuleConditionReferenceNamePropertyDescriptor(IServiceProvider serviceProvider, PropertyDescriptor descriptor)
-            : base(serviceProvider, descriptor)
-        {
-        }
+        public RuleConditionReferenceNamePropertyDescriptor(
+            IServiceProvider serviceProvider,
+            PropertyDescriptor descriptor
+        )
+            : base(serviceProvider, descriptor) { }
 
         public override object GetEditor(Type editorBaseType)
         {
@@ -229,18 +317,12 @@ namespace System.Workflow.Activities.Rules.Design
 
         public override string Description
         {
-            get
-            {
-                return Messages.NamePropertyDescription;
-            }
+            get { return Messages.NamePropertyDescription; }
         }
 
         public override bool IsReadOnly
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override object GetValue(object component)
@@ -250,7 +332,14 @@ namespace System.Workflow.Activities.Rules.Design
 
             RuleConditionReference conditionDecl = component as RuleConditionReference;
             if (conditionDecl == null)
-                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Messages.NotARuleConditionReference, "component"), "component");
+                throw new ArgumentException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.NotARuleConditionReference,
+                        "component"
+                    ),
+                    "component"
+                );
 
             if (conditionDecl.ConditionName != null)
                 return conditionDecl.ConditionName;
@@ -265,7 +354,14 @@ namespace System.Workflow.Activities.Rules.Design
 
             RuleConditionReference conditionDecl = component as RuleConditionReference;
             if (conditionDecl == null)
-                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Messages.NotARuleConditionReference, "component"), "component");
+                throw new ArgumentException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.NotARuleConditionReference,
+                        "component"
+                    ),
+                    "component"
+                );
 
             string conditionName = value as string;
             if ((conditionName == null) || (conditionName.TrimEnd().Length == 0))
@@ -274,54 +370,71 @@ namespace System.Workflow.Activities.Rules.Design
             ISite site = PropertyDescriptorUtils.GetSite(this.ServiceProvider, component);
             if (site == null)
             {
-                string message = string.Format(CultureInfo.CurrentCulture, Messages.MissingService, typeof(ISite).FullName);
+                string message = string.Format(
+                    CultureInfo.CurrentCulture,
+                    Messages.MissingService,
+                    typeof(ISite).FullName
+                );
                 throw new InvalidOperationException(message);
             }
 
             RuleConditionCollection conditionDefinitions = null;
-            RuleDefinitions rules = ConditionHelper.Load_Rules_DT(site, Helpers.GetRootActivity(site.Component as Activity));
+            RuleDefinitions rules = ConditionHelper.Load_Rules_DT(
+                site,
+                Helpers.GetRootActivity(site.Component as Activity)
+            );
             if (rules != null)
                 conditionDefinitions = rules.Conditions;
 
-            if (conditionDefinitions != null && conditionName.Length != 0 && !conditionDefinitions.Contains(conditionName))
+            if (
+                conditionDefinitions != null
+                && conditionName.Length != 0
+                && !conditionDefinitions.Contains(conditionName)
+            )
             {
-                //in this case, RuleExpressionCondition is the only type allowed in the ruleConditionCollection 
+                //in this case, RuleExpressionCondition is the only type allowed in the ruleConditionCollection
                 RuleExpressionCondition newCondition = new RuleExpressionCondition();
                 newCondition.Name = conditionName;
                 conditionDefinitions.Add(newCondition);
-                ConditionHelper.Flush_Rules_DT(site, Helpers.GetRootActivity(site.Component as Activity));
+                ConditionHelper.Flush_Rules_DT(
+                    site,
+                    Helpers.GetRootActivity(site.Component as Activity)
+                );
             }
 
             // Cause component change events to be fired.
-            PropertyDescriptor propertyDescriptor = TypeDescriptor.GetProperties(component)["ConditionName"];
+            PropertyDescriptor propertyDescriptor = TypeDescriptor.GetProperties(component)[
+                "ConditionName"
+            ];
             if (propertyDescriptor != null)
-                PropertyDescriptorUtils.SetPropertyValue(site, propertyDescriptor, component, conditionName);
+                PropertyDescriptorUtils.SetPropertyValue(
+                    site,
+                    propertyDescriptor,
+                    component,
+                    conditionName
+                );
         }
     }
     #endregion
 
     #region Class CodeDomRuleExpressionPropertyDescriptor
-    internal class RuleConditionReferencePropertyDescriptor : RuleDefinitionDynamicPropertyDescriptor
+    internal class RuleConditionReferencePropertyDescriptor
+        : RuleDefinitionDynamicPropertyDescriptor
     {
-        public RuleConditionReferencePropertyDescriptor(IServiceProvider serviceProvider, PropertyDescriptor descriptor)
-            : base(serviceProvider, descriptor)
-        {
-        }
+        public RuleConditionReferencePropertyDescriptor(
+            IServiceProvider serviceProvider,
+            PropertyDescriptor descriptor
+        )
+            : base(serviceProvider, descriptor) { }
 
         public override TypeConverter Converter
         {
-            get
-            {
-                return new RuleConditionReferenceExpressionTypeConverter();
-            }
+            get { return new RuleConditionReferenceExpressionTypeConverter(); }
         }
 
         public override string Description
         {
-            get
-            {
-                return Messages.ExpressionPropertyDescription;
-            }
+            get { return Messages.ExpressionPropertyDescription; }
         }
 
         public override object GetEditor(Type editorBaseType)
@@ -339,7 +452,14 @@ namespace System.Workflow.Activities.Rules.Design
 
             RuleConditionReference conditionDecl = component as RuleConditionReference;
             if (conditionDecl == null)
-                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, Messages.NotARuleConditionReference, "component"), "component");
+                throw new ArgumentException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.NotARuleConditionReference,
+                        "component"
+                    ),
+                    "component"
+                );
 
             if (conditionDecl.ConditionName != null)
             {
@@ -347,10 +467,14 @@ namespace System.Workflow.Activities.Rules.Design
                 if (rules != null)
                 {
                     RuleConditionCollection conditionDefs = rules.Conditions;
-                    if (conditionDefs != null && conditionDefs.Contains(conditionDecl.ConditionName))
+                    if (
+                        conditionDefs != null
+                        && conditionDefs.Contains(conditionDecl.ConditionName)
+                    )
                     {
-                        //in this case, RuleExpressionCondition is the only type allowed in the ruleConditionCollection 
-                        RuleExpressionCondition conditionDefinition = (RuleExpressionCondition)conditionDefs[conditionDecl.ConditionName];
+                        //in this case, RuleExpressionCondition is the only type allowed in the ruleConditionCollection
+                        RuleExpressionCondition conditionDefinition = (RuleExpressionCondition)
+                            conditionDefs[conditionDecl.ConditionName];
                         return conditionDefinition.Expression;
                     }
                 }
@@ -360,12 +484,8 @@ namespace System.Workflow.Activities.Rules.Design
 
         public override bool IsReadOnly
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
-
 
         public override void SetValue(object component, object value)
         {
@@ -382,21 +502,32 @@ namespace System.Workflow.Activities.Rules.Design
                 ISite site = PropertyDescriptorUtils.GetSite(this.ServiceProvider, component);
                 if (site == null)
                 {
-                    string message = string.Format(CultureInfo.CurrentCulture, Messages.MissingService, typeof(ISite).FullName);
+                    string message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.MissingService,
+                        typeof(ISite).FullName
+                    );
                     throw new InvalidOperationException(message);
                 }
 
                 RuleConditionCollection conditionDefs = null;
-                RuleDefinitions rules = ConditionHelper.Load_Rules_DT(site, Helpers.GetRootActivity(site.Component as Activity));
+                RuleDefinitions rules = ConditionHelper.Load_Rules_DT(
+                    site,
+                    Helpers.GetRootActivity(site.Component as Activity)
+                );
                 if (rules != null)
                     conditionDefs = rules.Conditions;
 
                 if (conditionDefs != null && conditionDefs.Contains(conditionDecl.ConditionName))
                 {
-                    //in this case, RuleExpressionCondition is the only type allowed in the ruleConditionCollection 
-                    RuleExpressionCondition conditionDefinition = (RuleExpressionCondition)conditionDefs[conditionDecl.ConditionName];
+                    //in this case, RuleExpressionCondition is the only type allowed in the ruleConditionCollection
+                    RuleExpressionCondition conditionDefinition = (RuleExpressionCondition)
+                        conditionDefs[conditionDecl.ConditionName];
                     conditionDefinition.Expression = expression;
-                    ConditionHelper.Flush_Rules_DT(site, Helpers.GetRootActivity(site.Component as Activity));
+                    ConditionHelper.Flush_Rules_DT(
+                        site,
+                        Helpers.GetRootActivity(site.Component as Activity)
+                    );
                 }
             }
         }
@@ -406,25 +537,20 @@ namespace System.Workflow.Activities.Rules.Design
     #region Class RuleSetPropertyDescriptor
     internal class RuleSetPropertyDescriptor : RuleDefinitionDynamicPropertyDescriptor
     {
-        public RuleSetPropertyDescriptor(IServiceProvider serviceProvider, PropertyDescriptor descriptor)
-            : base(serviceProvider, descriptor)
-        {
-        }
+        public RuleSetPropertyDescriptor(
+            IServiceProvider serviceProvider,
+            PropertyDescriptor descriptor
+        )
+            : base(serviceProvider, descriptor) { }
 
         public override TypeConverter Converter
         {
-            get
-            {
-                return new RuleSetDefinitionTypeConverter();
-            }
+            get { return new RuleSetDefinitionTypeConverter(); }
         }
 
         public override string Description
         {
-            get
-            {
-                return SR.GetString(SR.RuleSetDefinitionDescription);
-            }
+            get { return SR.GetString(SR.RuleSetDefinitionDescription); }
         }
 
         public override object GetEditor(Type editorBaseType)
@@ -447,9 +573,12 @@ namespace System.Workflow.Activities.Rules.Design
                 if (rules != null)
                 {
                     RuleSetCollection ruleSetCollection = rules.RuleSets;
-                    if (ruleSetCollection != null && ruleSetCollection.Contains(ruleSetReference.RuleSetName))
+                    if (
+                        ruleSetCollection != null
+                        && ruleSetCollection.Contains(ruleSetReference.RuleSetName)
+                    )
                     {
-                        //in this case, RuleExpressionCondition is the only type allowed in the ruleConditionCollection 
+                        //in this case, RuleExpressionCondition is the only type allowed in the ruleConditionCollection
                         RuleSet ruleSet = ruleSetCollection[ruleSetReference.RuleSetName];
                         return ruleSet;
                     }
@@ -460,12 +589,8 @@ namespace System.Workflow.Activities.Rules.Design
 
         public override bool IsReadOnly
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
-
 
         public override void SetValue(object component, object value)
         {
@@ -482,24 +607,36 @@ namespace System.Workflow.Activities.Rules.Design
                 ISite site = PropertyDescriptorUtils.GetSite(this.ServiceProvider, component);
                 if (site == null)
                 {
-                    string message = string.Format(CultureInfo.CurrentCulture, Messages.MissingService, typeof(ISite).FullName);
+                    string message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.MissingService,
+                        typeof(ISite).FullName
+                    );
                     throw new InvalidOperationException(message);
                 }
 
                 RuleSetCollection ruleSetCollection = null;
-                RuleDefinitions rules = ConditionHelper.Load_Rules_DT(site, Helpers.GetRootActivity(site.Component as Activity));
+                RuleDefinitions rules = ConditionHelper.Load_Rules_DT(
+                    site,
+                    Helpers.GetRootActivity(site.Component as Activity)
+                );
                 if (rules != null)
                     ruleSetCollection = rules.RuleSets;
 
-                if (ruleSetCollection != null && ruleSetCollection.Contains(ruleSetReference.RuleSetName))
+                if (
+                    ruleSetCollection != null
+                    && ruleSetCollection.Contains(ruleSetReference.RuleSetName)
+                )
                 {
                     ruleSetCollection.Remove(ruleSetReference.RuleSetName);
                     ruleSetCollection.Add(ruleSet);
-                    ConditionHelper.Flush_Rules_DT(site, Helpers.GetRootActivity(site.Component as Activity));
+                    ConditionHelper.Flush_Rules_DT(
+                        site,
+                        Helpers.GetRootActivity(site.Component as Activity)
+                    );
                 }
             }
         }
-
     }
 
     #endregion

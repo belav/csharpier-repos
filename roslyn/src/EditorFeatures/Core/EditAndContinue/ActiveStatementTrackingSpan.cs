@@ -8,7 +8,12 @@ using Microsoft.VisualStudio.Text;
 
 namespace Microsoft.CodeAnalysis.EditAndContinue
 {
-    internal readonly struct ActiveStatementTrackingSpan(ITrackingSpan trackingSpan, int ordinal, ActiveStatementFlags flags, DocumentId? unmappedDocumentId)
+    internal readonly struct ActiveStatementTrackingSpan(
+        ITrackingSpan trackingSpan,
+        int ordinal,
+        ActiveStatementFlags flags,
+        DocumentId? unmappedDocumentId
+    )
     {
         public readonly ITrackingSpan Span = trackingSpan;
         public readonly int Ordinal = ordinal;
@@ -20,7 +25,18 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// </summary>
         public bool IsLeaf => (Flags & ActiveStatementFlags.LeafFrame) != 0;
 
-        public static ActiveStatementTrackingSpan Create(ITextSnapshot snapshot, ActiveStatementSpan span)
-            => new(snapshot.CreateTrackingSpan(snapshot.GetTextSpan(span.LineSpan).ToSpan(), SpanTrackingMode.EdgeExclusive), span.Ordinal, span.Flags, span.UnmappedDocumentId);
+        public static ActiveStatementTrackingSpan Create(
+            ITextSnapshot snapshot,
+            ActiveStatementSpan span
+        ) =>
+            new(
+                snapshot.CreateTrackingSpan(
+                    snapshot.GetTextSpan(span.LineSpan).ToSpan(),
+                    SpanTrackingMode.EdgeExclusive
+                ),
+                span.Ordinal,
+                span.Flags,
+                span.UnmappedDocumentId
+            );
     }
 }

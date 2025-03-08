@@ -22,7 +22,8 @@ public class ActionExecutedContext : FilterContext
     public ActionExecutedContext(
         ActionContext actionContext,
         IList<IFilterMetadata> filters,
-        object controller)
+        object controller
+    )
         : base(actionContext, filters)
     {
         Controller = controller;
@@ -55,7 +56,6 @@ public class ActionExecutedContext : FilterContext
                 return _exception;
             }
         }
-
         set
         {
             _exceptionDispatchInfo = null;
@@ -69,11 +69,7 @@ public class ActionExecutedContext : FilterContext
     /// </summary>
     public virtual ExceptionDispatchInfo? ExceptionDispatchInfo
     {
-        get
-        {
-            return _exceptionDispatchInfo;
-        }
-
+        get { return _exceptionDispatchInfo; }
         set
         {
             _exception = null;

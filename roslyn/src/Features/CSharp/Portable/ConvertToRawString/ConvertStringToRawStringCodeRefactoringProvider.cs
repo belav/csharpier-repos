@@ -21,26 +21,48 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString;
 
-[ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.ConvertToRawString), Shared]
-internal partial class ConvertStringToRawStringCodeRefactoringProvider : SyntaxEditorBasedCodeRefactoringProvider
+[
+    ExportCodeRefactoringProvider(
+        LanguageNames.CSharp,
+        Name = PredefinedCodeRefactoringProviderNames.ConvertToRawString
+    ),
+    Shared
+]
+internal partial class ConvertStringToRawStringCodeRefactoringProvider
+    : SyntaxEditorBasedCodeRefactoringProvider
 {
     private static readonly BidirectionalMap<ConvertToRawKind, string> s_kindToEquivalenceKeyMap =
-        new(new[]
-        {
-            KeyValuePairUtil.Create(ConvertToRawKind.SingleLine, nameof(ConvertToRawKind.SingleLine)),
-            KeyValuePairUtil.Create(ConvertToRawKind.MultiLineIndented, nameof(ConvertToRawKind.MultiLineIndented)),
-            KeyValuePairUtil.Create(ConvertToRawKind.MultiLineWithoutLeadingWhitespace, nameof(ConvertToRawKind.MultiLineWithoutLeadingWhitespace)),
-        });
+        new(
+            new[]
+            {
+                KeyValuePairUtil.Create(
+                    ConvertToRawKind.SingleLine,
+                    nameof(ConvertToRawKind.SingleLine)
+                ),
+                KeyValuePairUtil.Create(
+                    ConvertToRawKind.MultiLineIndented,
+                    nameof(ConvertToRawKind.MultiLineIndented)
+                ),
+                KeyValuePairUtil.Create(
+                    ConvertToRawKind.MultiLineWithoutLeadingWhitespace,
+                    nameof(ConvertToRawKind.MultiLineWithoutLeadingWhitespace)
+                ),
+            }
+        );
 
-    private static readonly ImmutableArray<IConvertStringProvider> s_convertStringProviders = ImmutableArray.Create<IConvertStringProvider>(
-        ConvertRegularStringToRawStringProvider.Instance,
-        ConvertInterpolatedStringToRawStringProvider.Instance);
+    private static readonly ImmutableArray<IConvertStringProvider> s_convertStringProviders =
+        ImmutableArray.Create<IConvertStringProvider>(
+            ConvertRegularStringToRawStringProvider.Instance,
+            ConvertInterpolatedStringToRawStringProvider.Instance
+        );
 
     [ImportingConstructor]
-    [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-    public ConvertStringToRawStringCodeRefactoringProvider()
-    {
-    }
+    [SuppressMessage(
+        "RoslynDiagnosticsReliability",
+        "RS0033:Importing constructor should be [Obsolete]",
+        Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+    )]
+    public ConvertStringToRawStringCodeRefactoringProvider() { }
 
     protected override ImmutableArray<FixAllScope> SupportedFixAllScopes => AllFixAllScopes;
 
@@ -50,11 +72,20 @@ internal partial class ConvertStringToRawStringCodeRefactoringProvider : SyntaxE
         SyntaxFormattingOptions formattingOptions,
         out CanConvertParams canConvertParams,
         [NotNullWhen(true)] out IConvertStringProvider? provider,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         foreach (var convertProvider in s_convertStringProviders)
         {
-            if (convertProvider.CanConvert(parsedDocument, expression, formattingOptions, out canConvertParams, cancellationToken))
+            if (
+                convertProvider.CanConvert(
+                    parsedDocument,
+                    expression,
+                    formattingOptions,
+                    out canConvertParams,
+                    cancellationToken
+                )
+            )
             {
                 provider = convertProvider;
                 return true;
@@ -70,7 +101,9 @@ internal partial class ConvertStringToRawStringCodeRefactoringProvider : SyntaxE
     {
         var (document, span, cancellationToken) = context;
 
-        var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+        var root = await document
+            .GetRequiredSyntaxRootAsync(cancellationToken)
+            .ConfigureAwait(false);
         var token = root.FindToken(span.Start);
         if (!context.Span.IntersectsWith(token.Span))
             return;
@@ -79,10 +112,23 @@ internal partial class ConvertStringToRawStringCodeRefactoringProvider : SyntaxE
             return;
 
         var options = context.Options;
-        var formattingOptions = await document.GetSyntaxFormattingOptionsAsync(options, cancellationToken).ConfigureAwait(false);
-        var parsedDocument = await ParsedDocument.CreateAsync(document, cancellationToken).ConfigureAwait(false);
+        var formattingOptions = await document
+            .GetSyntaxFormattingOptionsAsync(options, cancellationToken)
+            .ConfigureAwait(false);
+        var parsedDocument = await ParsedDocument
+            .CreateAsync(document, cancellationToken)
+            .ConfigureAwait(false);
 
-        if (!CanConvert(parsedDocument, parentExpression, formattingOptions, out var convertParams, out var provider, cancellationToken))
+        if (
+            !CanConvert(
+                parsedDocument,
+                parentExpression,
+                formattingOptions,
+                out var convertParams,
+                out var provider,
+                cancellationToken
+            )
+        )
             return;
 
         var priority = convertParams.Priority;
@@ -92,30 +138,62 @@ internal partial class ConvertStringToRawStringCodeRefactoringProvider : SyntaxE
             context.RegisterRefactoring(
                 CodeAction.Create(
                     CSharpFeaturesResources.Convert_to_raw_string,
-                    cancellationToken => UpdateDocumentAsync(document, parentExpression, ConvertToRawKind.SingleLine, options, provider, cancellationToken),
+                    cancellationToken =>
+                        UpdateDocumentAsync(
+                            document,
+                            parentExpression,
+                            ConvertToRawKind.SingleLine,
+                            options,
+                            provider,
+                            cancellationToken
+                        ),
                     s_kindToEquivalenceKeyMap[ConvertToRawKind.SingleLine],
-                    priority),
-                token.Span);
+                    priority
+                ),
+                token.Span
+            );
         }
         else
         {
             context.RegisterRefactoring(
                 CodeAction.Create(
                     CSharpFeaturesResources.Convert_to_raw_string,
-                    cancellationToken => UpdateDocumentAsync(document, parentExpression, ConvertToRawKind.MultiLineIndented, options, provider, cancellationToken),
+                    cancellationToken =>
+                        UpdateDocumentAsync(
+                            document,
+                            parentExpression,
+                            ConvertToRawKind.MultiLineIndented,
+                            options,
+                            provider,
+                            cancellationToken
+                        ),
                     s_kindToEquivalenceKeyMap[ConvertToRawKind.MultiLineIndented],
-                    priority),
-                token.Span);
+                    priority
+                ),
+                token.Span
+            );
 
             if (convertParams.CanBeMultiLineWithoutLeadingWhiteSpaces)
             {
                 context.RegisterRefactoring(
                     CodeAction.Create(
                         CSharpFeaturesResources.without_leading_whitespace_may_change_semantics,
-                        cancellationToken => UpdateDocumentAsync(document, parentExpression, ConvertToRawKind.MultiLineWithoutLeadingWhitespace, options, provider, cancellationToken),
-                        s_kindToEquivalenceKeyMap[ConvertToRawKind.MultiLineWithoutLeadingWhitespace],
-                        priority),
-                    token.Span);
+                        cancellationToken =>
+                            UpdateDocumentAsync(
+                                document,
+                                parentExpression,
+                                ConvertToRawKind.MultiLineWithoutLeadingWhitespace,
+                                options,
+                                provider,
+                                cancellationToken
+                            ),
+                        s_kindToEquivalenceKeyMap[
+                            ConvertToRawKind.MultiLineWithoutLeadingWhitespace
+                        ],
+                        priority
+                    ),
+                    token.Span
+                );
             }
         }
     }
@@ -126,13 +204,26 @@ internal partial class ConvertStringToRawStringCodeRefactoringProvider : SyntaxE
         ConvertToRawKind kind,
         CodeActionOptionsProvider optionsProvider,
         IConvertStringProvider provider,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
-        var options = await document.GetSyntaxFormattingOptionsAsync(optionsProvider, cancellationToken).ConfigureAwait(false);
-        var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+        var options = await document
+            .GetSyntaxFormattingOptionsAsync(optionsProvider, cancellationToken)
+            .ConfigureAwait(false);
+        var root = await document
+            .GetRequiredSyntaxRootAsync(cancellationToken)
+            .ConfigureAwait(false);
 
-        var parsedDocument = await ParsedDocument.CreateAsync(document, cancellationToken).ConfigureAwait(false);
-        var replacement = provider.Convert(parsedDocument, expression, kind, options, cancellationToken);
+        var parsedDocument = await ParsedDocument
+            .CreateAsync(document, cancellationToken)
+            .ConfigureAwait(false);
+        var replacement = provider.Convert(
+            parsedDocument,
+            expression,
+            kind,
+            options,
+            cancellationToken
+        );
         return document.WithSyntaxRoot(root.ReplaceNode(expression, replacement));
     }
 
@@ -142,14 +233,19 @@ internal partial class ConvertStringToRawStringCodeRefactoringProvider : SyntaxE
         SyntaxEditor editor,
         CodeActionOptionsProvider optionsProvider,
         string? equivalenceKey,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         // Get the kind to be fixed from the equivalenceKey for the FixAll operation
         Debug.Assert(equivalenceKey != null);
         var kind = s_kindToEquivalenceKeyMap[equivalenceKey];
 
-        var formattingOptions = await document.GetSyntaxFormattingOptionsAsync(optionsProvider, cancellationToken).ConfigureAwait(false);
-        var parsedDocument = await ParsedDocument.CreateAsync(document, cancellationToken).ConfigureAwait(false);
+        var formattingOptions = await document
+            .GetSyntaxFormattingOptionsAsync(optionsProvider, cancellationToken)
+            .ConfigureAwait(false);
+        var parsedDocument = await ParsedDocument
+            .CreateAsync(document, cancellationToken)
+            .ConfigureAwait(false);
 
         foreach (var fixSpan in fixAllSpans)
         {
@@ -157,7 +253,16 @@ internal partial class ConvertStringToRawStringCodeRefactoringProvider : SyntaxE
             foreach (var expression in node.DepthFirstTraversalNodes().OfType<ExpressionSyntax>())
             {
                 // Ensure we can convert the string literal
-                if (!CanConvert(parsedDocument, expression, formattingOptions, out var canConvertParams, out var provider, cancellationToken))
+                if (
+                    !CanConvert(
+                        parsedDocument,
+                        expression,
+                        formattingOptions,
+                        out var canConvertParams,
+                        out var provider,
+                        cancellationToken
+                    )
+                )
                     continue;
 
                 // Ensure we have a matching kind to fix for this literal
@@ -169,7 +274,8 @@ internal partial class ConvertStringToRawStringCodeRefactoringProvider : SyntaxE
                     // multi-line matches are something we can proceed with.  After all, we're updating all other
                     // ones that might change semantics, so we can def update the ones that won't change semantics.
                     ConvertToRawKind.MultiLineWithoutLeadingWhitespace =>
-                        !canConvertParams.CanBeSingleLine || canConvertParams.CanBeMultiLineWithoutLeadingWhiteSpaces,
+                        !canConvertParams.CanBeSingleLine
+                            || canConvertParams.CanBeMultiLineWithoutLeadingWhiteSpaces,
                     _ => throw ExceptionUtilities.UnexpectedValue(kind),
                 };
 
@@ -184,10 +290,19 @@ internal partial class ConvertStringToRawStringCodeRefactoringProvider : SyntaxE
                             return current;
 
                         var currentParsedDocument = parsedDocument.WithChangedRoot(
-                            currentExpression.SyntaxTree.GetRoot(cancellationToken), cancellationToken);
-                        var replacement = provider.Convert(currentParsedDocument, currentExpression, kind, formattingOptions, cancellationToken);
+                            currentExpression.SyntaxTree.GetRoot(cancellationToken),
+                            cancellationToken
+                        );
+                        var replacement = provider.Convert(
+                            currentParsedDocument,
+                            currentExpression,
+                            kind,
+                            formattingOptions,
+                            cancellationToken
+                        );
                         return replacement;
-                    });
+                    }
+                );
             }
         }
     }

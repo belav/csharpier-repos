@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using System.Xml;
 
-
 namespace System.Runtime.Serialization.Json
 {
     /// <summary>
@@ -29,15 +28,8 @@ namespace System.Runtime.Serialization.Json
         /// </summary>
         public int MaxItemsInObjectGraph
         {
-            get
-            {
-                return _maxItemsInObjectGraph;
-            }
-
-            set
-            {
-                _maxItemsInObjectGraph = value;
-            }
+            get { return _maxItemsInObjectGraph; }
+            set { _maxItemsInObjectGraph = value; }
         }
 
         /// <summary>

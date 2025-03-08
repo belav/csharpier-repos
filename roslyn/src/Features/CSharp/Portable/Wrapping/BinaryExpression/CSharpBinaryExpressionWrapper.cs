@@ -12,14 +12,18 @@ using Microsoft.CodeAnalysis.Wrapping.BinaryExpression;
 
 namespace Microsoft.CodeAnalysis.CSharp.Wrapping.BinaryExpression
 {
-    internal class CSharpBinaryExpressionWrapper : AbstractBinaryExpressionWrapper<BinaryExpressionSyntax>
+    internal class CSharpBinaryExpressionWrapper
+        : AbstractBinaryExpressionWrapper<BinaryExpressionSyntax>
     {
         public CSharpBinaryExpressionWrapper()
-            : base(CSharpIndentationService.Instance, CSharpSyntaxFacts.Instance, CSharpExpressionPrecedenceService.Instance)
-        {
-        }
+            : base(
+                CSharpIndentationService.Instance,
+                CSharpSyntaxFacts.Instance,
+                CSharpExpressionPrecedenceService.Instance
+            ) { }
 
-        protected override SyntaxTriviaList GetNewLineBeforeOperatorTrivia(SyntaxTriviaList newLine)
-            => newLine;
+        protected override SyntaxTriviaList GetNewLineBeforeOperatorTrivia(
+            SyntaxTriviaList newLine
+        ) => newLine;
     }
 }

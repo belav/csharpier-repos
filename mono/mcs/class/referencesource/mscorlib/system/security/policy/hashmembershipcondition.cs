@@ -1,10 +1,10 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 //
 // HashMembershipCondition.cs
@@ -12,28 +12,37 @@
 // Implementation of membership condition for hashes of assemblies.
 //
 
-namespace System.Security.Policy {
+namespace System.Security.Policy
+{
     using System.Collections;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
     using System.Runtime.Serialization;
     using System.Security;
     using System.Security.Cryptography;
-    using System.Security.Util;
     using System.Security.Permissions;
+    using System.Security.Util;
     using System.Threading;
-    using System.Globalization;
-    using System.Diagnostics.Contracts;
 
     [Serializable]
     [System.Runtime.InteropServices.ComVisible(true)]
-    public sealed class HashMembershipCondition : ISerializable, IDeserializationCallback, IMembershipCondition, IReportMatchMembershipCondition {
+    public sealed class HashMembershipCondition
+        : ISerializable,
+            IDeserializationCallback,
+            IMembershipCondition,
+            IReportMatchMembershipCondition
+    {
         private byte[] m_value = null;
         private HashAlgorithm m_hashAlg = null;
         private SecurityElement m_element = null;
 
         private object s_InternalSyncObject = null;
-        private object InternalSyncObject {
-            get {
-                if (s_InternalSyncObject == null) {
+        private object InternalSyncObject
+        {
+            get
+            {
+                if (s_InternalSyncObject == null)
+                {
                     Object o = new Object();
                     Interlocked.CompareExchange(ref s_InternalSyncObject, o, null);
                 }
@@ -41,17 +50,20 @@ namespace System.Security.Policy {
             }
         }
 
-        internal HashMembershipCondition() {}
-        private HashMembershipCondition (SerializationInfo info, StreamingContext context) {
-            m_value = (byte[]) info.GetValue("HashValue", typeof(byte[]));
-            string hashAlgorithm = (string) info.GetValue("HashAlgorithm", typeof(string));
+        internal HashMembershipCondition() { }
+
+        private HashMembershipCondition(SerializationInfo info, StreamingContext context)
+        {
+            m_value = (byte[])info.GetValue("HashValue", typeof(byte[]));
+            string hashAlgorithm = (string)info.GetValue("HashAlgorithm", typeof(string));
             if (hashAlgorithm != null)
                 m_hashAlg = HashAlgorithm.Create(hashAlgorithm);
             else
                 m_hashAlg = new SHA1Managed();
         }
 
-        public HashMembershipCondition(HashAlgorithm hashAlg, byte[] value) {
+        public HashMembershipCondition(HashAlgorithm hashAlg, byte[] value)
+        {
             if (value == null)
                 throw new ArgumentNullException("value");
             if (hashAlg == null)
@@ -72,31 +84,37 @@ namespace System.Security.Policy {
         }
 
         /// <internalonly/>
-        void IDeserializationCallback.OnDeserialization (Object sender) {}
+        void IDeserializationCallback.OnDeserialization(Object sender) { }
 
-        public HashAlgorithm HashAlgorithm {
-            set {
+        public HashAlgorithm HashAlgorithm
+        {
+            set
+            {
                 if (value == null)
                     throw new ArgumentNullException("HashAlgorithm");
                 Contract.EndContractBlock();
                 m_hashAlg = value;
             }
-            get {
+            get
+            {
                 if (m_hashAlg == null && m_element != null)
                     ParseHashAlgorithm();
                 return m_hashAlg;
             }
         }
 
-        public byte[] HashValue {
-            set {
+        public byte[] HashValue
+        {
+            set
+            {
                 if (value == null)
                     throw new ArgumentNullException("value");
                 Contract.EndContractBlock();
                 m_value = new byte[value.Length];
                 Array.Copy(value, m_value, value.Length);
             }
-            get {
+            get
+            {
                 if (m_value == null && m_element != null)
                     ParseHashValue();
                 if (m_value == null)
@@ -108,19 +126,22 @@ namespace System.Security.Policy {
             }
         }
 
-        public bool Check(Evidence evidence) {
+        public bool Check(Evidence evidence)
+        {
             object usedEvidence = null;
             return (this as IReportMatchMembershipCondition).Check(evidence, out usedEvidence);
         }
 
-        bool IReportMatchMembershipCondition.Check(Evidence evidence, out object usedEvidence) {
+        bool IReportMatchMembershipCondition.Check(Evidence evidence, out object usedEvidence)
+        {
             usedEvidence = null;
 
             if (evidence == null)
                 return false;
 
             Hash hash = evidence.GetHostEvidence<Hash>();
-            if (hash != null) {
+            if (hash != null)
+            {
                 if (m_value == null && m_element != null)
                     ParseHashValue();
 
@@ -128,11 +149,13 @@ namespace System.Security.Policy {
                     ParseHashAlgorithm();
 
                 byte[] asmHash = null;
-                lock (InternalSyncObject) {
+                lock (InternalSyncObject)
+                {
                     asmHash = hash.GenerateHash(m_hashAlg);
                 }
 
-                if (asmHash != null && CompareArrays(asmHash, m_value)) {
+                if (asmHash != null && CompareArrays(asmHash, m_value))
+                {
                     usedEvidence = hash;
                     return true;
                 }
@@ -141,7 +164,8 @@ namespace System.Security.Policy {
             return false;
         }
 
-        public IMembershipCondition Copy() {
+        public IMembershipCondition Copy()
+        {
             if (m_value == null && m_element != null)
                 ParseHashValue();
 
@@ -151,15 +175,18 @@ namespace System.Security.Policy {
             return new HashMembershipCondition(m_hashAlg, m_value);
         }
 
-        public SecurityElement ToXml() {
+        public SecurityElement ToXml()
+        {
             return ToXml(null);
         }
 
-        public void FromXml(SecurityElement e) {
+        public void FromXml(SecurityElement e)
+        {
             FromXml(e, null);
         }
 
-        public SecurityElement ToXml(PolicyLevel level) {
+        public SecurityElement ToXml(PolicyLevel level)
+        {
             if (m_value == null && m_element != null)
                 ParseHashValue();
 
@@ -167,10 +194,17 @@ namespace System.Security.Policy {
                 ParseHashAlgorithm();
 
             SecurityElement root = new SecurityElement("IMembershipCondition");
-            XMLUtil.AddClassAttribute(root, this.GetType(), "System.Security.Policy.HashMembershipCondition");
-            // If you hit this assert then most likely you are trying to change the name of this class. 
+            XMLUtil.AddClassAttribute(
+                root,
+                this.GetType(),
+                "System.Security.Policy.HashMembershipCondition"
+            );
+            // If you hit this assert then most likely you are trying to change the name of this class.
             // This is ok as long as you change the hard coded string above and change the assert below.
-            Contract.Assert(this.GetType().FullName.Equals("System.Security.Policy.HashMembershipCondition"), "Class name changed!");
+            Contract.Assert(
+                this.GetType().FullName.Equals("System.Security.Policy.HashMembershipCondition"),
+                "Class name changed!"
+            );
 
             root.AddAttribute("version", "1");
             if (m_value != null)
@@ -180,31 +214,41 @@ namespace System.Security.Policy {
             return root;
         }
 
-        public void FromXml(SecurityElement e, PolicyLevel level) {
+        public void FromXml(SecurityElement e, PolicyLevel level)
+        {
             if (e == null)
                 throw new ArgumentNullException("e");
 
             if (!e.Tag.Equals("IMembershipCondition"))
-                throw new ArgumentException(Environment.GetResourceString("Argument_MembershipConditionElement"));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_MembershipConditionElement")
+                );
             Contract.EndContractBlock();
 
-            lock (InternalSyncObject) {
+            lock (InternalSyncObject)
+            {
                 m_element = e;
                 m_value = null;
                 m_hashAlg = null;
             }
         }
 
-        public override bool Equals(Object o) {
+        public override bool Equals(Object o)
+        {
             HashMembershipCondition that = (o as HashMembershipCondition);
-            if (that != null) {
+            if (that != null)
+            {
                 if (this.m_hashAlg == null && this.m_element != null)
                     this.ParseHashAlgorithm();
                 if (that.m_hashAlg == null && that.m_element != null)
                     that.ParseHashAlgorithm();
 
-                if (this.m_hashAlg != null && that.m_hashAlg != null &&
-                    this.m_hashAlg.GetType() == that.m_hashAlg.GetType()) {
+                if (
+                    this.m_hashAlg != null
+                    && that.m_hashAlg != null
+                    && this.m_hashAlg.GetType() == that.m_hashAlg.GetType()
+                )
+                {
                     if (this.m_value == null && this.m_element != null)
                         this.ParseHashValue();
                     if (that.m_value == null && that.m_element != null)
@@ -213,7 +257,8 @@ namespace System.Security.Policy {
                     if (this.m_value.Length != that.m_value.Length)
                         return false;
 
-                    for (int i = 0; i < m_value.Length; i++) {
+                    for (int i = 0; i < m_value.Length; i++)
+                    {
                         if (this.m_value[i] != that.m_value[i])
                             return false;
                     }
@@ -223,7 +268,8 @@ namespace System.Security.Policy {
             return false;
         }
 
-        public override int GetHashCode() {
+        public override int GetHashCode()
+        {
             if (this.m_hashAlg == null && this.m_element != null)
                 this.ParseHashAlgorithm();
 
@@ -235,18 +281,25 @@ namespace System.Security.Policy {
             return accumulator;
         }
 
-        public override string ToString() {
+        public override string ToString()
+        {
             if (m_hashAlg == null)
                 ParseHashAlgorithm();
 
-            return Environment.GetResourceString("Hash_ToString", m_hashAlg.GetType().AssemblyQualifiedName, Hex.EncodeHexString(HashValue));
+            return Environment.GetResourceString(
+                "Hash_ToString",
+                m_hashAlg.GetType().AssemblyQualifiedName,
+                Hex.EncodeHexString(HashValue)
+            );
         }
 
         private const string s_tagHashValue = "HashValue";
         private const string s_tagHashAlgorithm = "HashAlgorithm";
 
-        private void ParseHashValue() {
-            lock (InternalSyncObject) {
+        private void ParseHashValue()
+        {
+            lock (InternalSyncObject)
+            {
                 if (m_element == null)
                     return;
 
@@ -254,16 +307,25 @@ namespace System.Security.Policy {
                 if (elHash != null)
                     m_value = Hex.DecodeHexString(elHash);
                 else
-                    throw new ArgumentException(Environment.GetResourceString("Argument_InvalidXMLElement", s_tagHashValue, this.GetType().FullName));
+                    throw new ArgumentException(
+                        Environment.GetResourceString(
+                            "Argument_InvalidXMLElement",
+                            s_tagHashValue,
+                            this.GetType().FullName
+                        )
+                    );
 
-                if (m_value != null && m_hashAlg != null) {
+                if (m_value != null && m_hashAlg != null)
+                {
                     m_element = null;
                 }
             }
         }
 
-        private void ParseHashAlgorithm() {
-            lock (InternalSyncObject) {
+        private void ParseHashAlgorithm()
+        {
+            lock (InternalSyncObject)
+            {
                 if (m_element == null)
                     return;
 
@@ -278,12 +340,14 @@ namespace System.Security.Policy {
             }
         }
 
-        private static bool CompareArrays(byte[] first, byte[] second) {
+        private static bool CompareArrays(byte[] first, byte[] second)
+        {
             if (first.Length != second.Length)
                 return false;
 
             int count = first.Length;
-            for (int i = 0; i < count; ++i) {
+            for (int i = 0; i < count; ++i)
+            {
                 if (first[i] != second[i])
                     return false;
             }
@@ -291,12 +355,14 @@ namespace System.Security.Policy {
             return true;
         }
 
-        private static int GetByteArrayHashCode(byte[] baData) {
+        private static int GetByteArrayHashCode(byte[] baData)
+        {
             if (baData == null)
                 return 0;
 
             int accumulator = 0;
-            for (int i = 0; i < baData.Length; ++i) {
+            for (int i = 0; i < baData.Length; ++i)
+            {
                 accumulator = (accumulator << 8) ^ (int)baData[i] ^ (accumulator >> 24);
             }
             return accumulator;

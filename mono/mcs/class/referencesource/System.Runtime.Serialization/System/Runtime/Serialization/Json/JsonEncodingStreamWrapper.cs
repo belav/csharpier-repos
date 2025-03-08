@@ -7,40 +7,52 @@
 namespace System.Runtime.Serialization.Json
 {
     using System.IO;
+    using System.Security;
+    using System.Text;
+    using System.Xml;
 #if !MONO
     using System.ServiceModel;
 #endif
-    using System.Text;
-    using System.Xml;
-    using System.Security;
 
     // This wrapper does not support seek.
     // Supports: UTF-8, Unicode, BigEndianUnicode
     // ASSUMPTION (Microsoft): This class will only be used for EITHER reading OR writing.  It can be done, it would just mean more buffers.
     class JsonEncodingStreamWrapper : Stream
     {
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - Static fields are marked SecurityCritical or readonly to prevent"
-            + " data from being modified or leaked to other components in appdomain.")]
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - Static fields are marked SecurityCritical or readonly to prevent"
+                + " data from being modified or leaked to other components in appdomain."
+        )]
         static readonly UnicodeEncoding SafeBEUTF16 = new UnicodeEncoding(true, false, false);
 
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - Static fields are marked SecurityCritical or readonly to prevent"
-            + " data from being modified or leaked to other components in appdomain.")]
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - Static fields are marked SecurityCritical or readonly to prevent"
+                + " data from being modified or leaked to other components in appdomain."
+        )]
         static readonly UnicodeEncoding SafeUTF16 = new UnicodeEncoding(false, false, false);
 
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - Static fields are marked SecurityCritical or readonly to prevent"
-            + " data from being modified or leaked to other components in appdomain.")]
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - Static fields are marked SecurityCritical or readonly to prevent"
+                + " data from being modified or leaked to other components in appdomain."
+        )]
         static readonly UTF8Encoding SafeUTF8 = new UTF8Encoding(false, false);
 
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - Static fields are marked SecurityCritical or readonly to prevent"
-            + " data from being modified or leaked to other components in appdomain.")]
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - Static fields are marked SecurityCritical or readonly to prevent"
+                + " data from being modified or leaked to other components in appdomain."
+        )]
         static readonly UnicodeEncoding ValidatingBEUTF16 = new UnicodeEncoding(true, false, true);
 
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - Static fields are marked SecurityCritical or readonly to prevent"
-            + " data from being modified or leaked to other components in appdomain.")]
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - Static fields are marked SecurityCritical or readonly to prevent"
+                + " data from being modified or leaked to other components in appdomain."
+        )]
         static readonly UnicodeEncoding ValidatingUTF16 = new UnicodeEncoding(false, false, true);
 
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - Static fields are marked SecurityCritical or readonly to prevent"
-            + " data from being modified or leaked to other components in appdomain.")]
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - Static fields are marked SecurityCritical or readonly to prevent"
+                + " data from being modified or leaked to other components in appdomain."
+        )]
         static readonly UTF8Encoding ValidatingUTF8 = new UTF8Encoding(false, true);
         const int BufferLength = 128;
 
@@ -81,7 +93,7 @@ namespace System.Runtime.Serialization.Json
             UTF8,
             UTF16LE,
             UTF16BE,
-            None
+            None,
         }
 
         // This stream wrapper does not support duplex
@@ -129,16 +141,22 @@ namespace System.Runtime.Serialization.Json
             get { return this.stream.Length; }
         }
 
-
         // The encoding conversion and buffering breaks seeking.
         public override long Position
         {
             get
             {
 #pragma warning suppress 56503 // The contract for non seekable stream is to throw exception
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException()
+                );
             }
-            set { throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException()); }
+            set
+            {
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException()
+                );
+            }
         }
 
         public override int ReadTimeout
@@ -153,7 +171,12 @@ namespace System.Runtime.Serialization.Json
             set { this.stream.WriteTimeout = value; }
         }
 
-        public static ArraySegment<byte> ProcessBuffer(byte[] buffer, int offset, int count, Encoding encoding)
+        public static ArraySegment<byte> ProcessBuffer(
+            byte[] buffer,
+            int offset,
+            int count,
+            Encoding encoding
+        )
         {
             try
             {
@@ -179,13 +202,15 @@ namespace System.Runtime.Serialization.Json
                 }
 
                 // Convert to UTF-8
-                return
-                    new ArraySegment<byte>(ValidatingUTF8.GetBytes(GetEncoding(dataEnc).GetChars(buffer, offset, count)));
+                return new ArraySegment<byte>(
+                    ValidatingUTF8.GetBytes(GetEncoding(dataEnc).GetChars(buffer, offset, count))
+                );
             }
             catch (DecoderFallbackException e)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(SR.GetString(SR.JsonInvalidBytes), e));
+                    new XmlException(SR.GetString(SR.JsonInvalidBytes), e)
+                );
             }
         }
 
@@ -243,7 +268,8 @@ namespace System.Runtime.Serialization.Json
             catch (DecoderFallbackException ex)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(SR.GetString(SR.JsonInvalidBytes), ex));
+                    new XmlException(SR.GetString(SR.JsonInvalidBytes), ex)
+                );
             }
         }
 
@@ -317,7 +343,8 @@ namespace System.Runtime.Serialization.Json
 
                 default:
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(SR.GetString(SR.JsonEncodingNotSupported)));
+                        new XmlException(SR.GetString(SR.JsonEncodingNotSupported))
+                    );
             }
         }
 
@@ -336,7 +363,8 @@ namespace System.Runtime.Serialization.Json
 
                 default:
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(SR.GetString(SR.JsonEncodingNotSupported)));
+                        new XmlException(SR.GetString(SR.JsonEncodingNotSupported))
+                    );
             }
         }
 
@@ -361,7 +389,8 @@ namespace System.Runtime.Serialization.Json
             else
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(SR.GetString(SR.JsonEncodingNotSupported)));
+                    new XmlException(SR.GetString(SR.JsonEncodingNotSupported))
+                );
             }
         }
 
@@ -379,7 +408,9 @@ namespace System.Runtime.Serialization.Json
             else if (b1 == 0x00 && b2 == 0x00)
             {
                 // UTF-32BE not supported
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(SR.GetString(SR.JsonInvalidBytes)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(SR.GetString(SR.JsonInvalidBytes))
+                );
             }
             else
             {
@@ -387,9 +418,20 @@ namespace System.Runtime.Serialization.Json
             }
         }
 
-        static void ThrowExpectedEncodingMismatch(SupportedEncoding expEnc, SupportedEncoding actualEnc)
+        static void ThrowExpectedEncodingMismatch(
+            SupportedEncoding expEnc,
+            SupportedEncoding actualEnc
+        )
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(SR.GetString(SR.JsonExpectedEncoding, GetEncodingName(expEnc), GetEncodingName(actualEnc))));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new XmlException(
+                    SR.GetString(
+                        SR.JsonExpectedEncoding,
+                        GetEncodingName(expEnc),
+                        GetEncodingName(actualEnc)
+                    )
+                )
+            );
         }
 
         void CleanupCharBreak()
@@ -403,7 +445,8 @@ namespace System.Runtime.Serialization.Json
                 if (b < 0)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(SR.GetString(SR.JsonUnexpectedEndOfFile)));
+                        new XmlException(SR.GetString(SR.JsonUnexpectedEndOfFile))
+                    );
                 }
 
                 bytes[max++] = (byte)b;
@@ -427,7 +470,8 @@ namespace System.Runtime.Serialization.Json
                 if (b2 < 0)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new XmlException(SR.GetString(SR.JsonUnexpectedEndOfFile)));
+                        new XmlException(SR.GetString(SR.JsonUnexpectedEndOfFile))
+                    );
                 }
                 bytes[max++] = (byte)b1;
                 bytes[max++] = (byte)b2;
@@ -502,7 +546,8 @@ namespace System.Runtime.Serialization.Json
             catch (DecoderFallbackException ex)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new XmlException(SR.GetString(SR.JsonInvalidBytes), ex));
+                    new XmlException(SR.GetString(SR.JsonInvalidBytes), ex)
+                );
             }
         }
 

@@ -6,9 +6,9 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.IIS;
 using Microsoft.AspNetCore.Server.IIS.FunctionalTests;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Testing;
 using Xunit;
@@ -17,7 +17,11 @@ using BadHttpRequestException = Microsoft.AspNetCore.Http.BadHttpRequestExceptio
 namespace IIS.Tests;
 
 [SkipIfHostableWebCoreNotAvailable]
-[MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win8, SkipReason = "https://github.com/aspnet/IISIntegration/issues/866")]
+[MinimumOSVersion(
+    OperatingSystems.Windows,
+    WindowsVersions.Win8,
+    SkipReason = "https://github.com/aspnet/IISIntegration/issues/866"
+)]
 [SkipOnHelix("Unsupported queue", Queues = "Windows.Amd64.VS2022.Pre.Open;")]
 public class MaxRequestBodySizeTests : LoggedTest
 {
@@ -28,19 +32,23 @@ public class MaxRequestBodySizeTests : LoggedTest
 
         BadHttpRequestException exception = null;
 
-        using (var testServer = await TestServer.Create(
-            async ctx =>
-            {
-                try
+        using (
+            var testServer = await TestServer.Create(
+                async ctx =>
                 {
-                    await ctx.Request.Body.ReadAsync(new byte[2000]);
-                }
-                catch (BadHttpRequestException ex)
-                {
-                    exception = ex;
-                    throw ex;
-                }
-            }, LoggerFactory))
+                    try
+                    {
+                        await ctx.Request.Body.ReadAsync(new byte[2000]);
+                    }
+                    catch (BadHttpRequestException ex)
+                    {
+                        exception = ex;
+                        throw ex;
+                    }
+                },
+                LoggerFactory
+            )
+        )
         {
             using (var connection = testServer.CreateConnection())
             {
@@ -49,7 +57,8 @@ public class MaxRequestBodySizeTests : LoggedTest
                     $"Content-Length: {globalMaxRequestBodySize + 1}",
                     "Host: localhost",
                     "",
-                    "");
+                    ""
+                );
                 await connection.Receive("HTTP/1.1 413 Payload Too Large");
             }
         }
@@ -66,24 +75,28 @@ public class MaxRequestBodySizeTests : LoggedTest
 
         BadHttpRequestException exception = null;
 
-        using (var testServer = await TestServer.Create(
-            async ctx =>
-            {
-                try
+        using (
+            var testServer = await TestServer.Create(
+                async ctx =>
                 {
-                    var feature = ctx.Features.Get<IHttpMaxRequestBodySizeFeature>();
-                    Assert.Equal(maxRequestSize, feature.MaxRequestBodySize);
-                    feature.MaxRequestBodySize = perRequestMaxRequestBodySize;
+                    try
+                    {
+                        var feature = ctx.Features.Get<IHttpMaxRequestBodySizeFeature>();
+                        Assert.Equal(maxRequestSize, feature.MaxRequestBodySize);
+                        feature.MaxRequestBodySize = perRequestMaxRequestBodySize;
 
-                    await ctx.Request.Body.ReadAsync(new byte[2000]);
-                }
-
-                catch (BadHttpRequestException ex)
-                {
-                    exception = ex;
-                    throw ex;
-                }
-            }, LoggerFactory, new IISServerOptions { MaxRequestBodySize = maxRequestSize }))
+                        await ctx.Request.Body.ReadAsync(new byte[2000]);
+                    }
+                    catch (BadHttpRequestException ex)
+                    {
+                        exception = ex;
+                        throw ex;
+                    }
+                },
+                LoggerFactory,
+                new IISServerOptions { MaxRequestBodySize = maxRequestSize }
+            )
+        )
         {
             using (var connection = testServer.CreateConnection())
             {
@@ -92,7 +105,8 @@ public class MaxRequestBodySizeTests : LoggedTest
                     $"Content-Length: {perRequestMaxRequestBodySize + 1}",
                     "Host: localhost",
                     "",
-                    "");
+                    ""
+                );
                 await connection.Receive("HTTP/1.1 413 Payload Too Large");
             }
         }
@@ -104,16 +118,20 @@ public class MaxRequestBodySizeTests : LoggedTest
     [ConditionalFact]
     public async Task DoesNotRejectRequestWithContentLengthHeaderExceedingGlobalLimitIfLimitDisabledPerRequest()
     {
-        using (var testServer = await TestServer.Create(
-            async ctx =>
-            {
-                var feature = ctx.Features.Get<IHttpMaxRequestBodySizeFeature>();
-                Assert.Equal(0, feature.MaxRequestBodySize);
-                feature.MaxRequestBodySize = null;
+        using (
+            var testServer = await TestServer.Create(
+                async ctx =>
+                {
+                    var feature = ctx.Features.Get<IHttpMaxRequestBodySizeFeature>();
+                    Assert.Equal(0, feature.MaxRequestBodySize);
+                    feature.MaxRequestBodySize = null;
 
-                await ctx.Request.Body.ReadAsync(new byte[2000]);
-
-            }, LoggerFactory, new IISServerOptions { MaxRequestBodySize = 0 }))
+                    await ctx.Request.Body.ReadAsync(new byte[2000]);
+                },
+                LoggerFactory,
+                new IISServerOptions { MaxRequestBodySize = 0 }
+            )
+        )
         {
             using (var connection = testServer.CreateConnection())
             {
@@ -122,7 +140,8 @@ public class MaxRequestBodySizeTests : LoggedTest
                     $"Content-Length: 1",
                     "Host: localhost",
                     "",
-                    "A");
+                    "A"
+                );
                 await connection.Receive("HTTP/1.1 200 OK");
             }
         }
@@ -131,16 +150,20 @@ public class MaxRequestBodySizeTests : LoggedTest
     [ConditionalFact]
     public async Task DoesNotRejectRequestWithChunkedExceedingGlobalLimitIfLimitDisabledPerRequest()
     {
-        using (var testServer = await TestServer.Create(
-            async ctx =>
-            {
-                var feature = ctx.Features.Get<IHttpMaxRequestBodySizeFeature>();
-                Assert.Equal(0, feature.MaxRequestBodySize);
-                feature.MaxRequestBodySize = null;
+        using (
+            var testServer = await TestServer.Create(
+                async ctx =>
+                {
+                    var feature = ctx.Features.Get<IHttpMaxRequestBodySizeFeature>();
+                    Assert.Equal(0, feature.MaxRequestBodySize);
+                    feature.MaxRequestBodySize = null;
 
-                await ctx.Request.Body.ReadAsync(new byte[2000]);
-
-            }, LoggerFactory, new IISServerOptions { MaxRequestBodySize = 0 }))
+                    await ctx.Request.Body.ReadAsync(new byte[2000]);
+                },
+                LoggerFactory,
+                new IISServerOptions { MaxRequestBodySize = 0 }
+            )
+        )
         {
             using (var connection = testServer.CreateConnection())
             {
@@ -152,7 +175,8 @@ public class MaxRequestBodySizeTests : LoggedTest
                     "1",
                     "a",
                     "0",
-                    "");
+                    ""
+                );
                 await connection.Receive("HTTP/1.1 200 OK");
             }
         }
@@ -161,20 +185,20 @@ public class MaxRequestBodySizeTests : LoggedTest
     [ConditionalFact]
     public async Task DoesNotRejectBodylessGetRequestWithZeroMaxRequestBodySize()
     {
-        using (var testServer = await TestServer.Create(
-            async ctx =>
-            {
-                await ctx.Request.Body.ReadAsync(new byte[2000]);
-
-            }, LoggerFactory, new IISServerOptions { MaxRequestBodySize = 0 }))
+        using (
+            var testServer = await TestServer.Create(
+                async ctx =>
+                {
+                    await ctx.Request.Body.ReadAsync(new byte[2000]);
+                },
+                LoggerFactory,
+                new IISServerOptions { MaxRequestBodySize = 0 }
+            )
+        )
         {
             using (var connection = testServer.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host: localhost",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host: localhost", "", "");
 
                 await connection.Receive("HTTP/1.1 200 OK");
             }
@@ -184,12 +208,16 @@ public class MaxRequestBodySizeTests : LoggedTest
     [ConditionalFact]
     public async Task DoesNotRejectBodylessPostWithZeroContentLengthRequestWithZeroMaxRequestBodySize()
     {
-        using (var testServer = await TestServer.Create(
-            async ctx =>
-            {
-                await ctx.Request.Body.ReadAsync(new byte[2000]);
-
-            }, LoggerFactory, new IISServerOptions { MaxRequestBodySize = 0 }))
+        using (
+            var testServer = await TestServer.Create(
+                async ctx =>
+                {
+                    await ctx.Request.Body.ReadAsync(new byte[2000]);
+                },
+                LoggerFactory,
+                new IISServerOptions { MaxRequestBodySize = 0 }
+            )
+        )
         {
             using (var connection = testServer.CreateConnection())
             {
@@ -198,7 +226,8 @@ public class MaxRequestBodySizeTests : LoggedTest
                     $"Content-Length: 0",
                     "Host: localhost",
                     "",
-                    "");
+                    ""
+                );
 
                 await connection.Receive("HTTP/1.1 200 OK");
             }
@@ -208,12 +237,16 @@ public class MaxRequestBodySizeTests : LoggedTest
     [ConditionalFact]
     public async Task DoesNotRejectBodylessPostWithEmptyChunksRequestWithZeroMaxRequestBodySize()
     {
-        using (var testServer = await TestServer.Create(
-            async ctx =>
-            {
-                await ctx.Request.Body.ReadAsync(new byte[2000]);
-
-            }, LoggerFactory, new IISServerOptions { MaxRequestBodySize = 0 }))
+        using (
+            var testServer = await TestServer.Create(
+                async ctx =>
+                {
+                    await ctx.Request.Body.ReadAsync(new byte[2000]);
+                },
+                LoggerFactory,
+                new IISServerOptions { MaxRequestBodySize = 0 }
+            )
+        )
         {
             using (var connection = testServer.CreateConnection())
             {
@@ -224,7 +257,8 @@ public class MaxRequestBodySizeTests : LoggedTest
                     "",
                     "0",
                     "",
-                    "");
+                    ""
+                );
 
                 await connection.Receive("HTTP/1.1 200 OK");
             }
@@ -239,19 +273,24 @@ public class MaxRequestBodySizeTests : LoggedTest
         var payload = new string('A', payloadSize);
         InvalidOperationException invalidOpEx = null;
 
-        using (var testServer = await TestServer.Create(
-            async ctx =>
-            {
-                var buffer = new byte[1];
-                Assert.Equal(1, await ctx.Request.Body.ReadAsync(buffer, 0, 1));
+        using (
+            var testServer = await TestServer.Create(
+                async ctx =>
+                {
+                    var buffer = new byte[1];
+                    Assert.Equal(1, await ctx.Request.Body.ReadAsync(buffer, 0, 1));
 
-                var feature = ctx.Features.Get<IHttpMaxRequestBodySizeFeature>();
-                Assert.True(feature.IsReadOnly);
+                    var feature = ctx.Features.Get<IHttpMaxRequestBodySizeFeature>();
+                    Assert.True(feature.IsReadOnly);
 
-                invalidOpEx = Assert.Throws<InvalidOperationException>(() =>
-                    feature.MaxRequestBodySize = perRequestMaxRequestBodySize);
-                throw invalidOpEx;
-            }, LoggerFactory))
+                    invalidOpEx = Assert.Throws<InvalidOperationException>(() =>
+                        feature.MaxRequestBodySize = perRequestMaxRequestBodySize
+                    );
+                    throw invalidOpEx;
+                },
+                LoggerFactory
+            )
+        )
         {
             using (var connection = testServer.CreateConnection())
             {
@@ -260,9 +299,9 @@ public class MaxRequestBodySizeTests : LoggedTest
                     "Host: localhost",
                     "Content-Length: " + payloadSize,
                     "",
-                    payload);
-                await connection.Receive(
-                    "HTTP/1.1 500 Internal Server Error");
+                    payload
+                );
+                await connection.Receive("HTTP/1.1 500 Internal Server Error");
             }
         }
     }
@@ -274,22 +313,27 @@ public class MaxRequestBodySizeTests : LoggedTest
 
         BadHttpRequestException exception = null;
 
-        using (var testServer = await TestServer.Create(
-            async ctx =>
-            {
-                try
+        using (
+            var testServer = await TestServer.Create(
+                async ctx =>
                 {
-                    while (true)
+                    try
                     {
-                        var num = await ctx.Request.Body.ReadAsync(new byte[2000]);
+                        while (true)
+                        {
+                            var num = await ctx.Request.Body.ReadAsync(new byte[2000]);
+                        }
                     }
-                }
-                catch (BadHttpRequestException ex)
-                {
-                    exception = ex;
-                    throw ex;
-                }
-            }, LoggerFactory, new IISServerOptions { MaxRequestBodySize = maxRequestSize }))
+                    catch (BadHttpRequestException ex)
+                    {
+                        exception = ex;
+                        throw ex;
+                    }
+                },
+                LoggerFactory,
+                new IISServerOptions { MaxRequestBodySize = maxRequestSize }
+            )
+        )
         {
             using (var connection = testServer.CreateConnection())
             {
@@ -301,7 +345,8 @@ public class MaxRequestBodySizeTests : LoggedTest
                     "1001",
                     new string('a', 4097),
                     "0",
-                    "");
+                    ""
+                );
                 await connection.Receive("HTTP/1.1 413 Payload Too Large");
             }
         }
@@ -317,16 +362,23 @@ public class MaxRequestBodySizeTests : LoggedTest
         BadHttpRequestException requestRejectedEx1 = null;
         BadHttpRequestException requestRejectedEx2 = null;
 
-        using (var testServer = await TestServer.Create(
-            async ctx =>
-            {
-                var buffer = new byte[1];
-                requestRejectedEx1 = await Assert.ThrowsAnyAsync<BadHttpRequestException>(
-                    async () => await ctx.Request.Body.ReadAsync(buffer, 0, 1));
-                requestRejectedEx2 = await Assert.ThrowsAnyAsync<BadHttpRequestException>(
-                    async () => await ctx.Request.Body.ReadAsync(buffer, 0, 1));
-                throw requestRejectedEx2;
-            }, LoggerFactory, new IISServerOptions { MaxRequestBodySize = 0 }))
+        using (
+            var testServer = await TestServer.Create(
+                async ctx =>
+                {
+                    var buffer = new byte[1];
+                    requestRejectedEx1 = await Assert.ThrowsAnyAsync<BadHttpRequestException>(
+                        async () => await ctx.Request.Body.ReadAsync(buffer, 0, 1)
+                    );
+                    requestRejectedEx2 = await Assert.ThrowsAnyAsync<BadHttpRequestException>(
+                        async () => await ctx.Request.Body.ReadAsync(buffer, 0, 1)
+                    );
+                    throw requestRejectedEx2;
+                },
+                LoggerFactory,
+                new IISServerOptions { MaxRequestBodySize = 0 }
+            )
+        )
         {
             using (var connection = testServer.CreateConnection())
             {
@@ -335,9 +387,9 @@ public class MaxRequestBodySizeTests : LoggedTest
                     "Host: localhost",
                     "Content-Length: " + (new IISServerOptions().MaxRequestBodySize + 1),
                     "",
-                    "");
-                await connection.Receive(
-                    "HTTP/1.1 413 Payload Too Large");
+                    ""
+                );
+                await connection.Receive("HTTP/1.1 413 Payload Too Large");
             }
         }
 
@@ -354,8 +406,18 @@ public class MaxRequestBodySizeTests : LoggedTest
         // be controlled by the app. We have no choice but to throw if the bad request is not observed until after the
         // app starts reading the request body. We log ApplicationErrors because these tests rethrow the
         // BadHttpRequestExceptions. IIS should emit no other logs over LogLevel.Debug for these bad requests.
-        var appErrorLog = Assert.Single(TestSink.Writes, w => w.LoggerName == "Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer" && w.LogLevel > LogLevel.Debug);
-        var badRequestLog = Assert.Single(TestSink.Writes, w => w.LoggerName == "Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer" && w.EventId == new EventId(4, "ConnectionBadRequest"));
+        var appErrorLog = Assert.Single(
+            TestSink.Writes,
+            w =>
+                w.LoggerName == "Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer"
+                && w.LogLevel > LogLevel.Debug
+        );
+        var badRequestLog = Assert.Single(
+            TestSink.Writes,
+            w =>
+                w.LoggerName == "Microsoft.AspNetCore.Server.IIS.Core.IISHttpServer"
+                && w.EventId == new EventId(4, "ConnectionBadRequest")
+        );
 
         Assert.Equal(new EventId(2, "ApplicationError"), appErrorLog.EventId);
         Assert.Equal(LogLevel.Error, appErrorLog.LogLevel);

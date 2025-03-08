@@ -31,9 +31,13 @@ namespace System.Web.TestUtil
                 Comparer = Comparer,
                 Creator = Creator,
                 ThrowOnKeyNotFound = ThrowOnKeyNotFound,
-                Values = SampleValues.ToArray()
+                Values = SampleValues.ToArray(),
             };
-            SeparateKeys(out executor.ExcludedKey, out executor.ConflictingKeys, out executor.NonConflictingKeys);
+            SeparateKeys(
+                out executor.ExcludedKey,
+                out executor.ConflictingKeys,
+                out executor.NonConflictingKeys
+            );
 
             executor.TestAdd1();
             executor.TestAdd1ThrowsArgumentExceptionIfKeyAlreadyInDictionary();
@@ -59,7 +63,11 @@ namespace System.Web.TestUtil
             executor.TestValuesProperty();
         }
 
-        private void SeparateKeys(out TKey excludedKey, out TKey[] conflictingKeys, out TKey[] nonConflictingKeys)
+        private void SeparateKeys(
+            out TKey excludedKey,
+            out TKey[] conflictingKeys,
+            out TKey[] nonConflictingKeys
+        )
         {
             List<TKey> nonConflictingKeyList = new List<TKey>();
             TKey[] newConflictingKeys = null;
@@ -93,17 +101,23 @@ namespace System.Web.TestUtil
             }
             if (SampleKeys == null || SampleKeys.Count < 4)
             {
-                throw new InvalidOperationException("The SampleKeys property must contain at least 4 elements.");
+                throw new InvalidOperationException(
+                    "The SampleKeys property must contain at least 4 elements."
+                );
             }
             if (SampleValues == null || SampleValues.Count != SampleKeys.Count)
             {
-                throw new InvalidOperationException("The SampleValues property must contain as many elements as the SampleKeys property.");
+                throw new InvalidOperationException(
+                    "The SampleValues property must contain as many elements as the SampleKeys property."
+                );
             }
 
             HashSet<TKey> keys = new HashSet<TKey>(SampleKeys, Comparer);
             if (keys.Count != SampleKeys.Count - 1)
             {
-                throw new InvalidOperationException("The SampleKeys property must contain exactly one colliding keypair using the given comparer.");
+                throw new InvalidOperationException(
+                    "The SampleKeys property must contain exactly one colliding keypair using the given comparer."
+                );
             }
         }
 
@@ -119,10 +133,14 @@ namespace System.Web.TestUtil
 
             private IEnumerable<KeyValuePair<TKey, TValue>> MakeKeyValuePairs()
             {
-                return MakeKeyValuePairs(false /* includeConflictingKeys */);
+                return MakeKeyValuePairs(
+                    false /* includeConflictingKeys */
+                );
             }
 
-            private IEnumerable<KeyValuePair<TKey, TValue>> MakeKeyValuePairs(bool includeConflictingKeys)
+            private IEnumerable<KeyValuePair<TKey, TValue>> MakeKeyValuePairs(
+                bool includeConflictingKeys
+            )
             {
                 for (int i = 0; i < NonConflictingKeys.Length; i++)
                 {
@@ -164,13 +182,20 @@ namespace System.Web.TestUtil
                 IDictionary<TKey, TValue> testDictionary = Creator();
 
                 // Act & assert
-                var pairs = MakeKeyValuePairs(true /* includeConflictingKeys */).Skip(NonConflictingKeys.Length).ToArray();
+                var pairs = MakeKeyValuePairs(
+                        true /* includeConflictingKeys */
+                    )
+                    .Skip(NonConflictingKeys.Length)
+                    .ToArray();
                 testDictionary.Add(pairs[0].Key, pairs[1].Value);
 
                 Assert.Throws<ArgumentException>(
-                    delegate { testDictionary.Add(pairs[1].Key, pairs[1].Value); },
+                    delegate
+                    {
+                        testDictionary.Add(pairs[1].Key, pairs[1].Value);
+                    },
                     "An item with the same key has already been added."
-                    );
+                );
             }
 
             public void TestAdd2()
@@ -234,9 +259,24 @@ namespace System.Web.TestUtil
 
                 // Assert
                 var shouldBeFound = MakeKeyValuePairs().First();
-                var shouldNotBeFound = new KeyValuePair<TKey, TValue>(ExcludedKey, Values[Values.Length - 1]);
-                Assert.True(testDictionary.Contains(shouldBeFound), String.Format("Test dictionary should have contained entry for KVP '{0}'.", shouldBeFound));
-                Assert.False(testDictionary.Contains(shouldNotBeFound), String.Format("Test dictionary should not have contained entry for KVP '{0}'.", shouldNotBeFound));
+                var shouldNotBeFound = new KeyValuePair<TKey, TValue>(
+                    ExcludedKey,
+                    Values[Values.Length - 1]
+                );
+                Assert.True(
+                    testDictionary.Contains(shouldBeFound),
+                    String.Format(
+                        "Test dictionary should have contained entry for KVP '{0}'.",
+                        shouldBeFound
+                    )
+                );
+                Assert.False(
+                    testDictionary.Contains(shouldNotBeFound),
+                    String.Format(
+                        "Test dictionary should not have contained entry for KVP '{0}'.",
+                        shouldNotBeFound
+                    )
+                );
             }
 
             public void TestContainsKey()
@@ -251,14 +291,28 @@ namespace System.Web.TestUtil
                 }
 
                 // Assert
-                Assert.True(testDictionary.ContainsKey(NonConflictingKeys[0]), String.Format("Test dictionary should have contained entry for key '{0}'.", NonConflictingKeys[0]));
-                Assert.False(testDictionary.ContainsKey(ExcludedKey), String.Format("Test dictionary should not have contained entry for key '{0}'.", ExcludedKey));
+                Assert.True(
+                    testDictionary.ContainsKey(NonConflictingKeys[0]),
+                    String.Format(
+                        "Test dictionary should have contained entry for key '{0}'.",
+                        NonConflictingKeys[0]
+                    )
+                );
+                Assert.False(
+                    testDictionary.ContainsKey(ExcludedKey),
+                    String.Format(
+                        "Test dictionary should not have contained entry for key '{0}'.",
+                        ExcludedKey
+                    )
+                );
             }
 
             public void TestCopyTo()
             {
                 // Arrange
-                IDictionary<TKey, TValue> controlDictionary = new Dictionary<TKey, TValue>(Comparer);
+                IDictionary<TKey, TValue> controlDictionary = new Dictionary<TKey, TValue>(
+                    Comparer
+                );
                 IDictionary<TKey, TValue> testDictionary = Creator();
 
                 foreach (var entry in MakeKeyValuePairs())
@@ -266,7 +320,9 @@ namespace System.Web.TestUtil
                     controlDictionary.Add(entry.Key, entry.Value);
                     testDictionary.Add(entry.Key, entry.Value);
                 }
-                KeyValuePair<TKey, TValue>[] testKvps = new KeyValuePair<TKey, TValue>[testDictionary.Count + 2];
+                KeyValuePair<TKey, TValue>[] testKvps = new KeyValuePair<TKey, TValue>[
+                    testDictionary.Count + 2
+                ];
 
                 // Act
                 testDictionary.CopyTo(testKvps, 2);
@@ -281,7 +337,13 @@ namespace System.Web.TestUtil
                 for (int i = 2; i < testKvps.Length; i++)
                 {
                     var entry = testKvps[i];
-                    Assert.True(controlDictionary.Contains(entry), String.Format("The value '{0}' wasn't present in the control dictionary.", entry));
+                    Assert.True(
+                        controlDictionary.Contains(entry),
+                        String.Format(
+                            "The value '{0}' wasn't present in the control dictionary.",
+                            entry
+                        )
+                    );
                     controlDictionary.Remove(entry);
                 }
 
@@ -346,7 +408,10 @@ namespace System.Web.TestUtil
                 IDictionary<TKey, TValue> testDictionary = Creator();
 
                 var shouldBeFound = MakeKeyValuePairs().First();
-                var shouldNotBeFound = new KeyValuePair<TKey, TValue>(ExcludedKey, Values[Values.Length - 1]);
+                var shouldNotBeFound = new KeyValuePair<TKey, TValue>(
+                    ExcludedKey,
+                    Values[Values.Length - 1]
+                );
 
                 // Act & assert
                 foreach (var entry in MakeKeyValuePairs())
@@ -362,7 +427,12 @@ namespace System.Web.TestUtil
                 if (ThrowOnKeyNotFound)
                 {
                     Assert.Throws<KeyNotFoundException>(
-                        delegate { TValue valueNotFound = testDictionary[shouldNotBeFound.Key]; }, allowDerivedExceptions: true);
+                        delegate
+                        {
+                            TValue valueNotFound = testDictionary[shouldNotBeFound.Key];
+                        },
+                        allowDerivedExceptions: true
+                    );
                 }
                 else
                 {
@@ -388,7 +458,10 @@ namespace System.Web.TestUtil
                 HashSet<TKey> testKeys = new HashSet<TKey>(testDictionary.Keys, Comparer);
 
                 // Assert
-                Assert.True(controlKeys.SetEquals(testKeys), "Control dictionary and test dictionary key sets were not equal.");
+                Assert.True(
+                    controlKeys.SetEquals(testKeys),
+                    "Control dictionary and test dictionary key sets were not equal."
+                );
             }
 
             public void TestRemove1()
@@ -409,7 +482,10 @@ namespace System.Web.TestUtil
 
                 // Assert
                 Assert.True(removalSuccess, "Remove() should return true if the key was removed.");
-                Assert.False(removalFailure, "Remove() should return false if the key was not removed.");
+                Assert.False(
+                    removalFailure,
+                    "Remove() should return false if the key was not removed."
+                );
 
                 controlDictionary.Remove(NonConflictingKeys[0]);
                 VerifyDictionaryEntriesEqual(controlDictionary, testDictionary);
@@ -429,13 +505,19 @@ namespace System.Web.TestUtil
 
                 // Act
                 var shouldBeFound = MakeKeyValuePairs().First();
-                var shouldNotBeFound = new KeyValuePair<TKey, TValue>(ExcludedKey, Values[Values.Length - 1]);
+                var shouldNotBeFound = new KeyValuePair<TKey, TValue>(
+                    ExcludedKey,
+                    Values[Values.Length - 1]
+                );
                 bool removalSuccess = testDictionary.Remove(shouldBeFound);
                 bool removalFailure = testDictionary.Remove(shouldNotBeFound);
 
                 // Assert
                 Assert.True(removalSuccess, "Remove() should return true if the key was removed.");
-                Assert.False(removalFailure, "Remove() should return false if the key was not removed.");
+                Assert.False(
+                    removalFailure,
+                    "Remove() should return false if the key was not removed."
+                );
 
                 ((IDictionary<TKey, TValue>)controlDictionary).Remove(shouldBeFound);
                 VerifyDictionaryEntriesEqual(controlDictionary, testDictionary);
@@ -454,7 +536,10 @@ namespace System.Web.TestUtil
                 }
 
                 var shouldBeFound = MakeKeyValuePairs().First();
-                var shouldNotBeFound = new KeyValuePair<TKey, TValue>(ExcludedKey, Values[Values.Length - 1]);
+                var shouldNotBeFound = new KeyValuePair<TKey, TValue>(
+                    ExcludedKey,
+                    Values[Values.Length - 1]
+                );
 
                 // Act
                 TValue value1;
@@ -463,9 +548,15 @@ namespace System.Web.TestUtil
                 bool returned2 = testDictionary.TryGetValue(shouldNotBeFound.Key, out value2);
 
                 // Assert
-                Assert.True(returned1, String.Format("The entry '{0}' should have been found.", shouldBeFound));
+                Assert.True(
+                    returned1,
+                    String.Format("The entry '{0}' should have been found.", shouldBeFound)
+                );
                 Assert.Equal(shouldBeFound.Value, value1);
-                Assert.False(returned2, String.Format("The entry '{0}' should not have been found.", shouldNotBeFound));
+                Assert.False(
+                    returned2,
+                    String.Format("The entry '{0}' should not have been found.", shouldNotBeFound)
+                );
                 Assert.Equal(default(TValue), value2);
             }
 
@@ -488,31 +579,49 @@ namespace System.Web.TestUtil
                 // Assert
                 foreach (var entry in controlValues)
                 {
-                    Assert.True(testValues.Contains(entry), String.Format("Test dictionary did not contain value '{0}'.", entry));
+                    Assert.True(
+                        testValues.Contains(entry),
+                        String.Format("Test dictionary did not contain value '{0}'.", entry)
+                    );
                 }
                 foreach (var entry in testValues)
                 {
-                    Assert.True(controlValues.Contains(entry), String.Format("Control dictionary did not contain value '{0}'.", entry));
+                    Assert.True(
+                        controlValues.Contains(entry),
+                        String.Format("Control dictionary did not contain value '{0}'.", entry)
+                    );
                 }
             }
 
-            private void VerifyDictionaryEntriesEqual(Dictionary<TKey, TValue> controlDictionary, IDictionary<TKey, TValue> testDictionary)
+            private void VerifyDictionaryEntriesEqual(
+                Dictionary<TKey, TValue> controlDictionary,
+                IDictionary<TKey, TValue> testDictionary
+            )
             {
                 Assert.Equal(controlDictionary.Count, testDictionary.Count);
 
-                Dictionary<TKey, TValue> clonedControlDictionary = new Dictionary<TKey, TValue>(controlDictionary, controlDictionary.Comparer);
+                Dictionary<TKey, TValue> clonedControlDictionary = new Dictionary<TKey, TValue>(
+                    controlDictionary,
+                    controlDictionary.Comparer
+                );
 
                 foreach (var entry in testDictionary)
                 {
                     var key = entry.Key;
-                    Assert.True(clonedControlDictionary.ContainsKey(entry.Key), String.Format("Control dictionary did not contain key '{0}'.", key));
+                    Assert.True(
+                        clonedControlDictionary.ContainsKey(entry.Key),
+                        String.Format("Control dictionary did not contain key '{0}'.", key)
+                    );
                     clonedControlDictionary.Remove(key);
                 }
 
                 foreach (var entry in clonedControlDictionary)
                 {
                     var key = entry.Key;
-                    Assert.True(false, String.Format("Test dictionary did not contain key '{0}'.", key));
+                    Assert.True(
+                        false,
+                        String.Format("Test dictionary did not contain key '{0}'.", key)
+                    );
                 }
             }
         }

@@ -3,26 +3,24 @@
 //-----------------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Diagnostics;
+using System.Reflection;
+using System.Runtime.Serialization;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
-using System.Runtime.Serialization;
+using System.Text;
 using System.Xml;
-using System.Reflection;
-using System.Diagnostics;
 
 namespace System.ServiceModel.Dispatcher
 {
     class DataContractSerializerFaultFormatter : FaultFormatter
     {
         internal DataContractSerializerFaultFormatter(Type[] detailTypes)
-            : base(detailTypes)
-        {
-        }
+            : base(detailTypes) { }
 
-        internal DataContractSerializerFaultFormatter(SynchronizedCollection<FaultContractInfo> faultContractInfoCollection)
-            : base(faultContractInfoCollection)
-        {
-        }
+        internal DataContractSerializerFaultFormatter(
+            SynchronizedCollection<FaultContractInfo> faultContractInfoCollection
+        )
+            : base(faultContractInfoCollection) { }
     }
 }

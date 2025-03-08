@@ -1,5 +1,5 @@
-﻿
-namespace System.ComponentModel.DataAnnotations {
+﻿namespace System.ComponentModel.DataAnnotations
+{
     /// <summary>
     /// Indicates whether the consumer of a field or property, such as a client application,
     /// should allow editing of the value.
@@ -10,8 +10,13 @@ namespace System.ComponentModel.DataAnnotations {
     /// of this attribute signals intent to the consumer of the attribute whethere or not
     /// the end user should be allowed to change the value via the client application.
     /// </remarks>
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-    public sealed class EditableAttribute : Attribute {
+    [AttributeUsage(
+        AttributeTargets.Field | AttributeTargets.Property,
+        AllowMultiple = false,
+        Inherited = true
+    )]
+    public sealed class EditableAttribute : Attribute
+    {
         /// <summary>
         /// Indicates whether or not the field/property allows editing of the
         /// value.
@@ -53,7 +58,8 @@ namespace System.ComponentModel.DataAnnotations {
         /// <see cref="AllowInitialValue"/> unless the <see cref="AllowInitialValue"/>
         /// property is explicitly specified.
         /// </param>
-        public EditableAttribute(bool allowEdit) {
+        public EditableAttribute(bool allowEdit)
+        {
             this.AllowEdit = allowEdit;
             this.AllowInitialValue = allowEdit;
         }

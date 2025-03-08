@@ -24,7 +24,10 @@ public interface ISqlExpressionFactory
     /// <param name="typeMapping">A type mapping to apply.</param>
     /// <returns>A SQL expression with given type mapping applied.</returns>
     [return: NotNullIfNotNull("sqlExpression")]
-    SqlExpression? ApplyTypeMapping(SqlExpression? sqlExpression, RelationalTypeMapping? typeMapping);
+    SqlExpression? ApplyTypeMapping(
+        SqlExpression? sqlExpression,
+        RelationalTypeMapping? typeMapping
+    );
 
     /// <summary>
     ///     Applies default type mapping to given <see cref="SqlExpression" />.
@@ -46,7 +49,8 @@ public interface ISqlExpressionFactory
         ExpressionType operatorType,
         SqlExpression operand,
         Type type,
-        RelationalTypeMapping? typeMapping = null);
+        RelationalTypeMapping? typeMapping = null
+    );
 
     /// <summary>
     ///     Creates a new <see cref="SqlBinaryExpression" /> with the given arguments.
@@ -60,7 +64,8 @@ public interface ISqlExpressionFactory
         ExpressionType operatorType,
         SqlExpression left,
         SqlExpression right,
-        RelationalTypeMapping? typeMapping);
+        RelationalTypeMapping? typeMapping
+    );
 
     // Comparison
     /// <summary>
@@ -139,7 +144,8 @@ public interface ISqlExpressionFactory
     SqlBinaryExpression Add(
         SqlExpression left,
         SqlExpression right,
-        RelationalTypeMapping? typeMapping = null);
+        RelationalTypeMapping? typeMapping = null
+    );
 
     /// <summary>
     ///     Creates a <see cref="SqlBinaryExpression" /> which represents a subtraction.
@@ -151,7 +157,8 @@ public interface ISqlExpressionFactory
     SqlBinaryExpression Subtract(
         SqlExpression left,
         SqlExpression right,
-        RelationalTypeMapping? typeMapping = null);
+        RelationalTypeMapping? typeMapping = null
+    );
 
     /// <summary>
     ///     Creates a <see cref="SqlBinaryExpression" /> which represents a multiplication.
@@ -163,7 +170,8 @@ public interface ISqlExpressionFactory
     SqlBinaryExpression Multiply(
         SqlExpression left,
         SqlExpression right,
-        RelationalTypeMapping? typeMapping = null);
+        RelationalTypeMapping? typeMapping = null
+    );
 
     /// <summary>
     ///     Creates a <see cref="SqlBinaryExpression" /> which represents a division.
@@ -175,7 +183,8 @@ public interface ISqlExpressionFactory
     SqlBinaryExpression Divide(
         SqlExpression left,
         SqlExpression right,
-        RelationalTypeMapping? typeMapping = null);
+        RelationalTypeMapping? typeMapping = null
+    );
 
     /// <summary>
     ///     Creates a <see cref="SqlBinaryExpression" /> which represents a modulo operation.
@@ -187,7 +196,8 @@ public interface ISqlExpressionFactory
     SqlBinaryExpression Modulo(
         SqlExpression left,
         SqlExpression right,
-        RelationalTypeMapping? typeMapping = null);
+        RelationalTypeMapping? typeMapping = null
+    );
 
     // Bitwise
     /// <summary>
@@ -200,7 +210,8 @@ public interface ISqlExpressionFactory
     SqlBinaryExpression And(
         SqlExpression left,
         SqlExpression right,
-        RelationalTypeMapping? typeMapping = null);
+        RelationalTypeMapping? typeMapping = null
+    );
 
     /// <summary>
     ///     Creates a <see cref="SqlBinaryExpression" /> which represents a bitwise OR operation.
@@ -212,7 +223,8 @@ public interface ISqlExpressionFactory
     SqlBinaryExpression Or(
         SqlExpression left,
         SqlExpression right,
-        RelationalTypeMapping? typeMapping = null);
+        RelationalTypeMapping? typeMapping = null
+    );
 
     // Other
     /// <summary>
@@ -225,7 +237,8 @@ public interface ISqlExpressionFactory
     SqlFunctionExpression Coalesce(
         SqlExpression left,
         SqlExpression right,
-        RelationalTypeMapping? typeMapping = null);
+        RelationalTypeMapping? typeMapping = null
+    );
 
     /// <summary>
     ///     Creates a new <see cref="SqlUnaryExpression" /> which represent equality to null.
@@ -251,7 +264,8 @@ public interface ISqlExpressionFactory
     SqlUnaryExpression Convert(
         SqlExpression operand,
         Type type,
-        RelationalTypeMapping? typeMapping = null);
+        RelationalTypeMapping? typeMapping = null
+    );
 
     /// <summary>
     ///     Creates a new <see cref="SqlUnaryExpression" /> which represent a NOT operation in a SQL tree.
@@ -277,7 +291,8 @@ public interface ISqlExpressionFactory
     CaseExpression Case(
         SqlExpression operand,
         IReadOnlyList<CaseWhenClause> whenClauses,
-        SqlExpression? elseResult);
+        SqlExpression? elseResult
+    );
 
     /// <summary>
     ///     Creates a new <see cref="CaseExpression" /> which represent a CASE statement in a SQL tree.
@@ -303,7 +318,8 @@ public interface ISqlExpressionFactory
         bool nullable,
         IEnumerable<bool> argumentsPropagateNullability,
         Type returnType,
-        RelationalTypeMapping? typeMapping = null);
+        RelationalTypeMapping? typeMapping = null
+    );
 
     /// <summary>
     ///     Creates a new <see cref="SqlFunctionExpression" /> which represents a function call in a SQL tree.
@@ -323,7 +339,8 @@ public interface ISqlExpressionFactory
         bool nullable,
         IEnumerable<bool> argumentsPropagateNullability,
         Type returnType,
-        RelationalTypeMapping? typeMapping = null);
+        RelationalTypeMapping? typeMapping = null
+    );
 
     /// <summary>
     ///     Creates a new <see cref="SqlFunctionExpression" /> which represents a function call in a SQL tree.
@@ -345,7 +362,8 @@ public interface ISqlExpressionFactory
         bool instancePropagatesNullability,
         IEnumerable<bool> argumentsPropagateNullability,
         Type returnType,
-        RelationalTypeMapping? typeMapping = null);
+        RelationalTypeMapping? typeMapping = null
+    );
 
     /// <summary>
     ///     Creates a new <see cref="SqlFunctionExpression" /> which represents a niladic function call in a SQL tree.
@@ -359,7 +377,8 @@ public interface ISqlExpressionFactory
         string name,
         bool nullable,
         Type returnType,
-        RelationalTypeMapping? typeMapping = null);
+        RelationalTypeMapping? typeMapping = null
+    );
 
     /// <summary>
     ///     Creates a new <see cref="SqlFunctionExpression" /> which represents a niladic function call in a SQL tree.
@@ -375,7 +394,8 @@ public interface ISqlExpressionFactory
         string name,
         bool nullable,
         Type returnType,
-        RelationalTypeMapping? typeMapping = null);
+        RelationalTypeMapping? typeMapping = null
+    );
 
     /// <summary>
     ///     Creates a new <see cref="SqlFunctionExpression" /> which represents a niladic function call in a SQL tree.
@@ -393,7 +413,8 @@ public interface ISqlExpressionFactory
         bool nullable,
         bool instancePropagatesNullability,
         Type returnType,
-        RelationalTypeMapping? typeMapping = null);
+        RelationalTypeMapping? typeMapping = null
+    );
 
     /// <summary>
     ///     Creates a new <see cref="ExistsExpression" /> which represents an EXISTS operation in a SQL tree.
@@ -433,7 +454,11 @@ public interface ISqlExpressionFactory
     /// <param name="pattern">A pattern to search.</param>
     /// <param name="escapeChar">An optional escape character to use in LIKE.</param>
     /// <returns>An expression representing a LIKE in a SQL tree.</returns>
-    LikeExpression Like(SqlExpression match, SqlExpression pattern, SqlExpression? escapeChar = null);
+    LikeExpression Like(
+        SqlExpression match,
+        SqlExpression pattern,
+        SqlExpression? escapeChar = null
+    );
 
     /// <summary>
     ///     Creates a new <see cref="SqlConstantExpression" /> which represents a constant in a SQL tree.
@@ -450,7 +475,11 @@ public interface ISqlExpressionFactory
     /// <param name="type">The type for the constant. Useful when value is null.</param>
     /// <param name="typeMapping">The <see cref="RelationalTypeMapping" /> associated with the expression.</param>
     /// <returns>An expression representing a constant in a SQL tree.</returns>
-    SqlConstantExpression Constant(object? value, Type type, RelationalTypeMapping? typeMapping = null);
+    SqlConstantExpression Constant(
+        object? value,
+        Type type,
+        RelationalTypeMapping? typeMapping = null
+    );
 
     /// <summary>
     ///     Creates a new <see cref="SqlFragmentExpression" /> which represents a SQL token.
@@ -495,7 +524,8 @@ public interface ISqlExpressionFactory
     bool TryCreateLeast(
         IReadOnlyList<SqlExpression> expressions,
         Type resultType,
-        [NotNullWhen(true)] out SqlExpression? leastExpression);
+        [NotNullWhen(true)] out SqlExpression? leastExpression
+    );
 
     /// <summary>
     ///     Attempts to creates a new expression that returns the greatest value from a list of expressions, e.g. an invocation of the
@@ -508,5 +538,6 @@ public interface ISqlExpressionFactory
     bool TryCreateGreatest(
         IReadOnlyList<SqlExpression> expressions,
         Type resultType,
-        [NotNullWhen(true)] out SqlExpression? greatestExpression);
+        [NotNullWhen(true)] out SqlExpression? greatestExpression
+    );
 }

@@ -11,9 +11,10 @@ namespace OLEDB.Test.ModuleCore
     // CTestCases
     //
     ////////////////////////////////////////////////////////////////
-    public class CTestCase : CTestBase//, ITestCases
+    public class CTestCase : CTestBase //, ITestCases
     {
         public delegate int dlgtTestVariation();
+
         //Data
         private CVariation _curvariation;
 
@@ -53,7 +54,7 @@ namespace OLEDB.Test.ModuleCore
                 foreach (object child in children)
                 {
                     CTestCase childTc = child as CTestCase;
-                    if (childTc != null)    //nested test case class will be child of a test case
+                    if (childTc != null) //nested test case class will be child of a test case
                     {
                         childTc.Init();
                         childTc.Execute();
@@ -89,7 +90,10 @@ namespace OLEDB.Test.ModuleCore
                         catch (Exception e)
                         {
                             System.Console.WriteLine(indent + var.Desc);
-                            System.Console.WriteLine("unexpected exception happened:{0}", e.Message);
+                            System.Console.WriteLine(
+                                "unexpected exception happened:{0}",
+                                e.Message
+                            );
                             System.Console.WriteLine(e.StackTrace);
                             System.Console.WriteLine(indent + " FAILED");
                             TestModule.FailCount++;
@@ -126,7 +130,8 @@ namespace OLEDB.Test.ModuleCore
                         foreach (var testCase in var.TestCases())
                         {
                             Func<tagVARIATION_STATUS> test = testCase.Test;
-                            testCase.Test = () => {
+                            testCase.Test = () =>
+                            {
                                 CurVariation = var;
                                 return test();
                             };
@@ -180,6 +185,7 @@ namespace OLEDB.Test.ModuleCore
                 TestModule.FailCount++;
             }
         }
+
         //Accessor
         public CTestModule TestModule
         {
@@ -187,7 +193,8 @@ namespace OLEDB.Test.ModuleCore
             {
                 if (Parent is CTestModule)
                     return (CTestModule)Parent;
-                else return ((CTestCase)Parent).TestModule;
+                else
+                    return ((CTestCase)Parent).TestModule;
             }
             set { Parent = value; }
         }
@@ -222,6 +229,7 @@ namespace OLEDB.Test.ModuleCore
             get { return _curvariation; }
             set { _curvariation = value; }
         }
+
         public int GetVariationCount()
         {
             return Children.Count;
@@ -292,8 +300,8 @@ namespace OLEDB.Test.ModuleCore
             //added the support of specifying an id=x, as an attribute so you can have
             //then sorted and displayed however your see fit.
             if (bSort)
-                Children.Sort(/*Default sort is based upon IComparable of each item*/);
+                Children.Sort( /*Default sort is based upon IComparable of each item*/
+                );
         }
-
     }
 }

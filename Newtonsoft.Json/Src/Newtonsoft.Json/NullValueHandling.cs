@@ -42,6 +42,6 @@ namespace Newtonsoft.Json
         /// <summary>
         /// Ignore null values when serializing and deserializing objects.
         /// </summary>
-        Ignore = 1
+        Ignore = 1,
     }
 }

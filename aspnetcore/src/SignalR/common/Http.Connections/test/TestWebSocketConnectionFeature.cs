@@ -15,8 +15,8 @@ namespace Microsoft.AspNetCore.Http.Connections.Tests;
 
 internal class TestWebSocketConnectionFeature : IHttpWebSocketFeature, IDisposable
 {
-    public TestWebSocketConnectionFeature()
-    { }
+    public TestWebSocketConnectionFeature() { }
+
     public TestWebSocketConnectionFeature(SyncPoint sync)
     {
         _sync = sync;
@@ -40,8 +40,16 @@ internal class TestWebSocketConnectionFeature : IHttpWebSocketFeature, IDisposab
         var clientToServer = Channel.CreateUnbounded<WebSocketMessage>();
         var serverToClient = Channel.CreateUnbounded<WebSocketMessage>();
 
-        var clientSocket = new WebSocketChannel(serverToClient.Reader, clientToServer.Writer, _sync);
-        var serverSocket = new WebSocketChannel(clientToServer.Reader, serverToClient.Writer, _sync);
+        var clientSocket = new WebSocketChannel(
+            serverToClient.Reader,
+            clientToServer.Writer,
+            _sync
+        );
+        var serverSocket = new WebSocketChannel(
+            clientToServer.Reader,
+            serverToClient.Writer,
+            _sync
+        );
 
         Client = clientSocket;
         SubProtocol = context.SubProtocol;
@@ -50,9 +58,7 @@ internal class TestWebSocketConnectionFeature : IHttpWebSocketFeature, IDisposab
         return Task.FromResult<WebSocket>(serverSocket);
     }
 
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 
     public class WebSocketChannel : WebSocket
     {
@@ -65,7 +71,11 @@ internal class TestWebSocketConnectionFeature : IHttpWebSocketFeature, IDisposab
         private WebSocketState _state;
         private WebSocketMessage _internalBuffer = new WebSocketMessage();
 
-        public WebSocketChannel(ChannelReader<WebSocketMessage> input, ChannelWriter<WebSocketMessage> output, SyncPoint sync = null)
+        public WebSocketChannel(
+            ChannelReader<WebSocketMessage> input,
+            ChannelWriter<WebSocketMessage> output,
+            SyncPoint sync = null
+        )
         {
             _input = input;
             _output = output;
@@ -91,30 +101,42 @@ internal class TestWebSocketConnectionFeature : IHttpWebSocketFeature, IDisposab
             _output.TryComplete(new WebSocketException(WebSocketError.ConnectionClosedPrematurely));
         }
 
-        public override async Task CloseAsync(WebSocketCloseStatus closeStatus, string statusDescription, CancellationToken cancellationToken)
+        public override async Task CloseAsync(
+            WebSocketCloseStatus closeStatus,
+            string statusDescription,
+            CancellationToken cancellationToken
+        )
         {
-            await SendMessageAsync(new WebSocketMessage
-            {
-                CloseStatus = closeStatus,
-                CloseStatusDescription = statusDescription,
-                MessageType = WebSocketMessageType.Close,
-            },
-            cancellationToken);
+            await SendMessageAsync(
+                new WebSocketMessage
+                {
+                    CloseStatus = closeStatus,
+                    CloseStatusDescription = statusDescription,
+                    MessageType = WebSocketMessageType.Close,
+                },
+                cancellationToken
+            );
 
             _state = WebSocketState.CloseSent;
 
             _output.TryComplete();
         }
 
-        public override async Task CloseOutputAsync(WebSocketCloseStatus closeStatus, string statusDescription, CancellationToken cancellationToken)
+        public override async Task CloseOutputAsync(
+            WebSocketCloseStatus closeStatus,
+            string statusDescription,
+            CancellationToken cancellationToken
+        )
         {
-            await SendMessageAsync(new WebSocketMessage
-            {
-                CloseStatus = closeStatus,
-                CloseStatusDescription = statusDescription,
-                MessageType = WebSocketMessageType.Close,
-            },
-            cancellationToken);
+            await SendMessageAsync(
+                new WebSocketMessage
+                {
+                    CloseStatus = closeStatus,
+                    CloseStatusDescription = statusDescription,
+                    MessageType = WebSocketMessageType.Close,
+                },
+                cancellationToken
+            );
 
             _state = WebSocketState.CloseSent;
 
@@ -127,7 +149,10 @@ internal class TestWebSocketConnectionFeature : IHttpWebSocketFeature, IDisposab
             _output.TryComplete();
         }
 
-        public override async Task<WebSocketReceiveResult> ReceiveAsync(ArraySegment<byte> buffer, CancellationToken cancellationToken)
+        public override async Task<WebSocketReceiveResult> ReceiveAsync(
+            ArraySegment<byte> buffer,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
@@ -142,7 +167,13 @@ internal class TestWebSocketConnectionFeature : IHttpWebSocketFeature, IDisposab
                             _state = WebSocketState.CloseReceived;
                             _closeStatus = message.CloseStatus;
                             _closeStatusDescription = message.CloseStatusDescription;
-                            return new WebSocketReceiveResult(0, WebSocketMessageType.Close, true, message.CloseStatus, message.CloseStatusDescription);
+                            return new WebSocketReceiveResult(
+                                0,
+                                WebSocketMessageType.Close,
+                                true,
+                                message.CloseStatus,
+                                message.CloseStatusDescription
+                            );
                         }
 
                         _internalBuffer = message;
@@ -153,22 +184,41 @@ internal class TestWebSocketConnectionFeature : IHttpWebSocketFeature, IDisposab
                 if (buffer.Count - buffer.Offset < _internalBuffer.Buffer.Length)
                 {
                     length = Math.Min(buffer.Count - buffer.Offset, _internalBuffer.Buffer.Length);
-                    Buffer.BlockCopy(_internalBuffer.Buffer, 0, buffer.Array, buffer.Offset, length);
+                    Buffer.BlockCopy(
+                        _internalBuffer.Buffer,
+                        0,
+                        buffer.Array,
+                        buffer.Offset,
+                        length
+                    );
                 }
                 else
                 {
-                    Buffer.BlockCopy(_internalBuffer.Buffer, 0, buffer.Array, buffer.Offset, length);
+                    Buffer.BlockCopy(
+                        _internalBuffer.Buffer,
+                        0,
+                        buffer.Array,
+                        buffer.Offset,
+                        length
+                    );
                 }
 
                 var endOfMessage = _internalBuffer.EndOfMessage;
                 if (length > 0)
                 {
                     // Remove the sent bytes from the remaining buffer
-                    _internalBuffer.Buffer = _internalBuffer.Buffer.AsMemory().Slice(length).ToArray();
+                    _internalBuffer.Buffer = _internalBuffer
+                        .Buffer.AsMemory()
+                        .Slice(length)
+                        .ToArray();
                     endOfMessage = _internalBuffer.Buffer.Length == 0 && endOfMessage;
                 }
 
-                return new WebSocketReceiveResult(length, _internalBuffer.MessageType, endOfMessage);
+                return new WebSocketReceiveResult(
+                    length,
+                    _internalBuffer.MessageType,
+                    endOfMessage
+                );
             }
             catch (WebSocketException ex)
             {
@@ -188,7 +238,12 @@ internal class TestWebSocketConnectionFeature : IHttpWebSocketFeature, IDisposab
             throw new InvalidOperationException("Unexpected close");
         }
 
-        public override async Task SendAsync(ArraySegment<byte> buffer, WebSocketMessageType messageType, bool endOfMessage, CancellationToken cancellationToken)
+        public override async Task SendAsync(
+            ArraySegment<byte> buffer,
+            WebSocketMessageType messageType,
+            bool endOfMessage,
+            CancellationToken cancellationToken
+        )
         {
             if (_sync != null)
             {
@@ -198,13 +253,15 @@ internal class TestWebSocketConnectionFeature : IHttpWebSocketFeature, IDisposab
 
             var copy = new byte[buffer.Count];
             Buffer.BlockCopy(buffer.Array, buffer.Offset, copy, 0, buffer.Count);
-            await SendMessageAsync(new WebSocketMessage
-            {
-                Buffer = copy,
-                MessageType = messageType,
-                EndOfMessage = endOfMessage
-            },
-            cancellationToken);
+            await SendMessageAsync(
+                new WebSocketMessage
+                {
+                    Buffer = copy,
+                    MessageType = messageType,
+                    EndOfMessage = endOfMessage,
+                },
+                cancellationToken
+            );
         }
 
         public async Task<WebSocketMessage> GetNextMessageAsync()
@@ -223,7 +280,7 @@ internal class TestWebSocketConnectionFeature : IHttpWebSocketFeature, IDisposab
                 MessageType = WebSocketMessageType.Close,
                 EndOfMessage = true,
                 CloseStatus = WebSocketCloseStatus.InternalServerError,
-                CloseStatusDescription = string.Empty
+                CloseStatusDescription = string.Empty,
             };
         }
 
@@ -239,7 +296,16 @@ internal class TestWebSocketConnectionFeature : IHttpWebSocketFeature, IDisposab
                         _state = WebSocketState.CloseReceived;
                         _closeStatus = message.CloseStatus;
                         _closeStatusDescription = message.CloseStatusDescription;
-                        return new WebSocketConnectionSummary(frames, new WebSocketReceiveResult(0, message.MessageType, message.EndOfMessage, message.CloseStatus, message.CloseStatusDescription));
+                        return new WebSocketConnectionSummary(
+                            frames,
+                            new WebSocketReceiveResult(
+                                0,
+                                message.MessageType,
+                                message.EndOfMessage,
+                                message.CloseStatus,
+                                message.CloseStatusDescription
+                            )
+                        );
                     }
 
                     frames.Add(message);
@@ -247,10 +313,22 @@ internal class TestWebSocketConnectionFeature : IHttpWebSocketFeature, IDisposab
             }
             _state = WebSocketState.Closed;
             _closeStatus = WebSocketCloseStatus.InternalServerError;
-            return new WebSocketConnectionSummary(frames, new WebSocketReceiveResult(0, WebSocketMessageType.Close, endOfMessage: true, closeStatus: WebSocketCloseStatus.InternalServerError, closeStatusDescription: ""));
+            return new WebSocketConnectionSummary(
+                frames,
+                new WebSocketReceiveResult(
+                    0,
+                    WebSocketMessageType.Close,
+                    endOfMessage: true,
+                    closeStatus: WebSocketCloseStatus.InternalServerError,
+                    closeStatusDescription: ""
+                )
+            );
         }
 
-        private async Task SendMessageAsync(WebSocketMessage webSocketMessage, CancellationToken cancellationToken)
+        private async Task SendMessageAsync(
+            WebSocketMessage webSocketMessage,
+            CancellationToken cancellationToken
+        )
         {
             while (await _output.WaitToWriteAsync(cancellationToken))
             {
@@ -267,7 +345,10 @@ internal class TestWebSocketConnectionFeature : IHttpWebSocketFeature, IDisposab
         public IList<WebSocketMessage> Received { get; }
         public WebSocketReceiveResult CloseResult { get; }
 
-        public WebSocketConnectionSummary(IList<WebSocketMessage> received, WebSocketReceiveResult closeResult)
+        public WebSocketConnectionSummary(
+            IList<WebSocketMessage> received,
+            WebSocketReceiveResult closeResult
+        )
         {
             Received = received;
             CloseResult = closeResult;

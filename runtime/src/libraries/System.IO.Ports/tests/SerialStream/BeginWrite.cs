@@ -47,7 +47,12 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Offset_NEG1()
         {
-            VerifyWriteException(new byte[DEFAULT_BUFFER_SIZE], -1, DEFAULT_BUFFER_COUNT, typeof(ArgumentOutOfRangeException));
+            VerifyWriteException(
+                new byte[DEFAULT_BUFFER_SIZE],
+                -1,
+                DEFAULT_BUFFER_COUNT,
+                typeof(ArgumentOutOfRangeException)
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
@@ -55,19 +60,34 @@ namespace System.IO.Ports.Tests
         {
             Random rndGen = new Random(-55);
 
-            VerifyWriteException(new byte[DEFAULT_BUFFER_SIZE], rndGen.Next(int.MinValue, 0), DEFAULT_BUFFER_COUNT, typeof(ArgumentOutOfRangeException));
+            VerifyWriteException(
+                new byte[DEFAULT_BUFFER_SIZE],
+                rndGen.Next(int.MinValue, 0),
+                DEFAULT_BUFFER_COUNT,
+                typeof(ArgumentOutOfRangeException)
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Offset_MinInt()
         {
-            VerifyWriteException(new byte[DEFAULT_BUFFER_SIZE], int.MinValue, DEFAULT_BUFFER_COUNT, typeof(ArgumentOutOfRangeException));
+            VerifyWriteException(
+                new byte[DEFAULT_BUFFER_SIZE],
+                int.MinValue,
+                DEFAULT_BUFFER_COUNT,
+                typeof(ArgumentOutOfRangeException)
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Count_NEG1()
         {
-            VerifyWriteException(new byte[DEFAULT_BUFFER_SIZE], DEFAULT_BUFFER_OFFSET, -1, typeof(ArgumentOutOfRangeException));
+            VerifyWriteException(
+                new byte[DEFAULT_BUFFER_SIZE],
+                DEFAULT_BUFFER_OFFSET,
+                -1,
+                typeof(ArgumentOutOfRangeException)
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
@@ -75,13 +95,23 @@ namespace System.IO.Ports.Tests
         {
             Random rndGen = new Random(-55);
 
-            VerifyWriteException(new byte[DEFAULT_BUFFER_SIZE], DEFAULT_BUFFER_OFFSET, rndGen.Next(int.MinValue, 0), typeof(ArgumentOutOfRangeException));
+            VerifyWriteException(
+                new byte[DEFAULT_BUFFER_SIZE],
+                DEFAULT_BUFFER_OFFSET,
+                rndGen.Next(int.MinValue, 0),
+                typeof(ArgumentOutOfRangeException)
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void Count_MinInt()
         {
-            VerifyWriteException(new byte[DEFAULT_BUFFER_SIZE], DEFAULT_BUFFER_OFFSET, int.MinValue, typeof(ArgumentOutOfRangeException));
+            VerifyWriteException(
+                new byte[DEFAULT_BUFFER_SIZE],
+                DEFAULT_BUFFER_OFFSET,
+                int.MinValue,
+                typeof(ArgumentOutOfRangeException)
+            );
         }
 
         [ConditionalFact(nameof(HasOneSerialPort))]
@@ -222,8 +252,16 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem))]
         public void Callback()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
                 CallbackHandler callbackHandler = new CallbackHandler();
 
@@ -237,12 +275,22 @@ namespace System.IO.Ports.Tests
                 // RTS allows us to control when driver sends the data but does not
                 // guarantee that data will not be consumed by driver
                 // we can check if data was received on the other side though
-                Action read = () => {
-                    com2.BaseStream.Read(new byte[DEFAULT_NUM_BYTES_TO_WRITE], 0, DEFAULT_NUM_BYTES_TO_WRITE);
+                Action read = () =>
+                {
+                    com2.BaseStream.Read(
+                        new byte[DEFAULT_NUM_BYTES_TO_WRITE],
+                        0,
+                        DEFAULT_NUM_BYTES_TO_WRITE
+                    );
                 };
 
-                IAsyncResult writeAsyncResult = com1.BaseStream.BeginWrite(new byte[DEFAULT_NUM_BYTES_TO_WRITE], 0,
-                    DEFAULT_NUM_BYTES_TO_WRITE, callbackHandler.Callback, this);
+                IAsyncResult writeAsyncResult = com1.BaseStream.BeginWrite(
+                    new byte[DEFAULT_NUM_BYTES_TO_WRITE],
+                    0,
+                    DEFAULT_NUM_BYTES_TO_WRITE,
+                    callbackHandler.Callback,
+                    this
+                );
                 callbackHandler.BeginWriteAsyncResult = writeAsyncResult;
 
                 Assert.Equal(this, writeAsyncResult.AsyncState);
@@ -258,17 +306,25 @@ namespace System.IO.Ports.Tests
 
                 // No we have to wait for the callbackHandler to complete
                 int elapsedTime = 0;
-                while (!callbackWriteAsyncResult.IsCompleted && elapsedTime < MAX_WAIT_WRITE_COMPLETE)
+                while (
+                    !callbackWriteAsyncResult.IsCompleted && elapsedTime < MAX_WAIT_WRITE_COMPLETE
+                )
                 {
                     Thread.Sleep(10);
                     elapsedTime += 10;
                 }
 
                 Assert.Equal(this, callbackWriteAsyncResult.AsyncState);
-                Assert.False(callbackWriteAsyncResult.CompletedSynchronously, "Should not have completed sync (cback)");
+                Assert.False(
+                    callbackWriteAsyncResult.CompletedSynchronously,
+                    "Should not have completed sync (cback)"
+                );
                 Assert.True(callbackWriteAsyncResult.IsCompleted, "Should have completed (cback)");
                 Assert.Equal(this, writeAsyncResult.AsyncState);
-                Assert.False(writeAsyncResult.CompletedSynchronously, "Should not have completed sync (write)");
+                Assert.False(
+                    writeAsyncResult.CompletedSynchronously,
+                    "Should not have completed sync (write)"
+                );
                 Assert.True(writeAsyncResult.IsCompleted, "Should have completed (write)");
             }
         }
@@ -276,8 +332,16 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasNullModem), nameof(HasHardwareFlowControl))]
         public void Callback_State()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
                 CallbackHandler callbackHandler = new CallbackHandler();
 
@@ -285,11 +349,22 @@ namespace System.IO.Ports.Tests
                 com1.Open();
                 com2.Open();
 
-                Action read = () => {
-                    com2.BaseStream.Read(new byte[DEFAULT_NUM_BYTES_TO_WRITE], 0, DEFAULT_NUM_BYTES_TO_WRITE);
+                Action read = () =>
+                {
+                    com2.BaseStream.Read(
+                        new byte[DEFAULT_NUM_BYTES_TO_WRITE],
+                        0,
+                        DEFAULT_NUM_BYTES_TO_WRITE
+                    );
                 };
 
-                IAsyncResult writeAsyncResult = com1.BaseStream.BeginWrite(new byte[DEFAULT_NUM_BYTES_TO_WRITE], 0, DEFAULT_NUM_BYTES_TO_WRITE, callbackHandler.Callback, this);
+                IAsyncResult writeAsyncResult = com1.BaseStream.BeginWrite(
+                    new byte[DEFAULT_NUM_BYTES_TO_WRITE],
+                    0,
+                    DEFAULT_NUM_BYTES_TO_WRITE,
+                    callbackHandler.Callback,
+                    this
+                );
                 callbackHandler.BeginWriteAsyncResult = writeAsyncResult;
 
                 Assert.Throws<TimeoutException>(read);
@@ -302,17 +377,25 @@ namespace System.IO.Ports.Tests
 
                 // No we have to wait for the callbackHandler to complete
                 int elapsedTime = 0;
-                while (!callbackWriteAsyncResult.IsCompleted && elapsedTime < MAX_WAIT_WRITE_COMPLETE)
+                while (
+                    !callbackWriteAsyncResult.IsCompleted && elapsedTime < MAX_WAIT_WRITE_COMPLETE
+                )
                 {
                     Thread.Sleep(10);
                     elapsedTime += 10;
                 }
 
                 Assert.Equal(this, callbackWriteAsyncResult.AsyncState);
-                Assert.False(writeAsyncResult.CompletedSynchronously, "Should not have completed sync (cback)");
+                Assert.False(
+                    writeAsyncResult.CompletedSynchronously,
+                    "Should not have completed sync (cback)"
+                );
                 Assert.True(callbackWriteAsyncResult.IsCompleted, "Should have completed (cback)");
                 Assert.Equal(this, writeAsyncResult.AsyncState);
-                Assert.False(writeAsyncResult.CompletedSynchronously, "Should not have completed sync (write)");
+                Assert.False(
+                    writeAsyncResult.CompletedSynchronously,
+                    "Should not have completed sync (write)"
+                );
                 Assert.True(writeAsyncResult.IsCompleted, "Should have completed (write)");
             }
         }
@@ -320,30 +403,55 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void InBreak()
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
-                Debug.WriteLine("Verifying BeginWrite throws InvalidOperationException while in a Break");
+                Debug.WriteLine(
+                    "Verifying BeginWrite throws InvalidOperationException while in a Break"
+                );
                 com1.Open();
                 com1.BreakState = true;
 
-                Assert.Throws<InvalidOperationException>(() => com1.BaseStream.BeginWrite(new byte[8], 0, 8, null, null));
+                Assert.Throws<InvalidOperationException>(() =>
+                    com1.BaseStream.BeginWrite(new byte[8], 0, 8, null, null)
+                );
             }
         }
         #endregion
 
         #region Verification for Test Cases
 
-        private void VerifyWriteException(byte[] buffer, int offset, int count, Type expectedException)
+        private void VerifyWriteException(
+            byte[] buffer,
+            int offset,
+            int count,
+            Type expectedException
+        )
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 int bufferLength = null == buffer ? 0 : buffer.Length;
 
-                Debug.WriteLine("Verifying write method throws {0} buffer.Length={1}, offset={2}, count={3}",
-                    expectedException, bufferLength, offset, count);
+                Debug.WriteLine(
+                    "Verifying write method throws {0} buffer.Length={1}, offset={2}, count={3}",
+                    expectedException,
+                    bufferLength,
+                    offset,
+                    count
+                );
                 com.Open();
 
-                Assert.Throws(expectedException, () => com.BaseStream.BeginWrite(buffer, offset, count, null, null));
+                Assert.Throws(
+                    expectedException,
+                    () => com.BaseStream.BeginWrite(buffer, offset, count, null, null)
+                );
             }
         }
 
@@ -362,15 +470,34 @@ namespace System.IO.Ports.Tests
             VerifyWrite(buffer, offset, count, encoding, DEFAULT_NUM_WRITES);
         }
 
-        private void VerifyWrite(byte[] buffer, int offset, int count, Encoding encoding, int numWrites)
+        private void VerifyWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            Encoding encoding,
+            int numWrites
+        )
         {
-            using (SerialPort com1 = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
-            using (SerialPort com2 = new SerialPort(TCSupport.LocalMachineSerialInfo.SecondAvailablePortName))
+            using (
+                SerialPort com1 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
+            using (
+                SerialPort com2 = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.SecondAvailablePortName
+                )
+            )
             {
                 Random rndGen = new Random(-55);
 
-                Debug.WriteLine("Verifying write method buffer.Length={0}, offset={1}, count={2}, endocing={3}",
-                    buffer.Length, offset, count, encoding.EncodingName);
+                Debug.WriteLine(
+                    "Verifying write method buffer.Length={0}, offset={1}, count={2}, endocing={3}",
+                    buffer.Length,
+                    offset,
+                    count,
+                    encoding.EncodingName
+                );
 
                 com1.Encoding = encoding;
                 com2.Encoding = encoding;
@@ -387,7 +514,14 @@ namespace System.IO.Ports.Tests
             }
         }
 
-        private void VerifyWriteByteArray(byte[] buffer, int offset, int count, SerialPort com1, SerialPort com2, int numWrites)
+        private void VerifyWriteByteArray(
+            byte[] buffer,
+            int offset,
+            int count,
+            SerialPort com1,
+            SerialPort com2,
+            int numWrites
+        )
         {
             int index = 0;
             CallbackHandler callbackHandler = new CallbackHandler();
@@ -403,28 +537,47 @@ namespace System.IO.Ports.Tests
 
             for (int i = 0; i < numWrites; i++)
             {
-                IAsyncResult writeAsyncResult = com1.BaseStream.BeginWrite(buffer, offset, count, callbackHandler.Callback, this);
+                IAsyncResult writeAsyncResult = com1.BaseStream.BeginWrite(
+                    buffer,
+                    offset,
+                    count,
+                    callbackHandler.Callback,
+                    this
+                );
                 com1.BaseStream.EndWrite(writeAsyncResult);
                 callbackHandler.BeginWriteAsyncResult = writeAsyncResult;
 
                 IAsyncResult callbackWriteAsyncResult = callbackHandler.WriteAsyncResult;
                 Assert.Equal(this, callbackWriteAsyncResult.AsyncState);
-                Assert.False(callbackWriteAsyncResult.CompletedSynchronously, "Should not have completed sync (cback)");
+                Assert.False(
+                    callbackWriteAsyncResult.CompletedSynchronously,
+                    "Should not have completed sync (cback)"
+                );
                 Assert.True(callbackWriteAsyncResult.IsCompleted, "Should have completed (cback)");
                 Assert.Equal(this, writeAsyncResult.AsyncState);
-                Assert.False(writeAsyncResult.CompletedSynchronously, "Should not have completed sync (write)");
+                Assert.False(
+                    writeAsyncResult.CompletedSynchronously,
+                    "Should not have completed sync (write)"
+                );
                 Assert.True(writeAsyncResult.IsCompleted, "Should have completed (write)");
             }
 
             com2.ReadTimeout = 500;
-            Thread.Sleep((int)(((expectedBytes.Length * numWrites * 10.0) / com1.BaudRate) * 1000) + 250);
+            Thread.Sleep(
+                (int)(((expectedBytes.Length * numWrites * 10.0) / com1.BaudRate) * 1000) + 250
+            );
 
             // Make sure buffer was not altered during the write call
             for (int i = 0; i < buffer.Length; i++)
             {
                 if (buffer[i] != oldBuffer[i])
                 {
-                    Fail("ERROR!!!: The contents of the buffer were changed from {0} to {1} at {2}", oldBuffer[i], buffer[i], i);
+                    Fail(
+                        "ERROR!!!: The contents of the buffer were changed from {0} to {1} at {2}",
+                        oldBuffer[i],
+                        buffer[i],
+                        i
+                    );
                 }
             }
 
@@ -451,7 +604,11 @@ namespace System.IO.Ports.Tests
                 index++;
                 if (actualBytes.Length - index != com2.BytesToRead)
                 {
-                    Fail("ERROR!!!: Expected BytesToRead={0} actual={1}", actualBytes.Length - index, com2.BytesToRead);
+                    Fail(
+                        "ERROR!!!: Expected BytesToRead={0} actual={1}",
+                        actualBytes.Length - index,
+                        com2.BytesToRead
+                    );
                 }
             }
 
@@ -462,7 +619,12 @@ namespace System.IO.Ports.Tests
                 {
                     if (expectedBytes[i] != actualBytes[i + expectedBytes.Length * j])
                     {
-                        Fail("ERROR!!!: Expected to read byte {0}  actual read {1} at {2}", (int)expectedBytes[i], (int)actualBytes[i + expectedBytes.Length * j], i);
+                        Fail(
+                            "ERROR!!!: Expected to read byte {0}  actual read {1} at {2}",
+                            (int)expectedBytes[i],
+                            (int)actualBytes[i + expectedBytes.Length * j],
+                            i
+                        );
                     }
                 }
             }
@@ -474,7 +636,8 @@ namespace System.IO.Ports.Tests
             private IAsyncResult _beginWriteAsyncResult;
             private readonly SerialPort _com;
 
-            public CallbackHandler() : this(null) { }
+            public CallbackHandler()
+                : this(null) { }
 
             private CallbackHandler(SerialPort com)
             {
@@ -483,7 +646,10 @@ namespace System.IO.Ports.Tests
 
             public void Callback(IAsyncResult writeAsyncResult)
             {
-                Debug.WriteLine("About to enter callback lock (already entered {0})", Monitor.IsEntered(this));
+                Debug.WriteLine(
+                    "About to enter callback lock (already entered {0})",
+                    Monitor.IsEntered(this)
+                );
                 lock (this)
                 {
                     Debug.WriteLine("Inside callback lock");
@@ -491,7 +657,9 @@ namespace System.IO.Ports.Tests
 
                     if (!writeAsyncResult.IsCompleted)
                     {
-                        throw new Exception("Err_23984afaea Expected IAsyncResult passed into callback to not be completed");
+                        throw new Exception(
+                            "Err_23984afaea Expected IAsyncResult passed into callback to not be completed"
+                        );
                     }
 
                     while (null == _beginWriteAsyncResult)
@@ -501,7 +669,9 @@ namespace System.IO.Ports.Tests
 
                     if (null != _beginWriteAsyncResult && !_beginWriteAsyncResult.IsCompleted)
                     {
-                        throw new Exception("Err_7907azpu Expected IAsyncResult returned from begin write to not be completed");
+                        throw new Exception(
+                            "Err_7907azpu Expected IAsyncResult returned from begin write to not be completed"
+                        );
                     }
 
                     if (null != _com)
@@ -509,19 +679,22 @@ namespace System.IO.Ports.Tests
                         _com.BaseStream.EndWrite(_beginWriteAsyncResult);
                         if (!_beginWriteAsyncResult.IsCompleted)
                         {
-                            throw new Exception("Err_6498afead Expected IAsyncResult returned from begin write to not be completed");
+                            throw new Exception(
+                                "Err_6498afead Expected IAsyncResult returned from begin write to not be completed"
+                            );
                         }
 
                         if (!writeAsyncResult.IsCompleted)
                         {
-                            throw new Exception("Err_1398ehpo Expected IAsyncResult passed into callback to not be completed");
+                            throw new Exception(
+                                "Err_1398ehpo Expected IAsyncResult passed into callback to not be completed"
+                            );
                         }
                     }
 
                     Monitor.Pulse(this);
                 }
             }
-
 
             public IAsyncResult WriteAsyncResult
             {
@@ -541,10 +714,7 @@ namespace System.IO.Ports.Tests
 
             public IAsyncResult BeginWriteAsyncResult
             {
-                get
-                {
-                    return _beginWriteAsyncResult;
-                }
+                get { return _beginWriteAsyncResult; }
                 set
                 {
                     lock (this)

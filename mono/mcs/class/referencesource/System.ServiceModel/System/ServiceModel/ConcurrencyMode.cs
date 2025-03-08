@@ -10,18 +10,17 @@ namespace System.ServiceModel
     {
         Single, // This is first so it is ConcurrencyMode.default
         Reentrant,
-        Multiple
+        Multiple,
     }
 
     static class ConcurrencyModeHelper
     {
-        static public bool IsDefined(ConcurrencyMode x)
+        public static bool IsDefined(ConcurrencyMode x)
         {
-            return
-                x == ConcurrencyMode.Single ||
-                x == ConcurrencyMode.Reentrant ||
-                x == ConcurrencyMode.Multiple ||
-                false;
+            return x == ConcurrencyMode.Single
+                || x == ConcurrencyMode.Reentrant
+                || x == ConcurrencyMode.Multiple
+                || false;
         }
     }
 }

@@ -3,17 +3,14 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class NotificationEntitiesInMemoryTest : NotificationEntitiesTestBase<
-    NotificationEntitiesInMemoryTest.NotificationEntitiesInMemoryFixture>
+public class NotificationEntitiesInMemoryTest
+    : NotificationEntitiesTestBase<NotificationEntitiesInMemoryTest.NotificationEntitiesInMemoryFixture>
 {
     public NotificationEntitiesInMemoryTest(NotificationEntitiesInMemoryFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public class NotificationEntitiesInMemoryFixture : NotificationEntitiesFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => InMemoryTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => InMemoryTestStoreFactory.Instance;
     }
 }

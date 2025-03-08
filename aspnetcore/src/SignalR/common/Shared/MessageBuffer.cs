@@ -18,7 +18,8 @@ namespace Microsoft.AspNetCore.SignalR.Internal;
 
 internal sealed class MessageBuffer : IDisposable
 {
-    private static readonly TaskCompletionSource<FlushResult> _completedTCS = new TaskCompletionSource<FlushResult>();
+    private static readonly TaskCompletionSource<FlushResult> _completedTCS =
+        new TaskCompletionSource<FlushResult>();
 
     public static TimeSpan AckRate => TimeSpan.FromSeconds(1);
 
@@ -29,7 +30,9 @@ internal sealed class MessageBuffer : IDisposable
     private readonly ILogger _logger;
     private readonly AckMessage _ackMessage = new(0);
     private readonly SequenceMessage _sequenceMessage = new(0);
-    private readonly Channel<long> _waitForAck = Channel.CreateBounded<long>(new BoundedChannelOptions(1) { FullMode = BoundedChannelFullMode.DropOldest });
+    private readonly Channel<long> _waitForAck = Channel.CreateBounded<long>(
+        new BoundedChannelOptions(1) { FullMode = BoundedChannelFullMode.DropOldest }
+    );
 
 #if NET8_0_OR_GREATER
     private readonly PeriodicTimer _timer;
@@ -60,12 +63,21 @@ internal sealed class MessageBuffer : IDisposable
         _completedTCS.SetResult(new());
     }
 
-    public MessageBuffer(ConnectionContext connection, IHubProtocol protocol, long bufferLimit, ILogger logger)
-        : this(connection, protocol, bufferLimit, logger, TimeProvider.System)
-    {
-    }
+    public MessageBuffer(
+        ConnectionContext connection,
+        IHubProtocol protocol,
+        long bufferLimit,
+        ILogger logger
+    )
+        : this(connection, protocol, bufferLimit, logger, TimeProvider.System) { }
 
-    public MessageBuffer(ConnectionContext connection, IHubProtocol protocol, long bufferLimit, ILogger logger, TimeProvider timeProvider)
+    public MessageBuffer(
+        ConnectionContext connection,
+        IHubProtocol protocol,
+        long bufferLimit,
+        ILogger logger,
+        TimeProvider timeProvider
+    )
     {
 #if NET8_0_OR_GREATER
         timeProvider ??= TimeProvider.System;
@@ -119,23 +131,39 @@ internal sealed class MessageBuffer : IDisposable
         }
     }
 
-    public ValueTask<FlushResult> WriteAsync(SerializedHubMessage hubMessage, CancellationToken cancellationToken)
+    public ValueTask<FlushResult> WriteAsync(
+        SerializedHubMessage hubMessage,
+        CancellationToken cancellationToken
+    )
     {
-        return WriteAsyncCore(hubMessage.Message!, hubMessage.GetSerializedMessage(_protocol), cancellationToken);
+        return WriteAsyncCore(
+            hubMessage.Message!,
+            hubMessage.GetSerializedMessage(_protocol),
+            cancellationToken
+        );
     }
 
-    public ValueTask<FlushResult> WriteAsync(HubMessage hubMessage, CancellationToken cancellationToken)
+    public ValueTask<FlushResult> WriteAsync(
+        HubMessage hubMessage,
+        CancellationToken cancellationToken
+    )
     {
         return WriteAsyncCore(hubMessage, _protocol.GetMessageBytes(hubMessage), cancellationToken);
     }
 
-    private async ValueTask<FlushResult> WriteAsyncCore(HubMessage hubMessage, ReadOnlyMemory<byte> messageBytes, CancellationToken cancellationToken)
+    private async ValueTask<FlushResult> WriteAsyncCore(
+        HubMessage hubMessage,
+        ReadOnlyMemory<byte> messageBytes,
+        CancellationToken cancellationToken
+    )
     {
         // TODO: Add backpressure based on message count
         if (_bufferedByteCount > _bufferLimit)
         {
             // primitive backpressure if buffer is full
-            while (await _waitForAck.Reader.WaitToReadAsync(cancellationToken).ConfigureAwait(false))
+            while (
+                await _waitForAck.Reader.WaitToReadAsync(cancellationToken).ConfigureAwait(false)
+            )
             {
                 if (_waitForAck.Reader.TryRead(out var count) && count < _bufferLimit)
                 {
@@ -215,7 +243,9 @@ internal sealed class MessageBuffer : IDisposable
 
             if (sequenceMessage.SequenceId > _currentReceivingSequenceId)
             {
-                throw new InvalidOperationException("Sequence ID greater than amount of messages we've received.");
+                throw new InvalidOperationException(
+                    "Sequence ID greater than amount of messages we've received."
+                );
             }
 
             _currentReceivingSequenceId = sequenceMessage.SequenceId;
@@ -247,7 +277,9 @@ internal sealed class MessageBuffer : IDisposable
 
     internal async Task ResendAsync(PipeWriter writer)
     {
-        var tcs = new TaskCompletionSource<FlushResult>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var tcs = new TaskCompletionSource<FlushResult>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         _resend = tcs;
 
         FlushResult finalResult = new();
@@ -319,7 +351,11 @@ internal sealed class MessageBuffer : IDisposable
 
         private readonly ReadOnlyMemory<byte>[] _messages = new ReadOnlyMemory<byte>[BufferLength];
 
-        public void AddMessage(ReadOnlyMemory<byte> hubMessage, long sequenceId, Stack<LinkedBuffer> pool)
+        public void AddMessage(
+            ReadOnlyMemory<byte> hubMessage,
+            long sequenceId,
+            Stack<LinkedBuffer> pool
+        )
         {
             if (_startingSequenceId < 0)
             {
@@ -360,17 +396,28 @@ internal sealed class MessageBuffer : IDisposable
             }
         }
 
-        public (LinkedBuffer Buffer, int ReturnCredit) RemoveMessages(long sequenceId, Stack<LinkedBuffer> pool)
+        public (LinkedBuffer Buffer, int ReturnCredit) RemoveMessages(
+            long sequenceId,
+            Stack<LinkedBuffer> pool
+        )
         {
             return RemoveMessagesCore(this, sequenceId, pool);
         }
 
-        private static (LinkedBuffer Buffer, int ReturnCredit) RemoveMessagesCore(LinkedBuffer linkedBuffer, long sequenceId, Stack<LinkedBuffer> pool)
+        private static (LinkedBuffer Buffer, int ReturnCredit) RemoveMessagesCore(
+            LinkedBuffer linkedBuffer,
+            long sequenceId,
+            Stack<LinkedBuffer> pool
+        )
         {
             var returnCredit = 0;
             while (linkedBuffer._startingSequenceId <= sequenceId)
             {
-                var numElements = (int)Math.Min(BufferLength, Math.Max(1, sequenceId - (linkedBuffer._startingSequenceId - 1)));
+                var numElements = (int)
+                    Math.Min(
+                        BufferLength,
+                        Math.Max(1, sequenceId - (linkedBuffer._startingSequenceId - 1))
+                    );
                 Debug.Assert(numElements > 0 && numElements < BufferLength + 1);
 
                 for (var i = 0; i < numElements; i++)
@@ -466,7 +513,10 @@ internal sealed class MessageBuffer : IDisposable
                     var firstMessageIndex = _linkedBuffer._ackedIndex + 1;
                     if (firstMessageIndex + index < BufferLength)
                     {
-                        return (_linkedBuffer._messages[firstMessageIndex + index], _linkedBuffer._startingSequenceId + firstMessageIndex + index);
+                        return (
+                            _linkedBuffer._messages[firstMessageIndex + index],
+                            _linkedBuffer._startingSequenceId + firstMessageIndex + index
+                        );
                     }
 
                     return (null, long.MinValue);

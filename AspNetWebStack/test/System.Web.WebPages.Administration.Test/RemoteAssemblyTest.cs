@@ -15,7 +15,11 @@ namespace System.Web.WebPages.Administration.Test
         public void GetAssembliesForBindingRedirectReturnsEmptySequenceIfNoBinAssembliesAreFound()
         {
             // Act
-            var assemblies = RemoteAssembly.GetAssembliesForBindingRedirect(AppDomain.CurrentDomain, @"x:\site\bin", (_, __) => Enumerable.Empty<IAssembly>());
+            var assemblies = RemoteAssembly.GetAssembliesForBindingRedirect(
+                AppDomain.CurrentDomain,
+                @"x:\site\bin",
+                (_, __) => Enumerable.Empty<IAssembly>()
+            );
 
             // Assert
             Assert.Empty(assemblies);
@@ -109,7 +113,12 @@ namespace System.Web.WebPages.Administration.Test
         public void RemoteAssemblyReturns1IfValueToBeComparedToIsNull()
         {
             // Arrange
-            RemoteAssembly assemblyA = new RemoteAssembly("A", new Version("1.0.0.0"), "public-key", "en-us");
+            RemoteAssembly assemblyA = new RemoteAssembly(
+                "A",
+                new Version("1.0.0.0"),
+                "public-key",
+                "en-us"
+            );
             RemoteAssembly assemblyB = null;
 
             // Act

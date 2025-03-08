@@ -7,7 +7,6 @@ using System.Linq.Expressions;
 
 namespace Moq.Behaviors
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal sealed class RaiseEvent : Behavior
@@ -29,7 +28,6 @@ namespace Moq.Behaviors
         sealed class RaiseEvent : Behavior
     */
     sealed class RaiseEvent : Behavior
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private Mock mock;
@@ -74,7 +72,12 @@ namespace Moq.Behaviors
         Delegate eventArgsFunc;
         object[] eventArgsParams;
 
-        public RaiseEvent(Mock mock, LambdaExpression expression, Delegate eventArgsFunc, object[] eventArgsParams)
+        public RaiseEvent(
+            Mock mock,
+            LambdaExpression expression,
+            Delegate eventArgsFunc,
+            object[] eventArgsParams
+        )
         {
             Debug.Assert(mock != null);
             Debug.Assert(expression != null);
@@ -99,11 +102,19 @@ namespace Moq.Behaviors
                 var argsFuncType = this.eventArgsFunc.GetType();
                 if (argsFuncType.IsGenericType && argsFuncType.GetGenericArguments().Length == 1)
                 {
-                    args = new object[] { this.mock.Object, this.eventArgsFunc.InvokePreserveStack() };
+                    args = new object[]
+                    {
+                        this.mock.Object,
+                        this.eventArgsFunc.InvokePreserveStack(),
+                    };
                 }
                 else
                 {
-                    args = new object[] { this.mock.Object, this.eventArgsFunc.InvokePreserveStack(invocation.Arguments) };
+                    args = new object[]
+                    {
+                        this.mock.Object,
+                        this.eventArgsFunc.InvokePreserveStack(invocation.Arguments),
+                    };
                 }
             }
 

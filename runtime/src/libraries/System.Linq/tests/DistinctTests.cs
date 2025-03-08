@@ -12,9 +12,10 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsIntQuery()
         {
-            var q = from x in new[] { 0, 9999, 0, 888, -1, 66, -1, -777, 1, 2, -12345, 66, 66, -1, -1 }
-                    where x > int.MinValue
-                    select x;
+            var q =
+                from x in new[] { 0, 9999, 0, 888, -1, 66, -1, -777, 1, 2, -12345, 66, 66, -1, -1 }
+                where x > int.MinValue
+                select x;
 
             Assert.Equal(q.Distinct(), q.Distinct());
         }
@@ -22,10 +23,10 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsStringQuery()
         {
-            var q = from x in new[] { "!@#$%^", "C", "AAA", "Calling Twice", "SoS" }
-                    where string.IsNullOrEmpty(x)
-                    select x;
-
+            var q =
+                from x in new[] { "!@#$%^", "C", "AAA", "Calling Twice", "SoS" }
+                where string.IsNullOrEmpty(x)
+                select x;
 
             Assert.Equal(q.Distinct(), q.Distinct());
         }
@@ -156,7 +157,10 @@ namespace System.Linq.Tests
         {
             string[] source = null;
 
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.Distinct(StringComparer.Ordinal));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.Distinct(StringComparer.Ordinal)
+            );
         }
 
         [Fact]
@@ -165,7 +169,11 @@ namespace System.Linq.Tests
             string[] source = { "Bob", "Tim", "bBo", "miT", "Robert", "iTm" };
             string[] expected = { "Bob", "Tim", "Robert" };
 
-            Assert.Equal(expected, source.Distinct(new AnagramEqualityComparer()), new AnagramEqualityComparer());
+            Assert.Equal(
+                expected,
+                source.Distinct(new AnagramEqualityComparer()),
+                new AnagramEqualityComparer()
+            );
         }
 
         [Fact]
@@ -174,7 +182,11 @@ namespace System.Linq.Tests
             string[] source = { "Bob", "Tim", "bBo", "miT", "Robert", "iTm" };
             string[] expected = { "Bob", "Tim", "Robert" };
 
-            Assert.Equal(expected, source.RunOnce().Distinct(new AnagramEqualityComparer()), new AnagramEqualityComparer());
+            Assert.Equal(
+                expected,
+                source.RunOnce().Distinct(new AnagramEqualityComparer()),
+                new AnagramEqualityComparer()
+            );
         }
 
         [Theory, MemberData(nameof(SequencesWithDuplicates))]
@@ -203,7 +215,9 @@ namespace System.Linq.Tests
             yield return new object[] { new double[] { 1, 1, 1, 2, 3, 5, 5, 6, 6, 10 } };
             yield return new object[] { new decimal[] { 1, 1, 1, 2, 3, 5, 5, 6, 6, 10 } };
             // Try strings
-            yield return new object[] { new []
+            yield return new object[]
+            {
+                new[]
                 {
                     "add",
                     "add",
@@ -220,7 +234,7 @@ namespace System.Linq.Tests
                     "namespace",
                     "namespace",
                     "namespace",
-                }
+                },
             };
         }
 
@@ -273,8 +287,14 @@ namespace System.Linq.Tests
         {
             string[] first = null;
 
-            AssertExtensions.Throws<ArgumentNullException>("source", () => first.DistinctBy(x => x));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => first.DistinctBy(x => x, new AnagramEqualityComparer()));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => first.DistinctBy(x => x)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => first.DistinctBy(x => x, new AnagramEqualityComparer())
+            );
         }
 
         [Fact]
@@ -283,20 +303,36 @@ namespace System.Linq.Tests
             string[] source = { "Bob", "Tim", "Robert", "Chris" };
             Func<string, string> keySelector = null;
 
-            AssertExtensions.Throws<ArgumentNullException>("keySelector", () => source.DistinctBy(keySelector));
-            AssertExtensions.Throws<ArgumentNullException>("keySelector", () => source.DistinctBy(keySelector, new AnagramEqualityComparer()));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "keySelector",
+                () => source.DistinctBy(keySelector)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "keySelector",
+                () => source.DistinctBy(keySelector, new AnagramEqualityComparer())
+            );
         }
 
         [Theory]
         [MemberData(nameof(DistinctBy_TestData))]
-        public static void DistinctBy_HasExpectedOutput<TSource, TKey>(IEnumerable<TSource> source, Func<TSource, TKey> keySelector, IEqualityComparer<TKey>? comparer, IEnumerable<TSource> expected)
+        public static void DistinctBy_HasExpectedOutput<TSource, TKey>(
+            IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            IEqualityComparer<TKey>? comparer,
+            IEnumerable<TSource> expected
+        )
         {
             Assert.Equal(expected, source.DistinctBy(keySelector, comparer));
         }
 
         [Theory]
         [MemberData(nameof(DistinctBy_TestData))]
-        public static void DistinctBy_RunOnce_HasExpectedOutput<TSource, TKey>(IEnumerable<TSource> source, Func<TSource, TKey> keySelector, IEqualityComparer<TKey>? comparer, IEnumerable<TSource> expected)
+        public static void DistinctBy_RunOnce_HasExpectedOutput<TSource, TKey>(
+            IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            IEqualityComparer<TKey>? comparer,
+            IEnumerable<TSource> expected
+        )
         {
             Assert.Equal(expected, source.RunOnce().DistinctBy(keySelector, comparer));
         }
@@ -307,64 +343,78 @@ namespace System.Linq.Tests
                 source: Enumerable.Range(0, 10),
                 keySelector: x => x,
                 comparer: null,
-                expected: Enumerable.Range(0, 10));
+                expected: Enumerable.Range(0, 10)
+            );
 
             yield return WrapArgs(
                 source: Enumerable.Range(5, 10),
                 keySelector: x => true,
                 comparer: null,
-                expected: new int[] { 5 });
+                expected: new int[] { 5 }
+            );
 
             yield return WrapArgs(
                 source: Enumerable.Range(0, 20),
                 keySelector: x => x % 5,
                 comparer: null,
-                expected: Enumerable.Range(0, 5));
+                expected: Enumerable.Range(0, 5)
+            );
 
             yield return WrapArgs(
                 source: Enumerable.Repeat(5, 20),
                 keySelector: x => x,
                 comparer: null,
-                expected: Enumerable.Repeat(5, 1));
+                expected: Enumerable.Repeat(5, 1)
+            );
 
             yield return WrapArgs(
                 source: new string[] { "Bob", "bob", "tim", "Bob", "Tim" },
                 keySelector: x => x,
                 null,
-                expected: new string[] { "Bob", "bob", "tim", "Tim" });
+                expected: new string[] { "Bob", "bob", "tim", "Tim" }
+            );
 
             yield return WrapArgs(
                 source: new string[] { "Bob", "bob", "tim", "Bob", "Tim" },
                 keySelector: x => x,
                 StringComparer.OrdinalIgnoreCase,
-                expected: new string[] { "Bob", "tim" });
+                expected: new string[] { "Bob", "tim" }
+            );
 
             yield return WrapArgs(
                 source: new (string Name, int Age)[] { ("Tom", 20), ("Dick", 30), ("Harry", 40) },
                 keySelector: x => x.Age,
                 comparer: null,
-                expected: new (string Name, int Age)[] { ("Tom", 20), ("Dick", 30), ("Harry", 40) });
+                expected: new (string Name, int Age)[] { ("Tom", 20), ("Dick", 30), ("Harry", 40) }
+            );
 
             yield return WrapArgs(
                 source: new (string Name, int Age)[] { ("Tom", 20), ("Dick", 20), ("Harry", 40) },
                 keySelector: x => x.Age,
                 comparer: null,
-                expected: new (string Name, int Age)[] { ("Tom", 20), ("Harry", 40) });
+                expected: new (string Name, int Age)[] { ("Tom", 20), ("Harry", 40) }
+            );
 
             yield return WrapArgs(
                 source: new (string Name, int Age)[] { ("Bob", 20), ("bob", 30), ("Harry", 40) },
                 keySelector: x => x.Name,
                 comparer: null,
-                expected: new (string Name, int Age)[] { ("Bob", 20), ("bob", 30), ("Harry", 40) });
+                expected: new (string Name, int Age)[] { ("Bob", 20), ("bob", 30), ("Harry", 40) }
+            );
 
             yield return WrapArgs(
                 source: new (string Name, int Age)[] { ("Bob", 20), ("bob", 30), ("Harry", 40) },
                 keySelector: x => x.Name,
                 comparer: StringComparer.OrdinalIgnoreCase,
-                expected: new (string Name, int Age)[] { ("Bob", 20), ("Harry", 40) });
+                expected: new (string Name, int Age)[] { ("Bob", 20), ("Harry", 40) }
+            );
 
-            object[] WrapArgs<TSource, TKey>(IEnumerable<TSource> source, Func<TSource, TKey> keySelector, IEqualityComparer<TKey>? comparer, IEnumerable<TSource> expected)
-                => new object[] { source, keySelector, comparer, expected };
+            object[] WrapArgs<TSource, TKey>(
+                IEnumerable<TSource> source,
+                Func<TSource, TKey> keySelector,
+                IEqualityComparer<TKey>? comparer,
+                IEnumerable<TSource> expected
+            ) => new object[] { source, keySelector, comparer, expected };
         }
     }
 }

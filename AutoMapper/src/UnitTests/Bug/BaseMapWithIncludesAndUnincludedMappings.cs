@@ -12,10 +12,7 @@ public class BaseMapWithIncludesAndUnincludedMappings
         public int PropB { get; set; }
     }
 
-    public class BDTO2 : ADTO
-    {
-
-    }
+    public class BDTO2 : ADTO { }
 
     public class A
     {
@@ -49,6 +46,7 @@ public class BaseMapChildProperty
     {
         public BaseB Item { get; set; }
     }
+
     public abstract class BaseA
     {
         public string Name { get; set; }
@@ -59,9 +57,8 @@ public class BaseMapChildProperty
         public string Name { get; set; }
     }
 
-    public class ProxyOfSubA : SubA
-    {
-    }
+    public class ProxyOfSubA : SubA { }
+
     public class SubA : BaseA
     {
         public string Description { get; set; }
@@ -82,10 +79,15 @@ public class BaseMapChildProperty
             cfg.CreateMap<Container, Container2>();
         });
 
-        var mapped = config.CreateMapper()
-            .Map<Container, Container2>(new Container() { Item = new ProxyOfSubA() { Name = "Martin", Description = "Hello" } });
+        var mapped = config
+            .CreateMapper()
+            .Map<Container, Container2>(
+                new Container()
+                {
+                    Item = new ProxyOfSubA() { Name = "Martin", Description = "Hello" },
+                }
+            );
         Assert.IsType<SubB>(mapped.Item);
-
     }
 
     [Fact]
@@ -97,9 +99,10 @@ public class BaseMapChildProperty
             cfg.CreateMap<BaseA, BaseB>();
         });
 
-        var mapped = config.CreateMapper().Map<BaseA, SubB>(new ProxyOfSubA() { Name = "Martin", Description = "Hello" });
+        var mapped = config
+            .CreateMapper()
+            .Map<BaseA, SubB>(new ProxyOfSubA() { Name = "Martin", Description = "Hello" });
         Assert.IsType<SubB>(mapped);
-
     }
 
     [Fact]
@@ -112,8 +115,14 @@ public class BaseMapChildProperty
             cfg.CreateMap<Container, Container2>();
         });
 
-        var mapped = config.CreateMapper().Map<Container, Container2>(new Container() { Item = new ProxyOfSubA() { Name = "Martin", Description = "Hello" } });
+        var mapped = config
+            .CreateMapper()
+            .Map<Container, Container2>(
+                new Container()
+                {
+                    Item = new ProxyOfSubA() { Name = "Martin", Description = "Hello" },
+                }
+            );
         Assert.IsType<SubB>(mapped.Item);
-
     }
 }

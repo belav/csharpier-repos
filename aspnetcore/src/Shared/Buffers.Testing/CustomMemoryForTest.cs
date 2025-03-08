@@ -10,9 +10,8 @@ internal sealed class CustomMemoryForTest<T> : IMemoryOwner<T>
     private readonly int _offset;
     private readonly int _length;
 
-    public CustomMemoryForTest(T[] array) : this(array, 0, array.Length)
-    {
-    }
+    public CustomMemoryForTest(T[] array)
+        : this(array, 0, array.Length) { }
 
     public CustomMemoryForTest(T[] array, int offset, int length)
     {
@@ -41,4 +40,3 @@ internal sealed class CustomMemoryForTest<T> : IMemoryOwner<T>
         _disposed = true;
     }
 }
-

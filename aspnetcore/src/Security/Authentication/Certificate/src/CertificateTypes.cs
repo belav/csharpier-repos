@@ -22,5 +22,5 @@ public enum CertificateTypes
     /// <summary>
     /// All certificates.
     /// </summary>
-    All = Chained | SelfSigned
+    All = Chained | SelfSigned,
 }

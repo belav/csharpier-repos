@@ -17,6 +17,7 @@ public class ModelMetadataProviderExtensionsTest
         ExceptionAssert.ThrowsArgument(
             () => provider.GetMetadataForProperty(typeof(object), propertyName: "BadPropertyName"),
             "propertyName",
-            "The property System.Object.BadPropertyName could not be found.");
+            "The property System.Object.BadPropertyName could not be found."
+        );
     }
 }

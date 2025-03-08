@@ -12,9 +12,7 @@ namespace Internal.Cryptography
     internal abstract class KeyAgreeRecipientInfoPal : RecipientInfoPal
     {
         internal KeyAgreeRecipientInfoPal()
-            : base()
-        {
-        }
+            : base() { }
 
         public abstract DateTime Date { get; }
         public abstract SubjectIdentifierOrKey OriginatorIdentifierOrKey { get; }

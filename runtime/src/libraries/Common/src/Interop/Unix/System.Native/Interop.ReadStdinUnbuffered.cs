@@ -8,13 +8,26 @@ internal static partial class Interop
 {
     internal static partial class Sys
     {
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_ReadStdin", SetLastError = true)]
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_ReadStdin",
+            SetLastError = true
+        )]
         internal static unsafe partial int ReadStdin(byte* buffer, int bufferSize);
 
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_InitializeConsoleBeforeRead")]
-        internal static partial void InitializeConsoleBeforeRead(byte minChars = 1, byte decisecondsTimeout = 0);
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_InitializeConsoleBeforeRead"
+        )]
+        internal static partial void InitializeConsoleBeforeRead(
+            byte minChars = 1,
+            byte decisecondsTimeout = 0
+        );
 
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_UninitializeConsoleAfterRead")]
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_UninitializeConsoleAfterRead"
+        )]
         internal static partial void UninitializeConsoleAfterRead();
     }
 }

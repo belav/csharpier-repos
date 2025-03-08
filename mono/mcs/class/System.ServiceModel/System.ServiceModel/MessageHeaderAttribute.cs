@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,26 +29,29 @@ using System;
 
 namespace System.ServiceModel
 {
-	[AttributeUsage (AttributeTargets.Property | AttributeTargets.Field,
-		Inherited = false)]
-	public class MessageHeaderAttribute : MessageContractMemberAttribute
-	{
-		string actor;
-		bool must_understand, relay;
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, Inherited = false)]
+    public class MessageHeaderAttribute : MessageContractMemberAttribute
+    {
+        string actor;
+        bool must_understand,
+            relay;
 
-		public string Actor {
-			get { return actor; }
-			set { actor = value; }
-		}
+        public string Actor
+        {
+            get { return actor; }
+            set { actor = value; }
+        }
 
-		public bool MustUnderstand {
-			get { return must_understand; }
-			set { must_understand = value; }
-		}
+        public bool MustUnderstand
+        {
+            get { return must_understand; }
+            set { must_understand = value; }
+        }
 
-		public bool Relay {
-			get { return relay; }
-			set { relay = value; }
-		}
-	}
+        public bool Relay
+        {
+            get { return relay; }
+            set { relay = value; }
+        }
+    }
 }

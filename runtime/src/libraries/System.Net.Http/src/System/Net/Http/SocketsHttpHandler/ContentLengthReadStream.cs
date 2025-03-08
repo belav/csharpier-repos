@@ -14,7 +14,8 @@ namespace System.Net.Http
         {
             private ulong _contentBytesRemaining;
 
-            public ContentLengthReadStream(HttpConnection connection, ulong contentLength) : base(connection)
+            public ContentLengthReadStream(HttpConnection connection, ulong contentLength)
+                : base(connection)
             {
                 Debug.Assert(contentLength > 0, "Caller should have checked for 0.");
                 _contentBytesRemaining = contentLength;
@@ -38,7 +39,13 @@ namespace System.Net.Http
                 if (bytesRead <= 0 && buffer.Length != 0)
                 {
                     // Unexpected end of response stream.
-                    throw new HttpIOException(HttpRequestError.ResponseEnded, SR.Format(SR.net_http_invalid_response_premature_eof_bytecount, _contentBytesRemaining));
+                    throw new HttpIOException(
+                        HttpRequestError.ResponseEnded,
+                        SR.Format(
+                            SR.net_http_invalid_response_premature_eof_bytecount,
+                            _contentBytesRemaining
+                        )
+                    );
                 }
 
                 Debug.Assert((ulong)bytesRead <= _contentBytesRemaining);
@@ -54,7 +61,10 @@ namespace System.Net.Http
                 return bytesRead;
             }
 
-            public override async ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken)
+            public override async ValueTask<int> ReadAsync(
+                Memory<byte> buffer,
+                CancellationToken cancellationToken
+            )
             {
                 CancellationHelper.ThrowIfCancellationRequested(cancellationToken);
 
@@ -79,14 +89,24 @@ namespace System.Net.Http
                 }
                 else
                 {
-                    CancellationTokenRegistration ctr = _connection.RegisterCancellation(cancellationToken);
+                    CancellationTokenRegistration ctr = _connection.RegisterCancellation(
+                        cancellationToken
+                    );
                     try
                     {
                         bytesRead = await readTask.ConfigureAwait(false);
                     }
-                    catch (Exception exc) when (CancellationHelper.ShouldWrapInOperationCanceledException(exc, cancellationToken))
+                    catch (Exception exc)
+                        when (CancellationHelper.ShouldWrapInOperationCanceledException(
+                                exc,
+                                cancellationToken
+                            )
+                        )
                     {
-                        throw CancellationHelper.CreateOperationCanceledException(exc, cancellationToken);
+                        throw CancellationHelper.CreateOperationCanceledException(
+                            exc,
+                            cancellationToken
+                        );
                     }
                     finally
                     {
@@ -100,7 +120,13 @@ namespace System.Net.Http
                     CancellationHelper.ThrowIfCancellationRequested(cancellationToken);
 
                     // Unexpected end of response stream.
-                    throw new HttpIOException(HttpRequestError.ResponseEnded, SR.Format(SR.net_http_invalid_response_premature_eof_bytecount, _contentBytesRemaining));
+                    throw new HttpIOException(
+                        HttpRequestError.ResponseEnded,
+                        SR.Format(
+                            SR.net_http_invalid_response_premature_eof_bytecount,
+                            _contentBytesRemaining
+                        )
+                    );
                 }
 
                 Debug.Assert((ulong)bytesRead <= _contentBytesRemaining);
@@ -116,7 +142,11 @@ namespace System.Net.Http
                 return bytesRead;
             }
 
-            public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
+            public override Task CopyToAsync(
+                Stream destination,
+                int bufferSize,
+                CancellationToken cancellationToken
+            )
             {
                 ValidateCopyToArguments(destination, bufferSize);
 
@@ -131,7 +161,13 @@ namespace System.Net.Http
                     return Task.CompletedTask;
                 }
 
-                Task copyTask = _connection.CopyToContentLengthAsync(destination, async: true, _contentBytesRemaining, bufferSize, cancellationToken);
+                Task copyTask = _connection.CopyToContentLengthAsync(
+                    destination,
+                    async: true,
+                    _contentBytesRemaining,
+                    bufferSize,
+                    cancellationToken
+                );
                 if (copyTask.IsCompletedSuccessfully)
                 {
                     Finish();
@@ -141,17 +177,30 @@ namespace System.Net.Http
                 return CompleteCopyToAsync(copyTask, cancellationToken);
             }
 
-            private async Task CompleteCopyToAsync(Task copyTask, CancellationToken cancellationToken)
+            private async Task CompleteCopyToAsync(
+                Task copyTask,
+                CancellationToken cancellationToken
+            )
             {
                 Debug.Assert(_connection != null);
-                CancellationTokenRegistration ctr = _connection.RegisterCancellation(cancellationToken);
+                CancellationTokenRegistration ctr = _connection.RegisterCancellation(
+                    cancellationToken
+                );
                 try
                 {
                     await copyTask.ConfigureAwait(false);
                 }
-                catch (Exception exc) when (CancellationHelper.ShouldWrapInOperationCanceledException(exc, cancellationToken))
+                catch (Exception exc)
+                    when (CancellationHelper.ShouldWrapInOperationCanceledException(
+                            exc,
+                            cancellationToken
+                        )
+                    )
                 {
-                    throw CancellationHelper.CreateOperationCanceledException(exc, cancellationToken);
+                    throw CancellationHelper.CreateOperationCanceledException(
+                        exc,
+                        cancellationToken
+                    );
                 }
                 finally
                 {
@@ -181,7 +230,10 @@ namespace System.Net.Http
                     return default;
                 }
 
-                int bytesToConsume = Math.Min(maxBytesToRead, (int)Math.Min((ulong)connectionBuffer.Length, _contentBytesRemaining));
+                int bytesToConsume = Math.Min(
+                    maxBytesToRead,
+                    (int)Math.Min((ulong)connectionBuffer.Length, _contentBytesRemaining)
+                );
                 Debug.Assert(bytesToConsume > 0);
 
                 _connection.ConsumeFromRemainingBuffer(bytesToConsume);
@@ -221,7 +273,10 @@ namespace System.Net.Http
                 if (drainTime != Timeout.InfiniteTimeSpan)
                 {
                     cts = new CancellationTokenSource((int)drainTime.TotalMilliseconds);
-                    ctr = cts.Token.Register(static s => ((HttpConnection)s!).Dispose(), _connection);
+                    ctr = cts.Token.Register(
+                        static s => ((HttpConnection)s!).Dispose(),
+                        _connection
+                    );
                 }
 
                 try

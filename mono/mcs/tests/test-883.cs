@@ -2,13 +2,13 @@
 
 public enum E
 {
-	TestField = 3
+    TestField = 3,
 }
 
 public class Second
 {
-	public void TestFinal ()
-	{
-		TestClass.Foo (E.TestField);
-	}
+    public void TestFinal()
+    {
+        TestClass.Foo(E.TestField);
+    }
 }

@@ -443,7 +443,13 @@ namespace System.Linq.Expressions.Compiler
                     }
 
                     int count = last - first + 1;
-                    ContractUtils.RequiresArrayRange(_expressions, first, count, nameof(first), nameof(last));
+                    ContractUtils.RequiresArrayRange(
+                        _expressions,
+                        first,
+                        count,
+                        nameof(first),
+                        nameof(last)
+                    );
 
                     if (count == _expressions.Length)
                     {

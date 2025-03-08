@@ -38,7 +38,9 @@ namespace Newtonsoft.Json.Schema
     /// </note>
     /// </summary>
     [Flags]
-    [Obsolete("JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details.")]
+    [Obsolete(
+        "JSON Schema validation has been moved to its own package. See https://www.newtonsoft.com/jsonschema for more details."
+    )]
     public enum JsonSchemaType
     {
         /// <summary>
@@ -84,6 +86,6 @@ namespace Newtonsoft.Json.Schema
         /// <summary>
         /// Any type.
         /// </summary>
-        Any = String | Float | Integer | Boolean | Object | Array | Null
+        Any = String | Float | Integer | Boolean | Object | Array | Null,
     }
 }

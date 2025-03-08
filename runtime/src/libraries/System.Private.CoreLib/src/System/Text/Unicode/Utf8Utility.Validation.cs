@@ -21,13 +21,24 @@ namespace System.Text.Unicode
         /// <remarks>
         /// Returns a pointer to the end of <paramref name="pInputBuffer"/> if the buffer is well-formed.
         /// </remarks>
-        public static byte* GetPointerToFirstInvalidByte(byte* pInputBuffer, int inputLength, out int utf16CodeUnitCountAdjustment, out int scalarCountAdjustment)
+        public static byte* GetPointerToFirstInvalidByte(
+            byte* pInputBuffer,
+            int inputLength,
+            out int utf16CodeUnitCountAdjustment,
+            out int scalarCountAdjustment
+        )
         {
             Debug.Assert(inputLength >= 0, "Input length must not be negative.");
-            Debug.Assert(pInputBuffer != null || inputLength == 0, "Input length must be zero if input buffer pointer is null.");
+            Debug.Assert(
+                pInputBuffer != null || inputLength == 0,
+                "Input length must be zero if input buffer pointer is null."
+            );
 
             // First, try to drain off as many ASCII bytes as we can from the beginning.
-            nuint numAsciiBytesCounted = Ascii.GetIndexOfFirstNonAsciiByte(pInputBuffer, (uint)inputLength);
+            nuint numAsciiBytesCounted = Ascii.GetIndexOfFirstNonAsciiByte(
+                pInputBuffer,
+                (uint)inputLength
+            );
             pInputBuffer += numAsciiBytesCounted;
 
             // Quick check - did we just end up consuming the entire input buffer?
@@ -57,7 +68,8 @@ namespace System.Text.Unicode
                 goto ProcessInputOfLessThanDWordSize;
             }
 
-            byte* pFinalPosWhereCanReadDWordFromInputBuffer = pInputBuffer + (uint)inputLength - sizeof(uint);
+            byte* pFinalPosWhereCanReadDWordFromInputBuffer =
+                pInputBuffer + (uint)inputLength - sizeof(uint);
 
             // Begin the main loop.
 
@@ -71,10 +83,13 @@ namespace System.Text.Unicode
 
                 uint thisDWord = Unsafe.ReadUnaligned<uint>(pInputBuffer);
 
-            AfterReadDWord:
+                AfterReadDWord:
 
 #if DEBUG
-                Debug.Assert(pLastBufferPosProcessed < pInputBuffer, "Algorithm should've made forward progress since last read.");
+                Debug.Assert(
+                    pLastBufferPosProcessed < pInputBuffer,
+                    "Algorithm should've made forward progress since last read."
+                );
                 pLastBufferPosProcessed = pInputBuffer;
 #endif
 
@@ -93,7 +108,15 @@ namespace System.Text.Unicode
                     // n.b. Since we incremented pInputBuffer above the below subtraction may result in a negative value,
                     // hence using nint instead of nuint.
 
-                    if ((nint)(void*)Unsafe.ByteOffset(ref *pInputBuffer, ref *pFinalPosWhereCanReadDWordFromInputBuffer) >= 4 * sizeof(uint))
+                    if (
+                        (nint)
+                            (void*)
+                                Unsafe.ByteOffset(
+                                    ref *pInputBuffer,
+                                    ref *pFinalPosWhereCanReadDWordFromInputBuffer
+                                )
+                        >= 4 * sizeof(uint)
+                    )
                     {
                         // We want reads in the inner loop to be aligned. So let's perform a quick
                         // ASCII check of the next 32 bits (4 bytes) now, and if that succeeds bump
@@ -112,7 +135,8 @@ namespace System.Text.Unicode
                         // the original 'if' check confirmed that there were 5 DWORDs before the alignment check, and
                         // the alignment check consumes at most a single DWORD.)
 
-                        byte* pInputBufferFinalPosAtWhichCanSafelyLoop = pFinalPosWhereCanReadDWordFromInputBuffer - 3 * sizeof(uint); // can safely read 4 DWORDs here
+                        byte* pInputBufferFinalPosAtWhichCanSafelyLoop =
+                            pFinalPosWhereCanReadDWordFromInputBuffer - 3 * sizeof(uint); // can safely read 4 DWORDs here
                         nuint trailingZeroCount;
 
                         // pInputBuffer is 32-bit aligned but not necessary 128-bit aligned, so we're
@@ -124,15 +148,19 @@ namespace System.Text.Unicode
                         {
                             // declare bitMask128 inside of the AdvSimd.Arm64.IsSupported check
                             // so it gets removed on non-Arm64 builds.
-                            Vector128<byte> bitMask128 = BitConverter.IsLittleEndian ?
-                                Vector128.Create((ushort)0x1001).AsByte() :
-                                Vector128.Create((ushort)0x0110).AsByte();
+                            Vector128<byte> bitMask128 = BitConverter.IsLittleEndian
+                                ? Vector128.Create((ushort)0x1001).AsByte()
+                                : Vector128.Create((ushort)0x0110).AsByte();
                             do
                             {
-                                ulong mask = GetNonAsciiBytes(AdvSimd.LoadVector128(pInputBuffer), bitMask128);
+                                ulong mask = GetNonAsciiBytes(
+                                    AdvSimd.LoadVector128(pInputBuffer),
+                                    bitMask128
+                                );
                                 if (mask != 0)
                                 {
-                                    trailingZeroCount = (nuint)BitOperations.TrailingZeroCount(mask) >> 2;
+                                    trailingZeroCount =
+                                        (nuint)BitOperations.TrailingZeroCount(mask) >> 2;
                                     goto LoopTerminatedEarlyDueToNonAsciiData;
                                 }
 
@@ -145,21 +173,31 @@ namespace System.Text.Unicode
                             {
                                 if (Sse2.IsSupported)
                                 {
-                                    uint mask = (uint)Sse2.MoveMask(Sse2.LoadVector128(pInputBuffer));
+                                    uint mask = (uint)
+                                        Sse2.MoveMask(Sse2.LoadVector128(pInputBuffer));
                                     if (mask != 0)
                                     {
-                                        trailingZeroCount = (nuint)BitOperations.TrailingZeroCount(mask);
+                                        trailingZeroCount = (nuint)
+                                            BitOperations.TrailingZeroCount(mask);
                                         goto LoopTerminatedEarlyDueToNonAsciiData;
                                     }
                                 }
                                 else
                                 {
-                                    if (!Ascii.AllBytesInUInt32AreAscii(((uint*)pInputBuffer)[0] | ((uint*)pInputBuffer)[1]))
+                                    if (
+                                        !Ascii.AllBytesInUInt32AreAscii(
+                                            ((uint*)pInputBuffer)[0] | ((uint*)pInputBuffer)[1]
+                                        )
+                                    )
                                     {
                                         goto LoopTerminatedEarlyDueToNonAsciiDataInFirstPair;
                                     }
 
-                                    if (!Ascii.AllBytesInUInt32AreAscii(((uint*)pInputBuffer)[2] | ((uint*)pInputBuffer)[3]))
+                                    if (
+                                        !Ascii.AllBytesInUInt32AreAscii(
+                                            ((uint*)pInputBuffer)[2] | ((uint*)pInputBuffer)[3]
+                                        )
+                                    )
                                     {
                                         goto LoopTerminatedEarlyDueToNonAsciiDataInSecondPair;
                                     }
@@ -171,11 +209,13 @@ namespace System.Text.Unicode
 
                         continue; // need to perform a bounds check because we might be running out of data
 
-                    LoopTerminatedEarlyDueToNonAsciiData:
+                        LoopTerminatedEarlyDueToNonAsciiData:
                         // x86 can only be little endian, while ARM can be big or little endian
                         // so if we reached this label we need to check both combinations are supported
-                        Debug.Assert((AdvSimd.Arm64.IsSupported && BitConverter.IsLittleEndian) || Sse2.IsSupported);
-
+                        Debug.Assert(
+                            (AdvSimd.Arm64.IsSupported && BitConverter.IsLittleEndian)
+                                || Sse2.IsSupported
+                        );
 
                         // The 'mask' value will have a 0 bit for each ASCII byte we saw and a 1 bit
                         // for each non-ASCII byte we saw. trailingZeroCount will count the number of ASCII bytes,
@@ -193,11 +233,11 @@ namespace System.Text.Unicode
                         thisDWord = Unsafe.ReadUnaligned<uint>(pInputBuffer); // no longer guaranteed to be aligned
                         goto BeforeProcessTwoByteSequence;
 
-                    LoopTerminatedEarlyDueToNonAsciiDataInSecondPair:
+                        LoopTerminatedEarlyDueToNonAsciiDataInSecondPair:
 
                         pInputBuffer += 2 * sizeof(uint); // consumed 2 DWORDs
 
-                    LoopTerminatedEarlyDueToNonAsciiDataInFirstPair:
+                        LoopTerminatedEarlyDueToNonAsciiDataInFirstPair:
 
                         // We know that there's *at least* two DWORDs of data remaining in the buffer.
                         // We also know that one of them (or both of them) contains non-ASCII data somewhere.
@@ -216,7 +256,7 @@ namespace System.Text.Unicode
                     continue; // not enough data remaining to unroll loop - go back to beginning with bounds checks
                 }
 
-            AfterReadDWordSkipAllBytesAsciiCheck:
+                AfterReadDWordSkipAllBytesAsciiCheck:
 
                 Debug.Assert(!Ascii.AllBytesInUInt32AreAscii(thisDWord)); // this should have been handled earlier
 
@@ -224,7 +264,10 @@ namespace System.Text.Unicode
                 // We only handle up to three ASCII bytes here since we handled the four ASCII byte case above.
 
                 {
-                    uint numLeadingAsciiBytes = Ascii.CountNumberOfLeadingAsciiBytesFromUInt32WithSomeNonAsciiData(thisDWord);
+                    uint numLeadingAsciiBytes =
+                        Ascii.CountNumberOfLeadingAsciiBytesFromUInt32WithSomeNonAsciiData(
+                            thisDWord
+                        );
                     pInputBuffer += numLeadingAsciiBytes;
 
                     if (pFinalPosWhereCanReadDWordFromInputBuffer < pInputBuffer)
@@ -239,7 +282,7 @@ namespace System.Text.Unicode
                     }
                 }
 
-            BeforeProcessTwoByteSequence:
+                BeforeProcessTwoByteSequence:
 
                 // At this point, we suspect we're working with a multi-byte code unit sequence,
                 // but we haven't yet validated it for well-formedness.
@@ -262,13 +305,15 @@ namespace System.Text.Unicode
                     // and that the trailing byte was originally in the range [ 80..BF ], so now we only need
                     // to check that the modified leading byte is >= [ 02 ].
 
-                    if ((BitConverter.IsLittleEndian && (byte)thisDWord < 0x02u)
-                        || (!BitConverter.IsLittleEndian && thisDWord < 0x0200_0000u))
+                    if (
+                        (BitConverter.IsLittleEndian && (byte)thisDWord < 0x02u)
+                        || (!BitConverter.IsLittleEndian && thisDWord < 0x0200_0000u)
+                    )
                     {
                         goto Error; // overlong form - leading byte was [ C0 ] or [ C1 ]
                     }
 
-                ProcessTwoByteSequenceSkipOverlongFormCheck:
+                    ProcessTwoByteSequenceSkipOverlongFormCheck:
 
                     // Optimization: If this is a two-byte-per-character language like Cyrillic or Hebrew,
                     // there's a good chance that if we see one two-byte run then there's another two-byte
@@ -278,8 +323,19 @@ namespace System.Text.Unicode
                     // the value isn't overlong using a single comparison. On big-endian platforms, we'll need
                     // to validate the mask and validate that the sequence isn't overlong as two separate comparisons.
 
-                    if ((BitConverter.IsLittleEndian && UInt32EndsWithValidUtf8TwoByteSequenceLittleEndian(thisDWord))
-                        || (!BitConverter.IsLittleEndian && (UInt32EndsWithUtf8TwoByteMask(thisDWord) && !UInt32EndsWithOverlongUtf8TwoByteSequence(thisDWord))))
+                    if (
+                        (
+                            BitConverter.IsLittleEndian
+                            && UInt32EndsWithValidUtf8TwoByteSequenceLittleEndian(thisDWord)
+                        )
+                        || (
+                            !BitConverter.IsLittleEndian
+                            && (
+                                UInt32EndsWithUtf8TwoByteMask(thisDWord)
+                                && !UInt32EndsWithOverlongUtf8TwoByteSequence(thisDWord)
+                            )
+                        )
+                    )
                     {
                         // We have two runs of two bytes each.
                         pInputBuffer += 4;
@@ -360,10 +416,13 @@ namespace System.Text.Unicode
                 // Check the 3-byte case.
                 // We need to restore the C0 leading byte we stripped out earlier, then we can strip out the expected E0 byte.
 
-                thisDWord -= (BitConverter.IsLittleEndian) ? (0x0080_00E0u - 0x0000_00C0u) : (0xE000_8000u - 0xC000_0000u);
+                thisDWord -=
+                    (BitConverter.IsLittleEndian)
+                        ? (0x0080_00E0u - 0x0000_00C0u)
+                        : (0xE000_8000u - 0xC000_0000u);
                 if ((thisDWord & (BitConverter.IsLittleEndian ? 0x00C0_C0F0u : 0xF0C0_C000u)) == 0)
                 {
-                ProcessThreeByteSequenceWithCheck:
+                    ProcessThreeByteSequenceWithCheck:
 
                     // We assume the caller has confirmed that the bit pattern is representative of a three-byte
                     // sequence, but it may still be overlong or surrogate. We need to check for these possibilities.
@@ -396,20 +455,26 @@ namespace System.Text.Unicode
 
                         // Code below becomes 5 instructions: test, jz, lea, test, jz
 
-                        if (((thisDWord & 0x0000_200Fu) == 0) || (((thisDWord - 0x0000_200Du) & 0x0000_200Fu) == 0))
+                        if (
+                            ((thisDWord & 0x0000_200Fu) == 0)
+                            || (((thisDWord - 0x0000_200Du) & 0x0000_200Fu) == 0)
+                        )
                         {
                             goto Error; // overlong or surrogate
                         }
                     }
                     else
                     {
-                        if (((thisDWord & 0x0F20_0000u) == 0) || (((thisDWord - 0x0D20_0000u) & 0x0F20_0000u) == 0))
+                        if (
+                            ((thisDWord & 0x0F20_0000u) == 0)
+                            || (((thisDWord - 0x0D20_0000u) & 0x0F20_0000u) == 0)
+                        )
                         {
                             goto Error; // overlong or surrogate
                         }
                     }
 
-                ProcessSingleThreeByteSequenceSkipOverlongAndSurrogateChecks:
+                    ProcessSingleThreeByteSequenceSkipOverlongAndSurrogateChecks:
 
                     // Occasionally one-off ASCII characters like spaces, periods, or newlines will make their way
                     // in to the text. If this happens strip it off now before seeing if the next character
@@ -441,7 +506,7 @@ namespace System.Text.Unicode
 
                     tempUtf16CodeUnitCountAdjustment -= 2; // 3 (or 4) UTF-8 bytes -> 1 (or 2) UTF-16 code unit (and 1 [or 2] scalar)
 
-                SuccessfullyProcessedThreeByteSequence:
+                    SuccessfullyProcessedThreeByteSequence:
 
                     if (IntPtr.Size >= 8 && BitConverter.IsLittleEndian)
                     {
@@ -466,7 +531,10 @@ namespace System.Text.Unicode
                             // Is this three 3-byte sequences in a row?
                             // thisQWord = [ 10yyyyyy 1110zzzz | 10xxxxxx 10yyyyyy 1110zzzz | 10xxxxxx 10yyyyyy 1110zzzz ] [ 10xxxxxx ]
                             //               ---- CHAR 3  ----   --------- CHAR 2 ---------   --------- CHAR 1 ---------     -CHAR 3-
-                            if ((thisQWord & 0xC0F0_C0C0_F0C0_C0F0ul) == 0x80E0_8080_E080_80E0ul && IsUtf8ContinuationByte(in pInputBuffer[8]))
+                            if (
+                                (thisQWord & 0xC0F0_C0C0_F0C0_C0F0ul) == 0x80E0_8080_E080_80E0ul
+                                && IsUtf8ContinuationByte(in pInputBuffer[8])
+                            )
                             {
                                 // Saw a proper bitmask for three incoming 3-byte sequences, perform the
                                 // overlong and surrogate sequence checking now.
@@ -474,7 +542,10 @@ namespace System.Text.Unicode
                                 // Check the first character.
                                 // If the first character is overlong or a surrogate, fail immediately.
 
-                                if ((((uint)thisQWord & 0x200Fu) == 0) || ((((uint)thisQWord - 0x200Du) & 0x200Fu) == 0))
+                                if (
+                                    (((uint)thisQWord & 0x200Fu) == 0)
+                                    || ((((uint)thisQWord - 0x200Du) & 0x200Fu) == 0)
+                                )
                                 {
                                     goto Error;
                                 }
@@ -485,7 +556,10 @@ namespace System.Text.Unicode
                                 // logic.
 
                                 thisQWord >>= 24;
-                                if ((((uint)thisQWord & 0x200Fu) == 0) || ((((uint)thisQWord - 0x200Du) & 0x200Fu) == 0))
+                                if (
+                                    (((uint)thisQWord & 0x200Fu) == 0)
+                                    || ((((uint)thisQWord - 0x200Du) & 0x200Fu) == 0)
+                                )
                                 {
                                     goto ProcessSingleThreeByteSequenceSkipOverlongAndSurrogateChecks;
                                 }
@@ -493,7 +567,10 @@ namespace System.Text.Unicode
                                 // Check the third character (we already checked that it's followed by a continuation byte).
 
                                 thisQWord >>= 24;
-                                if ((((uint)thisQWord & 0x200Fu) == 0) || ((((uint)thisQWord - 0x200Du) & 0x200Fu) == 0))
+                                if (
+                                    (((uint)thisQWord & 0x200Fu) == 0)
+                                    || ((((uint)thisQWord - 0x200Du) & 0x200Fu) == 0)
+                                )
                                 {
                                     goto ProcessSingleThreeByteSequenceSkipOverlongAndSurrogateChecks;
                                 }
@@ -515,7 +592,10 @@ namespace System.Text.Unicode
                                 // Check the first character.
                                 // If the first character is overlong or a surrogate, fail immediately.
 
-                                if ((((uint)thisQWord & 0x200Fu) == 0) || ((((uint)thisQWord - 0x200Du) & 0x200Fu) == 0))
+                                if (
+                                    (((uint)thisQWord & 0x200Fu) == 0)
+                                    || ((((uint)thisQWord - 0x200Du) & 0x200Fu) == 0)
+                                )
                                 {
                                     goto Error;
                                 }
@@ -526,7 +606,10 @@ namespace System.Text.Unicode
                                 // logic.
 
                                 thisQWord >>= 24;
-                                if ((((uint)thisQWord & 0x200Fu) == 0) || ((((uint)thisQWord - 0x200Du) & 0x200Fu) == 0))
+                                if (
+                                    (((uint)thisQWord & 0x200Fu) == 0)
+                                    || ((((uint)thisQWord - 0x200Du) & 0x200Fu) == 0)
+                                )
                                 {
                                     goto ProcessSingleThreeByteSequenceSkipOverlongAndSurrogateChecks;
                                 }
@@ -642,17 +725,23 @@ namespace System.Text.Unicode
 
             goto ProcessRemainingBytesSlow;
 
-        ProcessInputOfLessThanDWordSize:
+            ProcessInputOfLessThanDWordSize:
 
             Debug.Assert(inputLength < 4);
             nuint inputBufferRemainingBytes = (uint)inputLength;
             goto ProcessSmallBufferCommon;
 
-        ProcessRemainingBytesSlow:
+            ProcessRemainingBytesSlow:
 
-            inputBufferRemainingBytes = (nuint)(void*)Unsafe.ByteOffset(ref *pInputBuffer, ref *pFinalPosWhereCanReadDWordFromInputBuffer) + 4;
+            inputBufferRemainingBytes =
+                (nuint)
+                    (void*)
+                        Unsafe.ByteOffset(
+                            ref *pInputBuffer,
+                            ref *pFinalPosWhereCanReadDWordFromInputBuffer
+                        ) + 4;
 
-        ProcessSmallBufferCommon:
+            ProcessSmallBufferCommon:
 
             Debug.Assert(inputBufferRemainingBytes < 4);
             while (inputBufferRemainingBytes > 0)
@@ -726,10 +815,13 @@ namespace System.Text.Unicode
 
 #if DEBUG
             // Quick check that for the success case we're going to fulfill our contract of returning &inputBuffer[inputLength].
-            Debug.Assert(pOriginalInputBuffer + originalInputLength == pInputBuffer, "About to return an unexpected value.");
+            Debug.Assert(
+                pOriginalInputBuffer + originalInputLength == pInputBuffer,
+                "About to return an unexpected value."
+            );
 #endif
 
-        Error:
+            Error:
 
             // Report back to our caller how far we got before seeing invalid data.
             // (Also used for normal termination when falling out of the loop above.)
@@ -748,7 +840,9 @@ namespace System.Text.Unicode
                 throw new PlatformNotSupportedException();
             }
 
-            Vector128<byte> mostSignificantBitIsSet = AdvSimd.ShiftRightArithmetic(value.AsSByte(), 7).AsByte();
+            Vector128<byte> mostSignificantBitIsSet = AdvSimd
+                .ShiftRightArithmetic(value.AsSByte(), 7)
+                .AsByte();
             Vector128<byte> extractedBits = AdvSimd.And(mostSignificantBitIsSet, bitMask128);
             extractedBits = AdvSimd.Arm64.AddPairwise(extractedBits, extractedBits);
             return extractedBits.AsUInt64().ToScalar();

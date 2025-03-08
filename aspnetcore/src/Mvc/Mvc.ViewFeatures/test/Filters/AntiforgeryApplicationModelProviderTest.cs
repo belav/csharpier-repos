@@ -16,7 +16,8 @@ public class AntiforgeryApplicationModelProviderTest
     {
         var provider = new AntiforgeryApplicationModelProvider(
             Options.Create(new MvcOptions()),
-            NullLogger<AntiforgeryMiddlewareAuthorizationFilter>.Instance);
+            NullLogger<AntiforgeryMiddlewareAuthorizationFilter>.Instance
+        );
         var context = CreateProviderContext(typeof(TestController));
 
         // Act
@@ -24,11 +25,14 @@ public class AntiforgeryApplicationModelProviderTest
 
         // Assert
         var controller = Assert.Single(context.Result.Controllers);
-        Assert.Collection(controller.Actions,
+        Assert.Collection(
+            controller.Actions,
             model =>
             {
                 Assert.Equal(nameof(TestController.WithAntiforgeryMetadata), model.ActionName);
-                Assert.IsType<AntiforgeryMiddlewareAuthorizationFilter>(Assert.Single(model.Filters));
+                Assert.IsType<AntiforgeryMiddlewareAuthorizationFilter>(
+                    Assert.Single(model.Filters)
+                );
             },
             model =>
             {
@@ -39,18 +43,23 @@ public class AntiforgeryApplicationModelProviderTest
             {
                 Assert.Equal(nameof(TestController.NoAttributes), model.ActionName);
                 Assert.Empty(model.Filters);
-            });
+            }
+        );
     }
 
     [Theory]
-    [InlineData(typeof(AntiforgeryMetadataController), typeof(AntiforgeryMiddlewareAuthorizationFilter))]
+    [InlineData(
+        typeof(AntiforgeryMetadataController),
+        typeof(AntiforgeryMiddlewareAuthorizationFilter)
+    )]
     [InlineData(typeof(MvcAttributeController), typeof(ValidateAntiForgeryTokenAttribute))]
     [InlineData(typeof(EmptyController), null)]
     public void WorksWithAttributesOnController(Type controllerType, Type filterType)
     {
         var provider = new AntiforgeryApplicationModelProvider(
             Options.Create(new MvcOptions()),
-            NullLogger<AntiforgeryMiddlewareAuthorizationFilter>.Instance);
+            NullLogger<AntiforgeryMiddlewareAuthorizationFilter>.Instance
+        );
         var context = CreateProviderContext(controllerType);
 
         // Act
@@ -70,14 +79,18 @@ public class AntiforgeryApplicationModelProviderTest
     }
 
     [Theory]
-    [InlineData(typeof(DerivedAntiforgeryMetadataController), typeof(AntiforgeryMiddlewareAuthorizationFilter))]
+    [InlineData(
+        typeof(DerivedAntiforgeryMetadataController),
+        typeof(AntiforgeryMiddlewareAuthorizationFilter)
+    )]
     [InlineData(typeof(DerivedMvcAttributeController), typeof(ValidateAntiForgeryTokenAttribute))]
     [InlineData(typeof(DerivedEmptyController), null)]
     public void WorksWithAttributesOnDerivedController(Type controllerType, Type filterType)
     {
         var provider = new AntiforgeryApplicationModelProvider(
             Options.Create(new MvcOptions()),
-            NullLogger<AntiforgeryMiddlewareAuthorizationFilter>.Instance);
+            NullLogger<AntiforgeryMiddlewareAuthorizationFilter>.Instance
+        );
         var context = CreateProviderContext(controllerType);
 
         // Act
@@ -101,7 +114,8 @@ public class AntiforgeryApplicationModelProviderTest
     {
         var provider = new AntiforgeryApplicationModelProvider(
             Options.Create(new MvcOptions()),
-            NullLogger<AntiforgeryMiddlewareAuthorizationFilter>.Instance);
+            NullLogger<AntiforgeryMiddlewareAuthorizationFilter>.Instance
+        );
         var context = CreateProviderContext(typeof(AntiforgeryMetadataWithActionsController));
 
         // Act
@@ -109,17 +123,25 @@ public class AntiforgeryApplicationModelProviderTest
 
         // Assert
         var controller = Assert.Single(context.Result.Controllers);
-        Assert.Collection(controller.Actions,
+        Assert.Collection(
+            controller.Actions,
             model =>
             {
-                Assert.Equal(nameof(AntiforgeryMetadataWithActionsController.Post), model.ActionName);
+                Assert.Equal(
+                    nameof(AntiforgeryMetadataWithActionsController.Post),
+                    model.ActionName
+                );
                 Assert.Empty(model.Filters);
             },
             model =>
             {
-                Assert.Equal(nameof(AntiforgeryMetadataWithActionsController.Post2), model.ActionName);
+                Assert.Equal(
+                    nameof(AntiforgeryMetadataWithActionsController.Post2),
+                    model.ActionName
+                );
                 Assert.Empty(model.Filters);
-            });
+            }
+        );
     }
 
     [Theory]
@@ -129,26 +151,28 @@ public class AntiforgeryApplicationModelProviderTest
     {
         var provider = new AntiforgeryApplicationModelProvider(
             Options.Create(new MvcOptions()),
-            NullLogger<AntiforgeryMiddlewareAuthorizationFilter>.Instance);
+            NullLogger<AntiforgeryMiddlewareAuthorizationFilter>.Instance
+        );
         var context = CreateProviderContext(controllerType);
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(() => provider.OnProvidersExecuting(context));
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            provider.OnProvidersExecuting(context)
+        );
         Assert.Equal(
             $"Cannot apply [{nameof(ValidateAntiForgeryTokenAttribute)}] and [{nameof(RequireAntiforgeryTokenAttribute)}] at the same time.",
-            exception.Message);
+            exception.Message
+        );
     }
 
     private static ApplicationModelProviderContext CreateProviderContext(Type controllerType)
     {
         var defaultProvider = new DefaultApplicationModelProvider(
             Options.Create(new MvcOptions()),
-            new EmptyModelMetadataProvider());
+            new EmptyModelMetadataProvider()
+        );
 
-        var context = new ApplicationModelProviderContext(new[]
-        {
-            controllerType.GetTypeInfo()
-        });
+        var context = new ApplicationModelProviderContext(new[] { controllerType.GetTypeInfo() });
         defaultProvider.OnProvidersExecuting(context);
         return context;
     }
@@ -156,13 +180,20 @@ public class AntiforgeryApplicationModelProviderTest
     private static ActionModel GetActionModel(
         string actionName,
         object[] actionAttributes = null,
-        object[] controllerAttributes = null)
+        object[] controllerAttributes = null
+    )
     {
         actionAttributes ??= Array.Empty<object>();
         controllerAttributes ??= Array.Empty<object>();
 
-        var controllerModel = new ControllerModel(typeof(TestController).GetTypeInfo(), controllerAttributes);
-        var actionModel = new ActionModel(typeof(TestController).GetMethod(actionName), actionAttributes)
+        var controllerModel = new ControllerModel(
+            typeof(TestController).GetTypeInfo(),
+            controllerAttributes
+        );
+        var actionModel = new ActionModel(
+            typeof(TestController).GetMethod(actionName),
+            actionAttributes
+        )
         {
             Controller = controllerModel,
         };
@@ -193,9 +224,7 @@ public class AntiforgeryApplicationModelProviderTest
         public IActionResult Post() => null;
     }
 
-    private class DerivedAntiforgeryMetadataController : AntiforgeryMetadataController
-    {
-    }
+    private class DerivedAntiforgeryMetadataController : AntiforgeryMetadataController { }
 
     [ValidateAntiForgeryToken]
     private class MvcAttributeController
@@ -204,9 +233,7 @@ public class AntiforgeryApplicationModelProviderTest
         public IActionResult Post() => null;
     }
 
-    private class DerivedMvcAttributeController : MvcAttributeController
-    {
-    }
+    private class DerivedMvcAttributeController : MvcAttributeController { }
 
     [ValidateAntiForgeryToken]
     [RequireAntiforgeryToken]
@@ -216,9 +243,8 @@ public class AntiforgeryApplicationModelProviderTest
         public IActionResult Post() => null;
     }
 
-    private class DerivedAntiforgeryMetadataMvcAttributeController : AntiforgeryMetadataMvcAttributeController
-    {
-    }
+    private class DerivedAntiforgeryMetadataMvcAttributeController
+        : AntiforgeryMetadataMvcAttributeController { }
 
     private class EmptyController
     {

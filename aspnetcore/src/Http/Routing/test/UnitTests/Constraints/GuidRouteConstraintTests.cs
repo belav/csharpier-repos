@@ -14,8 +14,11 @@ public class GuidRouteConstraintTests
     [InlineData("12345678901234567890123456789012", false, true)]
     [InlineData("not-parseable-as-guid", false, false)]
     [InlineData(12, false, false)]
-
-    public void GuidRouteConstraint_ApplyConstraint(object parameterValue, bool parseBeforeTest, bool expected)
+    public void GuidRouteConstraint_ApplyConstraint(
+        object parameterValue,
+        bool parseBeforeTest,
+        bool expected
+    )
     {
         // Arrange
         if (parseBeforeTest)

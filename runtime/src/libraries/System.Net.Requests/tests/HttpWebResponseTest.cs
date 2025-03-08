@@ -7,7 +7,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Test.Common;
 using System.Threading.Tasks;
-
 using Xunit;
 
 namespace System.Net.Tests
@@ -58,7 +57,15 @@ namespace System.Net.Tests
 
             foreach (var format in offset_formats)
             {
-                foreach (var date in dates.SelectMany(d => new[] { d.ToOffset(TimeSpan.FromHours(5)), d.ToOffset(TimeSpan.FromHours(-5)) }))
+                foreach (
+                    var date in dates.SelectMany(d =>
+                        new[]
+                        {
+                            d.ToOffset(TimeSpan.FromHours(5)),
+                            d.ToOffset(TimeSpan.FromHours(-5)),
+                        }
+                    )
+                )
                 {
                     var formatted = date.ToString(format, CultureInfo.InvariantCulture);
                     var expected = date.LocalDateTime;
@@ -124,20 +131,22 @@ namespace System.Net.Tests
         [MemberData(nameof(Dates_ReadValue_Data))]
         public async Task LastModified_ReadValue(string raw, DateTime expected)
         {
-            await LoopbackServer.CreateServerAsync(async (server, url) =>
-            {
-                HttpWebRequest request = WebRequest.CreateHttp(url);
-                request.Method = HttpMethod.Get.Method;
-                Task<WebResponse> getResponse = request.GetResponseAsync();
-                await server.AcceptConnectionSendResponseAndCloseAsync(HttpStatusCode.OK);
-
-                using (WebResponse response = await getResponse)
+            await LoopbackServer.CreateServerAsync(
+                async (server, url) =>
                 {
-                    response.Headers.Set(HttpResponseHeader.LastModified, raw);
-                    HttpWebResponse httpResponse = Assert.IsType<HttpWebResponse>(response);
-                    Assert.Equal(expected, httpResponse.LastModified);
+                    HttpWebRequest request = WebRequest.CreateHttp(url);
+                    request.Method = HttpMethod.Get.Method;
+                    Task<WebResponse> getResponse = request.GetResponseAsync();
+                    await server.AcceptConnectionSendResponseAndCloseAsync(HttpStatusCode.OK);
+
+                    using (WebResponse response = await getResponse)
+                    {
+                        response.Headers.Set(HttpResponseHeader.LastModified, raw);
+                        HttpWebResponse httpResponse = Assert.IsType<HttpWebResponse>(response);
+                        Assert.Equal(expected, httpResponse.LastModified);
+                    }
                 }
-            });
+            );
         }
 
         [Theory]
@@ -151,84 +160,98 @@ namespace System.Net.Tests
         [MemberData(nameof(Dates_Now_Invalid_Data))]
         public async Task LastModified_InvalidValue(string invalid)
         {
-            await LoopbackServer.CreateServerAsync(async (server, url) =>
-            {
-                HttpWebRequest request = WebRequest.CreateHttp(url);
-                request.Method = HttpMethod.Get.Method;
-                Task<WebResponse> getResponse = request.GetResponseAsync();
-                await server.AcceptConnectionSendResponseAndCloseAsync(HttpStatusCode.OK);
-
-                using (WebResponse response = await getResponse)
+            await LoopbackServer.CreateServerAsync(
+                async (server, url) =>
                 {
-                    response.Headers.Set(HttpResponseHeader.LastModified, invalid);
-                    HttpWebResponse httpResponse = Assert.IsType<HttpWebResponse>(response);
-                    Assert.Throws<ProtocolViolationException>(() => httpResponse.LastModified);
+                    HttpWebRequest request = WebRequest.CreateHttp(url);
+                    request.Method = HttpMethod.Get.Method;
+                    Task<WebResponse> getResponse = request.GetResponseAsync();
+                    await server.AcceptConnectionSendResponseAndCloseAsync(HttpStatusCode.OK);
+
+                    using (WebResponse response = await getResponse)
+                    {
+                        response.Headers.Set(HttpResponseHeader.LastModified, invalid);
+                        HttpWebResponse httpResponse = Assert.IsType<HttpWebResponse>(response);
+                        Assert.Throws<ProtocolViolationException>(() => httpResponse.LastModified);
+                    }
                 }
-            });
+            );
         }
 
         [Fact]
         public async Task LastModified_NotPresent()
         {
-            await LoopbackServer.CreateServerAsync(async (server, url) =>
-            {
-                HttpWebRequest request = WebRequest.CreateHttp(url);
-                request.Method = HttpMethod.Get.Method;
-                Task<WebResponse> getResponse = request.GetResponseAsync();
-                await server.AcceptConnectionSendResponseAndCloseAsync(HttpStatusCode.OK);
-
-                using (WebResponse response = await getResponse)
+            await LoopbackServer.CreateServerAsync(
+                async (server, url) =>
                 {
-                    HttpWebResponse httpResponse = Assert.IsType<HttpWebResponse>(response);
+                    HttpWebRequest request = WebRequest.CreateHttp(url);
+                    request.Method = HttpMethod.Get.Method;
+                    Task<WebResponse> getResponse = request.GetResponseAsync();
+                    await server.AcceptConnectionSendResponseAndCloseAsync(HttpStatusCode.OK);
 
-                    DateTime lower = DateTime.Now;
-                    DateTime firstCaptured = httpResponse.LastModified;
-                    DateTime middle = DateTime.Now;
-                    Assert.InRange(firstCaptured, lower, middle);
-                    await Task.Delay(10);
-                    DateTime secondCaptured = httpResponse.LastModified;
-                    DateTime upper = DateTime.Now;
-                    Assert.InRange(secondCaptured, middle, upper);
-                    Assert.NotEqual(firstCaptured, secondCaptured);
+                    using (WebResponse response = await getResponse)
+                    {
+                        HttpWebResponse httpResponse = Assert.IsType<HttpWebResponse>(response);
+
+                        DateTime lower = DateTime.Now;
+                        DateTime firstCaptured = httpResponse.LastModified;
+                        DateTime middle = DateTime.Now;
+                        Assert.InRange(firstCaptured, lower, middle);
+                        await Task.Delay(10);
+                        DateTime secondCaptured = httpResponse.LastModified;
+                        DateTime upper = DateTime.Now;
+                        Assert.InRange(secondCaptured, middle, upper);
+                        Assert.NotEqual(firstCaptured, secondCaptured);
+                    }
                 }
-            });
+            );
         }
 
         [Theory]
         [InlineData("text/html")]
         [InlineData("text/html; charset=utf-8")]
         [InlineData("TypeAndNoSubType")]
-        public async Task ContentType_ServerResponseHasContentTypeHeader_ContentTypeReceivedCorrectly(string expectedContentType)
+        public async Task ContentType_ServerResponseHasContentTypeHeader_ContentTypeReceivedCorrectly(
+            string expectedContentType
+        )
         {
-            await LoopbackServer.CreateServerAsync(async (server, url) =>
-            {
-                HttpWebRequest request = WebRequest.CreateHttp(url);
-                request.Method = HttpMethod.Get.Method;
-                Task<WebResponse> getResponse = request.GetResponseAsync();
-                await server.AcceptConnectionSendResponseAndCloseAsync(HttpStatusCode.OK, $"Content-Type: {expectedContentType}\r\n", "12345");
-
-                using (WebResponse response = await getResponse)
+            await LoopbackServer.CreateServerAsync(
+                async (server, url) =>
                 {
-                    Assert.Equal(expectedContentType, response.ContentType);
+                    HttpWebRequest request = WebRequest.CreateHttp(url);
+                    request.Method = HttpMethod.Get.Method;
+                    Task<WebResponse> getResponse = request.GetResponseAsync();
+                    await server.AcceptConnectionSendResponseAndCloseAsync(
+                        HttpStatusCode.OK,
+                        $"Content-Type: {expectedContentType}\r\n",
+                        "12345"
+                    );
+
+                    using (WebResponse response = await getResponse)
+                    {
+                        Assert.Equal(expectedContentType, response.ContentType);
+                    }
                 }
-            });
+            );
         }
 
         [Fact]
         public async Task ContentType_ServerResponseMissingContentTypeHeader_ContentTypeIsEmptyString()
         {
-            await LoopbackServer.CreateServerAsync(async (server, url) =>
-            {
-                HttpWebRequest request = WebRequest.CreateHttp(url);
-                request.Method = HttpMethod.Get.Method;
-                Task<WebResponse> getResponse = request.GetResponseAsync();
-                await server.AcceptConnectionSendResponseAndCloseAsync(content: "12345");
-
-                using (WebResponse response = await getResponse)
+            await LoopbackServer.CreateServerAsync(
+                async (server, url) =>
                 {
-                    Assert.Equal(string.Empty, response.ContentType);
+                    HttpWebRequest request = WebRequest.CreateHttp(url);
+                    request.Method = HttpMethod.Get.Method;
+                    Task<WebResponse> getResponse = request.GetResponseAsync();
+                    await server.AcceptConnectionSendResponseAndCloseAsync(content: "12345");
+
+                    using (WebResponse response = await getResponse)
+                    {
+                        Assert.Equal(string.Empty, response.ContentType);
+                    }
                 }
-            });
+            );
         }
     }
 }

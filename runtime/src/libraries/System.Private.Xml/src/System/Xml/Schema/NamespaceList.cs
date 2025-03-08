@@ -13,16 +13,14 @@ namespace System.Xml.Schema
         {
             Any,
             Other,
-            Set
+            Set,
         };
 
         private ListType _type = ListType.Any;
         private Hashtable? _set;
         private readonly string? _targetNamespace;
 
-        public NamespaceList()
-        {
-        }
+        public NamespaceList() { }
 
         public NamespaceList(string namespaces, string targetNamespace)
         {
@@ -189,7 +187,6 @@ namespace System.Xml.Schema
             }
             return false;
         }
-
 
         public static NamespaceList? Union(NamespaceList o1, NamespaceList o2, bool v1Compat)
         {
@@ -386,7 +383,8 @@ namespace System.Xml.Schema
 
     internal sealed class NamespaceListV1Compat : NamespaceList
     {
-        public NamespaceListV1Compat(string namespaces, string targetNamespace) : base(namespaces, targetNamespace) { }
+        public NamespaceListV1Compat(string namespaces, string targetNamespace)
+            : base(namespaces, targetNamespace) { }
 
         public override bool Allows(string ns)
         {

@@ -49,7 +49,7 @@ namespace Microsoft.CodeAnalysis.Interactive
         #region UI Thread only
 
         /// <remarks>
-        /// Submission buffers in the order they were submitted. 
+        /// Submission buffers in the order they were submitted.
         /// Includes both command buffers as well as language buffers.
         /// Does not include the current buffer unless it has been submitted.
         /// </remarks>
@@ -59,8 +59,8 @@ namespace Microsoft.CodeAnalysis.Interactive
 
         public IContentType ContentType { get; }
 
-        public InteractiveEvaluatorResetOptions ResetOptions { get; set; }
-            = new InteractiveEvaluatorResetOptions(InteractiveHostPlatform.Core);
+        public InteractiveEvaluatorResetOptions ResetOptions { get; set; } =
+            new InteractiveEvaluatorResetOptions(InteractiveHostPlatform.Core);
 
         internal CSharpInteractiveEvaluator(
             IThreadingContext threadingContext,
@@ -73,9 +73,14 @@ namespace Microsoft.CodeAnalysis.Interactive
             ITextDocumentFactoryService textDocumentFactoryService,
             EditorOptionsService editorOptionsService,
             InteractiveEvaluatorLanguageInfoProvider languageInfo,
-            string initialWorkingDirectory)
+            string initialWorkingDirectory
+        )
         {
-            Debug.Assert(languageInfo.InteractiveResponseFileName.IndexOfAny([Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar]) == -1);
+            Debug.Assert(
+                languageInfo.InteractiveResponseFileName.IndexOfAny(
+                    [Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar]
+                ) == -1
+            );
 
             _threadingContext = threadingContext;
             ContentType = contentType;
@@ -84,7 +89,10 @@ namespace Microsoft.CodeAnalysis.Interactive
             _commandsFactory = commandsFactory;
             _commands = commands;
 
-            _workspace = new InteractiveWindowWorkspace(hostServices, editorOptionsService.GlobalOptions);
+            _workspace = new InteractiveWindowWorkspace(
+                hostServices,
+                editorOptionsService.GlobalOptions
+            );
 
             _session = new InteractiveSession(
                 _workspace,
@@ -93,7 +101,8 @@ namespace Microsoft.CodeAnalysis.Interactive
                 textDocumentFactoryService,
                 editorOptionsService,
                 languageInfo,
-                initialWorkingDirectory);
+                initialWorkingDirectory
+            );
 
             _session.Host.ProcessInitialized += ProcessInitialized;
         }
@@ -111,7 +120,11 @@ namespace Microsoft.CodeAnalysis.Interactive
             }
         }
 
-        private void ProcessInitialized(InteractiveHostPlatformInfo platformInfo, InteractiveHostOptions options, RemoteExecutionResult result)
+        private void ProcessInitialized(
+            InteractiveHostPlatformInfo platformInfo,
+            InteractiveHostOptions options,
+            RemoteExecutionResult result
+        )
         {
             // Capture and clear exising submission buffers. Independent of other operations that occur on restart.
             _ = _threadingContext.JoinableTaskFactory.RunAsync(async () =>
@@ -124,23 +137,29 @@ namespace Microsoft.CodeAnalysis.Interactive
         public IInteractiveWindow? CurrentWindow
         {
             get => _lazyInteractiveWindow;
-
             set
             {
                 _threadingContext.ThrowIfNotOnUIThread();
 
                 if (_lazyInteractiveWindow != null)
                 {
-                    throw new NotSupportedException(EditorFeaturesWpfResources.The_CurrentWindow_property_may_only_be_assigned_once);
+                    throw new NotSupportedException(
+                        EditorFeaturesWpfResources.The_CurrentWindow_property_may_only_be_assigned_once
+                    );
                 }
 
                 _lazyInteractiveWindow = value ?? throw new ArgumentNullException(nameof(value));
                 _workspace.Window = value;
 
-                Task.Run(() => _session.Host.SetOutputs(value.OutputWriter, value.ErrorOutputWriter));
+                Task.Run(() => _session.Host.SetOutputs(value.OutputWriter, value.ErrorOutputWriter)
+                );
 
                 value.SubmissionBufferAdded += SubmissionBufferAdded;
-                _lazyInteractiveCommands = _commandsFactory.CreateInteractiveCommands(value, CommandPrefix, _commands);
+                _lazyInteractiveCommands = _commandsFactory.CreateInteractiveCommands(
+                    value,
+                    CommandPrefix,
+                    _commands
+                );
             }
         }
 
@@ -149,14 +168,19 @@ namespace Microsoft.CodeAnalysis.Interactive
         /// </summary>
         public event Action<InteractiveHostPlatform>? OnBeforeReset;
 
-        public int SubmissionCount
-            => _session.SubmissionCount;
+        public int SubmissionCount => _session.SubmissionCount;
 
-        private IInteractiveWindow GetInteractiveWindow()
-            => _lazyInteractiveWindow ?? throw new InvalidOperationException(EditorFeaturesResources.Engine_must_be_attached_to_an_Interactive_Window);
+        private IInteractiveWindow GetInteractiveWindow() =>
+            _lazyInteractiveWindow
+            ?? throw new InvalidOperationException(
+                EditorFeaturesResources.Engine_must_be_attached_to_an_Interactive_Window
+            );
 
-        private IInteractiveWindowCommands GetInteractiveCommands()
-            => _lazyInteractiveCommands ?? throw new InvalidOperationException(EditorFeaturesResources.Engine_must_be_attached_to_an_Interactive_Window);
+        private IInteractiveWindowCommands GetInteractiveCommands() =>
+            _lazyInteractiveCommands
+            ?? throw new InvalidOperationException(
+                EditorFeaturesResources.Engine_must_be_attached_to_an_Interactive_Window
+            );
 
         /// <summary>
         /// Invoked on UI thread when a new language buffer is created and before it is added to the projection.
@@ -176,7 +200,11 @@ namespace Microsoft.CodeAnalysis.Interactive
             // Freeze all existing classifications and then clear the list of submission buffers we have.
             foreach (var textBuffer in _submittedBuffers)
             {
-                InertClassifierProvider.CaptureExistingClassificationSpans(_classifierAggregator, textView, textBuffer);
+                InertClassifierProvider.CaptureExistingClassificationSpans(
+                    _classifierAggregator,
+                    textView,
+                    textBuffer
+                );
             }
 
             _submittedBuffers.Clear();
@@ -186,7 +214,8 @@ namespace Microsoft.CodeAnalysis.Interactive
         {
             _threadingContext.ThrowIfNotOnUIThread();
 
-            return _lazyInteractiveCommands?.InCommand == true || _languageInfo.IsCompleteSubmission(text);
+            return _lazyInteractiveCommands?.InCommand == true
+                || _languageInfo.IsCompleteSubmission(text);
         }
 
         /// <summary>
@@ -200,7 +229,9 @@ namespace Microsoft.CodeAnalysis.Interactive
 
             var resetOptions = ResetOptions;
             _session.Host.SetOutputs(window.OutputWriter, window.ErrorOutputWriter);
-            var isSuccessful = await _session.ResetAsync(_session.GetHostOptions(initialize: true, resetOptions.Platform)).ConfigureAwait(false);
+            var isSuccessful = await _session
+                .ResetAsync(_session.GetHostOptions(initialize: true, resetOptions.Platform))
+                .ConfigureAwait(false);
             return new ExecutionResult(isSuccessful);
         }
 
@@ -215,7 +246,13 @@ namespace Microsoft.CodeAnalysis.Interactive
 
             var resetOptions = ResetOptions;
             Debug.Assert(GetInteractiveCommands().CommandPrefix == CommandPrefix);
-            window.AddInput(CommandPrefix + InteractiveWindowResetCommand.GetCommandLine(initialize, resetOptions.Platform));
+            window.AddInput(
+                CommandPrefix
+                    + InteractiveWindowResetCommand.GetCommandLine(
+                        initialize,
+                        resetOptions.Platform
+                    )
+            );
             window.WriteLine(EditorFeaturesWpfResources.Resetting_execution_engine);
             window.FlushOutput();
 
@@ -253,7 +290,7 @@ namespace Microsoft.CodeAnalysis.Interactive
                     }
                 }
 
-                // If process initialization is in progress we will wait with code 
+                // If process initialization is in progress we will wait with code
                 // execution after the initialization is completed.
                 var isSuccessful = await _session.ExecuteCodeAsync(text).ConfigureAwait(false);
                 return new ExecutionResult(isSuccessful);
@@ -278,12 +315,13 @@ namespace Microsoft.CodeAnalysis.Interactive
         public string GetPrompt()
         {
             var buffer = GetInteractiveWindow().CurrentLanguageBuffer;
-            return buffer != null && buffer.CurrentSnapshot.LineCount > 1
-                ? ". "
-                : "> ";
+            return buffer != null && buffer.CurrentSnapshot.LineCount > 1 ? ". " : "> ";
         }
 
-        public Task SetPathsAsync(ImmutableArray<string> referenceSearchPaths, ImmutableArray<string> sourceSearchPaths, string workingDirectory)
-            => _session.SetPathsAsync(referenceSearchPaths, sourceSearchPaths, workingDirectory);
+        public Task SetPathsAsync(
+            ImmutableArray<string> referenceSearchPaths,
+            ImmutableArray<string> sourceSearchPaths,
+            string workingDirectory
+        ) => _session.SetPathsAsync(referenceSearchPaths, sourceSearchPaths, workingDirectory);
     }
 }

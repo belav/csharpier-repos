@@ -1,12 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
 ** Class: PermissionListSet.cs
-** 
+**
 ** <OWNER>Microsoft</OWNER>
 ** <OWNER>Microsoft</OWNER>
 **
@@ -17,18 +17,18 @@
 
 namespace System.Security
 {
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
     using System.Globalization;
     using System.Reflection;
     using System.Runtime.InteropServices;
     using System.Security;
     using System.Security.Permissions;
     using System.Threading;
-    using System.Collections;
-    using System.Collections.Generic;
-    using System.Diagnostics.Contracts;
 
     [Serializable]
-    sealed internal class PermissionListSet
+    internal sealed class PermissionListSet
     {
         // Only internal (public) methods are creation methods and demand evaluation methods.
         // Scroll down to the end to see them.
@@ -39,7 +39,7 @@ namespace System.Security
         private ArrayList m_originList;
 #endif // FEATURE_COMPRESSEDSTACK
 
-        internal PermissionListSet() {}
+        internal PermissionListSet() { }
 
         private void EnsureTriplesListCreated()
         {
@@ -55,14 +55,19 @@ namespace System.Security
         }
 
 #if FEATURE_PLS
-        [System.Security.SecurityCritical]  // auto-generated
-        internal void UpdateDomainPLS (PermissionListSet adPLS) {
+        [System.Security.SecurityCritical] // auto-generated
+        internal void UpdateDomainPLS(PermissionListSet adPLS)
+        {
             if (adPLS != null && adPLS.m_firstPermSetTriple != null)
-                UpdateDomainPLS(adPLS.m_firstPermSetTriple.GrantSet, adPLS.m_firstPermSetTriple.RefusedSet);
+                UpdateDomainPLS(
+                    adPLS.m_firstPermSetTriple.GrantSet,
+                    adPLS.m_firstPermSetTriple.RefusedSet
+                );
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal void UpdateDomainPLS (PermissionSet grantSet, PermissionSet deniedSet) {
+        [System.Security.SecurityCritical] // auto-generated
+        internal void UpdateDomainPLS(PermissionSet grantSet, PermissionSet deniedSet)
+        {
             Contract.Assert(m_permSetTriples == null, "m_permSetTriples != null");
             if (m_firstPermSetTriple == null)
                 m_firstPermSetTriple = new PermissionSetTriple();
@@ -78,7 +83,7 @@ namespace System.Security
             UpdateTripleListAndCreateNewTriple(currentTriple, null);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private void Terminate(PermissionSetTriple currentTriple, PermissionListSet pls)
         {
 #if FEATURE_COMPRESSEDSTACK
@@ -88,7 +93,7 @@ namespace System.Security
             this.UpdateTripleListAndCreateNewTriple(currentTriple, null);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private bool Update(PermissionSetTriple currentTriple, PermissionListSet pls)
         {
 #if FEATURE_COMPRESSEDSTACK
@@ -97,30 +102,34 @@ namespace System.Security
             return this.UpdatePermissions(currentTriple, pls);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private bool Update(PermissionSetTriple currentTriple, FrameSecurityDescriptor fsd)
         {
 #if FEATURE_COMPRESSEDSTACK
-           FrameSecurityDescriptorWithResolver fsdWithResolver = fsd as FrameSecurityDescriptorWithResolver;
-           if (fsdWithResolver != null)
-           {
-               return Update2(currentTriple, fsdWithResolver);
-           }
+            FrameSecurityDescriptorWithResolver fsdWithResolver =
+                fsd as FrameSecurityDescriptorWithResolver;
+            if (fsdWithResolver != null)
+            {
+                return Update2(currentTriple, fsdWithResolver);
+            }
 #endif // FEATURE_COMPRESSEDSTACK
 
-           // check imperative
-           bool fHalt = Update2(currentTriple, fsd, false);
-           if (!fHalt)            
-           {
+            // check imperative
+            bool fHalt = Update2(currentTriple, fsd, false);
+            if (!fHalt)
+            {
                 // then declarative
                 fHalt = Update2(currentTriple, fsd, true);
-           }
-           return fHalt;
+            }
+            return fHalt;
         }
 
 #if FEATURE_COMPRESSEDSTACK
         [System.Security.SecurityCritical]
-        private bool Update2(PermissionSetTriple currentTriple, FrameSecurityDescriptorWithResolver fsdWithResolver)
+        private bool Update2(
+            PermissionSetTriple currentTriple,
+            FrameSecurityDescriptorWithResolver fsdWithResolver
+        )
         {
             System.Reflection.Emit.DynamicResolver resolver = fsdWithResolver.Resolver;
             CompressedStack dynamicCompressedStack = resolver.GetSecurityContext();
@@ -129,8 +138,12 @@ namespace System.Security
         }
 #endif // FEATURE_COMPRESSEDSTACK
 
-        [System.Security.SecurityCritical]  // auto-generated
-        private bool Update2(PermissionSetTriple currentTriple, FrameSecurityDescriptor fsd, bool fDeclarative)
+        [System.Security.SecurityCritical] // auto-generated
+        private bool Update2(
+            PermissionSetTriple currentTriple,
+            FrameSecurityDescriptor fsd,
+            bool fDeclarative
+        )
         {
             // Deny
             PermissionSet deniedPset = fsd.GetDenials(fDeclarative);
@@ -160,7 +173,7 @@ namespace System.Security
                 currentTriple.UpdateAssert(fsd.GetAssertions(fDeclarative));
                 return true;
             }
-                
+
             // Assert
             PermissionSet assertPset = fsd.GetAssertions(fDeclarative);
             if (assertPset != null)
@@ -189,8 +202,13 @@ namespace System.Security
 
             return false;
         }
-        [System.Security.SecurityCritical]  // auto-generated
-        private void Update(PermissionSetTriple currentTriple, PermissionSet in_g, PermissionSet in_r)
+
+        [System.Security.SecurityCritical] // auto-generated
+        private void Update(
+            PermissionSetTriple currentTriple,
+            PermissionSet in_g,
+            PermissionSet in_r
+        )
         {
 #if FEATURE_COMPRESSEDSTACK
             ZoneIdentityPermission z;
@@ -204,15 +222,15 @@ namespace System.Security
 #endif // FEATURE_COMPRESSEDSTACK
         }
 
-        // Called from the VM for HG CS construction        
-        [System.Security.SecurityCritical]  // auto-generated
+        // Called from the VM for HG CS construction
+        [System.Security.SecurityCritical] // auto-generated
         private void Update(PermissionSet in_g)
         {
             if (m_firstPermSetTriple == null)
                 m_firstPermSetTriple = new PermissionSetTriple();
             Update(m_firstPermSetTriple, in_g, null);
         }
-        
+
 #if FEATURE_COMPRESSEDSTACK
         private void UpdateZoneAndOrigin(PermissionListSet pls)
         {
@@ -221,14 +239,18 @@ namespace System.Security
                 if (this.m_zoneList == null && pls.m_zoneList != null && pls.m_zoneList.Count > 0)
                     this.m_zoneList = new ArrayList();
                 UpdateArrayList(this.m_zoneList, pls.m_zoneList);
-                if (this.m_originList == null && pls.m_originList != null && pls.m_originList.Count > 0)
-                    this.m_originList = new ArrayList();                                
+                if (
+                    this.m_originList == null
+                    && pls.m_originList != null
+                    && pls.m_originList.Count > 0
+                )
+                    this.m_originList = new ArrayList();
                 UpdateArrayList(this.m_originList, pls.m_originList);
             }
         }
 #endif // FEATURE_COMPRESSEDSTACK
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private bool UpdatePermissions(PermissionSetTriple currentTriple, PermissionListSet pls)
         {
             if (pls != null)
@@ -236,12 +258,12 @@ namespace System.Security
                 if (pls.m_permSetTriples != null)
                 {
                     // DCS has an AGR List. So we need to add the AGR List
-                    UpdateTripleListAndCreateNewTriple(currentTriple,pls.m_permSetTriples);
+                    UpdateTripleListAndCreateNewTriple(currentTriple, pls.m_permSetTriples);
                 }
                 else
                 {
                     // Common case: One AGR set
-                    
+
                     PermissionSetTriple tmp_psTriple = pls.m_firstPermSetTriple;
                     PermissionSetTriple retTriple;
                     // First try and update currentTriple. Return value indicates if we can stop construction
@@ -263,14 +285,14 @@ namespace System.Security
                 // pls can be null only outside the loop in CreateCompressedState
                 UpdateTripleListAndCreateNewTriple(currentTriple, null);
             }
-            
 
             return false;
-            
         }
 
-
-        private void UpdateTripleListAndCreateNewTriple(PermissionSetTriple currentTriple, ArrayList tripleList)
+        private void UpdateTripleListAndCreateNewTriple(
+            PermissionSetTriple currentTriple,
+            ArrayList tripleList
+        )
         {
             if (!currentTriple.IsEmpty())
             {
@@ -297,18 +319,16 @@ namespace System.Security
             if (newList == null)
                 return;
 
-            for(int i=0;i < newList.Count; i++)
+            for (int i = 0; i < newList.Count; i++)
             {
                 if (!current.Contains(newList[i]))
                     current.Add(newList[i]);
             }
-
         }
 
 #if FEATURE_COMPRESSEDSTACK
         private void AppendZoneOrigin(ZoneIdentityPermission z, UrlIdentityPermission u)
         {
-
             if (z != null)
             {
                 if (m_zoneList == null)
@@ -324,39 +344,50 @@ namespace System.Security
             }
         }
 
-[System.Security.SecurityCritical]  // auto-generated
-[System.Runtime.InteropServices.ComVisible(true)]
+        [System.Security.SecurityCritical] // auto-generated
+        [System.Runtime.InteropServices.ComVisible(true)]
         // public(internal) interface begins...
         // Creation functions
-        static internal PermissionListSet CreateCompressedState(CompressedStack cs, CompressedStack innerCS)
+        static internal PermissionListSet CreateCompressedState(
+            CompressedStack cs,
+            CompressedStack innerCS
+        )
         {
             // function that completes the construction of the compressed stack if not done so already (bottom half for demand evaluation)
-            
+
             bool bHaltConstruction = false;
             if (cs.CompressedStackHandle == null)
                 return null; //  FT case or Security off
-   
+
             PermissionListSet pls = new PermissionListSet();
             PermissionSetTriple currentTriple = new PermissionSetTriple();
             int numDomains = CompressedStack.GetDCSCount(cs.CompressedStackHandle);
-            for (int i=numDomains-1; (i >= 0 && !bHaltConstruction) ; i--)
+            for (int i = numDomains - 1; (i >= 0 && !bHaltConstruction); i--)
             {
-                DomainCompressedStack dcs = CompressedStack.GetDomainCompressedStack(cs.CompressedStackHandle, i);
+                DomainCompressedStack dcs = CompressedStack.GetDomainCompressedStack(
+                    cs.CompressedStackHandle,
+                    i
+                );
                 if (dcs == null)
                     continue; // we hit a FT Domain
                 if (dcs.PLS == null)
                 {
                     // We failed on some DCS
-                    throw new SecurityException(String.Format(CultureInfo.InvariantCulture, Environment.GetResourceString("Security_Generic")));
+                    throw new SecurityException(
+                        String.Format(
+                            CultureInfo.InvariantCulture,
+                            Environment.GetResourceString("Security_Generic")
+                        )
+                    );
                 }
                 pls.UpdateZoneAndOrigin(dcs.PLS);
-                pls.Update(currentTriple, dcs.PLS); 
+                pls.Update(currentTriple, dcs.PLS);
                 bHaltConstruction = dcs.ConstructionHalted;
             }
             if (!bHaltConstruction)
             {
                 PermissionListSet tmp_pls = null;
-                // Construction did not halt. 
+                // Construction did not halt.
                 if (innerCS != null)
                 {
                     innerCS.CompleteConstruction(null);
@@ -372,21 +403,34 @@ namespace System.Security
             return pls;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        static internal PermissionListSet CreateCompressedState(IntPtr unmanagedDCS, out bool bHaltConstruction)
+        [System.Security.SecurityCritical] // auto-generated
+        internal static PermissionListSet CreateCompressedState(
+            IntPtr unmanagedDCS,
+            out bool bHaltConstruction
+        )
         {
             PermissionListSet pls = new PermissionListSet();
             PermissionSetTriple currentTriple = new PermissionSetTriple();
 
-            PermissionSet tmp_g, tmp_r;
+            PermissionSet tmp_g,
+                tmp_r;
             // Construct the descriptor list
             int descCount = DomainCompressedStack.GetDescCount(unmanagedDCS);
             bHaltConstruction = false;
-            for(int i=0; (i < descCount && !bHaltConstruction); i++)
+            for (int i = 0; (i < descCount && !bHaltConstruction); i++)
             {
                 FrameSecurityDescriptor fsd;
                 Assembly assembly;
-                if (DomainCompressedStack.GetDescriptorInfo(unmanagedDCS, i, out tmp_g, out tmp_r, out assembly, out fsd))
+                if (
+                    DomainCompressedStack.GetDescriptorInfo(
+                        unmanagedDCS,
+                        i,
+                        out tmp_g,
+                        out tmp_r,
+                        out assembly,
+                        out fsd
+                    )
+                )
                 {
                     // Got an FSD
                     bHaltConstruction = pls.Update(currentTriple, fsd);
@@ -395,67 +439,80 @@ namespace System.Security
                 {
                     pls.Update(currentTriple, tmp_g, tmp_r);
                 }
-                
             }
             if (!bHaltConstruction)
             {
                 // domain
                 if (!DomainCompressedStack.IgnoreDomain(unmanagedDCS))
                 {
-                    DomainCompressedStack.GetDomainPermissionSets(unmanagedDCS, out tmp_g, out tmp_r);
+                    DomainCompressedStack.GetDomainPermissionSets(
+                        unmanagedDCS,
+                        out tmp_g,
+                        out tmp_r
+                    );
                     pls.Update(currentTriple, tmp_g, tmp_r);
                 }
             }
             pls.Terminate(currentTriple);
 
-
             // return the created object
             return pls;
-            
         }
-        [System.Security.SecurityCritical]  // auto-generated
-        static internal PermissionListSet CreateCompressedState_HG()
+
+        [System.Security.SecurityCritical] // auto-generated
+        internal static PermissionListSet CreateCompressedState_HG()
         {
             PermissionListSet pls = new PermissionListSet();
             CompressedStack.GetHomogeneousPLS(pls);
             return pls;
         }
 #endif // #if FEATURE_COMPRESSEDSTACK
+
         // Private Demand evaluation functions - only called from the VM
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal bool CheckDemandNoThrow(CodeAccessPermission demand)
         {
             // AppDomain permissions - no asserts. So there should only be one triple to work with
-            Contract.Assert(m_permSetTriples == null && m_firstPermSetTriple != null, "More than one PermissionSetTriple encountered in AD PermissionListSet");
-            
+            Contract.Assert(
+                m_permSetTriples == null && m_firstPermSetTriple != null,
+                "More than one PermissionSetTriple encountered in AD PermissionListSet"
+            );
 
-            
             PermissionToken permToken = null;
             if (demand != null)
                 permToken = PermissionToken.GetToken(demand);
 
             return m_firstPermSetTriple.CheckDemandNoThrow(demand, permToken);
-                
-
         }
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         internal bool CheckSetDemandNoThrow(PermissionSet pSet)
         {
             // AppDomain permissions - no asserts. So there should only be one triple to work with
-            Contract.Assert(m_permSetTriples == null && m_firstPermSetTriple != null, "More than one PermissionSetTriple encountered in AD PermissionListSet");
+            Contract.Assert(
+                m_permSetTriples == null && m_firstPermSetTriple != null,
+                "More than one PermissionSetTriple encountered in AD PermissionListSet"
+            );
 
-            
             return m_firstPermSetTriple.CheckSetDemandNoThrow(pSet);
         }
 
         // Demand evauation functions
-        [System.Security.SecurityCritical]  // auto-generated
-        internal bool CheckDemand(CodeAccessPermission demand, PermissionToken permToken, RuntimeMethodHandleInternal rmh)
+        [System.Security.SecurityCritical] // auto-generated
+        internal bool CheckDemand(
+            CodeAccessPermission demand,
+            PermissionToken permToken,
+            RuntimeMethodHandleInternal rmh
+        )
         {
             bool bRet = SecurityRuntime.StackContinue;
             if (m_permSetTriples != null)
             {
-                for (int i=0; (i < m_permSetTriples.Count && bRet != SecurityRuntime.StackHalt) ; i++)
+                for (
+                    int i = 0;
+                    (i < m_permSetTriples.Count && bRet != SecurityRuntime.StackHalt);
+                    i++
+                )
                 {
                     PermissionSetTriple psTriple = (PermissionSetTriple)m_permSetTriples[i];
                     bRet = psTriple.CheckDemand(demand, permToken, rmh);
@@ -469,23 +526,31 @@ namespace System.Security
             return bRet;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal bool CheckSetDemand(PermissionSet pset , RuntimeMethodHandleInternal rmh)
+        [System.Security.SecurityCritical] // auto-generated
+        internal bool CheckSetDemand(PermissionSet pset, RuntimeMethodHandleInternal rmh)
         {
             PermissionSet unused;
             CheckSetDemandWithModification(pset, out unused, rmh);
-            return SecurityRuntime.StackHalt; //  CS demand check always terminates the stackwalk    
+            return SecurityRuntime.StackHalt; //  CS demand check always terminates the stackwalk
         }
 
         [System.Security.SecurityCritical]
-        internal bool CheckSetDemandWithModification(PermissionSet pset, out PermissionSet alteredDemandSet, RuntimeMethodHandleInternal rmh)
+        internal bool CheckSetDemandWithModification(
+            PermissionSet pset,
+            out PermissionSet alteredDemandSet,
+            RuntimeMethodHandleInternal rmh
+        )
         {
             bool bRet = SecurityRuntime.StackContinue;
             PermissionSet demandSet = pset;
             alteredDemandSet = null;
             if (m_permSetTriples != null)
             {
-                for (int i=0; (i < m_permSetTriples.Count && bRet != SecurityRuntime.StackHalt) ; i++)
+                for (
+                    int i = 0;
+                    (i < m_permSetTriples.Count && bRet != SecurityRuntime.StackHalt);
+                    i++
+                )
                 {
                     PermissionSetTriple psTriple = (PermissionSetTriple)m_permSetTriples[i];
                     bRet = psTriple.CheckSetDemand(demandSet, out alteredDemandSet, rmh);
@@ -505,7 +570,7 @@ namespace System.Security
         ///     Check to see if the PLS satisfies a demand for the special permissions encoded in flags
         /// </summary>
         /// <param name="flags">set of flags to check (See PermissionType)</param>
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private bool CheckFlags(int flags)
         {
             Contract.Assert(flags != 0, "Invalid permission flag demand");
@@ -523,7 +588,7 @@ namespace System.Security
             {
                 check = m_firstPermSetTriple.CheckFlags(ref flags);
             }
-            
+
             return check;
         }
 
@@ -533,7 +598,7 @@ namespace System.Security
         /// </summary>
         /// <param name="flags">set of flags to check (See PermissionType)</param>
         /// <param name="grantSet">alternate permission set to check</param>
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal void DemandFlagsOrGrantSet(int flags, PermissionSet grantSet)
         {
             if (CheckFlags(flags))
@@ -543,7 +608,12 @@ namespace System.Security
         }
 
 #if FEATURE_COMPRESSEDSTACK
-        internal void GetZoneAndOrigin(ArrayList zoneList, ArrayList originList, PermissionToken zoneToken, PermissionToken originToken)
+        internal void GetZoneAndOrigin(
+            ArrayList zoneList,
+            ArrayList originList,
+            PermissionToken zoneToken,
+            PermissionToken originToken
+        )
         {
             if (m_zoneList != null)
                 zoneList.AddRange(m_zoneList);
@@ -552,5 +622,4 @@ namespace System.Security
         }
 #endif
     }
-
 }

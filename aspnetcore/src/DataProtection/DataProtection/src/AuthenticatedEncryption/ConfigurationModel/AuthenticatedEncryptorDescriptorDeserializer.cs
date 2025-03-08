@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
 /// A class that can deserialize an <see cref="XElement"/> that represents the serialized version
 /// of an <see cref="AuthenticatedEncryptorDescriptor"/>.
 /// </summary>
-public sealed class AuthenticatedEncryptorDescriptorDeserializer : IAuthenticatedEncryptorDescriptorDeserializer
+public sealed class AuthenticatedEncryptorDescriptorDeserializer
+    : IAuthenticatedEncryptorDescriptorDeserializer
 {
     /// <summary>
     /// Imports the <see cref="AuthenticatedEncryptorDescriptor"/> from serialized XML.
@@ -31,13 +32,21 @@ public sealed class AuthenticatedEncryptorDescriptorDeserializer : IAuthenticate
         var configuration = new AuthenticatedEncryptorConfiguration();
 
         var encryptionElement = element.Element("encryption")!;
-        configuration.EncryptionAlgorithm = (EncryptionAlgorithm)Enum.Parse(typeof(EncryptionAlgorithm), (string)encryptionElement.Attribute("algorithm")!);
+        configuration.EncryptionAlgorithm = (EncryptionAlgorithm)
+            Enum.Parse(
+                typeof(EncryptionAlgorithm),
+                (string)encryptionElement.Attribute("algorithm")!
+            );
 
         // only read <validation> if not GCM
         if (!AuthenticatedEncryptorFactory.IsGcmAlgorithm(configuration.EncryptionAlgorithm))
         {
             var validationElement = element.Element("validation")!;
-            configuration.ValidationAlgorithm = (ValidationAlgorithm)Enum.Parse(typeof(ValidationAlgorithm), (string)validationElement.Attribute("algorithm")!);
+            configuration.ValidationAlgorithm = (ValidationAlgorithm)
+                Enum.Parse(
+                    typeof(ValidationAlgorithm),
+                    (string)validationElement.Attribute("algorithm")!
+                );
         }
 
         Secret masterKey = ((string)element.Elements("masterKey").Single()).ToSecret();

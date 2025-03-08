@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Routing;
 
 // FYI: This class is also linked into MVC. If you make changes to the API you will
 // also need to change MVC's usage.
-internal sealed class DataSourceDependentCache<T> : IDisposable where T : class
+internal sealed class DataSourceDependentCache<T> : IDisposable
+    where T : class
 {
     private readonly EndpointDataSource _dataSource;
     private readonly Func<IReadOnlyList<Endpoint>, T> _initializeCore;
@@ -24,7 +25,10 @@ internal sealed class DataSourceDependentCache<T> : IDisposable where T : class
     private IDisposable? _disposable;
     private bool _disposed;
 
-    public DataSourceDependentCache(EndpointDataSource dataSource, Func<IReadOnlyList<Endpoint>, T> initialize)
+    public DataSourceDependentCache(
+        EndpointDataSource dataSource,
+        Func<IReadOnlyList<Endpoint>, T> initialize
+    )
     {
         ArgumentNullException.ThrowIfNull(dataSource);
         ArgumentNullException.ThrowIfNull(initialize);
@@ -46,7 +50,12 @@ internal sealed class DataSourceDependentCache<T> : IDisposable where T : class
     [MemberNotNull(nameof(_value))]
     public T EnsureInitialized()
     {
-        return LazyInitializer.EnsureInitialized<T>(ref _value, ref _initialized, ref _lock, _initializer);
+        return LazyInitializer.EnsureInitialized<T>(
+            ref _value,
+            ref _initialized,
+            ref _lock,
+            _initializer
+        );
     }
 
     private T Initialize()

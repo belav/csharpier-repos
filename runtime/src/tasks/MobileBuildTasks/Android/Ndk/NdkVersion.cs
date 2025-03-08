@@ -17,7 +17,7 @@ namespace Microsoft.Android.Build.Ndk
             string? ver = version?.Trim();
             if (string.IsNullOrEmpty(ver))
             {
-                throw new ArgumentException ("must be a non-empty string", nameof (version));
+                throw new ArgumentException("must be a non-empty string", nameof(version));
             }
 
             int tagIdx = ver!.IndexOf('-');
@@ -29,7 +29,9 @@ namespace Microsoft.Android.Build.Ndk
 
             if (!Version.TryParse(ver, out Version? ndkVersion) || ndkVersion == null)
             {
-                throw new InvalidOperationException ($"Failed to parse '{ver}' as a valid NDK version.");
+                throw new InvalidOperationException(
+                    $"Failed to parse '{ver}' as a valid NDK version."
+                );
             }
 
             Main = ndkVersion;

@@ -26,6 +26,7 @@ internal class RouteConstraintBuilder
 
     private readonly Dictionary<string, List<IRouteConstraint>> _constraints;
     private readonly HashSet<string> _optionalParameters;
+
     /// <summary>
     /// Creates a new instance of <see cref="RouteConstraintBuilder"/> instance.
     /// </summary>
@@ -33,7 +34,8 @@ internal class RouteConstraintBuilder
     /// <param name="displayName">The display name (for use in error messages).</param>
     public RouteConstraintBuilder(
         IInlineConstraintResolver inlineConstraintResolver,
-        string displayName)
+        string displayName
+    )
     {
         ArgumentNullException.ThrowIfNull(inlineConstraintResolver);
         ArgumentNullException.ThrowIfNull(displayName);
@@ -41,7 +43,9 @@ internal class RouteConstraintBuilder
         _inlineConstraintResolver = inlineConstraintResolver;
         _displayName = displayName;
 
-        _constraints = new Dictionary<string, List<IRouteConstraint>>(StringComparer.OrdinalIgnoreCase);
+        _constraints = new Dictionary<string, List<IRouteConstraint>>(
+            StringComparer.OrdinalIgnoreCase
+        );
         _optionalParameters = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
     }
 
@@ -51,7 +55,9 @@ internal class RouteConstraintBuilder
     /// <returns>An <see cref="IDictionary{String, IRouteConstraint}"/> of the constraints.</returns>
     public IDictionary<string, IRouteConstraint> Build()
     {
-        var constraints = new Dictionary<string, IRouteConstraint>(StringComparer.OrdinalIgnoreCase);
+        var constraints = new Dictionary<string, IRouteConstraint>(
+            StringComparer.OrdinalIgnoreCase
+        );
         foreach (var kvp in _constraints)
         {
             IRouteConstraint constraint;
@@ -108,7 +114,9 @@ internal class RouteConstraintBuilder
                         key,
                         value,
                         _displayName,
-                        typeof(IRouteConstraint)));
+                        typeof(IRouteConstraint)
+                    )
+                );
             }
 
             var constraintsRegEx = "^(" + regexPattern + ")$";
@@ -142,7 +150,9 @@ internal class RouteConstraintBuilder
                     key,
                     constraintText,
                     _displayName,
-                    _inlineConstraintResolver.GetType().Name));
+                    _inlineConstraintResolver.GetType().Name
+                )
+            );
         }
         else if (constraint == NullRouteConstraint.Instance)
         {

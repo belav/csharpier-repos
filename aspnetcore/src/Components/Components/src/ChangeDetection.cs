@@ -17,9 +17,11 @@ internal sealed class ChangeDetection
         {
             var oldValueType = oldValue!.GetType();
             var newValueType = newValue!.GetType();
-            if (oldValueType != newValueType            // Definitely different
-                || !IsKnownImmutableType(oldValueType)  // Maybe different
-                || !oldValue.Equals(newValue))          // Somebody says they are different
+            if (
+                oldValueType != newValueType // Definitely different
+                || !IsKnownImmutableType(oldValueType) // Maybe different
+                || !oldValue.Equals(newValue)
+            ) // Somebody says they are different
             {
                 return true;
             }
@@ -39,8 +41,8 @@ internal sealed class ChangeDetection
     // Supported immutable types : bool, byte, sbyte, short, ushort, int, uint, long, ulong, char, double,
     //                             string, DateTime, decimal, Guid, Enum, EventCallBack, EventCallBack<>.
     // For performance reasons, the following immutable types are not supported: IntPtr, UIntPtr, Type.
-    private static bool IsKnownImmutableType(Type type)
-        => Type.GetTypeCode(type) != TypeCode.Object
+    private static bool IsKnownImmutableType(Type type) =>
+        Type.GetTypeCode(type) != TypeCode.Object
         || type == typeof(Guid)
         || typeof(IEventCallback).IsAssignableFrom(type);
 }

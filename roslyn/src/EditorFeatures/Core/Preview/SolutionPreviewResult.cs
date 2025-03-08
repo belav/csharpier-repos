@@ -16,40 +16,65 @@ namespace Microsoft.CodeAnalysis.Editor
     internal class SolutionPreviewResult(
         IThreadingContext threadingContext,
         IList<SolutionPreviewItem>? previews,
-        SolutionChangeSummary? changeSummary = null)
+        SolutionChangeSummary? changeSummary = null
+    )
     {
         private readonly IThreadingContext _threadingContext = threadingContext;
-        private readonly IList<SolutionPreviewItem> _previews = previews ?? SpecializedCollections.EmptyList<SolutionPreviewItem>();
+        private readonly IList<SolutionPreviewItem> _previews =
+            previews ?? SpecializedCollections.EmptyList<SolutionPreviewItem>();
         public readonly SolutionChangeSummary? ChangeSummary = changeSummary;
 
-        public SolutionPreviewResult(IThreadingContext threadingContext, SolutionPreviewItem preview, SolutionChangeSummary? changeSummary = null)
-            : this(threadingContext, new List<SolutionPreviewItem> { preview }, changeSummary)
-        {
-        }
+        public SolutionPreviewResult(
+            IThreadingContext threadingContext,
+            SolutionPreviewItem preview,
+            SolutionChangeSummary? changeSummary = null
+        )
+            : this(threadingContext, new List<SolutionPreviewItem> { preview }, changeSummary) { }
 
         public bool IsEmpty => _previews.Count == 0;
 
-        public async Task<IReadOnlyList<object>?> GetPreviewsAsync(DocumentId? preferredDocumentId = null, ProjectId? preferredProjectId = null, CancellationToken cancellationToken = default)
+        public async Task<IReadOnlyList<object>?> GetPreviewsAsync(
+            DocumentId? preferredDocumentId = null,
+            ProjectId? preferredProjectId = null,
+            CancellationToken cancellationToken = default
+        )
         {
             _threadingContext.ThrowIfNotOnUIThread();
             cancellationToken.ThrowIfCancellationRequested();
 
-            var orderedPreviews = _previews.OrderBy((i1, i2) =>
-            {
-                return i1.DocumentId == preferredDocumentId && i2.DocumentId != preferredDocumentId ? -1 :
-                       i1.DocumentId != preferredDocumentId && i2.DocumentId == preferredDocumentId ? 1 :
-                       _previews.IndexOf(i1) - _previews.IndexOf(i2);
-            }).ThenBy((i1, i2) =>
-            {
-                return i1.ProjectId == preferredProjectId && i2.ProjectId != preferredProjectId ? -1 :
-                       i1.ProjectId != preferredProjectId && i2.ProjectId == preferredProjectId ? 1 :
-                       _previews.IndexOf(i1) - _previews.IndexOf(i2);
-            }).ThenBy((i1, i2) =>
-            {
-                return i1.Text == null && i2.Text != null ? -1 :
-                       i1.Text != null && i2.Text == null ? 1 :
-                       _previews.IndexOf(i1) - _previews.IndexOf(i2);
-            });
+            var orderedPreviews = _previews
+                .OrderBy(
+                    (i1, i2) =>
+                    {
+                        return i1.DocumentId == preferredDocumentId
+                            && i2.DocumentId != preferredDocumentId
+                                ? -1
+                            : i1.DocumentId != preferredDocumentId
+                            && i2.DocumentId == preferredDocumentId
+                                ? 1
+                            : _previews.IndexOf(i1) - _previews.IndexOf(i2);
+                    }
+                )
+                .ThenBy(
+                    (i1, i2) =>
+                    {
+                        return i1.ProjectId == preferredProjectId
+                            && i2.ProjectId != preferredProjectId
+                                ? -1
+                            : i1.ProjectId != preferredProjectId
+                            && i2.ProjectId == preferredProjectId
+                                ? 1
+                            : _previews.IndexOf(i1) - _previews.IndexOf(i2);
+                    }
+                )
+                .ThenBy(
+                    (i1, i2) =>
+                    {
+                        return i1.Text == null && i2.Text != null ? -1
+                            : i1.Text != null && i2.Text == null ? 1
+                            : _previews.IndexOf(i1) - _previews.IndexOf(i2);
+                    }
+                );
 
             var result = new List<object>();
             var gotRichPreview = false;
@@ -65,7 +90,9 @@ namespace Microsoft.CodeAnalysis.Editor
                     }
                     else if (!gotRichPreview)
                     {
-                        var preview = await previewItem.LazyPreview(cancellationToken).ConfigureAwait(true);
+                        var preview = await previewItem
+                            .LazyPreview(cancellationToken)
+                            .ConfigureAwait(true);
                         if (preview != null)
                         {
                             result.Add(preview);
@@ -87,7 +114,10 @@ namespace Microsoft.CodeAnalysis.Editor
 
         /// <summary>Merge two different previews into one final preview result.  The final preview will
         /// have a concatenation of all the inidivual previews contained within each result.</summary>
-        internal static SolutionPreviewResult? Merge(SolutionPreviewResult? result1, SolutionPreviewResult? result2)
+        internal static SolutionPreviewResult? Merge(
+            SolutionPreviewResult? result1,
+            SolutionPreviewResult? result2
+        )
         {
             if (result1 == null)
             {
@@ -102,7 +132,8 @@ namespace Microsoft.CodeAnalysis.Editor
             return new SolutionPreviewResult(
                 result1._threadingContext,
                 result1._previews.Concat(result2._previews).ToList(),
-                result1.ChangeSummary ?? result2.ChangeSummary);
+                result1.ChangeSummary ?? result2.ChangeSummary
+            );
         }
     }
 }

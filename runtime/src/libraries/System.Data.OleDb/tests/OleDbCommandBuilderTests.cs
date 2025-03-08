@@ -28,7 +28,8 @@ namespace System.Data.OleDb.Tests
                 cmd.CommandType = commandType;
                 AssertExtensions.Throws<InvalidOperationException>(
                     () => OleDbCommandBuilder.DeriveParameters(cmd),
-                    $"{nameof(OleDbCommand)} DeriveParameters only supports CommandType.StoredProcedure, not CommandType.{cmd.CommandType.ToString()}.");
+                    $"{nameof(OleDbCommand)} DeriveParameters only supports CommandType.StoredProcedure, not CommandType.{cmd.CommandType.ToString()}."
+                );
             }
         }
 
@@ -41,7 +42,8 @@ namespace System.Data.OleDb.Tests
                 cmd.CommandText = null;
                 AssertExtensions.Throws<InvalidOperationException>(
                     () => OleDbCommandBuilder.DeriveParameters(cmd),
-                    $"{nameof(OleDbCommandBuilder.DeriveParameters)}: {nameof(cmd.CommandText)} property has not been initialized");
+                    $"{nameof(OleDbCommandBuilder.DeriveParameters)}: {nameof(cmd.CommandText)} property has not been initialized"
+                );
             }
         }
 
@@ -49,122 +51,158 @@ namespace System.Data.OleDb.Tests
         [ConditionalFact(Helpers.IsDriverAvailable)]
         public void DeriveParameters_NullConnection_Throws()
         {
-            RunTest((command, tableName) => {
-                using (var cmd = (OleDbCommand)OleDbFactory.Instance.CreateCommand())
+            RunTest(
+                (command, tableName) =>
                 {
-                    cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.CommandText = @"SELECT * FROM " + tableName;
-                    cmd.Connection = null;
+                    using (var cmd = (OleDbCommand)OleDbFactory.Instance.CreateCommand())
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = @"SELECT * FROM " + tableName;
+                        cmd.Connection = null;
 
-                    AssertExtensions.Throws<InvalidOperationException>(
-                        () => OleDbCommandBuilder.DeriveParameters(cmd),
-                        $"{nameof(OleDbCommandBuilder.DeriveParameters)}: {nameof(cmd.Connection)} property has not been initialized.");
+                        AssertExtensions.Throws<InvalidOperationException>(
+                            () => OleDbCommandBuilder.DeriveParameters(cmd),
+                            $"{nameof(OleDbCommandBuilder.DeriveParameters)}: {nameof(cmd.Connection)} property has not been initialized."
+                        );
+                    }
                 }
-            });
+            );
         }
 
         [OuterLoop]
         [ConditionalFact(Helpers.IsDriverAvailable)]
         public void DeriveParameters_ClosedConnection_Throws()
         {
-            RunTest((command, tableName) => {
-                command.CommandType = CommandType.StoredProcedure;
-                command.CommandText = @"SELECT * FROM " + tableName;
-                connection.Close();
-                var exception = Record.Exception(() => OleDbCommandBuilder.DeriveParameters(command));
-                Assert.NotNull(exception);
-                Assert.IsType<InvalidOperationException>(exception);
-                Assert.Contains(
-                    $"{nameof(OleDbCommandBuilder.DeriveParameters)} requires an open and available Connection.",
-                    exception.Message);
-                command.CommandType = CommandType.Text;
-                connection.Open(); // reopen when done
-            });
+            RunTest(
+                (command, tableName) =>
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = @"SELECT * FROM " + tableName;
+                    connection.Close();
+                    var exception = Record.Exception(() =>
+                        OleDbCommandBuilder.DeriveParameters(command)
+                    );
+                    Assert.NotNull(exception);
+                    Assert.IsType<InvalidOperationException>(exception);
+                    Assert.Contains(
+                        $"{nameof(OleDbCommandBuilder.DeriveParameters)} requires an open and available Connection.",
+                        exception.Message
+                    );
+                    command.CommandType = CommandType.Text;
+                    connection.Open(); // reopen when done
+                }
+            );
         }
 
         [OuterLoop]
         [ConditionalFact(Helpers.IsDriverAvailable)]
         public void QuoteUnquoteIdentifier_Null_Throws()
         {
-            RunTest((command, tableName) => {
-                command.CommandType = CommandType.StoredProcedure;
-                command.CommandText = @"SELECT * FROM " + tableName;
-                using (var builder = (OleDbCommandBuilder)OleDbFactory.Instance.CreateCommandBuilder())
+            RunTest(
+                (command, tableName) =>
                 {
-                    if (PlatformDetection.IsNetFramework)
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = @"SELECT * FROM " + tableName;
+                    using (
+                        var builder = (OleDbCommandBuilder)
+                            OleDbFactory.Instance.CreateCommandBuilder()
+                    )
                     {
-                        AssertExtensions.Throws<ArgumentNullException>(
-                            () => builder.QuoteIdentifier(null, command.Connection),
-                            $"Value cannot be null.\r\nParameter name: unquotedIdentifier");
+                        if (PlatformDetection.IsNetFramework)
+                        {
+                            AssertExtensions.Throws<ArgumentNullException>(
+                                () => builder.QuoteIdentifier(null, command.Connection),
+                                $"Value cannot be null.\r\nParameter name: unquotedIdentifier"
+                            );
 
-                        AssertExtensions.Throws<ArgumentNullException>(
-                            () => builder.UnquoteIdentifier(null, command.Connection),
-                            $"Value cannot be null.\r\nParameter name: quotedIdentifier");
-                    }
-                    else
-                    {
-                        AssertExtensions.Throws<ArgumentNullException>(
-                            () => builder.QuoteIdentifier(null, command.Connection),
-                            $"Value cannot be null. (Parameter \'unquotedIdentifier\')");
+                            AssertExtensions.Throws<ArgumentNullException>(
+                                () => builder.UnquoteIdentifier(null, command.Connection),
+                                $"Value cannot be null.\r\nParameter name: quotedIdentifier"
+                            );
+                        }
+                        else
+                        {
+                            AssertExtensions.Throws<ArgumentNullException>(
+                                () => builder.QuoteIdentifier(null, command.Connection),
+                                $"Value cannot be null. (Parameter \'unquotedIdentifier\')"
+                            );
 
-                        AssertExtensions.Throws<ArgumentNullException>(
-                            () => builder.UnquoteIdentifier(null, command.Connection),
-                            $"Value cannot be null. (Parameter \'quotedIdentifier\')");
+                            AssertExtensions.Throws<ArgumentNullException>(
+                                () => builder.UnquoteIdentifier(null, command.Connection),
+                                $"Value cannot be null. (Parameter \'quotedIdentifier\')"
+                            );
+                        }
                     }
+                    command.CommandType = CommandType.Text;
                 }
-                command.CommandType = CommandType.Text;
-            });
+            );
         }
 
         [OuterLoop]
         [ConditionalFact(Helpers.IsDriverAvailable)]
         public void QuoteUnquote_CustomPrefixSuffix_Success()
         {
-            RunTest((command, tableName) => {
-                command.CommandType = CommandType.StoredProcedure;
-                command.CommandText = @"SELECT * FROM " + tableName;
-                using (var adapter = new OleDbDataAdapter(command.CommandText, connection))
-                using (var builder = new OleDbCommandBuilder(adapter))
+            RunTest(
+                (command, tableName) =>
                 {
-                    // Custom prefix & suffix
-                    builder.QuotePrefix = "'";
-                    builder.QuoteSuffix = "'";
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = @"SELECT * FROM " + tableName;
+                    using (var adapter = new OleDbDataAdapter(command.CommandText, connection))
+                    using (var builder = new OleDbCommandBuilder(adapter))
+                    {
+                        // Custom prefix & suffix
+                        builder.QuotePrefix = "'";
+                        builder.QuoteSuffix = "'";
 
-                    Assert.Equal(adapter, builder.DataAdapter);
-                    Assert.Equal("'Test'", builder.QuoteIdentifier("Test", connection));
-                    Assert.Equal("'Te''st'", builder.QuoteIdentifier("Te'st", connection));
-                    Assert.Equal("Test", builder.UnquoteIdentifier("'Test'", connection));
-                    Assert.Equal("Te'st", builder.UnquoteIdentifier("'Te''st'", connection));
+                        Assert.Equal(adapter, builder.DataAdapter);
+                        Assert.Equal("'Test'", builder.QuoteIdentifier("Test", connection));
+                        Assert.Equal("'Te''st'", builder.QuoteIdentifier("Te'st", connection));
+                        Assert.Equal("Test", builder.UnquoteIdentifier("'Test'", connection));
+                        Assert.Equal("Te'st", builder.UnquoteIdentifier("'Te''st'", connection));
 
-                    // Ensure we don't need active connection:
-                    Assert.Equal("'Test'", builder.QuoteIdentifier("Test", null));
-                    Assert.Equal("Test", builder.UnquoteIdentifier("'Test'", null));
+                        // Ensure we don't need active connection:
+                        Assert.Equal("'Test'", builder.QuoteIdentifier("Test", null));
+                        Assert.Equal("Test", builder.UnquoteIdentifier("'Test'", null));
 
-                    builder.QuotePrefix = string.Empty;
-                    string quoteErrMsg = $"{nameof(builder.QuoteIdentifier)} requires open connection when the quote prefix has not been set.";
-                    string unquoteErrMsg = $"{nameof(builder.UnquoteIdentifier)} requires open connection when the quote prefix has not been set.";
+                        builder.QuotePrefix = string.Empty;
+                        string quoteErrMsg =
+                            $"{nameof(builder.QuoteIdentifier)} requires open connection when the quote prefix has not been set.";
+                        string unquoteErrMsg =
+                            $"{nameof(builder.UnquoteIdentifier)} requires open connection when the quote prefix has not been set.";
 
-                    Assert.Equal("`Test`", builder.QuoteIdentifier("Test", connection));
-                    Assert.Equal("Test", builder.UnquoteIdentifier("`Test`", connection));
+                        Assert.Equal("`Test`", builder.QuoteIdentifier("Test", connection));
+                        Assert.Equal("Test", builder.UnquoteIdentifier("`Test`", connection));
 
-                    Assert.NotNull(adapter.SelectCommand.Connection);
-                    Assert.Equal("`Test`", builder.QuoteIdentifier("Test"));
-                    Assert.Equal("Test", builder.UnquoteIdentifier("`Test`"));
+                        Assert.NotNull(adapter.SelectCommand.Connection);
+                        Assert.Equal("`Test`", builder.QuoteIdentifier("Test"));
+                        Assert.Equal("Test", builder.UnquoteIdentifier("`Test`"));
 
-                    adapter.SelectCommand.Connection = null;
-                    AssertExtensions.Throws<InvalidOperationException>(() => builder.QuoteIdentifier("Test"), quoteErrMsg);
-                    AssertExtensions.Throws<InvalidOperationException>(() => builder.UnquoteIdentifier("'Test'"), unquoteErrMsg);
+                        adapter.SelectCommand.Connection = null;
+                        AssertExtensions.Throws<InvalidOperationException>(
+                            () => builder.QuoteIdentifier("Test"),
+                            quoteErrMsg
+                        );
+                        AssertExtensions.Throws<InvalidOperationException>(
+                            () => builder.UnquoteIdentifier("'Test'"),
+                            unquoteErrMsg
+                        );
+                    }
+                    command.CommandType = CommandType.Text;
                 }
-                command.CommandType = CommandType.Text;
-            });
+            );
         }
 
-        private void RunTest(Action<OleDbCommand, string> testAction, [CallerMemberName] string memberName = null)
+        private void RunTest(
+            Action<OleDbCommand, string> testAction,
+            [CallerMemberName] string memberName = null
+        )
         {
             string tableName = Helpers.GetTableName(memberName);
             Assert.False(File.Exists(Path.Combine(TestDirectory, tableName)));
             command.CommandText =
-                @"CREATE TABLE " + tableName + @" (
+                @"CREATE TABLE "
+                + tableName
+                + @" (
                     Firstname NVARCHAR(5),
                     Lastname NVARCHAR(40),
                     Nickname NVARCHAR(30))";
@@ -187,7 +225,9 @@ namespace System.Data.OleDb.Tests
             Assert.True(File.Exists(Path.Combine(TestDirectory, tableName)));
 
             command.CommandText =
-                @"INSERT INTO " + tableName + @" (
+                @"INSERT INTO "
+                + tableName
+                + @" (
                     Firstname,
                     Lastname,
                     Nickname)

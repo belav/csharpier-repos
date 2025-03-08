@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Text;
-
 using Internal.TypeSystem;
 
 namespace ILCompiler.PEWriter
@@ -102,7 +101,11 @@ namespace ILCompiler.PEWriter
             sb.Append(type.Name);
         }
 
-        protected override void AppendNameForNestedType(StringBuilder sb, DefType nestedType, DefType containingType)
+        protected override void AppendNameForNestedType(
+            StringBuilder sb,
+            DefType nestedType,
+            DefType containingType
+        )
         {
             AppendName(sb, containingType);
             sb.Append('+');

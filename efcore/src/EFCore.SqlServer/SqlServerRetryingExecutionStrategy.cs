@@ -42,11 +42,8 @@ public class SqlServerRetryingExecutionStrategy : ExecutionStrategy
     ///     Default values of 6 for the maximum retry count and 30 seconds for the maximum default delay are used.
     /// </remarks>
     /// <param name="context">The context on which the operations will be invoked.</param>
-    public SqlServerRetryingExecutionStrategy(
-        DbContext context)
-        : this(context, DefaultMaxRetryCount)
-    {
-    }
+    public SqlServerRetryingExecutionStrategy(DbContext context)
+        : this(context, DefaultMaxRetryCount) { }
 
     /// <summary>
     ///     Creates a new instance of <see cref="SqlServerRetryingExecutionStrategy" />.
@@ -55,11 +52,8 @@ public class SqlServerRetryingExecutionStrategy : ExecutionStrategy
     ///     Default values of 6 for the maximum retry count and 30 seconds for the maximum default delay are used.
     /// </remarks>
     /// <param name="dependencies">Parameter object containing service dependencies.</param>
-    public SqlServerRetryingExecutionStrategy(
-        ExecutionStrategyDependencies dependencies)
-        : this(dependencies, DefaultMaxRetryCount)
-    {
-    }
+    public SqlServerRetryingExecutionStrategy(ExecutionStrategyDependencies dependencies)
+        : this(dependencies, DefaultMaxRetryCount) { }
 
     /// <summary>
     ///     Creates a new instance of <see cref="SqlServerRetryingExecutionStrategy" />.
@@ -69,12 +63,8 @@ public class SqlServerRetryingExecutionStrategy : ExecutionStrategy
     /// </remarks>
     /// <param name="context">The context on which the operations will be invoked.</param>
     /// <param name="maxRetryCount">The maximum number of retry attempts.</param>
-    public SqlServerRetryingExecutionStrategy(
-        DbContext context,
-        int maxRetryCount)
-        : this(context, maxRetryCount, DefaultMaxDelay, errorNumbersToAdd: null)
-    {
-    }
+    public SqlServerRetryingExecutionStrategy(DbContext context, int maxRetryCount)
+        : this(context, maxRetryCount, DefaultMaxDelay, errorNumbersToAdd: null) { }
 
     /// <summary>
     ///     Creates a new instance of <see cref="SqlServerRetryingExecutionStrategy" />.
@@ -86,10 +76,9 @@ public class SqlServerRetryingExecutionStrategy : ExecutionStrategy
     /// <param name="maxRetryCount">The maximum number of retry attempts.</param>
     public SqlServerRetryingExecutionStrategy(
         ExecutionStrategyDependencies dependencies,
-        int maxRetryCount)
-        : this(dependencies, maxRetryCount, DefaultMaxDelay, errorNumbersToAdd: null)
-    {
-    }
+        int maxRetryCount
+    )
+        : this(dependencies, maxRetryCount, DefaultMaxDelay, errorNumbersToAdd: null) { }
 
     /// <summary>
     ///     Creates a new instance of <see cref="SqlServerRetryingExecutionStrategy" />.
@@ -101,10 +90,9 @@ public class SqlServerRetryingExecutionStrategy : ExecutionStrategy
     /// <param name="errorNumbersToAdd">Additional SQL error numbers that should be considered transient.</param>
     public SqlServerRetryingExecutionStrategy(
         ExecutionStrategyDependencies dependencies,
-        IEnumerable<int> errorNumbersToAdd)
-        : this(dependencies, DefaultMaxRetryCount, DefaultMaxDelay, errorNumbersToAdd)
-    {
-    }
+        IEnumerable<int> errorNumbersToAdd
+    )
+        : this(dependencies, DefaultMaxRetryCount, DefaultMaxDelay, errorNumbersToAdd) { }
 
     /// <summary>
     ///     Creates a new instance of <see cref="SqlServerRetryingExecutionStrategy" />.
@@ -117,11 +105,9 @@ public class SqlServerRetryingExecutionStrategy : ExecutionStrategy
         DbContext context,
         int maxRetryCount,
         TimeSpan maxRetryDelay,
-        IEnumerable<int>? errorNumbersToAdd)
-        : base(
-            context,
-            maxRetryCount,
-            maxRetryDelay)
+        IEnumerable<int>? errorNumbersToAdd
+    )
+        : base(context, maxRetryCount, maxRetryDelay)
     {
         _additionalErrorNumbers = errorNumbersToAdd?.ToHashSet();
     }
@@ -137,7 +123,8 @@ public class SqlServerRetryingExecutionStrategy : ExecutionStrategy
         ExecutionStrategyDependencies dependencies,
         int maxRetryCount,
         TimeSpan maxRetryDelay,
-        IEnumerable<int>? errorNumbersToAdd)
+        IEnumerable<int>? errorNumbersToAdd
+    )
         : base(dependencies, maxRetryCount, maxRetryDelay)
     {
         _additionalErrorNumbers = errorNumbersToAdd?.ToHashSet();
@@ -146,8 +133,7 @@ public class SqlServerRetryingExecutionStrategy : ExecutionStrategy
     /// <summary>
     ///     Additional SQL error numbers that should be considered transient.
     /// </summary>
-    public virtual IEnumerable<int>? AdditionalErrorNumbers
-        => _additionalErrorNumbers;
+    public virtual IEnumerable<int>? AdditionalErrorNumbers => _additionalErrorNumbers;
 
     /// <summary>
     ///     Determines whether the specified exception represents a transient failure that can be
@@ -159,8 +145,7 @@ public class SqlServerRetryingExecutionStrategy : ExecutionStrategy
     /// </returns>
     protected override bool ShouldRetryOn(Exception exception)
     {
-        if (_additionalErrorNumbers != null
-            && exception is SqlException sqlException)
+        if (_additionalErrorNumbers != null && exception is SqlException sqlException)
         {
             foreach (SqlError err in sqlException.Errors)
             {
@@ -191,10 +176,10 @@ public class SqlServerRetryingExecutionStrategy : ExecutionStrategy
         }
 
         return CallOnWrappedException(lastException, IsMemoryOptimizedError)
-            ? TimeSpan.FromMilliseconds(baseDelay.Value.TotalSeconds)
+                ? TimeSpan.FromMilliseconds(baseDelay.Value.TotalSeconds)
             : CallOnWrappedException(lastException, IsThrottlingError)
                 ? baseDelay + DefaultMinDelayThrottling
-                : baseDelay;
+            : baseDelay;
     }
 
     private static bool IsMemoryOptimizedError(Exception exception)

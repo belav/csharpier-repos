@@ -12,8 +12,15 @@ namespace System.Net.Http.Tests
     public class StreamToStreamCopyTest
     {
         [Theory]
-        [MemberData(nameof(TwoBooleansWithAdditionalArg), new object[] { new object[] { 256, 8192, 8231 } })]
-        public async Task MemoryStream_To_MemoryStream(bool sourceIsExposable, bool disposeSource, int inputSize)
+        [MemberData(
+            nameof(TwoBooleansWithAdditionalArg),
+            new object[] { new object[] { 256, 8192, 8231 } }
+        )]
+        public async Task MemoryStream_To_MemoryStream(
+            bool sourceIsExposable,
+            bool disposeSource,
+            int inputSize
+        )
         {
             byte[] input = CreateByteArray(inputSize);
             MemoryStream source = CreateSourceMemoryStream(sourceIsExposable, input);
@@ -34,7 +41,10 @@ namespace System.Net.Http.Tests
 
         [Theory]
         [MemberData(nameof(TwoBooleans))]
-        public async Task NonSeekableMemoryStream_To_MemoryStream(bool sourceIsExposable, bool disposeSource)
+        public async Task NonSeekableMemoryStream_To_MemoryStream(
+            bool sourceIsExposable,
+            bool disposeSource
+        )
         {
             byte[] input = CreateByteArray(8192);
             var source = new NonSeekableMemoryStream(input, sourceIsExposable);
@@ -55,7 +65,10 @@ namespace System.Net.Http.Tests
 
         [Theory]
         [MemberData(nameof(TwoBooleans))]
-        public async Task MemoryStream_NonZeroPosition_To_MemoryStream(bool sourceIsExposable, bool disposeSource)
+        public async Task MemoryStream_NonZeroPosition_To_MemoryStream(
+            bool sourceIsExposable,
+            bool disposeSource
+        )
         {
             byte[] input = CreateByteArray(8192);
             MemoryStream source = CreateSourceMemoryStream(sourceIsExposable, input);
@@ -79,7 +92,10 @@ namespace System.Net.Http.Tests
 
         [Theory]
         [MemberData(nameof(TwoBooleans))]
-        public async Task MemoryStream_PositionAtEnd_To_MemoryStream(bool sourceIsExposable, bool disposeSource)
+        public async Task MemoryStream_PositionAtEnd_To_MemoryStream(
+            bool sourceIsExposable,
+            bool disposeSource
+        )
         {
             byte[] input = CreateByteArray(8192);
             MemoryStream source = CreateSourceMemoryStream(sourceIsExposable, input);
@@ -103,7 +119,10 @@ namespace System.Net.Http.Tests
 
         [Theory]
         [MemberData(nameof(TwoBooleans))]
-        public async Task MemoryStream_To_LimitMemoryStream_NoCapacity(bool sourceIsExposable, bool disposeSource)
+        public async Task MemoryStream_To_LimitMemoryStream_NoCapacity(
+            bool sourceIsExposable,
+            bool disposeSource
+        )
         {
             byte[] input = CreateByteArray(8192);
             MemoryStream source = CreateSourceMemoryStream(sourceIsExposable, input);
@@ -124,7 +143,10 @@ namespace System.Net.Http.Tests
 
         [Theory]
         [MemberData(nameof(TwoBooleans))]
-        public async Task MemoryStream_To_LimitMemoryStream_EqualCapacity(bool sourceIsExposable, bool disposeSource)
+        public async Task MemoryStream_To_LimitMemoryStream_EqualCapacity(
+            bool sourceIsExposable,
+            bool disposeSource
+        )
         {
             byte[] input = CreateByteArray(8192);
             MemoryStream source = CreateSourceMemoryStream(sourceIsExposable, input);
@@ -145,7 +167,10 @@ namespace System.Net.Http.Tests
 
         [Theory]
         [MemberData(nameof(TwoBooleans))]
-        public async Task MemoryStream_To_LimitMemoryStream_BiggerCapacity(bool sourceIsExposable, bool disposeSource)
+        public async Task MemoryStream_To_LimitMemoryStream_BiggerCapacity(
+            bool sourceIsExposable,
+            bool disposeSource
+        )
         {
             byte[] input = CreateByteArray(8192);
             MemoryStream source = CreateSourceMemoryStream(sourceIsExposable, input);
@@ -166,7 +191,10 @@ namespace System.Net.Http.Tests
 
         [Theory]
         [MemberData(nameof(TwoBooleans))]
-        public async Task MemoryStream_To_LimitMemoryStream_SmallerCapacity(bool sourceIsExposable, bool disposeSource)
+        public async Task MemoryStream_To_LimitMemoryStream_SmallerCapacity(
+            bool sourceIsExposable,
+            bool disposeSource
+        )
         {
             byte[] input = CreateByteArray(8192);
             MemoryStream source = CreateSourceMemoryStream(sourceIsExposable, input);
@@ -187,7 +215,10 @@ namespace System.Net.Http.Tests
 
         [Theory]
         [MemberData(nameof(TwoBooleans))]
-        public async Task MemoryStream_To_LimitMemoryStream_BiggerLength(bool sourceIsExposable, bool disposeSource)
+        public async Task MemoryStream_To_LimitMemoryStream_BiggerLength(
+            bool sourceIsExposable,
+            bool disposeSource
+        )
         {
             byte[] input = CreateByteArray(8192);
             MemoryStream source = CreateSourceMemoryStream(sourceIsExposable, input);
@@ -209,7 +240,10 @@ namespace System.Net.Http.Tests
 
         [Theory]
         [MemberData(nameof(TwoBooleans))]
-        public async Task NonMemoryStream_To_MemoryStream(bool sourceIsExposable, bool disposeSource)
+        public async Task NonMemoryStream_To_MemoryStream(
+            bool sourceIsExposable,
+            bool disposeSource
+        )
         {
             byte[] input = CreateByteArray(8192);
             var source = new WrapperStream(CreateSourceMemoryStream(sourceIsExposable, input));
@@ -230,7 +264,10 @@ namespace System.Net.Http.Tests
 
         [Theory]
         [MemberData(nameof(TwoBooleans))]
-        public async Task NonMemoryStream_To_LimitMemoryStream_NoCapacity(bool sourceIsExposable, bool disposeSource)
+        public async Task NonMemoryStream_To_LimitMemoryStream_NoCapacity(
+            bool sourceIsExposable,
+            bool disposeSource
+        )
         {
             byte[] input = CreateByteArray(8192);
             var source = new WrapperStream(CreateSourceMemoryStream(sourceIsExposable, input));
@@ -251,7 +288,10 @@ namespace System.Net.Http.Tests
 
         [Theory]
         [MemberData(nameof(TwoBooleans))]
-        public async Task NonMemoryStream_To_LimitMemoryStream_EqualCapacity(bool sourceIsExposable, bool disposeSource)
+        public async Task NonMemoryStream_To_LimitMemoryStream_EqualCapacity(
+            bool sourceIsExposable,
+            bool disposeSource
+        )
         {
             byte[] input = CreateByteArray(8192);
             var source = new WrapperStream(CreateSourceMemoryStream(sourceIsExposable, input));
@@ -272,7 +312,10 @@ namespace System.Net.Http.Tests
 
         [Theory]
         [MemberData(nameof(TwoBooleans))]
-        public async Task NonMemoryStream_To_NonMemoryStream(bool sourceIsExposable, bool disposeSource)
+        public async Task NonMemoryStream_To_NonMemoryStream(
+            bool sourceIsExposable,
+            bool disposeSource
+        )
         {
             byte[] input = CreateByteArray(8192);
             var source = new WrapperStream(CreateSourceMemoryStream(sourceIsExposable, input));
@@ -328,21 +371,21 @@ namespace System.Net.Http.Tests
         {
             bool[] bools = new[] { true, false };
             foreach (object arg in args)
-                foreach (bool b1 in bools)
-                    foreach (bool b2 in bools)
-                        yield return new object[] { b1, b2, arg };
+            foreach (bool b1 in bools)
+            foreach (bool b2 in bools)
+                yield return new object[] { b1, b2, arg };
         }
 
         private sealed class WrapperStream : DelegatingStream
         {
-            public WrapperStream(Stream wrapped) : base(wrapped) { }
+            public WrapperStream(Stream wrapped)
+                : base(wrapped) { }
         }
 
         private sealed class NonSeekableMemoryStream : MemoryStream
         {
-            public NonSeekableMemoryStream(byte[] input, bool sourceIsExposable) : base(input, 0, input.Length, true, sourceIsExposable)
-            {
-            }
+            public NonSeekableMemoryStream(byte[] input, bool sourceIsExposable)
+                : base(input, 0, input.Length, true, sourceIsExposable) { }
 
             public override bool CanSeek => false;
         }

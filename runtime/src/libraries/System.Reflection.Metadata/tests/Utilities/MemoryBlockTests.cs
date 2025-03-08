@@ -17,26 +17,61 @@ namespace System.Reflection.Metadata.Tests
 
             fixed (byte* heapPtr = (heap = new byte[] { 0 }))
             {
-                Assert.True(new MemoryBlock(heapPtr, heap.Length).Utf8NullTerminatedStringStartsWithAsciiPrefix(0, ""));
+                Assert.True(
+                    new MemoryBlock(
+                        heapPtr,
+                        heap.Length
+                    ).Utf8NullTerminatedStringStartsWithAsciiPrefix(0, "")
+                );
             }
 
             fixed (byte* heapPtr = (heap = "Hello World!\0"u8.ToArray()))
             {
-                Assert.True(new MemoryBlock(heapPtr, heap.Length).Utf8NullTerminatedStringStartsWithAsciiPrefix("Hello ".Length, "World"));
-                Assert.False(new MemoryBlock(heapPtr, heap.Length).Utf8NullTerminatedStringStartsWithAsciiPrefix("Hello ".Length, "World?"));
+                Assert.True(
+                    new MemoryBlock(
+                        heapPtr,
+                        heap.Length
+                    ).Utf8NullTerminatedStringStartsWithAsciiPrefix("Hello ".Length, "World")
+                );
+                Assert.False(
+                    new MemoryBlock(
+                        heapPtr,
+                        heap.Length
+                    ).Utf8NullTerminatedStringStartsWithAsciiPrefix("Hello ".Length, "World?")
+                );
             }
 
             fixed (byte* heapPtr = (heap = "x\0"u8.ToArray()))
             {
-                Assert.False(new MemoryBlock(heapPtr, heap.Length).Utf8NullTerminatedStringStartsWithAsciiPrefix(0, "xyz"));
-                Assert.True(new MemoryBlock(heapPtr, heap.Length).Utf8NullTerminatedStringStartsWithAsciiPrefix(0, "x"));
+                Assert.False(
+                    new MemoryBlock(
+                        heapPtr,
+                        heap.Length
+                    ).Utf8NullTerminatedStringStartsWithAsciiPrefix(0, "xyz")
+                );
+                Assert.True(
+                    new MemoryBlock(
+                        heapPtr,
+                        heap.Length
+                    ).Utf8NullTerminatedStringStartsWithAsciiPrefix(0, "x")
+                );
             }
 
             // bad metadata (#String heap is not nul-terminated):
             fixed (byte* heapPtr = (heap = "abcx"u8.ToArray()))
             {
-                Assert.True(new MemoryBlock(heapPtr, heap.Length).Utf8NullTerminatedStringStartsWithAsciiPrefix(3, "x"));
-                Assert.False(new MemoryBlock(heapPtr, heap.Length).Utf8NullTerminatedStringStartsWithAsciiPrefix(3, "xyz"));
+                Assert.True(
+                    new MemoryBlock(
+                        heapPtr,
+                        heap.Length
+                    ).Utf8NullTerminatedStringStartsWithAsciiPrefix(3, "x")
+                );
+                Assert.False(
+                    new MemoryBlock(
+                        heapPtr,
+                        heap.Length
+                    ).Utf8NullTerminatedStringStartsWithAsciiPrefix(3, "xyz")
+                );
             }
         }
 
@@ -51,24 +86,48 @@ namespace System.Reflection.Metadata.Tests
             // dangling lead byte
             fixed (byte* ptr = (buffer = new byte[] { 0xC0 }))
             {
-                string s = new MemoryBlock(ptr, buffer.Length).PeekUtf8NullTerminated(0, null, decoder, out bytesRead);
-                Assert.Equal("\uFFFD", new MemoryBlock(ptr, buffer.Length).PeekUtf8NullTerminated(0, null, decoder, out bytesRead));
+                string s = new MemoryBlock(ptr, buffer.Length).PeekUtf8NullTerminated(
+                    0,
+                    null,
+                    decoder,
+                    out bytesRead
+                );
+                Assert.Equal(
+                    "\uFFFD",
+                    new MemoryBlock(ptr, buffer.Length).PeekUtf8NullTerminated(
+                        0,
+                        null,
+                        decoder,
+                        out bytesRead
+                    )
+                );
                 Assert.Equal(s, Encoding.UTF8.GetString(buffer));
                 Assert.Equal(buffer.Length, bytesRead);
 
-                s = new MemoryBlock(ptr, buffer.Length).PeekUtf8NullTerminated(0, "Hello"u8.ToArray(), decoder, out bytesRead);
+                s = new MemoryBlock(ptr, buffer.Length).PeekUtf8NullTerminated(
+                    0,
+                    "Hello"u8.ToArray(),
+                    decoder,
+                    out bytesRead
+                );
                 Assert.Equal("Hello\uFFFD", s);
                 Assert.Equal(s, "Hello" + Encoding.UTF8.GetString(buffer));
                 Assert.Equal(buffer.Length, bytesRead);
 
-                Assert.Equal("\uFFFD", new MemoryBlock(ptr, buffer.Length).PeekUtf8(0, buffer.Length));
+                Assert.Equal(
+                    "\uFFFD",
+                    new MemoryBlock(ptr, buffer.Length).PeekUtf8(0, buffer.Length)
+                );
             }
 
             // overlong encoding
             fixed (byte* ptr = (buffer = new byte[] { (byte)'a', 0xC0, 0xAF, (byte)'b', 0x0 }))
             {
                 var block = new MemoryBlock(ptr, buffer.Length);
-                Assert.Equal("a\uFFFD\uFFFDb", block.PeekUtf8NullTerminated(0, null, decoder, out bytesRead));
+                Assert.Equal(
+                    "a\uFFFD\uFFFDb",
+                    block.PeekUtf8NullTerminated(0, null, decoder, out bytesRead)
+                );
                 Assert.Equal(buffer.Length, bytesRead);
             }
             // TODO: There are a bunch more error cases of course, but this is enough to break the old code
@@ -78,7 +137,11 @@ namespace System.Reflection.Metadata.Tests
         [Fact]
         public unsafe void DecodingSuccessMatchesBcl()
         {
-            var utf8 = Encoding.GetEncoding("utf-8", EncoderFallback.ExceptionFallback, DecoderFallback.ExceptionFallback);
+            var utf8 = Encoding.GetEncoding(
+                "utf-8",
+                EncoderFallback.ExceptionFallback,
+                DecoderFallback.ExceptionFallback
+            );
             byte[] buffer;
             int bytesRead;
             string str = "\u4F60\u597D. Comment \u00E7a va?";
@@ -87,10 +150,26 @@ namespace System.Reflection.Metadata.Tests
 
             fixed (byte* ptr = (buffer = utf8.GetBytes(str)))
             {
-                Assert.Equal(str, new MemoryBlock(ptr, buffer.Length).PeekUtf8NullTerminated(0, null, decoder, out bytesRead));
+                Assert.Equal(
+                    str,
+                    new MemoryBlock(ptr, buffer.Length).PeekUtf8NullTerminated(
+                        0,
+                        null,
+                        decoder,
+                        out bytesRead
+                    )
+                );
                 Assert.Equal(buffer.Length, bytesRead);
 
-                Assert.Equal(str + str, new MemoryBlock(ptr, buffer.Length).PeekUtf8NullTerminated(0, buffer, decoder, out bytesRead));
+                Assert.Equal(
+                    str + str,
+                    new MemoryBlock(ptr, buffer.Length).PeekUtf8NullTerminated(
+                        0,
+                        buffer,
+                        decoder,
+                        out bytesRead
+                    )
+                );
                 Assert.Equal(buffer.Length, bytesRead);
 
                 Assert.Equal(str, new MemoryBlock(ptr, buffer.Length).PeekUtf8(0, buffer.Length));
@@ -100,10 +179,26 @@ namespace System.Reflection.Metadata.Tests
             str = string.Concat(Enumerable.Repeat(str, 10000));
             fixed (byte* ptr = (buffer = utf8.GetBytes(str)))
             {
-                Assert.Equal(str, new MemoryBlock(ptr, buffer.Length).PeekUtf8NullTerminated(0, null, decoder, out bytesRead));
+                Assert.Equal(
+                    str,
+                    new MemoryBlock(ptr, buffer.Length).PeekUtf8NullTerminated(
+                        0,
+                        null,
+                        decoder,
+                        out bytesRead
+                    )
+                );
                 Assert.Equal(buffer.Length, bytesRead);
 
-                Assert.Equal(str + str, new MemoryBlock(ptr, buffer.Length).PeekUtf8NullTerminated(0, buffer, decoder, out bytesRead));
+                Assert.Equal(
+                    str + str,
+                    new MemoryBlock(ptr, buffer.Length).PeekUtf8NullTerminated(
+                        0,
+                        buffer,
+                        decoder,
+                        out bytesRead
+                    )
+                );
                 Assert.Equal(buffer.Length, bytesRead);
 
                 Assert.Equal(str, new MemoryBlock(ptr, buffer.Length).PeekUtf8(0, buffer.Length));
@@ -129,28 +224,61 @@ namespace System.Reflection.Metadata.Tests
                     Assert.Equal(s, prefixed ? "PrefixTest" : "Test");
                     return "Intercepted";
                 }
-             );
+            );
 
             fixed (byte* fixedPtr = (buffer = "Test"u8.ToArray()))
             {
                 ptr = fixedPtr;
-                Assert.Equal("Intercepted", new MemoryBlock(ptr, buffer.Length).PeekUtf8NullTerminated(0, null, decoder, out bytesRead));
+                Assert.Equal(
+                    "Intercepted",
+                    new MemoryBlock(ptr, buffer.Length).PeekUtf8NullTerminated(
+                        0,
+                        null,
+                        decoder,
+                        out bytesRead
+                    )
+                );
                 Assert.Equal(buffer.Length, bytesRead);
 
                 prefixed = true;
-                Assert.Equal("Intercepted", new MemoryBlock(ptr, buffer.Length).PeekUtf8NullTerminated(0, "Prefix"u8.ToArray(), decoder, out bytesRead));
+                Assert.Equal(
+                    "Intercepted",
+                    new MemoryBlock(ptr, buffer.Length).PeekUtf8NullTerminated(
+                        0,
+                        "Prefix"u8.ToArray(),
+                        decoder,
+                        out bytesRead
+                    )
+                );
                 Assert.Equal(buffer.Length, bytesRead);
             }
 
             // decoder will fail to intercept because we don't bother calling it for empty strings.
-            Assert.Same(string.Empty, new MemoryBlock(null, 0).PeekUtf8NullTerminated(0, null, decoder, out bytesRead));
+            Assert.Same(
+                string.Empty,
+                new MemoryBlock(null, 0).PeekUtf8NullTerminated(0, null, decoder, out bytesRead)
+            );
             Assert.Equal(0, bytesRead);
 
-            Assert.Same(string.Empty, new MemoryBlock(null, 0).PeekUtf8NullTerminated(0, new byte[0], decoder, out bytesRead));
+            Assert.Same(
+                string.Empty,
+                new MemoryBlock(null, 0).PeekUtf8NullTerminated(
+                    0,
+                    new byte[0],
+                    decoder,
+                    out bytesRead
+                )
+            );
             Assert.Equal(0, bytesRead);
         }
 
-        private unsafe void TestComparisons(string heapValue, int offset, string value, bool unicode = false, bool ignoreCase = false)
+        private unsafe void TestComparisons(
+            string heapValue,
+            int offset,
+            string value,
+            bool unicode = false,
+            bool ignoreCase = false
+        )
         {
             byte[] heap;
             MetadataStringDecoder decoder = MetadataStringDecoder.DefaultUTF8;
@@ -163,7 +291,10 @@ namespace System.Reflection.Metadata.Tests
                 // compare:
                 if (!unicode)
                 {
-                    int actualCmp = block.CompareUtf8NullTerminatedStringWithAsciiString(offset, value);
+                    int actualCmp = block.CompareUtf8NullTerminatedStringWithAsciiString(
+                        offset,
+                        value
+                    );
                     int expectedCmp = StringComparer.Ordinal.Compare(heapSubstr, value);
                     Assert.Equal(Math.Sign(expectedCmp), Math.Sign(actualCmp));
                 }
@@ -177,16 +308,42 @@ namespace System.Reflection.Metadata.Tests
             }
         }
 
-        private static unsafe void TestComparison(MemoryBlock block, int offset, string value, string heapSubstr, MetadataStringDecoder decoder, bool ignoreCase)
+        private static unsafe void TestComparison(
+            MemoryBlock block,
+            int offset,
+            string value,
+            string heapSubstr,
+            MetadataStringDecoder decoder,
+            bool ignoreCase
+        )
         {
             // equals:
-            bool actualEq = block.Utf8NullTerminatedEquals(offset, value, decoder, terminator: '\0', ignoreCase: ignoreCase);
-            bool expectedEq = string.Equals(heapSubstr, value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
+            bool actualEq = block.Utf8NullTerminatedEquals(
+                offset,
+                value,
+                decoder,
+                terminator: '\0',
+                ignoreCase: ignoreCase
+            );
+            bool expectedEq = string.Equals(
+                heapSubstr,
+                value,
+                ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal
+            );
             Assert.Equal(expectedEq, actualEq);
 
             // starts with:
-            bool actualSW = block.Utf8NullTerminatedStartsWith(offset, value, decoder, terminator: '\0', ignoreCase: ignoreCase);
-            bool expectedSW = heapSubstr.StartsWith(value, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal);
+            bool actualSW = block.Utf8NullTerminatedStartsWith(
+                offset,
+                value,
+                decoder,
+                terminator: '\0',
+                ignoreCase: ignoreCase
+            );
+            bool expectedSW = heapSubstr.StartsWith(
+                value,
+                ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal
+            );
             Assert.Equal(actualSW, expectedSW);
         }
 
@@ -200,27 +357,93 @@ namespace System.Reflection.Metadata.Tests
             fixed (byte* ptr = (buffer = new byte[] { 0xC0 }))
             {
                 var block = new MemoryBlock(ptr, buffer.Length);
-                Assert.False(block.Utf8NullTerminatedStartsWith(0, new string((char)0xC0, 1), decoder, terminator: '\0', ignoreCase: false));
-                Assert.False(block.Utf8NullTerminatedEquals(0, new string((char)0xC0, 1), decoder, terminator: '\0', ignoreCase: false));
-                Assert.True(block.Utf8NullTerminatedStartsWith(0, "\uFFFD", decoder, terminator: '\0', ignoreCase: false));
-                Assert.True(block.Utf8NullTerminatedEquals(0, "\uFFFD", decoder, terminator: '\0', ignoreCase: false));
+                Assert.False(
+                    block.Utf8NullTerminatedStartsWith(
+                        0,
+                        new string((char)0xC0, 1),
+                        decoder,
+                        terminator: '\0',
+                        ignoreCase: false
+                    )
+                );
+                Assert.False(
+                    block.Utf8NullTerminatedEquals(
+                        0,
+                        new string((char)0xC0, 1),
+                        decoder,
+                        terminator: '\0',
+                        ignoreCase: false
+                    )
+                );
+                Assert.True(
+                    block.Utf8NullTerminatedStartsWith(
+                        0,
+                        "\uFFFD",
+                        decoder,
+                        terminator: '\0',
+                        ignoreCase: false
+                    )
+                );
+                Assert.True(
+                    block.Utf8NullTerminatedEquals(
+                        0,
+                        "\uFFFD",
+                        decoder,
+                        terminator: '\0',
+                        ignoreCase: false
+                    )
+                );
             }
 
             // overlong encoding
             fixed (byte* ptr = (buffer = new byte[] { (byte)'a', 0xC0, 0xAF, (byte)'b', 0x0 }))
             {
                 var block = new MemoryBlock(ptr, buffer.Length);
-                Assert.False(block.Utf8NullTerminatedStartsWith(0, "a\\", decoder, terminator: '\0', ignoreCase: false));
-                Assert.False(block.Utf8NullTerminatedEquals(0, "a\\b", decoder, terminator: '\0', ignoreCase: false));
-                Assert.True(block.Utf8NullTerminatedStartsWith(0, "a\uFFFD", decoder, terminator: '\0', ignoreCase: false));
-                Assert.True(block.Utf8NullTerminatedEquals(0, "a\uFFFD\uFFFDb", decoder, terminator: '\0', ignoreCase: false));
+                Assert.False(
+                    block.Utf8NullTerminatedStartsWith(
+                        0,
+                        "a\\",
+                        decoder,
+                        terminator: '\0',
+                        ignoreCase: false
+                    )
+                );
+                Assert.False(
+                    block.Utf8NullTerminatedEquals(
+                        0,
+                        "a\\b",
+                        decoder,
+                        terminator: '\0',
+                        ignoreCase: false
+                    )
+                );
+                Assert.True(
+                    block.Utf8NullTerminatedStartsWith(
+                        0,
+                        "a\uFFFD",
+                        decoder,
+                        terminator: '\0',
+                        ignoreCase: false
+                    )
+                );
+                Assert.True(
+                    block.Utf8NullTerminatedEquals(
+                        0,
+                        "a\uFFFD\uFFFDb",
+                        decoder,
+                        terminator: '\0',
+                        ignoreCase: false
+                    )
+                );
             }
         }
 
         private string GetStringHeapValue(string heapValue, int offset)
         {
             int heapEnd = heapValue.IndexOf('\0');
-            return (heapEnd < 0) ? heapValue.Substring(offset) : heapValue.Substring(offset, heapEnd - offset);
+            return (heapEnd < 0)
+                ? heapValue.Substring(offset)
+                : heapValue.Substring(offset, heapEnd - offset);
         }
 
         [Fact]
@@ -272,30 +495,178 @@ namespace System.Reflection.Metadata.Tests
             const char terminator_X = 'X';
             const char terminator_x = 'x';
 
-            fixed (byte* heapPtr = (heap = new byte[] { (byte)'F', 0, (byte)'X', (byte)'Y', /* U+12345 (\ud808\udf45) */ 0xf0, 0x92, 0x8d, 0x85 }))
+            fixed (
+                byte* heapPtr = (
+                    heap = new byte[]
+                    {
+                        (byte)'F',
+                        0,
+                        (byte)'X',
+                        (byte)'Y', /* U+12345 (\ud808\udf45) */
+                        0xf0,
+                        0x92,
+                        0x8d,
+                        0x85,
+                    }
+                )
+            )
             {
                 var block = new MemoryBlock(heapPtr, heap.Length);
 
-                TestUtf8NullTerminatedFastCompare(block, 0, terminator_0, "F", 0, HonorCase, MemoryBlock.FastComparisonResult.Equal, 1);
-                TestUtf8NullTerminatedFastCompare(block, 0, terminator_0, "f", 0, IgnoreCase, MemoryBlock.FastComparisonResult.Equal, 1);
+                TestUtf8NullTerminatedFastCompare(
+                    block,
+                    0,
+                    terminator_0,
+                    "F",
+                    0,
+                    HonorCase,
+                    MemoryBlock.FastComparisonResult.Equal,
+                    1
+                );
+                TestUtf8NullTerminatedFastCompare(
+                    block,
+                    0,
+                    terminator_0,
+                    "f",
+                    0,
+                    IgnoreCase,
+                    MemoryBlock.FastComparisonResult.Equal,
+                    1
+                );
 
-                TestUtf8NullTerminatedFastCompare(block, 0, terminator_F, "", 0, IgnoreCase, MemoryBlock.FastComparisonResult.Equal, 0);
-                TestUtf8NullTerminatedFastCompare(block, 0, terminator_F, "*", 1, IgnoreCase, MemoryBlock.FastComparisonResult.Equal, 1);
+                TestUtf8NullTerminatedFastCompare(
+                    block,
+                    0,
+                    terminator_F,
+                    "",
+                    0,
+                    IgnoreCase,
+                    MemoryBlock.FastComparisonResult.Equal,
+                    0
+                );
+                TestUtf8NullTerminatedFastCompare(
+                    block,
+                    0,
+                    terminator_F,
+                    "*",
+                    1,
+                    IgnoreCase,
+                    MemoryBlock.FastComparisonResult.Equal,
+                    1
+                );
 
-                TestUtf8NullTerminatedFastCompare(block, 0, terminator_0, "FF", 0, HonorCase, MemoryBlock.FastComparisonResult.TextStartsWithBytes, 1);
-                TestUtf8NullTerminatedFastCompare(block, 0, terminator_0, "fF", 0, IgnoreCase, MemoryBlock.FastComparisonResult.TextStartsWithBytes, 1);
-                TestUtf8NullTerminatedFastCompare(block, 0, terminator_0, "F\0", 0, HonorCase, MemoryBlock.FastComparisonResult.TextStartsWithBytes, 1);
-                TestUtf8NullTerminatedFastCompare(block, 0, terminator_X, "F\0", 0, HonorCase, MemoryBlock.FastComparisonResult.TextStartsWithBytes, 1);
+                TestUtf8NullTerminatedFastCompare(
+                    block,
+                    0,
+                    terminator_0,
+                    "FF",
+                    0,
+                    HonorCase,
+                    MemoryBlock.FastComparisonResult.TextStartsWithBytes,
+                    1
+                );
+                TestUtf8NullTerminatedFastCompare(
+                    block,
+                    0,
+                    terminator_0,
+                    "fF",
+                    0,
+                    IgnoreCase,
+                    MemoryBlock.FastComparisonResult.TextStartsWithBytes,
+                    1
+                );
+                TestUtf8NullTerminatedFastCompare(
+                    block,
+                    0,
+                    terminator_0,
+                    "F\0",
+                    0,
+                    HonorCase,
+                    MemoryBlock.FastComparisonResult.TextStartsWithBytes,
+                    1
+                );
+                TestUtf8NullTerminatedFastCompare(
+                    block,
+                    0,
+                    terminator_X,
+                    "F\0",
+                    0,
+                    HonorCase,
+                    MemoryBlock.FastComparisonResult.TextStartsWithBytes,
+                    1
+                );
 
-                TestUtf8NullTerminatedFastCompare(block, 2, terminator_0, "X", 0, HonorCase, MemoryBlock.FastComparisonResult.BytesStartWithText, 1);
-                TestUtf8NullTerminatedFastCompare(block, 2, terminator_0, "x", 0, IgnoreCase, MemoryBlock.FastComparisonResult.BytesStartWithText, 1);
-                TestUtf8NullTerminatedFastCompare(block, 2, terminator_x, "XY", 0, IgnoreCase, MemoryBlock.FastComparisonResult.BytesStartWithText, 2);
+                TestUtf8NullTerminatedFastCompare(
+                    block,
+                    2,
+                    terminator_0,
+                    "X",
+                    0,
+                    HonorCase,
+                    MemoryBlock.FastComparisonResult.BytesStartWithText,
+                    1
+                );
+                TestUtf8NullTerminatedFastCompare(
+                    block,
+                    2,
+                    terminator_0,
+                    "x",
+                    0,
+                    IgnoreCase,
+                    MemoryBlock.FastComparisonResult.BytesStartWithText,
+                    1
+                );
+                TestUtf8NullTerminatedFastCompare(
+                    block,
+                    2,
+                    terminator_x,
+                    "XY",
+                    0,
+                    IgnoreCase,
+                    MemoryBlock.FastComparisonResult.BytesStartWithText,
+                    2
+                );
 
-                TestUtf8NullTerminatedFastCompare(block, 3, terminator_0, "yZ", 0, IgnoreCase, MemoryBlock.FastComparisonResult.Unequal, 1);
-                TestUtf8NullTerminatedFastCompare(block, 4, terminator_0, "a", 0, HonorCase, MemoryBlock.FastComparisonResult.Unequal, 0);
-                TestUtf8NullTerminatedFastCompare(block, 4, terminator_0, "\ud808", 0, HonorCase, MemoryBlock.FastComparisonResult.Inconclusive, 0);
-                TestUtf8NullTerminatedFastCompare(block, 4, terminator_0, "\ud808\udf45", 0, HonorCase, MemoryBlock.FastComparisonResult.Inconclusive, 0);
-
+                TestUtf8NullTerminatedFastCompare(
+                    block,
+                    3,
+                    terminator_0,
+                    "yZ",
+                    0,
+                    IgnoreCase,
+                    MemoryBlock.FastComparisonResult.Unequal,
+                    1
+                );
+                TestUtf8NullTerminatedFastCompare(
+                    block,
+                    4,
+                    terminator_0,
+                    "a",
+                    0,
+                    HonorCase,
+                    MemoryBlock.FastComparisonResult.Unequal,
+                    0
+                );
+                TestUtf8NullTerminatedFastCompare(
+                    block,
+                    4,
+                    terminator_0,
+                    "\ud808",
+                    0,
+                    HonorCase,
+                    MemoryBlock.FastComparisonResult.Inconclusive,
+                    0
+                );
+                TestUtf8NullTerminatedFastCompare(
+                    block,
+                    4,
+                    terminator_0,
+                    "\ud808\udf45",
+                    0,
+                    HonorCase,
+                    MemoryBlock.FastComparisonResult.Inconclusive,
+                    0
+                );
             }
         }
 
@@ -307,10 +678,18 @@ namespace System.Reflection.Metadata.Tests
             int comparandOffset,
             bool ignoreCase,
             MemoryBlock.FastComparisonResult expectedResult,
-            int expectedFirstDifferenceIndex)
+            int expectedFirstDifferenceIndex
+        )
         {
             int actualFirstDifferenceIndex;
-            var actualResult = block.Utf8NullTerminatedFastCompare(offset, comparand, comparandOffset, out actualFirstDifferenceIndex, terminator, ignoreCase);
+            var actualResult = block.Utf8NullTerminatedFastCompare(
+                offset,
+                comparand,
+                comparandOffset,
+                out actualFirstDifferenceIndex,
+                terminator,
+                ignoreCase
+            );
 
             Assert.Equal(expectedResult, actualResult);
             Assert.Equal(expectedFirstDifferenceIndex, actualFirstDifferenceIndex);
@@ -374,11 +753,26 @@ namespace System.Reflection.Metadata.Tests
 
             var table = new byte[]
             {
-                0xAA, 0xAA, 0x05, 0x00,
-                0xBB, 0xBB, 0x04, 0x00,
-                0xCC, 0xCC, 0x02, 0x01,
-                0xDD, 0xDD, 0x02, 0x00,
-                0xEE, 0xEE, 0x01, 0x01,
+                0xAA,
+                0xAA,
+                0x05,
+                0x00,
+                0xBB,
+                0xBB,
+                0x04,
+                0x00,
+                0xCC,
+                0xCC,
+                0x02,
+                0x01,
+                0xDD,
+                0xDD,
+                0x02,
+                0x00,
+                0xEE,
+                0xEE,
+                0x01,
+                0x01,
             };
 
             int rowCount = table.Length / rowSize;
@@ -389,7 +783,12 @@ namespace System.Reflection.Metadata.Tests
 
                 Assert.Equal(0x0004, block.PeekReference(6, smallRefSize: true));
 
-                var actual = block.BuildPtrTable(rowCount, rowSize, secondColumnOffset, isReferenceSmall: true);
+                var actual = block.BuildPtrTable(
+                    rowCount,
+                    rowSize,
+                    secondColumnOffset,
+                    isReferenceSmall: true
+                );
                 var expected = new int[] { 4, 2, 1, 5, 3 };
                 Assert.Equal(expected, actual);
             }
@@ -403,11 +802,36 @@ namespace System.Reflection.Metadata.Tests
 
             var table = new byte[]
             {
-                0xAA, 0xAA, 0x10, 0x00, 0x05, 0x00,
-                0xBB, 0xBB, 0x10, 0x00, 0x04, 0x00,
-                0xCC, 0xCC, 0x10, 0x00, 0x02, 0x01,
-                0xDD, 0xDD, 0x10, 0x00, 0x02, 0x00,
-                0xEE, 0xEE, 0x10, 0x00, 0x01, 0x01,
+                0xAA,
+                0xAA,
+                0x10,
+                0x00,
+                0x05,
+                0x00,
+                0xBB,
+                0xBB,
+                0x10,
+                0x00,
+                0x04,
+                0x00,
+                0xCC,
+                0xCC,
+                0x10,
+                0x00,
+                0x02,
+                0x01,
+                0xDD,
+                0xDD,
+                0x10,
+                0x00,
+                0x02,
+                0x00,
+                0xEE,
+                0xEE,
+                0x10,
+                0x00,
+                0x01,
+                0x01,
             };
 
             int rowCount = table.Length / rowSize;
@@ -418,7 +842,12 @@ namespace System.Reflection.Metadata.Tests
 
                 Assert.Equal(0x00040010, block.PeekReference(8, smallRefSize: false));
 
-                var actual = block.BuildPtrTable(rowCount, rowSize, secondColumnOffset, isReferenceSmall: false);
+                var actual = block.BuildPtrTable(
+                    rowCount,
+                    rowSize,
+                    secondColumnOffset,
+                    isReferenceSmall: false
+                );
                 var expected = new int[] { 4, 2, 1, 5, 3 };
                 Assert.Equal(expected, actual);
             }
@@ -429,11 +858,26 @@ namespace System.Reflection.Metadata.Tests
         {
             var table = new byte[]
             {
-                0xff, 0xff, 0xff, 0x00, // offset 0
-                0xff, 0xff, 0xff, 0x01, // offset 4
-                0xff, 0xff, 0xff, 0x1f, // offset 8
-                0xff, 0xff, 0xff, 0x2f, // offset 12
-                0xff, 0xff, 0xff, 0xff, // offset 16
+                0xff,
+                0xff,
+                0xff,
+                0x00, // offset 0
+                0xff,
+                0xff,
+                0xff,
+                0x01, // offset 4
+                0xff,
+                0xff,
+                0xff,
+                0x1f, // offset 8
+                0xff,
+                0xff,
+                0xff,
+                0x2f, // offset 12
+                0xff,
+                0xff,
+                0xff,
+                0xff, // offset 16
             };
 
             fixed (byte* tablePtr = table)
@@ -445,12 +889,20 @@ namespace System.Reflection.Metadata.Tests
                 Assert.Equal(0x0000ffffu, block.PeekReferenceUnchecked(0, smallRefSize: true));
 
                 Assert.Equal(0x00ffffff, block.PeekReference(0, smallRefSize: false));
-                Assert.Throws<BadImageFormatException>(() => block.PeekReference(4, smallRefSize: false));
-                Assert.Throws<BadImageFormatException>(() => block.PeekReference(16, smallRefSize: false));
+                Assert.Throws<BadImageFormatException>(() =>
+                    block.PeekReference(4, smallRefSize: false)
+                );
+                Assert.Throws<BadImageFormatException>(() =>
+                    block.PeekReference(16, smallRefSize: false)
+                );
 
                 Assert.Equal(0x1fffffff, block.PeekHeapReference(8, smallRefSize: false));
-                Assert.Throws<BadImageFormatException>(() => block.PeekHeapReference(12, smallRefSize: false));
-                Assert.Throws<BadImageFormatException>(() => block.PeekHeapReference(16, smallRefSize: false));
+                Assert.Throws<BadImageFormatException>(() =>
+                    block.PeekHeapReference(12, smallRefSize: false)
+                );
+                Assert.Throws<BadImageFormatException>(() =>
+                    block.PeekHeapReference(16, smallRefSize: false)
+                );
 
                 Assert.Equal(0x01ffffffu, block.PeekReferenceUnchecked(4, smallRefSize: false));
                 Assert.Equal(0x1fffffffu, block.PeekReferenceUnchecked(8, smallRefSize: false));

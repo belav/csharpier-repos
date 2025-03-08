@@ -4,10 +4,10 @@
 
 #nullable disable
 
-using Microsoft.CodeAnalysis.ExpressionEvaluator;
 using System;
 using System.Collections.Immutable;
 using System.Diagnostics;
+using Microsoft.CodeAnalysis.ExpressionEvaluator;
 
 namespace Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator
 {
@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator
     {
         internal static readonly StringComparer StringComparer = StringComparer.OrdinalIgnoreCase;
         internal static readonly ImmutableHashSet<string> Keywords = GetKeywords(StringComparer);
-        internal static readonly ImmutableDictionary<string, SyntaxKind> KeywordKinds = GetKeywordKinds(StringComparer);
+        internal static readonly ImmutableDictionary<string, SyntaxKind> KeywordKinds =
+            GetKeywordKinds(StringComparer);
 
         internal static RequestSignature Parse(string signature)
         {
@@ -183,7 +184,10 @@ namespace Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator
                 if (IsStartOfTypeArguments())
                 {
                     var typeArguments = ParseTypeArguments();
-                    signature = new GenericTypeSignature((QualifiedTypeSignature)signature, typeArguments);
+                    signature = new GenericTypeSignature(
+                        (QualifiedTypeSignature)signature,
+                        typeArguments
+                    );
                 }
                 if (CurrentToken.Kind != TokenKind.Dot)
                 {
@@ -243,7 +247,8 @@ namespace Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator
                         EatToken();
                         type = new GenericTypeSignature(
                             SpecialType.System_Nullable_T.GetTypeSignature(),
-                            ImmutableArray.Create(type));
+                            ImmutableArray.Create(type)
+                        );
                         break;
                     default:
                         return type;
@@ -253,8 +258,8 @@ namespace Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator
 
         private bool IsStartOfTypeArguments()
         {
-            return CurrentToken.Kind == TokenKind.OpenParen &&
-                PeekToken(1).KeywordKind == SyntaxKind.OfKeyword;
+            return CurrentToken.Kind == TokenKind.OpenParen
+                && PeekToken(1).KeywordKind == SyntaxKind.OfKeyword;
         }
 
         private enum ParameterModifier
@@ -305,7 +310,12 @@ namespace Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator
             {
                 var modifier = ParseParameterModifier();
                 var parameterType = ParseType();
-                builder.Add(new ParameterSignature(parameterType, isByRef: modifier == ParameterModifier.ByRef));
+                builder.Add(
+                    new ParameterSignature(
+                        parameterType,
+                        isByRef: modifier == ParameterModifier.ByRef
+                    )
+                );
                 switch (CurrentToken.Kind)
                 {
                     case TokenKind.CloseParen:
@@ -366,8 +376,6 @@ namespace Microsoft.CodeAnalysis.VisualBasic.ExpressionEvaluator
             return new InvalidSignatureException();
         }
 
-        private sealed class InvalidSignatureException : Exception
-        {
-        }
+        private sealed class InvalidSignatureException : Exception { }
     }
 }

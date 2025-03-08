@@ -22,7 +22,9 @@ namespace System.IO.Pipes
         {
             if (_isAsync)
             {
-                return ReadAsync(buffer, offset, count, CancellationToken.None).GetAwaiter().GetResult();
+                return ReadAsync(buffer, offset, count, CancellationToken.None)
+                    .GetAwaiter()
+                    .GetResult();
             }
 
             ValidateBufferArguments(buffer, offset, count);
@@ -51,7 +53,12 @@ namespace System.IO.Pipes
             return ReadCore(buffer);
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ValidateBufferArguments(buffer, offset, count);
             if (!CanRead)
@@ -72,12 +79,16 @@ namespace System.IO.Pipes
                 return Task.FromResult(0);
             }
 
-            return _isAsync ?
-                ReadAsyncCore(new Memory<byte>(buffer, offset, count), cancellationToken).AsTask() :
-                AsyncOverSyncRead(new Memory<byte>(buffer, offset, count), cancellationToken).AsTask();
+            return _isAsync
+                ? ReadAsyncCore(new Memory<byte>(buffer, offset, count), cancellationToken).AsTask()
+                : AsyncOverSyncRead(new Memory<byte>(buffer, offset, count), cancellationToken)
+                    .AsTask();
         }
 
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default(CancellationToken))
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             if (!CanRead)
             {
@@ -97,19 +108,36 @@ namespace System.IO.Pipes
                 return new ValueTask<int>(0);
             }
 
-            return _isAsync ?
-                ReadAsyncCore(buffer, cancellationToken) :
-                AsyncOverSyncRead(buffer, cancellationToken);
+            return _isAsync
+                ? ReadAsyncCore(buffer, cancellationToken)
+                : AsyncOverSyncRead(buffer, cancellationToken);
         }
 
         /// <summary>Initiates an async-over-sync read for a pipe opened for non-overlapped I/O.</summary>
-        private ValueTask<int> AsyncOverSyncRead(Memory<byte> buffer, CancellationToken cancellationToken) =>
-            AsyncOverSyncWithIoCancellation.InvokeAsync(static s => s.Stream.ReadCore(s.Buffer.Span), (Stream: this, Buffer: buffer), cancellationToken);
+        private ValueTask<int> AsyncOverSyncRead(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken
+        ) =>
+            AsyncOverSyncWithIoCancellation.InvokeAsync(
+                static s => s.Stream.ReadCore(s.Buffer.Span),
+                (Stream: this, Buffer: buffer),
+                cancellationToken
+            );
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        )
         {
             if (_isAsync)
-                return TaskToAsyncResult.Begin(ReadAsync(buffer, offset, count, CancellationToken.None), callback, state);
+                return TaskToAsyncResult.Begin(
+                    ReadAsync(buffer, offset, count, CancellationToken.None),
+                    callback,
+                    state
+                );
             else
                 return base.BeginRead(buffer, offset, count, callback, state);
         }
@@ -157,7 +185,12 @@ namespace System.IO.Pipes
             WriteCore(buffer);
         }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ValidateBufferArguments(buffer, offset, count);
             if (!CanWrite)
@@ -172,13 +205,24 @@ namespace System.IO.Pipes
 
             CheckWriteOperations();
 
-            return
-                count == 0 ? Task.CompletedTask :
-                _isAsync ? WriteAsyncCore(new ReadOnlyMemory<byte>(buffer, offset, count), cancellationToken).AsTask() :
-                AsyncOverSyncWrite(new ReadOnlyMemory<byte>(buffer, offset, count), cancellationToken).AsTask();
+            return count == 0 ? Task.CompletedTask
+                : _isAsync
+                    ? WriteAsyncCore(
+                            new ReadOnlyMemory<byte>(buffer, offset, count),
+                            cancellationToken
+                        )
+                        .AsTask()
+                : AsyncOverSyncWrite(
+                        new ReadOnlyMemory<byte>(buffer, offset, count),
+                        cancellationToken
+                    )
+                    .AsTask();
         }
 
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default(CancellationToken))
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             if (!CanWrite)
             {
@@ -192,20 +236,36 @@ namespace System.IO.Pipes
 
             CheckWriteOperations();
 
-            return
-                buffer.Length == 0 ? default :
-                _isAsync ? WriteAsyncCore(buffer, cancellationToken) :
-                AsyncOverSyncWrite(buffer, cancellationToken);
+            return buffer.Length == 0 ? default
+                : _isAsync ? WriteAsyncCore(buffer, cancellationToken)
+                : AsyncOverSyncWrite(buffer, cancellationToken);
         }
 
         /// <summary>Initiates an async-over-sync write for a pipe opened for non-overlapped I/O.</summary>
-        private ValueTask AsyncOverSyncWrite(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken) =>
-            AsyncOverSyncWithIoCancellation.InvokeAsync(static s => s.Stream.WriteCore(s.Buffer.Span), (Stream: this, Buffer: buffer), cancellationToken);
+        private ValueTask AsyncOverSyncWrite(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken
+        ) =>
+            AsyncOverSyncWithIoCancellation.InvokeAsync(
+                static s => s.Stream.WriteCore(s.Buffer.Span),
+                (Stream: this, Buffer: buffer),
+                cancellationToken
+            );
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        )
         {
             if (_isAsync)
-                return TaskToAsyncResult.Begin(WriteAsync(buffer, offset, count, CancellationToken.None), callback, state);
+                return TaskToAsyncResult.Begin(
+                    WriteAsync(buffer, offset, count, CancellationToken.None),
+                    callback,
+                    state
+                );
             else
                 return base.BeginWrite(buffer, offset, count, callback, state);
         }
@@ -221,9 +281,18 @@ namespace System.IO.Pipes
         internal static string GetPipePath(string serverName, string pipeName)
         {
             string normalizedPipePath = Path.GetFullPath(@"\\" + serverName + @"\pipe\" + pipeName);
-            if (string.Equals(normalizedPipePath, @"\\.\pipe\" + AnonymousPipeName, StringComparison.OrdinalIgnoreCase))
+            if (
+                string.Equals(
+                    normalizedPipePath,
+                    @"\\.\pipe\" + AnonymousPipeName,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
-                throw new ArgumentOutOfRangeException(nameof(pipeName), SR.ArgumentOutOfRange_AnonymousReserved);
+                throw new ArgumentOutOfRangeException(
+                    nameof(pipeName),
+                    SR.ArgumentOutOfRange_AnonymousReserved
+                );
             }
             return normalizedPipePath;
         }
@@ -233,7 +302,10 @@ namespace System.IO.Pipes
         private protected static void ValidateHandleIsPipe(SafePipeHandle safePipeHandle)
         {
             // Check that this handle is infact a handle to a pipe.
-            if (Interop.Kernel32.GetFileType(safePipeHandle) != Interop.Kernel32.FileTypes.FILE_TYPE_PIPE)
+            if (
+                Interop.Kernel32.GetFileType(safePipeHandle)
+                != Interop.Kernel32.FileTypes.FILE_TYPE_PIPE
+            )
             {
                 throw new IOException(SR.IO_InvalidPipeHandle);
             }
@@ -254,7 +326,9 @@ namespace System.IO.Pipes
 
             if (source is ReadWriteValueTaskSource readWriteSource)
             {
-                ref ReadWriteValueTaskSource? field = ref readWriteSource._isWrite ? ref _reusableWriteValueTaskSource : ref _reusableReadValueTaskSource;
+                ref ReadWriteValueTaskSource? field = ref readWriteSource._isWrite
+                    ? ref _reusableWriteValueTaskSource
+                    : ref _reusableReadValueTaskSource;
                 if (Interlocked.CompareExchange(ref field, readWriteSource, null) is not null)
                 {
                     source._preallocatedOverlapped.Dispose();
@@ -285,7 +359,15 @@ namespace System.IO.Pipes
             fixed (byte* p = &MemoryMarshal.GetReference(buffer))
             {
                 int bytesRead = 0;
-                if (Interop.Kernel32.ReadFile(_handle!, p, buffer.Length, out bytesRead, IntPtr.Zero) != 0)
+                if (
+                    Interop.Kernel32.ReadFile(
+                        _handle!,
+                        p,
+                        buffer.Length,
+                        out bytesRead,
+                        IntPtr.Zero
+                    ) != 0
+                )
                 {
                     _isMessageComplete = true;
                     return bytesRead;
@@ -311,18 +393,31 @@ namespace System.IO.Pipes
             }
         }
 
-        private unsafe ValueTask<int> ReadAsyncCore(Memory<byte> buffer, CancellationToken cancellationToken)
+        private unsafe ValueTask<int> ReadAsyncCore(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(_isAsync);
 
-            ReadWriteValueTaskSource vts = Interlocked.Exchange(ref _reusableReadValueTaskSource, null) ?? new ReadWriteValueTaskSource(this, isWrite: false);
+            ReadWriteValueTaskSource vts =
+                Interlocked.Exchange(ref _reusableReadValueTaskSource, null)
+                ?? new ReadWriteValueTaskSource(this, isWrite: false);
             try
             {
                 vts.PrepareForOperation(buffer);
                 Debug.Assert(vts._memoryHandle.Pointer != null);
 
                 // Queue an async ReadFile operation.
-                if (Interop.Kernel32.ReadFile(_handle!, (byte*)vts._memoryHandle.Pointer, buffer.Length, IntPtr.Zero, vts._overlapped) == 0)
+                if (
+                    Interop.Kernel32.ReadFile(
+                        _handle!,
+                        (byte*)vts._memoryHandle.Pointer,
+                        buffer.Length,
+                        IntPtr.Zero,
+                        vts._overlapped
+                    ) == 0
+                )
                 {
                     // The operation failed, or it's pending.
                     int errorCode = Marshal.GetLastPInvokeError();
@@ -351,7 +446,9 @@ namespace System.IO.Pipes
                         default:
                             // Error. Callback will not be called.
                             vts.Dispose();
-                            return ValueTask.FromException<int>(Win32Marshal.GetExceptionForWin32Error(errorCode));
+                            return ValueTask.FromException<int>(
+                                Win32Marshal.GetExceptionForWin32Error(errorCode)
+                            );
                     }
                 }
             }
@@ -378,25 +475,46 @@ namespace System.IO.Pipes
             fixed (byte* p = &MemoryMarshal.GetReference(buffer))
             {
                 int bytesWritten = 0;
-                if (Interop.Kernel32.WriteFile(_handle!, p, buffer.Length, out bytesWritten, IntPtr.Zero) == 0)
+                if (
+                    Interop.Kernel32.WriteFile(
+                        _handle!,
+                        p,
+                        buffer.Length,
+                        out bytesWritten,
+                        IntPtr.Zero
+                    ) == 0
+                )
                 {
                     throw WinIOError(Marshal.GetLastPInvokeError());
                 }
             }
         }
 
-        private unsafe ValueTask WriteAsyncCore(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken)
+        private unsafe ValueTask WriteAsyncCore(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(_isAsync);
 
-            ReadWriteValueTaskSource vts = Interlocked.Exchange(ref _reusableWriteValueTaskSource, null) ?? new ReadWriteValueTaskSource(this, isWrite: true);
+            ReadWriteValueTaskSource vts =
+                Interlocked.Exchange(ref _reusableWriteValueTaskSource, null)
+                ?? new ReadWriteValueTaskSource(this, isWrite: true);
             try
             {
                 vts.PrepareForOperation(buffer);
                 Debug.Assert(vts._memoryHandle.Pointer != null);
 
                 // Queue an async WriteFile operation.
-                if (Interop.Kernel32.WriteFile(_handle!, (byte*)vts._memoryHandle.Pointer, buffer.Length, IntPtr.Zero, vts._overlapped) == 0)
+                if (
+                    Interop.Kernel32.WriteFile(
+                        _handle!,
+                        (byte*)vts._memoryHandle.Pointer,
+                        buffer.Length,
+                        IntPtr.Zero,
+                        vts._overlapped
+                    ) == 0
+                )
                 {
                     // The operation failed, or it's pending.
                     int errorCode = Marshal.GetLastPInvokeError();
@@ -411,7 +529,9 @@ namespace System.IO.Pipes
                         default:
                             // Error. Callback will not be invoked.
                             vts.Dispose();
-                            return ValueTask.FromException(ExceptionDispatchInfo.SetCurrentStackTrace(WinIOError(errorCode)));
+                            return ValueTask.FromException(
+                                ExceptionDispatchInfo.SetCurrentStackTrace(WinIOError(errorCode))
+                            );
                     }
                 }
             }
@@ -517,7 +637,9 @@ namespace System.IO.Pipes
                 {
                     outBufferSize = _outBufferSize;
                 }
-                else if (!Interop.Kernel32.GetNamedPipeInfo(_handle!, null, &outBufferSize, null, null))
+                else if (
+                    !Interop.Kernel32.GetNamedPipeInfo(_handle!, null, &outBufferSize, null, null)
+                )
                 {
                     throw WinIOError(Marshal.GetLastPInvokeError());
                 }
@@ -547,13 +669,23 @@ namespace System.IO.Pipes
                 CheckPipePropertyOperations();
                 if (value < PipeTransmissionMode.Byte || value > PipeTransmissionMode.Message)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.ArgumentOutOfRange_TransmissionModeByteOrMsg);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.ArgumentOutOfRange_TransmissionModeByteOrMsg
+                    );
                 }
 
                 unsafe
                 {
                     int pipeReadType = (int)value << 1;
-                    if (!Interop.Kernel32.SetNamedPipeHandleState(_handle!, &pipeReadType, IntPtr.Zero, IntPtr.Zero))
+                    if (
+                        !Interop.Kernel32.SetNamedPipeHandleState(
+                            _handle!,
+                            &pipeReadType,
+                            IntPtr.Zero,
+                            IntPtr.Zero
+                        )
+                    )
                     {
                         throw WinIOError(Marshal.GetLastPInvokeError());
                     }
@@ -565,18 +697,27 @@ namespace System.IO.Pipes
             }
         }
 
-        internal static unsafe Interop.Kernel32.SECURITY_ATTRIBUTES GetSecAttrs(HandleInheritability inheritability)
+        internal static unsafe Interop.Kernel32.SECURITY_ATTRIBUTES GetSecAttrs(
+            HandleInheritability inheritability
+        )
         {
             Interop.Kernel32.SECURITY_ATTRIBUTES secAttrs = new Interop.Kernel32.SECURITY_ATTRIBUTES
             {
                 nLength = (uint)sizeof(Interop.Kernel32.SECURITY_ATTRIBUTES),
-                bInheritHandle = ((inheritability & HandleInheritability.Inheritable) != 0) ? Interop.BOOL.TRUE : Interop.BOOL.FALSE
+                bInheritHandle =
+                    ((inheritability & HandleInheritability.Inheritable) != 0)
+                        ? Interop.BOOL.TRUE
+                        : Interop.BOOL.FALSE,
             };
 
             return secAttrs;
         }
 
-        internal static unsafe Interop.Kernel32.SECURITY_ATTRIBUTES GetSecAttrs(HandleInheritability inheritability, PipeSecurity? pipeSecurity, ref GCHandle pinningHandle)
+        internal static unsafe Interop.Kernel32.SECURITY_ATTRIBUTES GetSecAttrs(
+            HandleInheritability inheritability,
+            PipeSecurity? pipeSecurity,
+            ref GCHandle pinningHandle
+        )
         {
             Interop.Kernel32.SECURITY_ATTRIBUTES secAttrs = GetSecAttrs(inheritability);
 
@@ -593,15 +734,23 @@ namespace System.IO.Pipes
             return secAttrs;
         }
 
-
-
         /// <summary>
         /// Determine pipe read mode from Win32
         /// </summary>
         private unsafe void UpdateReadMode()
         {
             uint flags;
-            if (!Interop.Kernel32.GetNamedPipeHandleStateW(SafePipeHandle, &flags, null, null, null, null, 0))
+            if (
+                !Interop.Kernel32.GetNamedPipeHandleStateW(
+                    SafePipeHandle,
+                    &flags,
+                    null,
+                    null,
+                    null,
+                    null,
+                    0
+                )
+            )
             {
                 throw WinIOError(Marshal.GetLastPInvokeError());
             }
@@ -629,7 +778,10 @@ namespace System.IO.Pipes
                 case Interop.Errors.ERROR_NO_DATA:
                     // Other side has broken the connection
                     _state = PipeState.Broken;
-                    return new IOException(SR.IO_PipeBroken, Win32Marshal.MakeHRFromErrorCode(errorCode));
+                    return new IOException(
+                        SR.IO_PipeBroken,
+                        Win32Marshal.MakeHRFromErrorCode(errorCode)
+                    );
 
                 case Interop.Errors.ERROR_HANDLE_EOF:
                     return Error.GetEndOfFile();

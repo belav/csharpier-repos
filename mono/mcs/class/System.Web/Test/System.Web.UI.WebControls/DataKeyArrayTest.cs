@@ -26,88 +26,84 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
-
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Data;
+using System.IO;
 using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.IO;
-using System.Collections;
-using System.Collections.Specialized;
 using NUnit.Framework;
-using System.Data;
-
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-	[TestFixture]
-	public class DataKeyArrayTest
+    [TestFixture]
+    public class DataKeyArrayTest
+    {
+        [Test]
+        public void DataKeyArray_DefaultProperty()
+        {
+            DataKeyArray keyarray = new DataKeyArray(new ArrayList());
+            Assert.AreEqual(0, keyarray.Count, "Count");
+            Assert.AreEqual(false, keyarray.IsReadOnly, "IsReadOnly");
+            Assert.AreEqual(false, keyarray.IsSynchronized, "IsSynchronized");
+            //Assert.AreEqual (keyarray, keyarray.SyncRoot, "SyncRoot");
+        }
 
-	{
-		[Test]
-		public void DataKeyArray_DefaultProperty()
-		{
-			DataKeyArray keyarray = new DataKeyArray (new ArrayList ());
-			Assert.AreEqual (0, keyarray.Count, "Count");
-			Assert.AreEqual (false, keyarray.IsReadOnly, "IsReadOnly");
-			Assert.AreEqual (false, keyarray.IsSynchronized, "IsSynchronized");
-			//Assert.AreEqual (keyarray, keyarray.SyncRoot, "SyncRoot");
-		}
+        [Test]
+        public void DataKeyArray_DefaultPropertyNotWorking()
+        {
+            DataKeyArray keyarray = new DataKeyArray(new ArrayList());
+            Assert.AreEqual(keyarray, keyarray.SyncRoot, "SyncRoot");
+        }
 
-		[Test]
-		public void DataKeyArray_DefaultPropertyNotWorking()
-		{
-			DataKeyArray keyarray = new DataKeyArray (new ArrayList ());
-			Assert.AreEqual (keyarray, keyarray.SyncRoot, "SyncRoot");
-		}
+        [Test]
+        public void DataKeyArray_Item()
+        {
+            OrderedDictionary dictionary = new OrderedDictionary();
+            dictionary.Add("key", "value");
+            ArrayList list = new ArrayList();
+            DataKey key = new DataKey(dictionary);
+            list.Add(key);
+            DataKeyArray keyarray = new DataKeyArray(list);
+            Assert.AreEqual(1, keyarray.Count, "CreateItems");
+            Assert.AreEqual(key, keyarray[0], "CreateKeyData");
+            Assert.AreEqual("value", ((DataKey)keyarray[0]).Value, "KeyArrayValue");
+            dictionary.Add("key1", "value1");
+            key = new DataKey(dictionary);
+            list.Add(key);
+            keyarray = new DataKeyArray(list);
+            Assert.AreEqual(2, keyarray.Count, "CreateItemsMulty");
+        }
 
-		[Test]
-		public void DataKeyArray_Item ()
-		{
-			OrderedDictionary dictionary = new OrderedDictionary();
-			dictionary.Add("key","value");
-			ArrayList list = new ArrayList ();
-			DataKey key = new DataKey (dictionary);
-			list.Add (key);
-			DataKeyArray keyarray = new DataKeyArray (list);
-			Assert.AreEqual(1,keyarray.Count,"CreateItems");
-			Assert.AreEqual (key, keyarray[0], "CreateKeyData");
-			Assert.AreEqual ("value",((DataKey)keyarray[0]).Value,"KeyArrayValue");
-			dictionary.Add ("key1", "value1");
-			key = new DataKey (dictionary);
-			list.Add (key);
-			keyarray = new DataKeyArray (list);
-			Assert.AreEqual (2, keyarray.Count, "CreateItemsMulty");
-		}
+        [Test]
+        public void DataKeyArray_CopyTo()
+        {
+            OrderedDictionary dictionary = new OrderedDictionary();
+            dictionary.Add("key", "value");
+            ArrayList list = new ArrayList();
+            DataKey key = new DataKey(dictionary);
+            list.Add(key);
+            DataKeyArray keyarray = new DataKeyArray(list);
+            DataKey[] keys = new DataKey[list.Count];
+            keyarray.CopyTo(keys, 0);
+            Assert.AreEqual("value", keys[0].Value, "CopyToValue");
+        }
 
-		[Test]
-		public void DataKeyArray_CopyTo ()
-		{
-			OrderedDictionary dictionary = new OrderedDictionary ();
-			dictionary.Add ("key", "value");
-			ArrayList list = new ArrayList ();
-			DataKey key = new DataKey (dictionary);
-			list.Add (key);
-			DataKeyArray keyarray = new DataKeyArray (list);
-			DataKey[] keys = new DataKey[list.Count];
-			keyarray.CopyTo(keys,0);
-			Assert.AreEqual ("value", keys[0].Value, "CopyToValue");
-		}
-
-		[Test]
-		public void DataKeyArray_GetEnumerator ()
-		{
-			OrderedDictionary dictionary = new OrderedDictionary ();
-			dictionary.Add ("key", "value");
-			ArrayList list = new ArrayList ();
-			DataKey key = new DataKey (dictionary);
-			list.Add (key);
-			DataKeyArray keyarray = new DataKeyArray (list);
-			IEnumerator inumerator = keyarray.GetEnumerator ();
-			Assert.IsNotNull (inumerator, "GetEnumerator");
-		}
-	}
+        [Test]
+        public void DataKeyArray_GetEnumerator()
+        {
+            OrderedDictionary dictionary = new OrderedDictionary();
+            dictionary.Add("key", "value");
+            ArrayList list = new ArrayList();
+            DataKey key = new DataKey(dictionary);
+            list.Add(key);
+            DataKeyArray keyarray = new DataKeyArray(list);
+            IEnumerator inumerator = keyarray.GetEnumerator();
+            Assert.IsNotNull(inumerator, "GetEnumerator");
+        }
+    }
 }

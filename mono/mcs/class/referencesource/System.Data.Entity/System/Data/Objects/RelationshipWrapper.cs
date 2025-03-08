@@ -8,8 +8,8 @@
 //---------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Data.Metadata.Edm;
+using System.Diagnostics;
 
 namespace System.Data.Objects
 {
@@ -40,23 +40,31 @@ namespace System.Data.Objects
             this.Key1 = (0 == ordinal) ? wrapper.Key1 : key;
         }
 
-        internal RelationshipWrapper(AssociationSet extent,
-                                     KeyValuePair<string, EntityKey> roleAndKey1,
-                                     KeyValuePair<string, EntityKey> roleAndKey2)
+        internal RelationshipWrapper(
+            AssociationSet extent,
+            KeyValuePair<string, EntityKey> roleAndKey1,
+            KeyValuePair<string, EntityKey> roleAndKey2
+        )
             : this(extent, roleAndKey1.Key, roleAndKey1.Value, roleAndKey2.Key, roleAndKey2.Value)
-        {
-        }
+        { }
 
-        internal RelationshipWrapper(AssociationSet extent,
-                                     string role0, EntityKey key0,
-                                     string role1, EntityKey key1)
+        internal RelationshipWrapper(
+            AssociationSet extent,
+            string role0,
+            EntityKey key0,
+            string role1,
+            EntityKey key1
+        )
         {
             Debug.Assert(null != extent, "null AssociationSet");
             Debug.Assert(null != (object)key0, "null key0");
             Debug.Assert(null != (object)key1, "null key1");
 
             AssociationSet = extent;
-            Debug.Assert(extent.ElementType.AssociationEndMembers.Count == 2, "only 2 ends are supported");
+            Debug.Assert(
+                extent.ElementType.AssociationEndMembers.Count == 2,
+                "only 2 ends are supported"
+            );
 
             // this assert is explictly commented out to show that the two are similar but different
             // we should always use AssociationEndMembers, never CorrespondingAssociationEndMember
@@ -66,14 +74,23 @@ namespace System.Data.Objects
 
             if (extent.ElementType.AssociationEndMembers[0].Name == role0)
             {
-                Debug.Assert(extent.ElementType.AssociationEndMembers[1].Name == role1, "a)roleAndKey1 Name differs");
+                Debug.Assert(
+                    extent.ElementType.AssociationEndMembers[1].Name == role1,
+                    "a)roleAndKey1 Name differs"
+                );
                 Key0 = key0;
                 Key1 = key1;
             }
             else
             {
-                Debug.Assert(extent.ElementType.AssociationEndMembers[0].Name == role1, "b)roleAndKey1 Name differs");
-                Debug.Assert(extent.ElementType.AssociationEndMembers[1].Name == role0, "b)roleAndKey0 Name differs");
+                Debug.Assert(
+                    extent.ElementType.AssociationEndMembers[0].Name == role1,
+                    "b)roleAndKey1 Name differs"
+                );
+                Debug.Assert(
+                    extent.ElementType.AssociationEndMembers[1].Name == role0,
+                    "b)roleAndKey0 Name differs"
+                );
                 Key0 = key1;
                 Key1 = key0;
             }
@@ -110,7 +127,8 @@ namespace System.Data.Objects
 
         public override int GetHashCode()
         {
-            return this.AssociationSet.Name.GetHashCode() ^ (this.Key0.GetHashCode() + this.Key1.GetHashCode());
+            return this.AssociationSet.Name.GetHashCode()
+                ^ (this.Key0.GetHashCode() + this.Key1.GetHashCode());
         }
 
         public override bool Equals(object obj)
@@ -120,11 +138,15 @@ namespace System.Data.Objects
 
         public bool Equals(RelationshipWrapper wrapper)
         {
-            return (Object.ReferenceEquals(this, wrapper) ||
-                    ((null != wrapper) &&
-                     Object.ReferenceEquals(this.AssociationSet, wrapper.AssociationSet) &&
-                     this.Key0.Equals(wrapper.Key0) &&
-                     this.Key1.Equals(wrapper.Key1)));
+            return (
+                Object.ReferenceEquals(this, wrapper)
+                || (
+                    (null != wrapper)
+                    && Object.ReferenceEquals(this.AssociationSet, wrapper.AssociationSet)
+                    && this.Key0.Equals(wrapper.Key0)
+                    && this.Key1.Equals(wrapper.Key1)
+                )
+            );
         }
     }
 }

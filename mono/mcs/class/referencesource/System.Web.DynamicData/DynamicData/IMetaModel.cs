@@ -1,10 +1,12 @@
-﻿namespace System.Web.DynamicData {
+﻿namespace System.Web.DynamicData
+{
     using System;
-    using System.Web.DynamicData.ModelProviders;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Web.DynamicData.ModelProviders;
 
-    internal interface IMetaModel {
+    internal interface IMetaModel
+    {
         string DynamicDataFolderVirtualPath { get; set; }
         IFieldTemplateFactory FieldTemplateFactory { get; set; }
         string GetActionPath(string tableName, string action, object row);
@@ -16,7 +18,10 @@
         void RegisterContext(Type contextType);
         void RegisterContext(Type contextType, ContextConfiguration configuration);
         void RegisterContext(DataModelProvider dataModelProvider);
-        void RegisterContext(DataModelProvider dataModelProvider, ContextConfiguration configuration);
+        void RegisterContext(
+            DataModelProvider dataModelProvider,
+            ContextConfiguration configuration
+        );
         ReadOnlyCollection<IMetaTable> Tables { get; }
         bool TryGetTable(string uniqueTableName, out IMetaTable table);
         bool TryGetTable(Type entityType, out IMetaTable table);

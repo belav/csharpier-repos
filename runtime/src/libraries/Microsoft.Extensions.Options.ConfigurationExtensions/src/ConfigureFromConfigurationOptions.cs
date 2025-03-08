@@ -14,7 +14,9 @@ namespace Microsoft.Extensions.Options
     /// Configures an option instance by using <see cref="ConfigurationBinder.Bind(IConfiguration, object)"/> against an <see cref="IConfiguration"/>.
     /// </summary>
     /// <typeparam name="TOptions">The type of options to bind.</typeparam>
-    public class ConfigureFromConfigurationOptions<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TOptions> : ConfigureOptions<TOptions>
+    public class ConfigureFromConfigurationOptions<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TOptions
+    > : ConfigureOptions<TOptions>
         where TOptions : class
     {
         /// <summary>
@@ -23,7 +25,9 @@ namespace Microsoft.Extensions.Options
         /// <param name="config">The <see cref="IConfiguration"/> instance.</param>
         //Even though TOptions is annotated, we need to annotate as RUC as we can't guarantee properties on referenced types are preserved.
         [RequiresDynamicCode(OptionsBuilderConfigurationExtensions.RequiresDynamicCodeMessage)]
-        [RequiresUnreferencedCode(OptionsBuilderConfigurationExtensions.TrimmingRequiredUnreferencedCodeMessage)]
+        [RequiresUnreferencedCode(
+            OptionsBuilderConfigurationExtensions.TrimmingRequiredUnreferencedCodeMessage
+        )]
         public ConfigureFromConfigurationOptions(IConfiguration config)
             : base(options => ConfigurationBinder.Bind(config, options))
         {

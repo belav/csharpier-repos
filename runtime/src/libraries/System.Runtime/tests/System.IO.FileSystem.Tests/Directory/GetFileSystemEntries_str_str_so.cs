@@ -5,7 +5,8 @@ using Xunit;
 
 namespace System.IO.Tests
 {
-    public class Directory_GetFileSystemEntries_str_str_so_alldirs : Directory_GetFileSystemEntries_str_str
+    public class Directory_GetFileSystemEntries_str_str_so_alldirs
+        : Directory_GetFileSystemEntries_str_str
     {
         #region Utilities
 
@@ -16,10 +17,18 @@ namespace System.IO.Tests
 
         public override string[] GetEntries(string dirName, string searchPattern)
         {
-            return Directory.GetFileSystemEntries(dirName, searchPattern, SearchOption.AllDirectories);
+            return Directory.GetFileSystemEntries(
+                dirName,
+                searchPattern,
+                SearchOption.AllDirectories
+            );
         }
 
-        public virtual string[] GetEntries(string dirName, string searchPattern, SearchOption option)
+        public virtual string[] GetEntries(
+            string dirName,
+            string searchPattern,
+            SearchOption option
+        )
         {
             return Directory.GetFileSystemEntries(dirName, searchPattern, option);
         }
@@ -27,7 +36,7 @@ namespace System.IO.Tests
         #endregion
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // ? in search pattern returns results
+        [PlatformSpecific(TestPlatforms.Windows)] // ? in search pattern returns results
         public override void WindowsSearchPatternQuestionMarks()
         {
             string testDir1Str = GetTestFileName();
@@ -37,7 +46,10 @@ namespace System.IO.Tests
             using (File.Create(Path.Combine(TestDirectory, testDir1Str, GetTestFileName())))
             using (File.Create(Path.Combine(TestDirectory, GetTestFileName())))
             {
-                string[] results = GetEntries(TestDirectory, string.Format("{0}.???", new string('?', GetTestFileName().Length)));
+                string[] results = GetEntries(
+                    TestDirectory,
+                    string.Format("{0}.???", new string('?', GetTestFileName().Length))
+                );
                 if (TestFiles && TestDirectories)
                     Assert.Equal(3, results.Length);
                 else
@@ -83,7 +95,11 @@ namespace System.IO.Tests
             using (File.Create(testFile1))
             using (File.Create(testFile2))
             {
-                string[] results = GetEntries(Directory.GetParent(TestDirectory).FullName, Path.Combine(Path.GetFileName(TestDirectory), "*"), SearchOption.AllDirectories);
+                string[] results = GetEntries(
+                    Directory.GetParent(TestDirectory).FullName,
+                    Path.Combine(Path.GetFileName(TestDirectory), "*"),
+                    SearchOption.AllDirectories
+                );
                 if (TestFiles)
                 {
                     Assert.Contains(testFile1, results);
@@ -109,10 +125,18 @@ namespace System.IO.Tests
 
         public override string[] GetEntries(string dirName, string searchPattern)
         {
-            return Directory.GetFileSystemEntries(dirName, searchPattern, SearchOption.TopDirectoryOnly);
+            return Directory.GetFileSystemEntries(
+                dirName,
+                searchPattern,
+                SearchOption.TopDirectoryOnly
+            );
         }
 
-        public virtual string[] GetEntries(string dirName, string searchPattern, SearchOption option)
+        public virtual string[] GetEntries(
+            string dirName,
+            string searchPattern,
+            SearchOption option
+        )
         {
             return Directory.GetFileSystemEntries(dirName, searchPattern, option);
         }
@@ -122,8 +146,11 @@ namespace System.IO.Tests
         [Fact]
         public void InvalidSearchOption()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => GetEntries(".", "*", (SearchOption)100));
-            Assert.Throws<ArgumentOutOfRangeException>(() => GetEntries(".", "*", (SearchOption)(-1)));
+            Assert.Throws<ArgumentOutOfRangeException>(() => GetEntries(".", "*", (SearchOption)100)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                GetEntries(".", "*", (SearchOption)(-1))
+            );
         }
     }
 }

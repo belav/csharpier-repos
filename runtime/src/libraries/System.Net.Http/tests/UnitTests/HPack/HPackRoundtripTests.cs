@@ -5,8 +5,8 @@ using System;
 using System.Buffers;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http.HPack;
 using System.Net.Http.Headers;
+using System.Net.Http.HPack;
 using System.Text;
 using Xunit;
 
@@ -16,41 +16,85 @@ namespace System.Net.Http.Unit.Tests.HPack
     {
         public static IEnumerable<object[]> TestHeaders()
         {
-            yield return new object[] { new HttpRequestHeaders() { { "header", "value" } }, null };
-            yield return new object[] { new HttpRequestHeaders() { { "header", "value" } }, Encoding.ASCII };
-            yield return new object[] { new HttpRequestHeaders() { { "header", new[] { "value1", "value2" } } }, null };
-            yield return new object[] { new HttpRequestHeaders() { { "header", new[] { "value1", "value2" } } }, Encoding.ASCII };
-            yield return new object[] { new HttpRequestHeaders()
+            yield return new object[]
             {
-                { "header-0", new[] { "value1", "value2" } },
-                { "header-0", "value3" },
-                { "header-1", "value1" },
-                { "header-2", new[] { "value1", "value2" } },
-            }, null };
-            yield return new object[] { new HttpRequestHeaders() { { "header", "foo" } }, Encoding.UTF8 };
-            yield return new object[] { new HttpRequestHeaders() { { "header", "\uD83D\uDE03" } }, Encoding.UTF8 };
-            yield return new object[] { new HttpRequestHeaders()
+                new HttpRequestHeaders() { { "header", "value" } },
+                null,
+            };
+            yield return new object[]
             {
-                { "header-0", new[] { "\uD83D\uDE03", "\uD83D\uDE48\uD83D\uDE49\uD83D\uDE4A" } },
-                { "header-1", "\uD83D\uDE03" },
-                { "header-2", "\uD83D\uDE48\uD83D\uDE49\uD83D\uDE4A" },
-                { "header-3", new[] { "\uD83D\uDE03", "\uD83D\uDE48\uD83D\uDE49\uD83D\uDE4A" } }
-            }, Encoding.UTF8 };
+                new HttpRequestHeaders() { { "header", "value" } },
+                Encoding.ASCII,
+            };
+            yield return new object[]
+            {
+                new HttpRequestHeaders() { { "header", new[] { "value1", "value2" } } },
+                null,
+            };
+            yield return new object[]
+            {
+                new HttpRequestHeaders() { { "header", new[] { "value1", "value2" } } },
+                Encoding.ASCII,
+            };
+            yield return new object[]
+            {
+                new HttpRequestHeaders()
+                {
+                    { "header-0", new[] { "value1", "value2" } },
+                    { "header-0", "value3" },
+                    { "header-1", "value1" },
+                    { "header-2", new[] { "value1", "value2" } },
+                },
+                null,
+            };
+            yield return new object[]
+            {
+                new HttpRequestHeaders() { { "header", "foo" } },
+                Encoding.UTF8,
+            };
+            yield return new object[]
+            {
+                new HttpRequestHeaders() { { "header", "\uD83D\uDE03" } },
+                Encoding.UTF8,
+            };
+            yield return new object[]
+            {
+                new HttpRequestHeaders()
+                {
+                    {
+                        "header-0",
+                        new[] { "\uD83D\uDE03", "\uD83D\uDE48\uD83D\uDE49\uD83D\uDE4A" }
+                    },
+                    { "header-1", "\uD83D\uDE03" },
+                    { "header-2", "\uD83D\uDE48\uD83D\uDE49\uD83D\uDE4A" },
+                    {
+                        "header-3",
+                        new[] { "\uD83D\uDE03", "\uD83D\uDE48\uD83D\uDE49\uD83D\uDE4A" }
+                    },
+                },
+                Encoding.UTF8,
+            };
         }
 
         [Theory, MemberData(nameof(TestHeaders))]
-        public void HPack_HeaderEncodeDecodeRoundtrip_ShouldMatchOriginalInput(HttpHeaders headers, Encoding? valueEncoding)
+        public void HPack_HeaderEncodeDecodeRoundtrip_ShouldMatchOriginalInput(
+            HttpHeaders headers,
+            Encoding? valueEncoding
+        )
         {
             Memory<byte> encoding = HPackEncode(headers, valueEncoding);
             HttpHeaders decodedHeaders = HPackDecode(encoding, valueEncoding);
 
             // Assert: decoded headers are structurally equal to original headers
             Assert.Equal(headers.Count(), decodedHeaders.Count());
-            Assert.All(headers.Zip(decodedHeaders), pair =>
-            {
-                Assert.Equal(pair.First.Key, pair.Second.Key);
-                Assert.Equal(pair.First.Value, pair.Second.Value);
-            });
+            Assert.All(
+                headers.Zip(decodedHeaders),
+                pair =>
+                {
+                    Assert.Equal(pair.First.Key, pair.Second.Key);
+                    Assert.Equal(pair.First.Value, pair.Second.Value);
+                }
+            );
         }
 
         // adapted from Header serialization code in Http2Connection.cs
@@ -62,7 +106,11 @@ namespace System.Net.Http.Unit.Tests.HPack
 
             foreach (HeaderEntry header in headers.GetEntries())
             {
-                int headerValuesCount = HttpHeaders.GetStoreValuesIntoStringArray(header.Key, header.Value, ref headerValues);
+                int headerValuesCount = HttpHeaders.GetStoreValuesIntoStringArray(
+                    header.Key,
+                    header.Value,
+                    ref headerValues
+                );
                 Assert.InRange(headerValuesCount, 0, int.MaxValue);
                 ReadOnlySpan<string> headerValuesSpan = headerValues.AsSpan(0, headerValuesCount);
 
@@ -108,7 +156,15 @@ namespace System.Net.Http.Unit.Tests.HPack
             void WriteLiteralHeaderValues(ReadOnlySpan<string> values, string separator)
             {
                 int bytesWritten;
-                while (!HPackEncoder.EncodeStringLiterals(values, separator, valueEncoding, buffer.AvailableSpan, out bytesWritten))
+                while (
+                    !HPackEncoder.EncodeStringLiterals(
+                        values,
+                        separator,
+                        valueEncoding,
+                        buffer.AvailableSpan,
+                        out bytesWritten
+                    )
+                )
                 {
                     buffer.Grow();
                     FillAvailableSpaceWithOnes(buffer);
@@ -120,7 +176,16 @@ namespace System.Net.Http.Unit.Tests.HPack
             void WriteLiteralHeader(string name, ReadOnlySpan<string> values)
             {
                 int bytesWritten;
-                while (!HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexingNewName(name, values, HttpHeaderParser.DefaultSeparator, valueEncoding, buffer.AvailableSpan, out bytesWritten))
+                while (
+                    !HPackEncoder.EncodeLiteralHeaderFieldWithoutIndexingNewName(
+                        name,
+                        values,
+                        HttpHeaderParser.DefaultSeparator,
+                        valueEncoding,
+                        buffer.AvailableSpan,
+                        out bytesWritten
+                    )
+                )
                 {
                     buffer.Grow();
                     FillAvailableSpaceWithOnes(buffer);
@@ -137,7 +202,10 @@ namespace System.Net.Http.Unit.Tests.HPack
         private static HttpHeaders HPackDecode(Memory<byte> memory, Encoding? valueEncoding)
         {
             var header = new HttpRequestHeaders();
-            var hpackDecoder = new HPackDecoder(maxDynamicTableSize: 0, maxHeadersLength: HttpHandlerDefaults.DefaultMaxResponseHeadersLength * 1024);
+            var hpackDecoder = new HPackDecoder(
+                maxDynamicTableSize: 0,
+                maxHeadersLength: HttpHandlerDefaults.DefaultMaxResponseHeadersLength * 1024
+            );
 
             hpackDecoder.Decode(memory.Span, true, new HeaderHandler(header, valueEncoding));
 
@@ -159,12 +227,20 @@ namespace System.Net.Http.Unit.Tests.HPack
             {
                 if (!HeaderDescriptor.TryGet(name, out HeaderDescriptor descriptor))
                 {
-                    throw new HttpRequestException(SR.Format(SR.net_http_invalid_response_header_name, Encoding.ASCII.GetString(name)));
+                    throw new HttpRequestException(
+                        SR.Format(
+                            SR.net_http_invalid_response_header_name,
+                            Encoding.ASCII.GetString(name)
+                        )
+                    );
                 }
 
                 string headerValue = descriptor.GetHeaderValue(value, _valueEncoding);
 
-                _headers.TryAddWithoutValidation(descriptor, headerValue.Split(',').Select(x => x.Trim()));
+                _headers.TryAddWithoutValidation(
+                    descriptor,
+                    headerValue.Split(',').Select(x => x.Trim())
+                );
             }
 
             public void OnHeadersComplete(bool endStream)
@@ -183,7 +259,11 @@ namespace System.Net.Http.Unit.Tests.HPack
                 OnHeader(H2StaticTable.Get(index - 1).Name, value);
             }
 
-            public void OnDynamicIndexedHeader(int? index, ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
+            public void OnDynamicIndexedHeader(
+                int? index,
+                ReadOnlySpan<byte> name,
+                ReadOnlySpan<byte> value
+            )
             {
                 OnHeader(name, value);
             }

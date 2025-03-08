@@ -38,8 +38,13 @@ namespace System.Runtime
         [Fx.Tag.GuaranteeNonBlocking]
         public static T End(IAsyncResult result)
         {
-            Fx.AssertAndThrowFatal(result.IsCompleted, "CompletedAsyncResult<T> was not completed!");
-            CompletedAsyncResult<T> completedResult = AsyncResult.End<CompletedAsyncResult<T>>(result);
+            Fx.AssertAndThrowFatal(
+                result.IsCompleted,
+                "CompletedAsyncResult<T> was not completed!"
+            );
+            CompletedAsyncResult<T> completedResult = AsyncResult.End<CompletedAsyncResult<T>>(
+                result
+            );
             return completedResult.data;
         }
     }
@@ -49,7 +54,12 @@ namespace System.Runtime
         TResult resultData;
         TParameter parameter;
 
-        public CompletedAsyncResult(TResult resultData, TParameter parameter, AsyncCallback callback, object state)
+        public CompletedAsyncResult(
+            TResult resultData,
+            TParameter parameter,
+            AsyncCallback callback,
+            object state
+        )
             : base(callback, state)
         {
             this.resultData = resultData;
@@ -60,8 +70,13 @@ namespace System.Runtime
         [Fx.Tag.GuaranteeNonBlocking]
         public static TResult End(IAsyncResult result, out TParameter parameter)
         {
-            Fx.AssertAndThrowFatal(result.IsCompleted, "CompletedAsyncResult<T> was not completed!");
-            CompletedAsyncResult<TResult, TParameter> completedResult = AsyncResult.End<CompletedAsyncResult<TResult, TParameter>>(result);
+            Fx.AssertAndThrowFatal(
+                result.IsCompleted,
+                "CompletedAsyncResult<T> was not completed!"
+            );
+            CompletedAsyncResult<TResult, TParameter> completedResult = AsyncResult.End<
+                CompletedAsyncResult<TResult, TParameter>
+            >(result);
             parameter = completedResult.parameter;
             return completedResult.resultData;
         }

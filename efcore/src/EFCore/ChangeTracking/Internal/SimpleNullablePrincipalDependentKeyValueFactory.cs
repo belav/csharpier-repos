@@ -14,8 +14,9 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class SimpleNullablePrincipalDependentKeyValueFactory<TKey, TNonNullableKey> : DependentKeyValueFactory<TKey>,
-    IDependentKeyValueFactory<TKey>
+public class SimpleNullablePrincipalDependentKeyValueFactory<TKey, TNonNullableKey>
+    : DependentKeyValueFactory<TKey>,
+        IDependentKeyValueFactory<TKey>
     where TKey : notnull
     where TNonNullableKey : struct
 {
@@ -29,7 +30,8 @@ public class SimpleNullablePrincipalDependentKeyValueFactory<TKey, TNonNullableK
     /// </summary>
     public SimpleNullablePrincipalDependentKeyValueFactory(
         IForeignKey foreignKey,
-        IPrincipalKeyValueFactory<TKey> principalKeyValueFactory)
+        IPrincipalKeyValueFactory<TKey> principalKeyValueFactory
+    )
         : base(foreignKey, principalKeyValueFactory)
     {
         var property = foreignKey.Properties.Single();
@@ -52,7 +54,10 @@ public class SimpleNullablePrincipalDependentKeyValueFactory<TKey, TNonNullableK
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [Obsolete]
-    public virtual bool TryCreateFromBuffer(in ValueBuffer valueBuffer, [NotNullWhen(true)] out TKey? key)
+    public virtual bool TryCreateFromBuffer(
+        in ValueBuffer valueBuffer,
+        [NotNullWhen(true)] out TKey? key
+    )
     {
         var value = _propertyAccessors.ValueBufferGetter!(valueBuffer);
         if (value == null)
@@ -71,10 +76,16 @@ public class SimpleNullablePrincipalDependentKeyValueFactory<TKey, TNonNullableK
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool TryCreateFromCurrentValues(IUpdateEntry entry, [NotNullWhen(true)] out TKey? key)
+    public override bool TryCreateFromCurrentValues(
+        IUpdateEntry entry,
+        [NotNullWhen(true)] out TKey? key
+    )
     {
-        key = (TKey)(object)((Func<InternalEntityEntry, TNonNullableKey>)_propertyAccessors.CurrentValueGetter)(
-            (InternalEntityEntry)entry)!;
+        key = (TKey)
+            (object)
+                ((Func<InternalEntityEntry, TNonNullableKey>)_propertyAccessors.CurrentValueGetter)(
+                    (InternalEntityEntry)entry
+                )!;
         return true;
     }
 
@@ -84,10 +95,17 @@ public class SimpleNullablePrincipalDependentKeyValueFactory<TKey, TNonNullableK
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool TryCreateFromPreStoreGeneratedCurrentValues(IUpdateEntry entry, [NotNullWhen(true)] out TKey? key)
+    public virtual bool TryCreateFromPreStoreGeneratedCurrentValues(
+        IUpdateEntry entry,
+        [NotNullWhen(true)] out TKey? key
+    )
     {
-        key = (TKey)(object)((Func<InternalEntityEntry, TNonNullableKey>)_propertyAccessors.PreStoreGeneratedCurrentValueGetter)(
-            (InternalEntityEntry)entry)!;
+        key = (TKey)
+            (object)
+                (
+                    (Func<InternalEntityEntry, TNonNullableKey>)
+                        _propertyAccessors.PreStoreGeneratedCurrentValueGetter
+                )((InternalEntityEntry)entry)!;
         return true;
     }
 
@@ -97,10 +115,17 @@ public class SimpleNullablePrincipalDependentKeyValueFactory<TKey, TNonNullableK
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool TryCreateFromOriginalValues(IUpdateEntry entry, [NotNullWhen(true)] out TKey? key)
+    public override bool TryCreateFromOriginalValues(
+        IUpdateEntry entry,
+        [NotNullWhen(true)] out TKey? key
+    )
     {
-        key = (TKey)(object)((Func<InternalEntityEntry, TNonNullableKey>)_propertyAccessors.OriginalValueGetter!)(
-            (InternalEntityEntry)entry)!;
+        key = (TKey)
+            (object)
+                (
+                    (Func<InternalEntityEntry, TNonNullableKey>)
+                        _propertyAccessors.OriginalValueGetter!
+                )((InternalEntityEntry)entry)!;
         return true;
     }
 
@@ -110,10 +135,17 @@ public class SimpleNullablePrincipalDependentKeyValueFactory<TKey, TNonNullableK
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool TryCreateFromRelationshipSnapshot(IUpdateEntry entry, [NotNullWhen(true)] out TKey? key)
+    public virtual bool TryCreateFromRelationshipSnapshot(
+        IUpdateEntry entry,
+        [NotNullWhen(true)] out TKey? key
+    )
     {
-        key = (TKey)(object)((Func<InternalEntityEntry, TNonNullableKey>)_propertyAccessors.RelationshipSnapshotGetter)(
-            (InternalEntityEntry)entry)!;
+        key = (TKey)
+            (object)
+                (
+                    (Func<InternalEntityEntry, TNonNullableKey>)
+                        _propertyAccessors.RelationshipSnapshotGetter
+                )((InternalEntityEntry)entry)!;
         return true;
     }
 }

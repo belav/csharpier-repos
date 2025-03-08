@@ -44,7 +44,7 @@ namespace System.Reflection.Emit
     [StructLayout(LayoutKind.Sequential)]
     internal sealed partial class RuntimeConstructorBuilder : ConstructorBuilder
     {
-#region Sync with MonoReflectionCtorBuilder in object-internals.h
+        #region Sync with MonoReflectionCtorBuilder in object-internals.h
         private RuntimeMethodHandle mhandle;
         private RuntimeILGenerator? ilgen;
         internal Type[]? parameters;
@@ -52,18 +52,25 @@ namespace System.Reflection.Emit
         private MethodImplAttributes iattrs;
         private int table_idx;
         private CallingConventions call_conv;
-        private RuntimeTypeBuilder  type;
+        private RuntimeTypeBuilder type;
         internal ParameterBuilder[]? pinfo;
         private CustomAttributeBuilder[]? cattrs;
         private bool init_locals = true;
         private Type[][]? paramModReq;
         private Type[][]? paramModOpt;
-#endregion
+        #endregion
 
         internal bool finished;
 
         [DynamicDependency(nameof(paramModOpt))] // Automatically keeps all previous fields too due to StructLayout
-        internal RuntimeConstructorBuilder(RuntimeTypeBuilder tb, MethodAttributes attributes, CallingConventions callingConvention, Type[]? parameterTypes, Type[][]? paramModReq, Type[][]? paramModOpt)
+        internal RuntimeConstructorBuilder(
+            RuntimeTypeBuilder tb,
+            MethodAttributes attributes,
+            CallingConventions callingConvention,
+            Type[]? parameterTypes,
+            Type[][]? paramModReq,
+            Type[][]? paramModOpt
+        )
         {
             attrs = attributes | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName;
             call_conv = callingConvention;
@@ -88,30 +95,18 @@ namespace System.Reflection.Emit
         // FIXME:
         public override CallingConventions CallingConvention
         {
-            get
-            {
-                return call_conv;
-            }
+            get { return call_conv; }
         }
 
         protected override bool InitLocalsCore
         {
-            get
-            {
-                return init_locals;
-            }
-            set
-            {
-                init_locals = value;
-            }
+            get { return init_locals; }
+            set { init_locals = value; }
         }
 
         internal RuntimeTypeBuilder TypeBuilder
         {
-            get
-            {
-                return type;
-            }
+            get { return type; }
         }
 
         public override MethodImplAttributes GetMethodImplementationFlags()
@@ -152,19 +147,33 @@ namespace System.Reflection.Emit
             return parameters![pos];
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2075:UnrecognizedReflectionPattern",
-            Justification = "Linker doesn't analyze RuntimeResolve but it's an identity function")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2075:UnrecognizedReflectionPattern",
+            Justification = "Linker doesn't analyze RuntimeResolve but it's an identity function"
+        )]
         internal MethodBase RuntimeResolve()
         {
             return type.RuntimeResolve().GetConstructor(this);
         }
 
-        public override object Invoke(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
+        public override object Invoke(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
         {
             throw not_supported();
         }
 
-        public override object Invoke(BindingFlags invokeAttr, Binder? binder, object?[]? parameters, CultureInfo? culture)
+        public override object Invoke(
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? parameters,
+            CultureInfo? culture
+        )
         {
             throw not_supported();
         }
@@ -173,45 +182,39 @@ namespace System.Reflection.Emit
 
         public override RuntimeMethodHandle MethodHandle
         {
-            get
-            {
-                throw not_supported();
-            }
+            get { throw not_supported(); }
         }
 
         public override MethodAttributes Attributes
         {
-            get
-            {
-                return attrs;
-            }
+            get { return attrs; }
         }
 
         public override Type ReflectedType
         {
-            get
-            {
-                return type;
-            }
+            get { return type; }
         }
 
         public override Type DeclaringType
         {
-            get
-            {
-                return type;
-            }
+            get { return type; }
         }
 
         public override string Name
         {
             get
             {
-                return (attrs & MethodAttributes.Static) != 0 ? TypeConstructorName : ConstructorName;
+                return (attrs & MethodAttributes.Static) != 0
+                    ? TypeConstructorName
+                    : ConstructorName;
             }
         }
 
-        protected override ParameterBuilder DefineParameterCore(int iSequence, ParameterAttributes attributes, string? strParamName)
+        protected override ParameterBuilder DefineParameterCore(
+            int iSequence,
+            ParameterAttributes attributes,
+            string? strParamName
+        )
         {
             // The 0th ParameterBuilder does not correspond to an
             // actual parameter, but .NETFramework lets you define
@@ -222,7 +225,12 @@ namespace System.Reflection.Emit
             if (type.is_created)
                 throw not_after_created();
 
-            ParameterBuilder pb = new RuntimeParameterBuilder(this, iSequence, attributes, strParamName);
+            ParameterBuilder pb = new RuntimeParameterBuilder(
+                this,
+                iSequence,
+                attributes,
+                strParamName
+            );
             pinfo ??= new ParameterBuilder[parameters!.Length + 1];
             pinfo[iSequence] = pb;
             return pb;
@@ -249,13 +257,30 @@ namespace System.Reflection.Emit
                 throw new InvalidOperationException();
             if (ilgen != null)
                 return ilgen;
-            if (!(((attrs & (MethodAttributes.Abstract | MethodAttributes.PinvokeImpl)) == 0) && ((iattrs & (MethodImplAttributes.Runtime | MethodImplAttributes.InternalCall)) == 0)))
+            if (
+                !(
+                    ((attrs & (MethodAttributes.Abstract | MethodAttributes.PinvokeImpl)) == 0)
+                    && (
+                        (
+                            iattrs
+                            & (MethodImplAttributes.Runtime | MethodImplAttributes.InternalCall)
+                        ) == 0
+                    )
+                )
+            )
                 throw new InvalidOperationException();
-            ilgen = new RuntimeILGenerator(type.Module, ((RuntimeModuleBuilder)type.Module).GetTokenGenerator(), streamSize);
+            ilgen = new RuntimeILGenerator(
+                type.Module,
+                ((RuntimeModuleBuilder)type.Module).GetTokenGenerator(),
+                streamSize
+            );
             return ilgen;
         }
 
-        protected override void SetCustomAttributeCore(ConstructorInfo con, ReadOnlySpan<byte> binaryAttribute)
+        protected override void SetCustomAttributeCore(
+            ConstructorInfo con,
+            ReadOnlySpan<byte> binaryAttribute
+        )
         {
             string? attrname = con.ReflectedType!.FullName;
             if (attrname == "System.Runtime.CompilerServices.MethodImplAttribute")
@@ -289,10 +314,7 @@ namespace System.Reflection.Emit
 
         public override Module Module
         {
-            get
-            {
-                return type.Module;
-            }
+            get { return type.Module; }
         }
 
         public override string ToString()
@@ -302,14 +324,26 @@ namespace System.Reflection.Emit
 
         internal void fixup()
         {
-            if (((attrs & (MethodAttributes.Abstract | MethodAttributes.PinvokeImpl)) == 0) && ((iattrs & (MethodImplAttributes.Runtime | MethodImplAttributes.InternalCall)) == 0))
+            if (
+                ((attrs & (MethodAttributes.Abstract | MethodAttributes.PinvokeImpl)) == 0)
+                && (
+                    (iattrs & (MethodImplAttributes.Runtime | MethodImplAttributes.InternalCall))
+                    == 0
+                )
+            )
             {
                 if ((ilgen == null) || (ilgen.ILOffset == 0))
-                    throw new InvalidOperationException(SR.Format(SR.InvalidOperation_BadEmptyMethodBody, Name));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.InvalidOperation_BadEmptyMethodBody, Name)
+                    );
             }
-            if (IsStatic &&
-                ((call_conv & CallingConventions.VarArgs) != 0 ||
-                 (call_conv & CallingConventions.HasThis) != 0))
+            if (
+                IsStatic
+                && (
+                    (call_conv & CallingConventions.VarArgs) != 0
+                    || (call_conv & CallingConventions.HasThis) != 0
+                )
+            )
                 throw new TypeLoadException();
             ilgen?.label_fixup(this);
         }

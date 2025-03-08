@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,19 +31,19 @@ using System;
 
 namespace System.Data.Linq.Mapping
 {
-	[AttributeUsage (AttributeTargets.Property|AttributeTargets.Field, AllowMultiple = false)]
-	public sealed class AssociationAttribute : DataAttribute
-	{
-		public bool DeleteOnNull { get; set; }
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
+    public sealed class AssociationAttribute : DataAttribute
+    {
+        public bool DeleteOnNull { get; set; }
 
-		public string DeleteRule { get; set; }
+        public string DeleteRule { get; set; }
 
-		public bool IsForeignKey { get; set; }
+        public bool IsForeignKey { get; set; }
 
-		public bool IsUnique { get; set; }
+        public bool IsUnique { get; set; }
 
-		public string OtherKey { get; set; }
+        public string OtherKey { get; set; }
 
-		public string ThisKey { get; set; }
-	}
+        public string ThisKey { get; set; }
+    }
 }

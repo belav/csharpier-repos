@@ -25,12 +25,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         // The lambda rewriter also saves/restores the proxies across passes, since local function
         // reference rewriting is done in a separate pass but still requires the frame proxies
         // created in the first pass.
-        protected Dictionary<Symbol, CapturedSymbolReplacement> proxies = new Dictionary<Symbol, CapturedSymbolReplacement>();
+        protected Dictionary<Symbol, CapturedSymbolReplacement> proxies =
+            new Dictionary<Symbol, CapturedSymbolReplacement>();
 
         // A mapping from every local variable to its replacement local variable.  Local variables are replaced when
         // their types change due to being inside of a generic method.  Otherwise we reuse the original local (even
         // though its containing method is not correct because the code is moved into another method)
-        protected readonly Dictionary<LocalSymbol, LocalSymbol> localMap = new Dictionary<LocalSymbol, LocalSymbol>();
+        protected readonly Dictionary<LocalSymbol, LocalSymbol> localMap =
+            new Dictionary<LocalSymbol, LocalSymbol>();
 
         // A mapping for types in the original method to types in its replacement.  This is mainly necessary
         // when the original method was generic, as type parameters in the original method are mapping into
@@ -38,7 +40,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         protected abstract TypeMap TypeMap { get; }
 
         // Subclasses override this method to fetch a frame pointer.
-        protected abstract BoundExpression FramePointer(SyntaxNode syntax, NamedTypeSymbol frameClass);
+        protected abstract BoundExpression FramePointer(
+            SyntaxNode syntax,
+            NamedTypeSymbol frameClass
+        );
 
         protected abstract MethodSymbol CurrentMethod { get; }
 
@@ -53,7 +58,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private readonly Dictionary<BoundValuePlaceholderBase, BoundExpression> _placeholderMap;
 
-        protected MethodToClassRewriter(VariableSlotAllocator? slotAllocatorOpt, TypeCompilationState compilationState, BindingDiagnosticBag diagnostics)
+        protected MethodToClassRewriter(
+            VariableSlotAllocator? slotAllocatorOpt,
+            TypeCompilationState compilationState,
+            BindingDiagnosticBag diagnostics
+        )
         {
             Debug.Assert(compilationState != null);
             Debug.Assert(diagnostics != null);
@@ -77,7 +86,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         protected abstract bool NeedsProxy(Symbol localOrParameter);
 
-        protected void RewriteLocals(ImmutableArray<LocalSymbol> locals, ArrayBuilder<LocalSymbol> newLocals)
+        protected void RewriteLocals(
+            ImmutableArray<LocalSymbol> locals,
+            ArrayBuilder<LocalSymbol> newLocals
+        )
         {
             foreach (var local in locals)
             {
@@ -88,7 +100,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        protected bool TryRewriteLocal(LocalSymbol local, [NotNullWhen(true)] out LocalSymbol? newLocal)
+        protected bool TryRewriteLocal(
+            LocalSymbol local,
+            [NotNullWhen(true)] out LocalSymbol? newLocal
+        )
         {
             if (NeedsProxy(local))
             {
@@ -109,7 +124,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else
             {
-                newLocal = new TypeSubstitutedLocalSymbol(local, TypeWithAnnotations.Create(newType), CurrentMethod);
+                newLocal = new TypeSubstitutedLocalSymbol(
+                    local,
+                    TypeWithAnnotations.Create(newType),
+                    CurrentMethod
+                );
                 localMap.Add(local, newLocal);
             }
 
@@ -118,7 +137,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         private ImmutableArray<LocalSymbol> RewriteLocals(ImmutableArray<LocalSymbol> locals)
         {
-            if (locals.IsEmpty) return locals;
+            if (locals.IsEmpty)
+                return locals;
             var newLocals = ArrayBuilder<LocalSymbol>.GetInstance();
             RewriteLocals(locals, newLocals);
             return newLocals.ToImmutableAndFree();
@@ -128,7 +148,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             if (!node.Locals.IsDefaultOrEmpty)
             {
-                // Yield/await aren't supported in catch block atm, but we need to rewrite the type 
+                // Yield/await aren't supported in catch block atm, but we need to rewrite the type
                 // of the variables owned by the catch block. Note that one of these variables might be a closure frame reference.
                 var newLocals = RewriteLocals(node.Locals);
 
@@ -139,14 +159,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     (BoundStatementList?)this.Visit(node.ExceptionFilterPrologueOpt),
                     (BoundExpression?)this.Visit(node.ExceptionFilterOpt),
                     (BoundBlock?)this.Visit(node.Body)!,
-                    node.IsSynthesizedAsyncCatchAll);
+                    node.IsSynthesizedAsyncCatchAll
+                );
             }
 
             return base.VisitCatchBlock(node)!;
         }
 
-        public override BoundNode VisitBlock(BoundBlock node)
-            => VisitBlock(node, removeInstrumentation: false);
+        public override BoundNode VisitBlock(BoundBlock node) =>
+            VisitBlock(node, removeInstrumentation: false);
 
         protected BoundBlock VisitBlock(BoundBlock node, bool removeInstrumentation)
         {
@@ -155,8 +176,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var newLocals = RewriteLocals(node.Locals);
             var newLocalFunctions = node.LocalFunctions;
             var newStatements = VisitList(node.Statements);
-            var newInstrumentation = removeInstrumentation ? null : (BoundBlockInstrumentation?)Visit(node.Instrumentation);
-            return node.Update(newLocals, newLocalFunctions, node.HasUnsafeModifier, newInstrumentation, newStatements);
+            var newInstrumentation = removeInstrumentation
+                ? null
+                : (BoundBlockInstrumentation?)Visit(node.Instrumentation);
+            return node.Update(
+                newLocals,
+                newLocalFunctions,
+                node.HasUnsafeModifier,
+                newInstrumentation,
+                newStatements
+            );
         }
 
         public abstract override BoundNode VisitScope(BoundScope node);
@@ -178,7 +207,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var condition = (BoundExpression?)this.Visit(node.Condition);
             var increment = (BoundStatement?)this.Visit(node.Increment);
             var body = (BoundStatement)this.Visit(node.Body);
-            return node.Update(newOuterLocals, initializer, newInnerLocals, condition, increment, body, node.BreakLabel, node.ContinueLabel);
+            return node.Update(
+                newOuterLocals,
+                initializer,
+                newInnerLocals,
+                condition,
+                increment,
+                body,
+                node.BreakLabel,
+                node.ContinueLabel
+            );
         }
 
         public override BoundNode VisitDoStatement(BoundDoStatement node)
@@ -203,7 +241,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var declarations = (BoundMultipleLocalDeclarations?)this.Visit(node.DeclarationsOpt);
             var expression = (BoundExpression?)this.Visit(node.ExpressionOpt);
             var body = (BoundStatement)this.Visit(node.Body);
-            return node.Update(newLocals, declarations, expression, body, node.AwaitOpt, node.PatternDisposeInfoOpt);
+            return node.Update(
+                newLocals,
+                declarations,
+                expression,
+                body,
+                node.AwaitOpt,
+                node.PatternDisposeInfoOpt
+            );
         }
 
         [return: NotNullIfNotNull(nameof(type))]
@@ -223,23 +268,38 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             var rewrittenPropertySymbol = VisitPropertySymbol(node.PropertySymbol);
             var rewrittenReceiver = (BoundExpression?)Visit(node.ReceiverOpt);
-            return node.Update(rewrittenReceiver, initialBindingReceiverIsSubjectToCloning: ThreeState.Unknown, rewrittenPropertySymbol, node.ResultKind, VisitType(node.Type));
+            return node.Update(
+                rewrittenReceiver,
+                initialBindingReceiverIsSubjectToCloning: ThreeState.Unknown,
+                rewrittenPropertySymbol,
+                node.ResultKind,
+                VisitType(node.Type)
+            );
         }
 
         public override BoundNode VisitCall(BoundCall node)
         {
             var rewrittenMethodSymbol = VisitMethodSymbol(node.Method);
             var rewrittenReceiver = (BoundExpression?)this.Visit(node.ReceiverOpt);
-            var rewrittenArguments = (ImmutableArray<BoundExpression>)this.VisitList(node.Arguments);
+            var rewrittenArguments =
+                (ImmutableArray<BoundExpression>)this.VisitList(node.Arguments);
             var rewrittenType = this.VisitType(node.Type);
 
-            Debug.Assert(rewrittenMethodSymbol.IsMetadataVirtual() == node.Method.IsMetadataVirtual());
+            Debug.Assert(
+                rewrittenMethodSymbol.IsMetadataVirtual() == node.Method.IsMetadataVirtual()
+            );
 
-            // If the original receiver was a base access and it was rewritten, 
+            // If the original receiver was a base access and it was rewritten,
             // change the method to point to the wrapper method
-            if (BaseReferenceInReceiverWasRewritten(node.ReceiverOpt, rewrittenReceiver) && node.Method.IsMetadataVirtual())
+            if (
+                BaseReferenceInReceiverWasRewritten(node.ReceiverOpt, rewrittenReceiver)
+                && node.Method.IsMetadataVirtual()
+            )
             {
-                rewrittenMethodSymbol = GetMethodWrapperForBaseNonVirtualCall(rewrittenMethodSymbol, node.Syntax);
+                rewrittenMethodSymbol = GetMethodWrapperForBaseNonVirtualCall(
+                    rewrittenMethodSymbol,
+                    node.Syntax
+                );
             }
 
             return node.Update(
@@ -255,7 +315,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 node.ArgsToParamsOpt,
                 node.DefaultArguments,
                 node.ResultKind,
-                rewrittenType);
+                rewrittenType
+            );
         }
 
         public override BoundNode VisitBinaryOperator(BoundBinaryOperator node)
@@ -271,18 +332,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 node.ResultKind,
                 (BoundExpression)Visit(node.Left),
                 (BoundExpression)Visit(node.Right),
-                VisitType(node.Type));
+                VisitType(node.Type)
+            );
         }
 
-        public override BoundNode VisitUnaryOperator(BoundUnaryOperator node)
-            => node.Update(
+        public override BoundNode VisitUnaryOperator(BoundUnaryOperator node) =>
+            node.Update(
                 node.OperatorKind,
                 (BoundExpression)Visit(node.Operand),
                 node.ConstantValueOpt,
                 VisitMethodSymbol(node.MethodOpt),
                 VisitType(node.ConstrainedToTypeOpt),
                 node.ResultKind,
-                VisitType(node.Type));
+                VisitType(node.Type)
+            );
 
         public override BoundNode? VisitConversion(BoundConversion node)
         {
@@ -301,11 +364,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 node.ExplicitCastInCode,
                 node.ConstantValueOpt,
                 node.ConversionGroupOpt,
-                VisitType(node.Type));
+                VisitType(node.Type)
+            );
         }
 
-        public override BoundNode? VisitUserDefinedConditionalLogicalOperator(BoundUserDefinedConditionalLogicalOperator node)
-            => node.Update(
+        public override BoundNode? VisitUserDefinedConditionalLogicalOperator(
+            BoundUserDefinedConditionalLogicalOperator node
+        ) =>
+            node.Update(
                 node.OperatorKind,
                 VisitMethodSymbol(node.LogicalOperator),
                 VisitMethodSymbol(node.TrueOperator),
@@ -314,9 +380,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 node.ResultKind,
                 (BoundExpression)Visit(node.Left),
                 (BoundExpression)Visit(node.Right),
-                VisitType(node.Type));
+                VisitType(node.Type)
+            );
 
-        private MethodSymbol GetMethodWrapperForBaseNonVirtualCall(MethodSymbol methodBeingCalled, SyntaxNode syntax)
+        private MethodSymbol GetMethodWrapperForBaseNonVirtualCall(
+            MethodSymbol methodBeingCalled,
+            SyntaxNode syntax
+        )
         {
             var newMethod = GetOrCreateBaseFunctionWrapper(methodBeingCalled, syntax);
             if (!newMethod.IsGenericMethod)
@@ -332,13 +402,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var visitedTypeArgs = ArrayBuilder<TypeWithAnnotations>.GetInstance(typeArgs.Length);
             foreach (var typeArg in typeArgs)
             {
-                visitedTypeArgs.Add(typeArg.WithTypeAndModifiers(VisitType(typeArg.Type), typeArg.CustomModifiers));
+                visitedTypeArgs.Add(
+                    typeArg.WithTypeAndModifiers(VisitType(typeArg.Type), typeArg.CustomModifiers)
+                );
             }
 
             return newMethod.Construct(visitedTypeArgs.ToImmutableAndFree());
         }
 
-        private MethodSymbol GetOrCreateBaseFunctionWrapper(MethodSymbol methodBeingWrapped, SyntaxNode syntax)
+        private MethodSymbol GetOrCreateBaseFunctionWrapper(
+            MethodSymbol methodBeingWrapped,
+            SyntaxNode syntax
+        )
         {
             methodBeingWrapped = methodBeingWrapped.ConstructedFrom;
 
@@ -351,13 +426,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var containingType = this.ContainingType;
 
             //  create a method symbol
-            string methodName = GeneratedNames.MakeBaseMethodWrapperName(this.CompilationState.NextWrapperMethodIndex);
-            wrapper = new BaseMethodWrapperSymbol(containingType, methodBeingWrapped, syntax, methodName);
+            string methodName = GeneratedNames.MakeBaseMethodWrapperName(
+                this.CompilationState.NextWrapperMethodIndex
+            );
+            wrapper = new BaseMethodWrapperSymbol(
+                containingType,
+                methodBeingWrapped,
+                syntax,
+                methodName
+            );
 
             //  add the method to module
             if (this.CompilationState.Emitting)
             {
-                this.CompilationState.ModuleBuilderOpt.AddSynthesizedDefinition(containingType, wrapper.GetCciAdapter());
+                this.CompilationState.ModuleBuilderOpt.AddSynthesizedDefinition(
+                    containingType,
+                    wrapper.GetCciAdapter()
+                );
             }
 
             Debug.Assert(wrapper.SynthesizesLoweredBoundBody);
@@ -365,11 +450,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return wrapper;
         }
 
-        private bool TryReplaceWithProxy(Symbol parameterOrLocal, SyntaxNode syntax, [NotNullWhen(true)] out BoundNode? replacement)
+        private bool TryReplaceWithProxy(
+            Symbol parameterOrLocal,
+            SyntaxNode syntax,
+            [NotNullWhen(true)] out BoundNode? replacement
+        )
         {
             if (proxies.TryGetValue(parameterOrLocal, out CapturedSymbolReplacement? proxy))
             {
-                replacement = proxy.Replacement(syntax, frameType => FramePointer(syntax, frameType));
+                replacement = proxy.Replacement(
+                    syntax,
+                    frameType => FramePointer(syntax, frameType)
+                );
                 return true;
             }
 
@@ -406,15 +498,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return VisitUnhoistedLocal(node);
         }
 
-        public override BoundNode? VisitLocalId(BoundLocalId node)
-            => TryGetHoistedField(node.Local, out var fieldSymbol) ?
-                node.Update(node.Local, fieldSymbol, node.Type) :
-                base.VisitLocalId(node);
+        public override BoundNode? VisitLocalId(BoundLocalId node) =>
+            TryGetHoistedField(node.Local, out var fieldSymbol)
+                ? node.Update(node.Local, fieldSymbol, node.Type)
+                : base.VisitLocalId(node);
 
-        public override BoundNode? VisitParameterId(BoundParameterId node)
-            => TryGetHoistedField(node.Parameter, out var fieldSymbol) ?
-                node.Update(node.Parameter, fieldSymbol, node.Type) :
-                base.VisitParameterId(node);
+        public override BoundNode? VisitParameterId(BoundParameterId node) =>
+            TryGetHoistedField(node.Parameter, out var fieldSymbol)
+                ? node.Update(node.Parameter, fieldSymbol, node.Type)
+                : base.VisitParameterId(node);
 
         private bool TryGetHoistedField(Symbol variable, [NotNullWhen(true)] out FieldSymbol? field)
         {
@@ -422,9 +514,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 field = proxy switch
                 {
-                    CapturedToStateMachineFieldReplacement stateMachineProxy => (FieldSymbol)stateMachineProxy.HoistedField,
+                    CapturedToStateMachineFieldReplacement stateMachineProxy => (FieldSymbol)
+                        stateMachineProxy.HoistedField,
                     CapturedToFrameSymbolReplacement closureProxy => closureProxy.HoistedField,
-                    _ => throw ExceptionUtilities.UnexpectedValue(proxy)
+                    _ => throw ExceptionUtilities.UnexpectedValue(proxy),
                 };
 
                 return true;
@@ -438,7 +531,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             if (this.localMap.TryGetValue(node.LocalSymbol, out LocalSymbol? replacementLocal))
             {
-                return new BoundLocal(node.Syntax, replacementLocal, node.ConstantValueOpt, replacementLocal.Type, node.HasErrors);
+                return new BoundLocal(
+                    node.Syntax,
+                    replacementLocal,
+                    node.ConstantValueOpt,
+                    replacementLocal.Type,
+                    node.HasErrors
+                );
             }
 
             return base.VisitLocal(node)!;
@@ -452,7 +551,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return node;
             }
 
-            var rewrittenPlaceholder = awaitablePlaceholder.Update(VisitType(awaitablePlaceholder.Type));
+            var rewrittenPlaceholder = awaitablePlaceholder.Update(
+                VisitType(awaitablePlaceholder.Type)
+            );
             _placeholderMap.Add(awaitablePlaceholder, rewrittenPlaceholder);
 
             var getAwaiter = (BoundExpression?)this.Visit(node.GetAwaiter);
@@ -461,10 +562,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             _placeholderMap.Remove(awaitablePlaceholder);
 
-            return node.Update(rewrittenPlaceholder, node.IsDynamic, getAwaiter, isCompleted, getResult);
+            return node.Update(
+                rewrittenPlaceholder,
+                node.IsDynamic,
+                getAwaiter,
+                isCompleted,
+                getResult
+            );
         }
 
-        public override BoundNode VisitAwaitableValuePlaceholder(BoundAwaitableValuePlaceholder node)
+        public override BoundNode VisitAwaitableValuePlaceholder(
+            BoundAwaitableValuePlaceholder node
+        )
         {
             return _placeholderMap[node];
         }
@@ -482,9 +591,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             BoundExpression originalRight = node.Right;
 
-            if (leftLocal.LocalSymbol.RefKind != RefKind.None &&
-                node.IsRef &&
-                NeedsProxy(leftLocal.LocalSymbol))
+            if (
+                leftLocal.LocalSymbol.RefKind != RefKind.None
+                && node.IsRef
+                && NeedsProxy(leftLocal.LocalSymbol)
+            )
             {
                 Debug.Assert(!proxies.ContainsKey(leftLocal.LocalSymbol));
                 Debug.Assert(originalRight.Kind != BoundKind.ConvertedStackAllocExpression);
@@ -509,26 +620,40 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // If the receiver of the field is on the stack when the stackalloc happens,
             // popping it will free the memory (?) or otherwise cause verification issues.
             // DevDiv Bugs 59454
-            if (rewrittenLeft.Kind != BoundKind.Local && originalRight.Kind == BoundKind.ConvertedStackAllocExpression)
+            if (
+                rewrittenLeft.Kind != BoundKind.Local
+                && originalRight.Kind == BoundKind.ConvertedStackAllocExpression
+            )
             {
                 // From ILGENREC::genAssign:
                 // DevDiv Bugs 59454: Handle hoisted local initialized with a stackalloc
                 // NOTE: Need to check for cast of stackalloc on RHS.
                 // If LHS isLocal, then genAddr is a noop so regular case works fine.
 
-                SyntheticBoundNodeFactory factory = new SyntheticBoundNodeFactory(this.CurrentMethod, rewrittenLeft.Syntax, this.CompilationState, this.Diagnostics);
+                SyntheticBoundNodeFactory factory = new SyntheticBoundNodeFactory(
+                    this.CurrentMethod,
+                    rewrittenLeft.Syntax,
+                    this.CompilationState,
+                    this.Diagnostics
+                );
                 BoundAssignmentOperator tempAssignment;
                 BoundLocal tempLocal = factory.StoreToTemp(rewrittenRight, out tempAssignment);
 
                 Debug.Assert(!node.IsRef);
-                BoundAssignmentOperator rewrittenAssignment = node.Update(rewrittenLeft, tempLocal, node.IsRef, rewrittenType);
+                BoundAssignmentOperator rewrittenAssignment = node.Update(
+                    rewrittenLeft,
+                    tempLocal,
+                    node.IsRef,
+                    rewrittenType
+                );
 
                 return new BoundSequence(
                     node.Syntax,
                     ImmutableArray.Create<LocalSymbol>(tempLocal.LocalSymbol),
                     ImmutableArray.Create<BoundExpression>(tempAssignment),
                     rewrittenAssignment,
-                    rewrittenType);
+                    rewrittenType
+                );
             }
 
             return node.Update(rewrittenLeft, rewrittenRight, node.IsRef, rewrittenType);
@@ -536,8 +661,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override BoundNode VisitFieldInfo(BoundFieldInfo node)
         {
-            var rewrittenField = ((FieldSymbol)node.Field.OriginalDefinition)
-                .AsMember((NamedTypeSymbol)this.VisitType(node.Field.ContainingType));
+            var rewrittenField = ((FieldSymbol)node.Field.OriginalDefinition).AsMember(
+                (NamedTypeSymbol)this.VisitType(node.Field.ContainingType)
+            );
             return node.Update(rewrittenField, node.GetFieldFromHandle, node.Type);
         }
 
@@ -545,16 +671,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         {
             var receiverOpt = (BoundExpression?)this.Visit(node.ReceiverOpt);
             TypeSymbol type = this.VisitType(node.Type);
-            var fieldSymbol = ((FieldSymbol)node.FieldSymbol.OriginalDefinition)
-                .AsMember((NamedTypeSymbol)this.VisitType(node.FieldSymbol.ContainingType));
-            return node.Update(receiverOpt, fieldSymbol, node.ConstantValueOpt, node.ResultKind, type);
+            var fieldSymbol = ((FieldSymbol)node.FieldSymbol.OriginalDefinition).AsMember(
+                (NamedTypeSymbol)this.VisitType(node.FieldSymbol.ContainingType)
+            );
+            return node.Update(
+                receiverOpt,
+                fieldSymbol,
+                node.ConstantValueOpt,
+                node.ResultKind,
+                type
+            );
         }
 
         public override BoundNode VisitObjectCreationExpression(BoundObjectCreationExpression node)
         {
-            var rewritten = (BoundObjectCreationExpression?)base.VisitObjectCreationExpression(node);
+            var rewritten = (BoundObjectCreationExpression?)
+                base.VisitObjectCreationExpression(node);
             Debug.Assert(rewritten != null);
-            if (!TypeSymbol.Equals(rewritten.Type, node.Type, TypeCompareKind.ConsiderEverything2) && (object)node.Constructor != null)
+            if (
+                !TypeSymbol.Equals(rewritten.Type, node.Type, TypeCompareKind.ConsiderEverything2)
+                && (object)node.Constructor != null
+            )
             {
                 MethodSymbol ctor = VisitMethodSymbol(node.Constructor);
                 rewritten = rewritten.Update(
@@ -567,13 +704,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     rewritten.DefaultArguments,
                     rewritten.ConstantValueOpt,
                     rewritten.InitializerExpressionOpt,
-                    rewritten.Type);
+                    rewritten.Type
+                );
             }
 
             return rewritten;
         }
 
-        public override BoundNode VisitDelegateCreationExpression(BoundDelegateCreationExpression node)
+        public override BoundNode VisitDelegateCreationExpression(
+            BoundDelegateCreationExpression node
+        )
         {
             BoundExpression originalArgument = node.Argument;
             BoundExpression rewrittenArgument = (BoundExpression)this.Visit(originalArgument);
@@ -581,18 +721,31 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             // if the original receiver was BoundKind.BaseReference (i.e. from a method group)
             // and the receiver is overridden, change the method to point to a wrapper method
-            if (BaseReferenceInReceiverWasRewritten(originalArgument, rewrittenArgument) && method!.IsMetadataVirtual())
+            if (
+                BaseReferenceInReceiverWasRewritten(originalArgument, rewrittenArgument)
+                && method!.IsMetadataVirtual()
+            )
             {
                 method = GetMethodWrapperForBaseNonVirtualCall(method, originalArgument.Syntax);
             }
             method = VisitMethodSymbol(method);
             TypeSymbol type = this.VisitType(node.Type);
-            return node.Update(rewrittenArgument, method, node.IsExtensionMethod, node.WasTargetTyped, type);
+            return node.Update(
+                rewrittenArgument,
+                method,
+                node.IsExtensionMethod,
+                node.WasTargetTyped,
+                type
+            );
         }
 
         public override BoundNode VisitFunctionPointerLoad(BoundFunctionPointerLoad node)
         {
-            return node.Update(VisitMethodSymbol(node.TargetMethod), VisitType(node.ConstrainedToTypeOpt), VisitType(node.Type));
+            return node.Update(
+                VisitMethodSymbol(node.TargetMethod),
+                VisitType(node.ConstrainedToTypeOpt),
+                VisitType(node.Type)
+            );
         }
 
         public override BoundNode VisitLoweredConditionalAccess(BoundLoweredConditionalAccess node)
@@ -601,7 +754,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var whenNotNull = (BoundExpression)this.Visit(node.WhenNotNull);
             var whenNullOpt = (BoundExpression?)this.Visit(node.WhenNullOpt);
             TypeSymbol type = this.VisitType(node.Type);
-            return node.Update(receiver, VisitMethodSymbol(node.HasValueMethodOpt), whenNotNull, whenNullOpt, node.Id, node.ForceCopyOfNullableValueType, type);
+            return node.Update(
+                receiver,
+                VisitMethodSymbol(node.HasValueMethodOpt),
+                whenNotNull,
+                whenNullOpt,
+                node.Id,
+                node.ForceCopyOfNullableValueType,
+                type
+            );
         }
 
         [return: NotNullIfNotNull(nameof(method))]
@@ -615,7 +776,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (method.ContainingType.IsAnonymousType)
             {
                 //  Method of an anonymous type
-                var newType = (NamedTypeSymbol)TypeMap.SubstituteType(method.ContainingType).AsTypeSymbolOnly();
+                var newType = (NamedTypeSymbol)
+                    TypeMap.SubstituteType(method.ContainingType).AsTypeSymbolOnly();
                 if (ReferenceEquals(newType, method.ContainingType))
                 {
                     //  Anonymous type symbol was not rewritten
@@ -637,8 +799,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 //  Method of a regular type
                 return ((MethodSymbol)method.OriginalDefinition)
-                    .AsMember((NamedTypeSymbol)TypeMap.SubstituteType(method.ContainingType).AsTypeSymbolOnly())
-                    .ConstructIfGeneric(TypeMap.SubstituteTypes(method.TypeArgumentsWithAnnotations));
+                    .AsMember(
+                        (NamedTypeSymbol)
+                            TypeMap.SubstituteType(method.ContainingType).AsTypeSymbolOnly()
+                    )
+                    .ConstructIfGeneric(
+                        TypeMap.SubstituteTypes(method.TypeArgumentsWithAnnotations)
+                    );
             }
         }
 
@@ -653,12 +820,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (!property.ContainingType.IsAnonymousType)
             {
                 //  Property of a regular type
-                return ((PropertySymbol)property.OriginalDefinition)
-                    .AsMember((NamedTypeSymbol)TypeMap.SubstituteType(property.ContainingType).AsTypeSymbolOnly());
+                return ((PropertySymbol)property.OriginalDefinition).AsMember(
+                    (NamedTypeSymbol)
+                        TypeMap.SubstituteType(property.ContainingType).AsTypeSymbolOnly()
+                );
             }
 
             //  Method of an anonymous type
-            var newType = (NamedTypeSymbol)TypeMap.SubstituteType(property.ContainingType).AsTypeSymbolOnly();
+            var newType = (NamedTypeSymbol)
+                TypeMap.SubstituteType(property.ContainingType).AsTypeSymbolOnly();
             if (ReferenceEquals(newType, property.ContainingType))
             {
                 //  Anonymous type symbol was not rewritten
@@ -680,13 +850,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private FieldSymbol VisitFieldSymbol(FieldSymbol field)
         {
             //  Property of a regular type
-            return ((FieldSymbol)field.OriginalDefinition)
-                .AsMember((NamedTypeSymbol)TypeMap.SubstituteType(field.ContainingType).AsTypeSymbolOnly());
+            return ((FieldSymbol)field.OriginalDefinition).AsMember(
+                (NamedTypeSymbol)TypeMap.SubstituteType(field.ContainingType).AsTypeSymbolOnly()
+            );
         }
 
         public override BoundNode VisitObjectInitializerMember(BoundObjectInitializerMember node)
         {
-            ImmutableArray<BoundExpression> arguments = (ImmutableArray<BoundExpression>)this.VisitList(node.Arguments);
+            ImmutableArray<BoundExpression> arguments =
+                (ImmutableArray<BoundExpression>)this.VisitList(node.Arguments);
             TypeSymbol type = this.VisitType(node.Type);
             TypeSymbol receiverType = this.VisitType(node.ReceiverType);
 
@@ -703,7 +875,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     break;
             }
 
-            return node.Update(member, arguments, node.ArgumentNamesOpt, node.ArgumentRefKindsOpt, node.Expanded, node.ArgsToParamsOpt, node.DefaultArguments, node.ResultKind, receiverType, type);
+            return node.Update(
+                member,
+                arguments,
+                node.ArgumentNamesOpt,
+                node.ArgumentRefKindsOpt,
+                node.Expanded,
+                node.ArgsToParamsOpt,
+                node.DefaultArguments,
+                node.ResultKind,
+                receiverType,
+                type
+            );
         }
 
         public override BoundNode VisitReadOnlySpanFromArray(BoundReadOnlySpanFromArray node)
@@ -714,27 +897,47 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return node.Update(operand, method, type);
         }
 
-        private static bool BaseReferenceInReceiverWasRewritten([NotNullWhen(true)] BoundExpression? originalReceiver, [NotNullWhen(true)] BoundExpression? rewrittenReceiver)
+        private static bool BaseReferenceInReceiverWasRewritten(
+            [NotNullWhen(true)] BoundExpression? originalReceiver,
+            [NotNullWhen(true)] BoundExpression? rewrittenReceiver
+        )
         {
-            return originalReceiver is { Kind: BoundKind.BaseReference } &&
-                   rewrittenReceiver is { Kind: not BoundKind.BaseReference };
+            return originalReceiver is { Kind: BoundKind.BaseReference }
+                && rewrittenReceiver is { Kind: not BoundKind.BaseReference };
         }
 
         /// <summary>
-        /// A wrapper method that is created for non-virtually calling a base-class 
+        /// A wrapper method that is created for non-virtually calling a base-class
         /// virtual method from other classes (like those created for lambdas...).
         /// </summary>
         private sealed partial class BaseMethodWrapperSymbol : SynthesizedMethodBaseSymbol
         {
-            internal BaseMethodWrapperSymbol(NamedTypeSymbol containingType, MethodSymbol methodBeingWrapped, SyntaxNode syntax, string name)
-                : base(containingType, methodBeingWrapped, syntax.SyntaxTree.GetReference(syntax), syntax.GetLocation(), name, DeclarationModifiers.Private,
-                      isIterator: false)
+            internal BaseMethodWrapperSymbol(
+                NamedTypeSymbol containingType,
+                MethodSymbol methodBeingWrapped,
+                SyntaxNode syntax,
+                string name
+            )
+                : base(
+                    containingType,
+                    methodBeingWrapped,
+                    syntax.SyntaxTree.GetReference(syntax),
+                    syntax.GetLocation(),
+                    name,
+                    DeclarationModifiers.Private,
+                    isIterator: false
+                )
             {
                 Debug.Assert(containingType.ContainingModule is SourceModuleSymbol);
-                Debug.Assert(ReferenceEquals(methodBeingWrapped, methodBeingWrapped.ConstructedFrom));
+                Debug.Assert(
+                    ReferenceEquals(methodBeingWrapped, methodBeingWrapped.ConstructedFrom)
+                );
                 Debug.Assert(!methodBeingWrapped.IsStatic);
 
-                TypeMap? typeMap = methodBeingWrapped.ContainingType is SubstitutedNamedTypeSymbol substitutedType ? substitutedType.TypeSubstitution : TypeMap.Empty;
+                TypeMap? typeMap = methodBeingWrapped.ContainingType
+                    is SubstitutedNamedTypeSymbol substitutedType
+                    ? substitutedType.TypeSubstitution
+                    : TypeMap.Empty;
 
                 ImmutableArray<TypeParameterSymbol> typeParameters;
                 if (!methodBeingWrapped.IsGenericMethod)
@@ -749,11 +952,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 AssignTypeMapAndTypeParameters(typeMap, typeParameters);
             }
 
-            internal override void AddSynthesizedAttributes(PEModuleBuilder moduleBuilder, ref ArrayBuilder<SynthesizedAttributeData> attributes)
+            internal override void AddSynthesizedAttributes(
+                PEModuleBuilder moduleBuilder,
+                ref ArrayBuilder<SynthesizedAttributeData> attributes
+            )
             {
                 base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
-                AddSynthesizedAttribute(ref attributes, this.DeclaringCompilation.TrySynthesizeAttribute(WellKnownMember.System_Diagnostics_DebuggerHiddenAttribute__ctor));
+                AddSynthesizedAttribute(
+                    ref attributes,
+                    this.DeclaringCompilation.TrySynthesizeAttribute(
+                        WellKnownMember.System_Diagnostics_DebuggerHiddenAttribute__ctor
+                    )
+                );
             }
         }
     }

@@ -11,5 +11,5 @@ public enum OperationType
     Move,
     Copy,
     Test,
-    Invalid
+    Invalid,
 }

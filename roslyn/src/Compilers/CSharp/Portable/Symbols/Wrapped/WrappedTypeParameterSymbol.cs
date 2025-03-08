@@ -13,13 +13,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
     /// <summary>
     /// Represents a type parameter that is based on another type parameter.
-    /// When inheriting from this class, one shouldn't assume that 
+    /// When inheriting from this class, one shouldn't assume that
     /// the default behavior it has is appropriate for every case.
     /// That behavior should be carefully reviewed and derived type
     /// should override behavior as appropriate.
     /// </summary>
-    internal abstract class WrappedTypeParameterSymbol
-        : TypeParameterSymbol
+    internal abstract class WrappedTypeParameterSymbol : TypeParameterSymbol
     {
         /// <summary>
         /// The underlying TypeParameterSymbol, cannot be another RetargetingTypeParameterSymbol.
@@ -34,10 +33,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public TypeParameterSymbol UnderlyingTypeParameter
         {
-            get
-            {
-                return _underlyingTypeParameter;
-            }
+            get { return _underlyingTypeParameter; }
         }
 
         public override bool IsImplicitlyDeclared
@@ -47,119 +43,95 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override TypeParameterKind TypeParameterKind
         {
-            get
-            {
-                return _underlyingTypeParameter.TypeParameterKind;
-            }
+            get { return _underlyingTypeParameter.TypeParameterKind; }
         }
 
         public override int Ordinal
         {
-            get
-            {
-                return _underlyingTypeParameter.Ordinal;
-            }
+            get { return _underlyingTypeParameter.Ordinal; }
         }
 
         public override bool HasConstructorConstraint
         {
-            get
-            {
-                return _underlyingTypeParameter.HasConstructorConstraint;
-            }
+            get { return _underlyingTypeParameter.HasConstructorConstraint; }
         }
 
         public override bool HasReferenceTypeConstraint
         {
-            get
-            {
-                return _underlyingTypeParameter.HasReferenceTypeConstraint;
-            }
+            get { return _underlyingTypeParameter.HasReferenceTypeConstraint; }
         }
 
         public override bool IsReferenceTypeFromConstraintTypes
         {
             get
             {
-                return _underlyingTypeParameter.IsReferenceTypeFromConstraintTypes || CalculateIsReferenceTypeFromConstraintTypes(ConstraintTypesNoUseSiteDiagnostics);
+                return _underlyingTypeParameter.IsReferenceTypeFromConstraintTypes
+                    || CalculateIsReferenceTypeFromConstraintTypes(
+                        ConstraintTypesNoUseSiteDiagnostics
+                    );
             }
         }
 
         internal override bool? ReferenceTypeConstraintIsNullable
         {
-            get
-            {
-                return _underlyingTypeParameter.ReferenceTypeConstraintIsNullable;
-            }
+            get { return _underlyingTypeParameter.ReferenceTypeConstraintIsNullable; }
         }
 
         public override bool HasNotNullConstraint
         {
-            get
-            {
-                return _underlyingTypeParameter.HasNotNullConstraint;
-            }
+            get { return _underlyingTypeParameter.HasNotNullConstraint; }
         }
 
         public override bool HasUnmanagedTypeConstraint
         {
-            get
-            {
-                return _underlyingTypeParameter.HasUnmanagedTypeConstraint;
-            }
+            get { return _underlyingTypeParameter.HasUnmanagedTypeConstraint; }
         }
 
         public override bool HasValueTypeConstraint
         {
-            get
-            {
-                return _underlyingTypeParameter.HasValueTypeConstraint;
-            }
+            get { return _underlyingTypeParameter.HasValueTypeConstraint; }
         }
 
         public override bool IsValueTypeFromConstraintTypes
         {
             get
             {
-                return _underlyingTypeParameter.IsValueTypeFromConstraintTypes || CalculateIsValueTypeFromConstraintTypes(ConstraintTypesNoUseSiteDiagnostics);
+                return _underlyingTypeParameter.IsValueTypeFromConstraintTypes
+                    || CalculateIsValueTypeFromConstraintTypes(ConstraintTypesNoUseSiteDiagnostics);
             }
         }
 
         public override VarianceKind Variance
         {
-            get
-            {
-                return _underlyingTypeParameter.Variance;
-            }
+            get { return _underlyingTypeParameter.Variance; }
         }
 
         public override ImmutableArray<Location> Locations
         {
-            get
-            {
-                return _underlyingTypeParameter.Locations;
-            }
+            get { return _underlyingTypeParameter.Locations; }
         }
 
         public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
         {
-            get
-            {
-                return _underlyingTypeParameter.DeclaringSyntaxReferences;
-            }
+            get { return _underlyingTypeParameter.DeclaringSyntaxReferences; }
         }
 
         public override string Name
         {
-            get
-            {
-                return _underlyingTypeParameter.Name;
-            }
+            get { return _underlyingTypeParameter.Name; }
         }
 
-        public override string GetDocumentationCommentXml(CultureInfo preferredCulture = null, bool expandIncludes = false, CancellationToken cancellationToken = default(CancellationToken))
+        public override string GetDocumentationCommentXml(
+            CultureInfo preferredCulture = null,
+            bool expandIncludes = false,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
-            return _underlyingTypeParameter.GetDocumentationCommentXml(preferredCulture, expandIncludes, cancellationToken);
+            return _underlyingTypeParameter.GetDocumentationCommentXml(
+                preferredCulture,
+                expandIncludes,
+                cancellationToken
+            );
         }
 
         internal override void EnsureAllConstraintsAreResolved()

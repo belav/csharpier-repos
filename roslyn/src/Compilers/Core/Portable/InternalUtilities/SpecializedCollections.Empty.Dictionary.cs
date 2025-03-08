@@ -16,15 +16,15 @@ namespace Roslyn.Utilities
 #nullable disable
                 // Note: if the interfaces we implement weren't oblivious, then we'd warn about the `[MaybeNullWhen(false)] out TValue value` parameter below
                 // We can remove this once `IDictionary` is annotated with `[MaybeNullWhen(false)]`
-                : Collection<KeyValuePair<TKey, TValue>>, IDictionary<TKey, TValue>, IReadOnlyDictionary<TKey, TValue>
+                : Collection<KeyValuePair<TKey, TValue>>,
+                    IDictionary<TKey, TValue>,
+                    IReadOnlyDictionary<TKey, TValue>
 #nullable enable
                 where TKey : notnull
             {
                 public static new readonly Dictionary<TKey, TValue> Instance = new();
 
-                private Dictionary()
-                {
-                }
+                private Dictionary() { }
 
                 public void Add(TKey key, TValue value)
                 {
@@ -38,10 +38,7 @@ namespace Roslyn.Utilities
 
                 public ICollection<TKey> Keys
                 {
-                    get
-                    {
-                        return Collection<TKey>.Instance;
-                    }
+                    get { return Collection<TKey>.Instance; }
                 }
 
                 IEnumerable<TKey> IReadOnlyDictionary<TKey, TValue>.Keys => Keys;
@@ -52,7 +49,10 @@ namespace Roslyn.Utilities
                     throw new NotSupportedException();
                 }
 
-                public bool TryGetValue(TKey key, [MaybeNullWhen(returnValue: false)] out TValue value)
+                public bool TryGetValue(
+                    TKey key,
+                    [MaybeNullWhen(returnValue: false)] out TValue value
+                )
                 {
                     value = default!;
                     return false;
@@ -60,23 +60,13 @@ namespace Roslyn.Utilities
 
                 public ICollection<TValue> Values
                 {
-                    get
-                    {
-                        return Collection<TValue>.Instance;
-                    }
+                    get { return Collection<TValue>.Instance; }
                 }
 
                 public TValue this[TKey key]
                 {
-                    get
-                    {
-                        throw new NotSupportedException();
-                    }
-
-                    set
-                    {
-                        throw new NotSupportedException();
-                    }
+                    get { throw new NotSupportedException(); }
+                    set { throw new NotSupportedException(); }
                 }
             }
         }

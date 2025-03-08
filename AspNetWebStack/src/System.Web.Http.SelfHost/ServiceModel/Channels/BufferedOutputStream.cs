@@ -23,10 +23,18 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
         private int _totalSize;
         private bool _callerReturnsBuffer;
 
-        [SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields", Justification = "Used for internal checking")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1823:AvoidUnusedPrivateFields",
+            Justification = "Used for internal checking"
+        )]
         private bool _bufferReturned;
 
-        [SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields", Justification = "Used for internal checking")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1823:AvoidUnusedPrivateFields",
+            Justification = "Used for internal checking"
+        )]
         private bool _initialized;
 
         // requires an explicit call to Init() by the caller
@@ -64,7 +72,6 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
         public override long Position
         {
             get { throw Error.NotSupported(SRResources.SeekNotSupported); }
-
             set { throw Error.NotSupported(SRResources.SeekNotSupported); }
         }
 
@@ -73,7 +80,12 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             Reinitialize(initialSize, maxSizeQuota, maxSizeQuota, bufferManager);
         }
 
-        public void Reinitialize(int initialSize, int maxSizeQuota, int effectiveMaxSize, BufferManager bufferManager)
+        public void Reinitialize(
+            int initialSize,
+            int maxSizeQuota,
+            int effectiveMaxSize,
+            BufferManager bufferManager
+        )
         {
             Contract.Assert(!_initialized, "Clear must be called before re-initializing stream");
 
@@ -93,7 +105,13 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             _initialized = true;
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
             throw Error.NotSupported(SRResources.ReadNotSupported);
         }
@@ -103,7 +121,13 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             throw Error.NotSupported(SRResources.ReadNotSupported);
         }
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback callback, object state)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        )
         {
             Write(buffer, offset, count);
             return new CompletedAsyncResult(callback, state);
@@ -138,9 +162,7 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             Clear();
         }
 
-        public override void Flush()
-        {
-        }
+        public override void Flush() { }
 
         public override int Read(byte[] buffer, int offset, int count)
         {
@@ -169,7 +191,11 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
             return new MemoryStream(buffer, 0, bufferSize);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", Justification = "Out parameter is fine here.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1021:AvoidOutParameters",
+            Justification = "Out parameter is fine here."
+        )]
         public byte[] ToArray(out int bufferSize)
         {
             Contract.Assert(_initialized, "No data to return from uninitialized stream");
@@ -215,7 +241,10 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
         public override void WriteByte(byte value)
         {
             Contract.Assert(_initialized, "Cannot write to uninitialized stream");
-            Contract.Assert(!_bufferReturned, "Cannot write to stream once ToArray has been called.");
+            Contract.Assert(
+                !_bufferReturned,
+                "Cannot write to stream once ToArray has been called."
+            );
 
             if (_totalSize == _maxSize)
             {
@@ -232,13 +261,18 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
 
         protected virtual Exception CreateQuotaExceededException(int maxSizeQuota)
         {
-            return new InvalidOperationException(Error.Format(SRResources.BufferedOutputStreamQuotaExceeded, maxSizeQuota));
+            return new InvalidOperationException(
+                Error.Format(SRResources.BufferedOutputStreamQuotaExceeded, maxSizeQuota)
+            );
         }
 
         private void WriteCore(byte[] buffer, int offset, int size)
         {
             Contract.Assert(_initialized, "Cannot write to uninitialized stream");
-            Contract.Assert(!_bufferReturned, "Cannot write to stream once ToArray has been called.");
+            Contract.Assert(
+                !_bufferReturned,
+                "Cannot write to stream once ToArray has been called."
+            );
 
             if (size < 0)
             {
@@ -263,7 +297,13 @@ namespace System.Web.Http.SelfHost.ServiceModel.Channels
                 {
                     if (buffer != null)
                     {
-                        Buffer.BlockCopy(buffer, offset, _currentChunk, _currentChunkSize, remainingSizeInChunk);
+                        Buffer.BlockCopy(
+                            buffer,
+                            offset,
+                            _currentChunk,
+                            _currentChunkSize,
+                            remainingSizeInChunk
+                        );
                     }
 
                     _currentChunkSize = _currentChunk.Length;

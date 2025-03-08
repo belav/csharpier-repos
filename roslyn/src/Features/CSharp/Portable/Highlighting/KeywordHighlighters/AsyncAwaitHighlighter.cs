@@ -21,19 +21,22 @@ namespace Microsoft.CodeAnalysis.CSharp.KeywordHighlighting.KeywordHighlighters
     [ExportHighlighter(LanguageNames.CSharp), Shared]
     internal class AsyncAwaitHighlighter : AbstractKeywordHighlighter
     {
-        private static readonly ObjectPool<Stack<SyntaxNode>> s_stackPool
-            = SharedPools.Default<Stack<SyntaxNode>>();
+        private static readonly ObjectPool<Stack<SyntaxNode>> s_stackPool = SharedPools.Default<
+            Stack<SyntaxNode>
+        >();
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AsyncAwaitHighlighter()
-        {
-        }
+        public AsyncAwaitHighlighter() { }
 
-        protected override bool IsHighlightableNode(SyntaxNode node)
-            => node.IsReturnableConstructOrTopLevelCompilationUnit();
+        protected override bool IsHighlightableNode(SyntaxNode node) =>
+            node.IsReturnableConstructOrTopLevelCompilationUnit();
 
-        protected override void AddHighlightsForNode(SyntaxNode node, List<TextSpan> highlights, CancellationToken cancellationToken)
+        protected override void AddHighlightsForNode(
+            SyntaxNode node,
+            List<TextSpan> highlights,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var current in WalkChildren(node))
             {
@@ -73,17 +76,36 @@ namespace Microsoft.CodeAnalysis.CSharp.KeywordHighlighting.KeywordHighlighters
             }
         }
 
-        private static bool HighlightRelatedKeywords(SyntaxNode node, List<TextSpan> spans)
-            => node switch
+        private static bool HighlightRelatedKeywords(SyntaxNode node, List<TextSpan> spans) =>
+            node switch
             {
-                MethodDeclarationSyntax methodDeclaration => TryAddAsyncModifier(methodDeclaration.Modifiers, spans),
-                LocalFunctionStatementSyntax localFunction => TryAddAsyncModifier(localFunction.Modifiers, spans),
-                AnonymousFunctionExpressionSyntax anonymousFunction => TryAddAsyncOrAwaitKeyword(anonymousFunction.AsyncKeyword, spans),
-                UsingStatementSyntax usingStatement => TryAddAsyncOrAwaitKeyword(usingStatement.AwaitKeyword, spans),
+                MethodDeclarationSyntax methodDeclaration => TryAddAsyncModifier(
+                    methodDeclaration.Modifiers,
+                    spans
+                ),
+                LocalFunctionStatementSyntax localFunction => TryAddAsyncModifier(
+                    localFunction.Modifiers,
+                    spans
+                ),
+                AnonymousFunctionExpressionSyntax anonymousFunction => TryAddAsyncOrAwaitKeyword(
+                    anonymousFunction.AsyncKeyword,
+                    spans
+                ),
+                UsingStatementSyntax usingStatement => TryAddAsyncOrAwaitKeyword(
+                    usingStatement.AwaitKeyword,
+                    spans
+                ),
                 LocalDeclarationStatementSyntax localDeclaration =>
-                    localDeclaration.UsingKeyword.Kind() == SyntaxKind.UsingKeyword && TryAddAsyncOrAwaitKeyword(localDeclaration.AwaitKeyword, spans),
-                CommonForEachStatementSyntax forEachStatement => TryAddAsyncOrAwaitKeyword(forEachStatement.AwaitKeyword, spans),
-                AwaitExpressionSyntax awaitExpression => TryAddAsyncOrAwaitKeyword(awaitExpression.AwaitKeyword, spans),
+                    localDeclaration.UsingKeyword.Kind() == SyntaxKind.UsingKeyword
+                        && TryAddAsyncOrAwaitKeyword(localDeclaration.AwaitKeyword, spans),
+                CommonForEachStatementSyntax forEachStatement => TryAddAsyncOrAwaitKeyword(
+                    forEachStatement.AwaitKeyword,
+                    spans
+                ),
+                AwaitExpressionSyntax awaitExpression => TryAddAsyncOrAwaitKeyword(
+                    awaitExpression.AwaitKeyword,
+                    spans
+                ),
                 _ => false,
             };
 

@@ -7,5 +7,5 @@ internal enum CommandOptionType
 {
     MultipleValue,
     SingleValue,
-    NoValue
+    NoValue,
 }

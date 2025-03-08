@@ -22,20 +22,57 @@ public class Program
     [MethodImpl(MethodImplOptions.NoInlining)]
     static void Consume(ushort u)
     {
-         if (u == 1)
-         {
-             s_result = 100;
-         }
+        if (u == 1)
+        {
+            s_result = 100;
+        }
     }
 
     [Fact]
     public static int TestEntryPoint()
     {
-        ushort[] vr3 = new ushort[]{0};
+        ushort[] vr3 = new ushort[] { 0 };
         for (int vr4 = 0; vr4 < 2; vr4++)
         {
             vr3[0] = 1;
-            var vr5 = new byte[][][][]{new byte[][][]{new byte[][]{new byte[]{1}, new byte[]{1, 1}}}, new byte[][][]{new byte[][]{new byte[]{1, 1}, new byte[]{1, 1}}, new byte[][]{new byte[]{1}}, new byte[][]{new byte[]{1}}, new byte[][]{new byte[]{1}, new byte[]{1}}, new byte[][]{new byte[]{1}}}, new byte[][][]{new byte[][]{new byte[]{1}}, new byte[][]{new byte[]{1}}, new byte[][]{new byte[]{1}}, new byte[][]{new byte[]{1}, new byte[]{1}}, new byte[][]{new byte[]{1}, new byte[]{1}, new byte[]{1}}, new byte[][]{new byte[]{1}}}, new byte[][][]{new byte[][]{new byte[]{1, 1}}, new byte[][]{new byte[]{1}}, new byte[][]{new byte[]{1, 1}}, new byte[][]{new byte[]{0}}, new byte[][]{new byte[]{1}, new byte[]{1, 1}}}, new byte[][][]{new byte[][]{new byte[]{0}, new byte[]{0}, new byte[]{1}}, new byte[][]{new byte[]{1}, new byte[]{1, 1}}, new byte[][]{new byte[]{1}}, new byte[][]{new byte[]{1}}, new byte[][]{new byte[]{1}}}, new byte[][][]{new byte[][]{new byte[]{1, 1}}}};
+            var vr5 = new byte[][][][]
+            {
+                new byte[][][] { new byte[][] { new byte[] { 1 }, new byte[] { 1, 1 } } },
+                new byte[][][]
+                {
+                    new byte[][] { new byte[] { 1, 1 }, new byte[] { 1, 1 } },
+                    new byte[][] { new byte[] { 1 } },
+                    new byte[][] { new byte[] { 1 } },
+                    new byte[][] { new byte[] { 1 }, new byte[] { 1 } },
+                    new byte[][] { new byte[] { 1 } },
+                },
+                new byte[][][]
+                {
+                    new byte[][] { new byte[] { 1 } },
+                    new byte[][] { new byte[] { 1 } },
+                    new byte[][] { new byte[] { 1 } },
+                    new byte[][] { new byte[] { 1 }, new byte[] { 1 } },
+                    new byte[][] { new byte[] { 1 }, new byte[] { 1 }, new byte[] { 1 } },
+                    new byte[][] { new byte[] { 1 } },
+                },
+                new byte[][][]
+                {
+                    new byte[][] { new byte[] { 1, 1 } },
+                    new byte[][] { new byte[] { 1 } },
+                    new byte[][] { new byte[] { 1, 1 } },
+                    new byte[][] { new byte[] { 0 } },
+                    new byte[][] { new byte[] { 1 }, new byte[] { 1, 1 } },
+                },
+                new byte[][][]
+                {
+                    new byte[][] { new byte[] { 0 }, new byte[] { 0 }, new byte[] { 1 } },
+                    new byte[][] { new byte[] { 1 }, new byte[] { 1, 1 } },
+                    new byte[][] { new byte[] { 1 } },
+                    new byte[][] { new byte[] { 1 } },
+                    new byte[][] { new byte[] { 1 } },
+                },
+                new byte[][][] { new byte[][] { new byte[] { 1, 1 } } },
+            };
             var vr6 = vr3[0];
             Consume(vr6);
         }

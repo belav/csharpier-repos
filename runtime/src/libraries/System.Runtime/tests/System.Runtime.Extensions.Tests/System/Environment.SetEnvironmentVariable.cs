@@ -28,15 +28,27 @@ namespace System.Tests
         [Fact]
         public void NullVariableThrowsArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>(() => Environment.SetEnvironmentVariable(null, "test"));
+            Assert.Throws<ArgumentNullException>(() =>
+                Environment.SetEnvironmentVariable(null, "test")
+            );
         }
 
         [Fact]
         public void IncorrectVariableThrowsArgument()
         {
-            AssertExtensions.Throws<ArgumentException>("variable", () => Environment.SetEnvironmentVariable(string.Empty, "test"));
-            AssertExtensions.Throws<ArgumentException>("variable", () => Environment.SetEnvironmentVariable(NullString, "test"));
-            AssertExtensions.Throws<ArgumentException>("variable", null, () => Environment.SetEnvironmentVariable("Variable=Something", "test"));
+            AssertExtensions.Throws<ArgumentException>(
+                "variable",
+                () => Environment.SetEnvironmentVariable(string.Empty, "test")
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "variable",
+                () => Environment.SetEnvironmentVariable(NullString, "test")
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "variable",
+                null,
+                () => Environment.SetEnvironmentVariable("Variable=Something", "test")
+            );
         }
 
         [Fact]
@@ -79,76 +91,86 @@ namespace System.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         public void EnvironmentVariableTooLarge_Throws()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                string longVar;
-                string val = "Test_SetEnvironmentVariable_EnvironmentVariableTooLarge_Throws";
+            RemoteExecutor
+                .Invoke(() =>
+                {
+                    string longVar;
+                    string val = "Test_SetEnvironmentVariable_EnvironmentVariableTooLarge_Throws";
 
-                try
-                {
-                    // string slightly less than 2 GiB (1 GiB for x86) so the constructor doesn't fail
-                    var count = (Environment.Is64BitProcess ? 1024 * 1024 * 1024 : 512 * 1024 * 1024) - 64;
-                    longVar = new string('c', count);
-                }
-                catch (OutOfMemoryException)
-                {
-                    // not enough memory to allocate a string at test time
+                    try
+                    {
+                        // string slightly less than 2 GiB (1 GiB for x86) so the constructor doesn't fail
+                        var count =
+                            (Environment.Is64BitProcess ? 1024 * 1024 * 1024 : 512 * 1024 * 1024)
+                            - 64;
+                        longVar = new string('c', count);
+                    }
+                    catch (OutOfMemoryException)
+                    {
+                        // not enough memory to allocate a string at test time
+                        return RemoteExecutor.SuccessExitCode;
+                    }
+
+                    try
+                    {
+                        Environment.SetEnvironmentVariable(longVar, val);
+                        // no exception is ok since we cannot construct an argument long enough to break the function
+                        // in that particular environment
+                    }
+                    catch (OutOfMemoryException)
+                    {
+                        // expected
+                    }
                     return RemoteExecutor.SuccessExitCode;
-                }
-
-                try
-                {
-                    Environment.SetEnvironmentVariable(longVar, val);
-                    // no exception is ok since we cannot construct an argument long enough to break the function
-                    // in that particular environment
-                }
-                catch (OutOfMemoryException)
-                {
-                    // expected
-                }
-                return RemoteExecutor.SuccessExitCode;
-            }).Dispose();
+                })
+                .Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         [PlatformSpecific(TestPlatforms.Windows)]
         public void EnvironmentVariableValueTooLarge_Throws()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                string var = "Test_SetEnvironmentVariable_EnvironmentVariableValueTooLarge_Throws";
-                string longVal;
+            RemoteExecutor
+                .Invoke(() =>
+                {
+                    string var =
+                        "Test_SetEnvironmentVariable_EnvironmentVariableValueTooLarge_Throws";
+                    string longVal;
 
-                try
-                {
-                    // string slightly less than 2 GiB (1 GiB for x86) so the constructor doesn't fail
-                    var count = (Environment.Is64BitProcess ? 1024 * 1024 * 1024 : 512 * 1024 * 1024) - 64;
-                    longVal = new string('c', count);
-                }
-                catch (OutOfMemoryException)
-                {
-                    // not enough memory to allocate a string at test time
+                    try
+                    {
+                        // string slightly less than 2 GiB (1 GiB for x86) so the constructor doesn't fail
+                        var count =
+                            (Environment.Is64BitProcess ? 1024 * 1024 * 1024 : 512 * 1024 * 1024)
+                            - 64;
+                        longVal = new string('c', count);
+                    }
+                    catch (OutOfMemoryException)
+                    {
+                        // not enough memory to allocate a string at test time
+                        return RemoteExecutor.SuccessExitCode;
+                    }
+
+                    try
+                    {
+                        Environment.SetEnvironmentVariable(var, longVal);
+                        // no exception is ok since we cannot construct an argument long enough to break the function
+                        // in that particular environment
+                    }
+                    catch (OutOfMemoryException)
+                    {
+                        // expected
+                    }
                     return RemoteExecutor.SuccessExitCode;
-                }
-
-                try
-                {
-                    Environment.SetEnvironmentVariable(var, longVal);
-                    // no exception is ok since we cannot construct an argument long enough to break the function
-                    // in that particular environment
-                }
-                catch (OutOfMemoryException)
-                {
-                    // expected
-                }
-                return RemoteExecutor.SuccessExitCode;
-            }).Dispose();
+                })
+                .Dispose();
         }
 
         private static void ExecuteAgainstTarget(
             EnvironmentVariableTarget target,
             Action action,
-            Action cleanUp = null)
+            Action cleanUp = null
+        )
         {
             bool shouldCleanUp = cleanUp != null;
             try
@@ -158,7 +180,10 @@ namespace System.Tests
             catch (SecurityException)
             {
                 shouldCleanUp = false;
-                Assert.True(target == EnvironmentVariableTarget.Machine, "only machine target should have access issues");
+                Assert.True(
+                    target == EnvironmentVariableTarget.Machine,
+                    "only machine target should have access issues"
+                );
                 Assert.True(PlatformDetection.IsWindows, "and it should be Windows");
                 Assert.False(PlatformDetection.IsPrivilegedProcess, "and we shouldn't be elevated");
             }
@@ -170,108 +195,135 @@ namespace System.Tests
         }
 
         [Theory]
-        [MemberData(nameof(EnvironmentTests.EnvironmentVariableTargets), MemberType = typeof(EnvironmentTests))]
+        [MemberData(
+            nameof(EnvironmentTests.EnvironmentVariableTargets),
+            MemberType = typeof(EnvironmentTests)
+        )]
         public void Default(EnvironmentVariableTarget target)
         {
             string varName = $"Test_SetEnvironmentVariable_Default ({target})";
             const string value = "true";
 
-            ExecuteAgainstTarget(target,
-            () =>
-            {
-                Environment.SetEnvironmentVariable(varName, value, target);
-                Assert.Equal(IsSupportedTarget(target) ? value : null,
-                    Environment.GetEnvironmentVariable(varName, target));
-            },
-            () =>
-            {
-                // Clear the test variable
-                Environment.SetEnvironmentVariable(varName, null, target);
-            });
+            ExecuteAgainstTarget(
+                target,
+                () =>
+                {
+                    Environment.SetEnvironmentVariable(varName, value, target);
+                    Assert.Equal(
+                        IsSupportedTarget(target) ? value : null,
+                        Environment.GetEnvironmentVariable(varName, target)
+                    );
+                },
+                () =>
+                {
+                    // Clear the test variable
+                    Environment.SetEnvironmentVariable(varName, null, target);
+                }
+            );
         }
 
-
         [Theory]
-        [MemberData(nameof(EnvironmentTests.EnvironmentVariableTargets), MemberType = typeof(EnvironmentTests))]
+        [MemberData(
+            nameof(EnvironmentTests.EnvironmentVariableTargets),
+            MemberType = typeof(EnvironmentTests)
+        )]
         public void ModifyEnvironmentVariable(EnvironmentVariableTarget target)
         {
             string varName = $"Test_ModifyEnvironmentVariable ({target})";
             const string value = "false";
 
-            ExecuteAgainstTarget(target,
-            () =>
-            {
-                // First set the value to something and then change it and ensure that it gets modified.
-                Environment.SetEnvironmentVariable(varName, "true", target);
+            ExecuteAgainstTarget(
+                target,
+                () =>
+                {
+                    // First set the value to something and then change it and ensure that it gets modified.
+                    Environment.SetEnvironmentVariable(varName, "true", target);
 
-                Environment.SetEnvironmentVariable(varName, value, target);
+                    Environment.SetEnvironmentVariable(varName, value, target);
 
-                // Check whether the variable exists.
-                Assert.Equal(IsSupportedTarget(target) ? value : null, Environment.GetEnvironmentVariable(varName, target));
-            },
-            () =>
-            {
-                // Clear the test variable
-                Environment.SetEnvironmentVariable(varName, null, target);
-            });
+                    // Check whether the variable exists.
+                    Assert.Equal(
+                        IsSupportedTarget(target) ? value : null,
+                        Environment.GetEnvironmentVariable(varName, target)
+                    );
+                },
+                () =>
+                {
+                    // Clear the test variable
+                    Environment.SetEnvironmentVariable(varName, null, target);
+                }
+            );
         }
 
         [Theory]
-        [MemberData(nameof(EnvironmentTests.EnvironmentVariableTargets), MemberType = typeof(EnvironmentTests))]
+        [MemberData(
+            nameof(EnvironmentTests.EnvironmentVariableTargets),
+            MemberType = typeof(EnvironmentTests)
+        )]
         public void ModifyEnvironmentVariable_AndEnumerate(EnvironmentVariableTarget target)
         {
             string varName = $"Test_ModifyEnvironmentVariable_AndEnumerate ({target})";
             const string value = "false";
 
-            ExecuteAgainstTarget(target,
-            () =>
-            {
-                // First set the value to something and then change it and ensure that it gets modified.
-                Environment.SetEnvironmentVariable(varName, "true", target);
-
-                // Enumerate to validate our first value to ensure we can still set after enumerating
-                IDictionary variables = Environment.GetEnvironmentVariables(target);
-                if (IsSupportedTarget(target))
+            ExecuteAgainstTarget(
+                target,
+                () =>
                 {
-                    Assert.True(variables.Contains(varName), "has the key we entered");
-                    Assert.Equal("true", variables[varName]);
+                    // First set the value to something and then change it and ensure that it gets modified.
+                    Environment.SetEnvironmentVariable(varName, "true", target);
+
+                    // Enumerate to validate our first value to ensure we can still set after enumerating
+                    IDictionary variables = Environment.GetEnvironmentVariables(target);
+                    if (IsSupportedTarget(target))
+                    {
+                        Assert.True(variables.Contains(varName), "has the key we entered");
+                        Assert.Equal("true", variables[varName]);
+                    }
+
+                    Environment.SetEnvironmentVariable(varName, value, target);
+
+                    // Check whether the variable exists.
+                    Assert.Equal(
+                        IsSupportedTarget(target) ? value : null,
+                        Environment.GetEnvironmentVariable(varName, target)
+                    );
+                },
+                () =>
+                {
+                    // Clear the test variable
+                    Environment.SetEnvironmentVariable(varName, null, target);
                 }
-
-                Environment.SetEnvironmentVariable(varName, value, target);
-
-                // Check whether the variable exists.
-                Assert.Equal(IsSupportedTarget(target) ? value : null, Environment.GetEnvironmentVariable(varName, target));
-            },
-            () =>
-            {
-                // Clear the test variable
-                Environment.SetEnvironmentVariable(varName, null, target);
-            });
+            );
         }
 
         [Theory]
-        [MemberData(nameof(EnvironmentTests.EnvironmentVariableTargets), MemberType = typeof(EnvironmentTests))]
+        [MemberData(
+            nameof(EnvironmentTests.EnvironmentVariableTargets),
+            MemberType = typeof(EnvironmentTests)
+        )]
         public void DeleteEnvironmentVariable(EnvironmentVariableTarget target)
         {
             string varName = $"Test_DeleteEnvironmentVariable ({target})";
             const string value = "false";
 
-            ExecuteAgainstTarget(target,
-            () =>
-            {
-                // First set the value to something and then ensure that it can be deleted.
-                Environment.SetEnvironmentVariable(varName, value);
-                Environment.SetEnvironmentVariable(varName, string.Empty);
-                Assert.Null(Environment.GetEnvironmentVariable(varName));
+            ExecuteAgainstTarget(
+                target,
+                () =>
+                {
+                    // First set the value to something and then ensure that it can be deleted.
+                    Environment.SetEnvironmentVariable(varName, value);
+                    Environment.SetEnvironmentVariable(varName, string.Empty);
+                    Assert.Null(Environment.GetEnvironmentVariable(varName));
 
-                Environment.SetEnvironmentVariable(varName, value);
-                Environment.SetEnvironmentVariable(varName, null);
-                Assert.Null(Environment.GetEnvironmentVariable(varName));
+                    Environment.SetEnvironmentVariable(varName, value);
+                    Environment.SetEnvironmentVariable(varName, null);
+                    Assert.Null(Environment.GetEnvironmentVariable(varName));
 
-                Environment.SetEnvironmentVariable(varName, value);
-                Environment.SetEnvironmentVariable(varName, NullString);
-                Assert.Null(Environment.GetEnvironmentVariable(varName));
-            });
+                    Environment.SetEnvironmentVariable(varName, value);
+                    Environment.SetEnvironmentVariable(varName, NullString);
+                    Assert.Null(Environment.GetEnvironmentVariable(varName));
+                }
+            );
         }
 
         [Fact]
@@ -363,7 +415,10 @@ namespace System.Tests
                 Environment.SetEnvironmentVariable(varName, null);
             }
 
-            Environment.SetEnvironmentVariable("TestDeletingNonExistingEnvironmentVariable", string.Empty);
+            Environment.SetEnvironmentVariable(
+                "TestDeletingNonExistingEnvironmentVariable",
+                string.Empty
+            );
         }
     }
 }

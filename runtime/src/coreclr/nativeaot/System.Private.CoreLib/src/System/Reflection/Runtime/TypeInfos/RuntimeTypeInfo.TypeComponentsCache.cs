@@ -9,9 +9,7 @@ using System.Reflection;
 using System.Reflection.Runtime.BindingFlagSupport;
 using System.Reflection.Runtime.General;
 using System.Threading;
-
 using Internal.Reflection.Core.Execution;
-
 using Unsafe = System.Runtime.CompilerServices.Unsafe;
 
 namespace System.Reflection.Runtime.TypeInfos
@@ -33,8 +31,14 @@ namespace System.Reflection.Runtime.TypeInfos
             {
                 _type = type;
 
-                _perNameQueryCaches_CaseSensitive = CreatePerNameQueryCaches(type, ignoreCase: false);
-                _perNameQueryCaches_CaseInsensitive = CreatePerNameQueryCaches(type, ignoreCase: true);
+                _perNameQueryCaches_CaseSensitive = CreatePerNameQueryCaches(
+                    type,
+                    ignoreCase: false
+                );
+                _perNameQueryCaches_CaseInsensitive = CreatePerNameQueryCaches(
+                    type,
+                    ignoreCase: true
+                );
 
                 _nameAgnosticQueryCaches = new object[MemberTypeIndex.Count];
             }
@@ -44,10 +48,17 @@ namespace System.Reflection.Runtime.TypeInfos
             //
             //  BindingFlags == Public | NonPublic | Instance | Static | FlattenHierarchy
             //
-            public QueriedMemberList<M> GetQueriedMembers<M>(MemberPolicies<M> policies, string name, bool ignoreCase) where M : MemberInfo
+            public QueriedMemberList<M> GetQueriedMembers<M>(
+                MemberPolicies<M> policies,
+                string name,
+                bool ignoreCase
+            )
+                where M : MemberInfo
             {
                 int index = policies.Index;
-                object obj = ignoreCase ? _perNameQueryCaches_CaseInsensitive[index] : _perNameQueryCaches_CaseSensitive[index];
+                object obj = ignoreCase
+                    ? _perNameQueryCaches_CaseInsensitive[index]
+                    : _perNameQueryCaches_CaseSensitive[index];
                 Debug.Assert(obj is PerNameQueryCache<M>);
                 PerNameQueryCache<M> unifier = Unsafe.As<PerNameQueryCache<M>>(obj);
 
@@ -63,13 +74,19 @@ namespace System.Reflection.Runtime.TypeInfos
             //
             //  BindingFlags == Public | NonPublic | Instance | Static | FlattenHierarchy
             //
-            public QueriedMemberList<M> GetQueriedMembers<M>(MemberPolicies<M> policies) where M : MemberInfo
+            public QueriedMemberList<M> GetQueriedMembers<M>(MemberPolicies<M> policies)
+                where M : MemberInfo
             {
                 int index = policies.Index;
                 object result = Volatile.Read(ref _nameAgnosticQueryCaches[index]);
                 if (result == null)
                 {
-                    QueriedMemberList<M> newResult = QueriedMemberList<M>.Create(policies, _type, optionalNameFilter: null, ignoreCase: false);
+                    QueriedMemberList<M> newResult = QueriedMemberList<M>.Create(
+                        policies,
+                        _type,
+                        optionalNameFilter: null,
+                        ignoreCase: false
+                    );
                     newResult.Compact();
                     result = newResult;
                     Volatile.Write(ref _nameAgnosticQueryCaches[index], result);
@@ -82,12 +99,30 @@ namespace System.Reflection.Runtime.TypeInfos
             private static object[] CreatePerNameQueryCaches(RuntimeTypeInfo type, bool ignoreCase)
             {
                 object[] perNameCaches = new object[MemberTypeIndex.Count];
-                perNameCaches[MemberTypeIndex.Constructor] = new PerNameQueryCache<ConstructorInfo>(type, ignoreCase: ignoreCase);
-                perNameCaches[MemberTypeIndex.Event] = new PerNameQueryCache<EventInfo>(type, ignoreCase: ignoreCase);
-                perNameCaches[MemberTypeIndex.Field] = new PerNameQueryCache<FieldInfo>(type, ignoreCase: ignoreCase);
-                perNameCaches[MemberTypeIndex.Method] = new PerNameQueryCache<MethodInfo>(type, ignoreCase: ignoreCase);
-                perNameCaches[MemberTypeIndex.Property] = new PerNameQueryCache<PropertyInfo>(type, ignoreCase: ignoreCase);
-                perNameCaches[MemberTypeIndex.NestedType] = new PerNameQueryCache<Type>(type, ignoreCase: ignoreCase);
+                perNameCaches[MemberTypeIndex.Constructor] = new PerNameQueryCache<ConstructorInfo>(
+                    type,
+                    ignoreCase: ignoreCase
+                );
+                perNameCaches[MemberTypeIndex.Event] = new PerNameQueryCache<EventInfo>(
+                    type,
+                    ignoreCase: ignoreCase
+                );
+                perNameCaches[MemberTypeIndex.Field] = new PerNameQueryCache<FieldInfo>(
+                    type,
+                    ignoreCase: ignoreCase
+                );
+                perNameCaches[MemberTypeIndex.Method] = new PerNameQueryCache<MethodInfo>(
+                    type,
+                    ignoreCase: ignoreCase
+                );
+                perNameCaches[MemberTypeIndex.Property] = new PerNameQueryCache<PropertyInfo>(
+                    type,
+                    ignoreCase: ignoreCase
+                );
+                perNameCaches[MemberTypeIndex.NestedType] = new PerNameQueryCache<Type>(
+                    type,
+                    ignoreCase: ignoreCase
+                );
                 return perNameCaches;
             }
 
@@ -115,7 +150,9 @@ namespace System.Reflection.Runtime.TypeInfos
             //
             // In addition, if "ignoreCase" was passed to the constructor, BindingFlags.IgnoreCase is also in effect.
             //
-            private sealed class PerNameQueryCache<M> : ConcurrentUnifier<string, QueriedMemberList<M>> where M : MemberInfo
+            private sealed class PerNameQueryCache<M>
+                : ConcurrentUnifier<string, QueriedMemberList<M>>
+                where M : MemberInfo
             {
                 public PerNameQueryCache(RuntimeTypeInfo type, bool ignoreCase)
                 {
@@ -127,7 +164,16 @@ namespace System.Reflection.Runtime.TypeInfos
                 // purpose - the PerNameQueryCache instances are created eagerly, but not all apps might require
                 // MemberPolicies for all members. This allows us to delay creating the MemberPolicies instance
                 // until the need arises.
-                public void SetPolicies(MemberPolicies<M> policies, Func<MemberPolicies<M>, RuntimeTypeInfo, string, bool, QueriedMemberList<M>> factory)
+                public void SetPolicies(
+                    MemberPolicies<M> policies,
+                    Func<
+                        MemberPolicies<M>,
+                        RuntimeTypeInfo,
+                        string,
+                        bool,
+                        QueriedMemberList<M>
+                    > factory
+                )
                 {
                     _policies = policies;
                     _factory = factory;
@@ -141,7 +187,13 @@ namespace System.Reflection.Runtime.TypeInfos
                 }
 
                 private MemberPolicies<M> _policies;
-                private Func<MemberPolicies<M>, RuntimeTypeInfo, string, bool, QueriedMemberList<M>> _factory;
+                private Func<
+                    MemberPolicies<M>,
+                    RuntimeTypeInfo,
+                    string,
+                    bool,
+                    QueriedMemberList<M>
+                > _factory;
                 private readonly RuntimeTypeInfo _type;
                 private readonly bool _ignoreCase;
             }

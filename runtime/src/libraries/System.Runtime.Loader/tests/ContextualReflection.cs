@@ -13,13 +13,11 @@ using Xunit;
 
 namespace System.Runtime.Loader.Tests
 {
-    class AGenericClass<T>
-    {
-    }
+    class AGenericClass<T> { }
 
     class MockAssembly : Assembly
     {
-        public MockAssembly() {}
+        public MockAssembly() { }
     }
 
     public class ContextualReflectionTestFixture : IContextualReflectionTestFixture
@@ -33,71 +31,158 @@ namespace System.Runtime.Loader.Tests
         public Assembly defaultAlcAssembly { get; }
         public Type defaultAlcFixtureType { get; }
 
-        public Assembly GetExecutingAssembly() { return Assembly.GetExecutingAssembly(); }
+        public Assembly GetExecutingAssembly()
+        {
+            return Assembly.GetExecutingAssembly();
+        }
 
-        public Assembly AssemblyLoad(AssemblyName name) { return Assembly.Load(name); }
+        public Assembly AssemblyLoad(AssemblyName name)
+        {
+            return Assembly.Load(name);
+        }
 
-        public Assembly AssemblyLoad(string name) { return Assembly.Load(name); }
+        public Assembly AssemblyLoad(string name)
+        {
+            return Assembly.Load(name);
+        }
 
 #pragma warning disable 618
-        public Assembly AssemblyLoadWithPartialName(string name) { return Assembly.LoadWithPartialName(name); }
+        public Assembly AssemblyLoadWithPartialName(string name)
+        {
+            return Assembly.LoadWithPartialName(name);
+        }
 #pragma warning restore 618
 
         public Type TypeGetType(string typeName)
-        { return Type.GetType(typeName); }
+        {
+            return Type.GetType(typeName);
+        }
 
         public Type TypeGetType(string typeName, bool throwOnError)
-        { return Type.GetType(typeName, throwOnError); }
+        {
+            return Type.GetType(typeName, throwOnError);
+        }
 
         public Type TypeGetType(string typeName, bool throwOnError, bool ignoreCase)
-        { return Type.GetType(typeName, throwOnError, ignoreCase); }
+        {
+            return Type.GetType(typeName, throwOnError, ignoreCase);
+        }
 
-        public Type TypeGetType(string typeName, Func<AssemblyName,Assembly> assemblyResolver, Func<Assembly, string, Boolean, Type> typeResolver)
-        { return Type.GetType(typeName, assemblyResolver, typeResolver); }
+        public Type TypeGetType(
+            string typeName,
+            Func<AssemblyName, Assembly> assemblyResolver,
+            Func<Assembly, string, Boolean, Type> typeResolver
+        )
+        {
+            return Type.GetType(typeName, assemblyResolver, typeResolver);
+        }
 
-        public Type TypeGetType(string typeName, Func<AssemblyName,Assembly> assemblyResolver, Func<Assembly, string, Boolean, Type> typeResolver, bool throwOnError)
-        { return Type.GetType(typeName, assemblyResolver, typeResolver, throwOnError); }
+        public Type TypeGetType(
+            string typeName,
+            Func<AssemblyName, Assembly> assemblyResolver,
+            Func<Assembly, string, Boolean, Type> typeResolver,
+            bool throwOnError
+        )
+        {
+            return Type.GetType(typeName, assemblyResolver, typeResolver, throwOnError);
+        }
 
-        public Type TypeGetType(string typeName, Func<AssemblyName,Assembly> assemblyResolver, Func<Assembly, string, Boolean, Type> typeResolver, bool throwOnError, bool ignoreCase)
-        { return Type.GetType(typeName, assemblyResolver, typeResolver, throwOnError, ignoreCase); }
+        public Type TypeGetType(
+            string typeName,
+            Func<AssemblyName, Assembly> assemblyResolver,
+            Func<Assembly, string, Boolean, Type> typeResolver,
+            bool throwOnError,
+            bool ignoreCase
+        )
+        {
+            return Type.GetType(typeName, assemblyResolver, typeResolver, throwOnError, ignoreCase);
+        }
 
         public Type AssemblyGetType(Assembly assembly, string typeName)
-        { return assembly.GetType(typeName); }
+        {
+            return assembly.GetType(typeName);
+        }
 
         public Type AssemblyGetType(Assembly assembly, string typeName, bool throwOnError)
-        { return assembly.GetType(typeName, throwOnError); }
+        {
+            return assembly.GetType(typeName, throwOnError);
+        }
 
-        public Type AssemblyGetType(Assembly assembly, string typeName, bool throwOnError, bool ignoreCase)
-        { return assembly.GetType(typeName, throwOnError, ignoreCase); }
+        public Type AssemblyGetType(
+            Assembly assembly,
+            string typeName,
+            bool throwOnError,
+            bool ignoreCase
+        )
+        {
+            return assembly.GetType(typeName, throwOnError, ignoreCase);
+        }
 
         public ObjectHandle ActivatorCreateInstance(string assemblyName, string typeName)
-        { return Activator.CreateInstance(assemblyName, typeName); }
+        {
+            return Activator.CreateInstance(assemblyName, typeName);
+        }
 
-        public ObjectHandle ActivatorCreateInstance(string assemblyName, string typeName, object[] activationAttributes)
-        { return Activator.CreateInstance(assemblyName, typeName, activationAttributes); }
+        public ObjectHandle ActivatorCreateInstance(
+            string assemblyName,
+            string typeName,
+            object[] activationAttributes
+        )
+        {
+            return Activator.CreateInstance(assemblyName, typeName, activationAttributes);
+        }
 
-        public ObjectHandle ActivatorCreateInstance(string assemblyName, string typeName, bool ignoreCase, System.Reflection.BindingFlags bindingAttr, System.Reflection.Binder binder, object[] args, System.Globalization.CultureInfo culture, object[] activationAttributes)
-        { return Activator.CreateInstance(assemblyName, typeName, ignoreCase, bindingAttr, binder, args, culture, activationAttributes); }
+        public ObjectHandle ActivatorCreateInstance(
+            string assemblyName,
+            string typeName,
+            bool ignoreCase,
+            System.Reflection.BindingFlags bindingAttr,
+            System.Reflection.Binder binder,
+            object[] args,
+            System.Globalization.CultureInfo culture,
+            object[] activationAttributes
+        )
+        {
+            return Activator.CreateInstance(
+                assemblyName,
+                typeName,
+                ignoreCase,
+                bindingAttr,
+                binder,
+                args,
+                culture,
+                activationAttributes
+            );
+        }
 
         public ContextualReflectionTestFixture()
         {
             SetPreConditions();
 
             Assembly executingAssembly = Assembly.GetExecutingAssembly();
-            AssemblyLoadContext executingAlc = AssemblyLoadContext.GetLoadContext(executingAssembly);
+            AssemblyLoadContext executingAlc = AssemblyLoadContext.GetLoadContext(
+                executingAssembly
+            );
 
             defaultAlc = AssemblyLoadContext.Default;
-            defaultAlcAssembly = AssemblyLoadContext.Default.LoadFromAssemblyName(executingAssembly.GetName());
-            defaultAlcFixtureType = defaultAlcAssembly.GetType("System.Runtime.Loader.Tests.ContextualReflectionTestFixture");
+            defaultAlcAssembly = AssemblyLoadContext.Default.LoadFromAssemblyName(
+                executingAssembly.GetName()
+            );
+            defaultAlcFixtureType = defaultAlcAssembly.GetType(
+                "System.Runtime.Loader.Tests.ContextualReflectionTestFixture"
+            );
 
             if (executingAlc == AssemblyLoadContext.Default)
             {
                 isolatedAlc = new AssemblyLoadContext("Isolated", isCollectible: true);
                 isolatedAlcAssembly = isolatedAlc.LoadFromAssemblyPath(defaultAlcAssembly.Location);
 
-                isolatedAlcFixtureType = isolatedAlcAssembly.GetType("System.Runtime.Loader.Tests.ContextualReflectionTestFixture");
+                isolatedAlcFixtureType = isolatedAlcAssembly.GetType(
+                    "System.Runtime.Loader.Tests.ContextualReflectionTestFixture"
+                );
 
-                isolatedAlcFixtureInstance = (IContextualReflectionTestFixture) Activator.CreateInstance(isolatedAlcFixtureType);
+                isolatedAlcFixtureInstance = (IContextualReflectionTestFixture)
+                    Activator.CreateInstance(isolatedAlcFixtureType);
             }
             else
             {
@@ -129,7 +214,10 @@ namespace System.Runtime.Loader.Tests
             Assert.Equal(isolatedAlc, isolatedAlcFixtureInstance.isolatedAlc);
             Assert.Equal(isolatedAlcAssembly, isolatedAlcFixtureInstance.isolatedAlcAssembly);
             Assert.Equal(isolatedAlcFixtureType, isolatedAlcFixtureInstance.isolatedAlcFixtureType);
-            Assert.Equal(isolatedAlcFixtureInstance, isolatedAlcFixtureInstance.isolatedAlcFixtureInstance);
+            Assert.Equal(
+                isolatedAlcFixtureInstance,
+                isolatedAlcFixtureInstance.isolatedAlcFixtureInstance
+            );
 
             Assert.Equal("Default", defaultAlc.Name);
             Assert.Equal("Isolated", isolatedAlc.Name);
@@ -139,7 +227,10 @@ namespace System.Runtime.Loader.Tests
             Assert.NotEqual(defaultAlcFixtureType, isolatedAlcFixtureType);
             Assert.NotEqual((IContextualReflectionTestFixture)this, isolatedAlcFixtureInstance);
 
-            Assert.Equal(isolatedAlc, AssemblyLoadContext.GetLoadContext(isolatedAlcFixtureInstance.isolatedAlcAssembly));
+            Assert.Equal(
+                isolatedAlc,
+                AssemblyLoadContext.GetLoadContext(isolatedAlcFixtureInstance.isolatedAlcAssembly)
+            );
         }
     }
 
@@ -156,7 +247,10 @@ namespace System.Runtime.Loader.Tests
 
         void AssertAssemblyEqual(Assembly expected, Assembly actual)
         {
-            Assert.Equal(AssemblyLoadContext.GetLoadContext(expected), AssemblyLoadContext.GetLoadContext(actual));
+            Assert.Equal(
+                AssemblyLoadContext.GetLoadContext(expected),
+                AssemblyLoadContext.GetLoadContext(actual)
+            );
             Assert.Equal(expected, actual);
         }
 
@@ -165,17 +259,22 @@ namespace System.Runtime.Loader.Tests
         {
             _fixture.FixtureSetupAssertions();
             AssertAssemblyEqual(_fixture.defaultAlcAssembly, _fixture.GetExecutingAssembly());
-            AssertAssemblyEqual(_fixture.isolatedAlcAssembly, _fixture.isolatedAlcFixtureInstance.GetExecutingAssembly());
+            AssertAssemblyEqual(
+                _fixture.isolatedAlcAssembly,
+                _fixture.isolatedAlcFixtureInstance.GetExecutingAssembly()
+            );
         }
 
-#region EnterContextualReflectionAndDispose
+        #region EnterContextualReflectionAndDispose
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void CurrentContextualReflectionContextInitialValueNull()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                Assert.Null(AssemblyLoadContext.CurrentContextualReflectionContext);
-            }).Dispose();
+            RemoteExecutor
+                .Invoke(() =>
+                {
+                    Assert.Null(AssemblyLoadContext.CurrentContextualReflectionContext);
+                })
+                .Dispose();
         }
 
         [Fact]
@@ -363,7 +462,10 @@ namespace System.Runtime.Loader.Tests
                 AssemblyLoadContext nestedContext = _fixture.isolatedAlc;
                 using (nestedContext.EnterContextualReflection())
                 {
-                    Assert.Equal(nestedContext, AssemblyLoadContext.CurrentContextualReflectionContext);
+                    Assert.Equal(
+                        nestedContext,
+                        AssemblyLoadContext.CurrentContextualReflectionContext
+                    );
                 }
                 Assert.Equal(context, AssemblyLoadContext.CurrentContextualReflectionContext);
             }
@@ -376,7 +478,10 @@ namespace System.Runtime.Loader.Tests
                 AssemblyLoadContext nestedContext = _fixture.defaultAlc;
                 using (nestedContext.EnterContextualReflection())
                 {
-                    Assert.Equal(nestedContext, AssemblyLoadContext.CurrentContextualReflectionContext);
+                    Assert.Equal(
+                        nestedContext,
+                        AssemblyLoadContext.CurrentContextualReflectionContext
+                    );
                 }
                 Assert.Equal(context, AssemblyLoadContext.CurrentContextualReflectionContext);
             }
@@ -397,7 +502,10 @@ namespace System.Runtime.Loader.Tests
                 AssemblyLoadContext nestedContext = _fixture.isolatedAlc;
                 using (nestedContext.EnterContextualReflection())
                 {
-                    Assert.Equal(nestedContext, AssemblyLoadContext.CurrentContextualReflectionContext);
+                    Assert.Equal(
+                        nestedContext,
+                        AssemblyLoadContext.CurrentContextualReflectionContext
+                    );
                 }
                 Assert.Equal(context, AssemblyLoadContext.CurrentContextualReflectionContext);
             }
@@ -411,7 +519,10 @@ namespace System.Runtime.Loader.Tests
                 AssemblyLoadContext nestedContext = _fixture.isolatedAlc;
                 using (nestedContext.EnterContextualReflection())
                 {
-                    Assert.Equal(nestedContext, AssemblyLoadContext.CurrentContextualReflectionContext);
+                    Assert.Equal(
+                        nestedContext,
+                        AssemblyLoadContext.CurrentContextualReflectionContext
+                    );
                 }
                 Assert.Equal(context, AssemblyLoadContext.CurrentContextualReflectionContext);
             }
@@ -425,7 +536,10 @@ namespace System.Runtime.Loader.Tests
                 AssemblyLoadContext nestedContext = _fixture.isolatedAlc;
                 using (nestedContext.EnterContextualReflection())
                 {
-                    Assert.Equal(nestedContext, AssemblyLoadContext.CurrentContextualReflectionContext);
+                    Assert.Equal(
+                        nestedContext,
+                        AssemblyLoadContext.CurrentContextualReflectionContext
+                    );
                 }
                 Assert.Equal(context, AssemblyLoadContext.CurrentContextualReflectionContext);
             }
@@ -446,7 +560,10 @@ namespace System.Runtime.Loader.Tests
                 AssemblyLoadContext nestedContext = _fixture.isolatedAlc;
                 using (var scopeIsolated = nestedContext.EnterContextualReflection())
                 {
-                    Assert.Equal(nestedContext, AssemblyLoadContext.CurrentContextualReflectionContext);
+                    Assert.Equal(
+                        nestedContext,
+                        AssemblyLoadContext.CurrentContextualReflectionContext
+                    );
 
                     scopeDefault.Dispose();
                     Assert.Null(AssemblyLoadContext.CurrentContextualReflectionContext);
@@ -530,12 +647,20 @@ namespace System.Runtime.Loader.Tests
         [Fact]
         void EnterContextualReflectionWithMockAssemblyThrows()
         {
-            AssertExtensions.Throws<ArgumentException>("activating", () => AssemblyLoadContext.EnterContextualReflection(new MockAssembly()));
+            AssertExtensions.Throws<ArgumentException>(
+                "activating",
+                () => AssemblyLoadContext.EnterContextualReflection(new MockAssembly())
+            );
         }
-#endregion
+        #endregion
 
-#region Assembly.Load
-        void AssemblyLoadTestCase(Func<Assembly> func, Assembly nullExpected, Assembly defaultExpected, Assembly isolatedExpected)
+        #region Assembly.Load
+        void AssemblyLoadTestCase(
+            Func<Assembly> func,
+            Assembly nullExpected,
+            Assembly defaultExpected,
+            Assembly isolatedExpected
+        )
         {
             AssertAssemblyEqual(nullExpected, func());
 
@@ -555,10 +680,12 @@ namespace System.Runtime.Loader.Tests
         {
             AssemblyName name = _fixture.defaultAlcAssembly.GetName();
 
-            AssemblyLoadTestCase(() => _fixture.AssemblyLoad(name),
-                                _fixture.defaultAlcAssembly,
-                                _fixture.defaultAlcAssembly,
-                                _fixture.isolatedAlcAssembly);
+            AssemblyLoadTestCase(
+                () => _fixture.AssemblyLoad(name),
+                _fixture.defaultAlcAssembly,
+                _fixture.defaultAlcAssembly,
+                _fixture.isolatedAlcAssembly
+            );
         }
 
         [Fact]
@@ -566,10 +693,12 @@ namespace System.Runtime.Loader.Tests
         {
             AssemblyName name = _fixture.defaultAlcAssembly.GetName();
 
-            AssemblyLoadTestCase(() => _fixture.isolatedAlcFixtureInstance.AssemblyLoad(name),
-                                _fixture.isolatedAlcAssembly,
-                                _fixture.defaultAlcAssembly,
-                                _fixture.isolatedAlcAssembly);
+            AssemblyLoadTestCase(
+                () => _fixture.isolatedAlcFixtureInstance.AssemblyLoad(name),
+                _fixture.isolatedAlcAssembly,
+                _fixture.defaultAlcAssembly,
+                _fixture.isolatedAlcAssembly
+            );
         }
 
         [Fact]
@@ -578,10 +707,12 @@ namespace System.Runtime.Loader.Tests
             Assembly sharedAssembly = typeof(IContextualReflectionTestFixture).Assembly;
             AssemblyName name = sharedAssembly.GetName();
 
-            AssemblyLoadTestCase(() => _fixture.AssemblyLoad(name),
-                                sharedAssembly,
-                                sharedAssembly,
-                                sharedAssembly);
+            AssemblyLoadTestCase(
+                () => _fixture.AssemblyLoad(name),
+                sharedAssembly,
+                sharedAssembly,
+                sharedAssembly
+            );
         }
 
         [Fact]
@@ -590,10 +721,12 @@ namespace System.Runtime.Loader.Tests
             Assembly sharedAssembly = typeof(IContextualReflectionTestFixture).Assembly;
             AssemblyName name = sharedAssembly.GetName();
 
-            AssemblyLoadTestCase(() => _fixture.isolatedAlcFixtureInstance.AssemblyLoad(name),
-                                sharedAssembly,
-                                sharedAssembly,
-                                sharedAssembly);
+            AssemblyLoadTestCase(
+                () => _fixture.isolatedAlcFixtureInstance.AssemblyLoad(name),
+                sharedAssembly,
+                sharedAssembly,
+                sharedAssembly
+            );
         }
 
         [Fact]
@@ -601,15 +734,19 @@ namespace System.Runtime.Loader.Tests
         {
             string name = _fixture.defaultAlcAssembly.GetName().Name;
 
-            AssemblyLoadTestCase(() => _fixture.AssemblyLoad(name),
-                                _fixture.defaultAlcAssembly,
-                                _fixture.defaultAlcAssembly,
-                                _fixture.isolatedAlcAssembly);
+            AssemblyLoadTestCase(
+                () => _fixture.AssemblyLoad(name),
+                _fixture.defaultAlcAssembly,
+                _fixture.defaultAlcAssembly,
+                _fixture.isolatedAlcAssembly
+            );
 
-            AssemblyLoadTestCase(() => _fixture.AssemblyLoadWithPartialName(name),
-                                _fixture.defaultAlcAssembly,
-                                _fixture.defaultAlcAssembly,
-                                _fixture.isolatedAlcAssembly);
+            AssemblyLoadTestCase(
+                () => _fixture.AssemblyLoadWithPartialName(name),
+                _fixture.defaultAlcAssembly,
+                _fixture.defaultAlcAssembly,
+                _fixture.isolatedAlcAssembly
+            );
         }
 
         [Fact]
@@ -617,15 +754,19 @@ namespace System.Runtime.Loader.Tests
         {
             string name = _fixture.defaultAlcAssembly.GetName().Name;
 
-            AssemblyLoadTestCase(() => _fixture.isolatedAlcFixtureInstance.AssemblyLoad(name),
-                                _fixture.isolatedAlcAssembly,
-                                _fixture.defaultAlcAssembly,
-                                _fixture.isolatedAlcAssembly);
+            AssemblyLoadTestCase(
+                () => _fixture.isolatedAlcFixtureInstance.AssemblyLoad(name),
+                _fixture.isolatedAlcAssembly,
+                _fixture.defaultAlcAssembly,
+                _fixture.isolatedAlcAssembly
+            );
 
-            AssemblyLoadTestCase(() => _fixture.isolatedAlcFixtureInstance.AssemblyLoadWithPartialName(name),
-                                _fixture.isolatedAlcAssembly,
-                                _fixture.defaultAlcAssembly,
-                                _fixture.isolatedAlcAssembly);
+            AssemblyLoadTestCase(
+                () => _fixture.isolatedAlcFixtureInstance.AssemblyLoadWithPartialName(name),
+                _fixture.isolatedAlcAssembly,
+                _fixture.defaultAlcAssembly,
+                _fixture.isolatedAlcAssembly
+            );
         }
 
         [Fact]
@@ -634,10 +775,12 @@ namespace System.Runtime.Loader.Tests
             Assembly sharedAssembly = typeof(IContextualReflectionTestFixture).Assembly;
             string name = sharedAssembly.GetName().Name;
 
-            AssemblyLoadTestCase(() => _fixture.AssemblyLoad(name),
-                                sharedAssembly,
-                                sharedAssembly,
-                                sharedAssembly);
+            AssemblyLoadTestCase(
+                () => _fixture.AssemblyLoad(name),
+                sharedAssembly,
+                sharedAssembly,
+                sharedAssembly
+            );
         }
 
         [Fact]
@@ -646,15 +789,22 @@ namespace System.Runtime.Loader.Tests
             Assembly sharedAssembly = typeof(IContextualReflectionTestFixture).Assembly;
             string name = sharedAssembly.GetName().Name;
 
-            AssemblyLoadTestCase(() => _fixture.isolatedAlcFixtureInstance.AssemblyLoad(name),
-                                sharedAssembly,
-                                sharedAssembly,
-                                sharedAssembly);
+            AssemblyLoadTestCase(
+                () => _fixture.isolatedAlcFixtureInstance.AssemblyLoad(name),
+                sharedAssembly,
+                sharedAssembly,
+                sharedAssembly
+            );
         }
-#endregion
+        #endregion
 
-#region Type.GetType
-        void TypeGetTypeTestCase(Func<Type> func, Assembly nullExpected, Assembly defaultExpected, Assembly isolatedExpected)
+        #region Type.GetType
+        void TypeGetTypeTestCase(
+            Func<Type> func,
+            Assembly nullExpected,
+            Assembly defaultExpected,
+            Assembly isolatedExpected
+        )
         {
             AssertAssemblyEqual(nullExpected, func().Assembly);
 
@@ -675,35 +825,49 @@ namespace System.Runtime.Loader.Tests
             Assembly assembly = typeof(IContextualReflectionTestFixture).Assembly;
             string typeName = typeof(IContextualReflectionTestFixture).AssemblyQualifiedName;
 
-            TypeGetTypeTestCase(() => _fixture.TypeGetType(typeName),
-                                assembly,
-                                assembly,
-                                assembly);
+            TypeGetTypeTestCase(() => _fixture.TypeGetType(typeName), assembly, assembly, assembly);
 
-            TypeGetTypeTestCase(() => _fixture.TypeGetType(typeName, throwOnError:false),
-                                assembly,
-                                assembly,
-                                assembly);
+            TypeGetTypeTestCase(
+                () => _fixture.TypeGetType(typeName, throwOnError: false),
+                assembly,
+                assembly,
+                assembly
+            );
 
-            TypeGetTypeTestCase(() => _fixture.TypeGetType(typeName, throwOnError:false, ignoreCase:true),
-                                assembly,
-                                assembly,
-                                assembly);
+            TypeGetTypeTestCase(
+                () => _fixture.TypeGetType(typeName, throwOnError: false, ignoreCase: true),
+                assembly,
+                assembly,
+                assembly
+            );
 
-            TypeGetTypeTestCase(() => _fixture.TypeGetType(typeName, null, null),
-                                assembly,
-                                assembly,
-                                assembly);
+            TypeGetTypeTestCase(
+                () => _fixture.TypeGetType(typeName, null, null),
+                assembly,
+                assembly,
+                assembly
+            );
 
-            TypeGetTypeTestCase(() => _fixture.TypeGetType(typeName, null, null, throwOnError:false),
-                                assembly,
-                                assembly,
-                                assembly);
+            TypeGetTypeTestCase(
+                () => _fixture.TypeGetType(typeName, null, null, throwOnError: false),
+                assembly,
+                assembly,
+                assembly
+            );
 
-            TypeGetTypeTestCase(() => _fixture.TypeGetType(typeName, null, null, throwOnError:false, ignoreCase:true),
-                                assembly,
-                                assembly,
-                                assembly);
+            TypeGetTypeTestCase(
+                () =>
+                    _fixture.TypeGetType(
+                        typeName,
+                        null,
+                        null,
+                        throwOnError: false,
+                        ignoreCase: true
+                    ),
+                assembly,
+                assembly,
+                assembly
+            );
         }
 
         [Fact]
@@ -712,36 +876,66 @@ namespace System.Runtime.Loader.Tests
             Assembly assembly = typeof(IContextualReflectionTestFixture).Assembly;
             string typeName = typeof(IContextualReflectionTestFixture).AssemblyQualifiedName;
 
+            TypeGetTypeTestCase(
+                () => _fixture.isolatedAlcFixtureInstance.TypeGetType(typeName),
+                assembly,
+                assembly,
+                assembly
+            );
 
-            TypeGetTypeTestCase(() => _fixture.isolatedAlcFixtureInstance.TypeGetType(typeName),
-                                assembly,
-                                assembly,
-                                assembly);
+            TypeGetTypeTestCase(
+                () =>
+                    _fixture.isolatedAlcFixtureInstance.TypeGetType(typeName, throwOnError: false),
+                assembly,
+                assembly,
+                assembly
+            );
 
-            TypeGetTypeTestCase(() => _fixture.isolatedAlcFixtureInstance.TypeGetType(typeName, throwOnError:false),
-                                assembly,
-                                assembly,
-                                assembly);
+            TypeGetTypeTestCase(
+                () =>
+                    _fixture.isolatedAlcFixtureInstance.TypeGetType(
+                        typeName,
+                        throwOnError: false,
+                        ignoreCase: true
+                    ),
+                assembly,
+                assembly,
+                assembly
+            );
 
-            TypeGetTypeTestCase(() => _fixture.isolatedAlcFixtureInstance.TypeGetType(typeName, throwOnError:false, ignoreCase:true),
-                                assembly,
-                                assembly,
-                                assembly);
+            TypeGetTypeTestCase(
+                () => _fixture.isolatedAlcFixtureInstance.TypeGetType(typeName, null, null),
+                assembly,
+                assembly,
+                assembly
+            );
 
-            TypeGetTypeTestCase(() => _fixture.isolatedAlcFixtureInstance.TypeGetType(typeName, null, null),
-                                assembly,
-                                assembly,
-                                assembly);
+            TypeGetTypeTestCase(
+                () =>
+                    _fixture.isolatedAlcFixtureInstance.TypeGetType(
+                        typeName,
+                        null,
+                        null,
+                        throwOnError: false
+                    ),
+                assembly,
+                assembly,
+                assembly
+            );
 
-            TypeGetTypeTestCase(() => _fixture.isolatedAlcFixtureInstance.TypeGetType(typeName, null, null, throwOnError:false),
-                                assembly,
-                                assembly,
-                                assembly);
-
-            TypeGetTypeTestCase(() => _fixture.isolatedAlcFixtureInstance.TypeGetType(typeName, null, null, throwOnError:false, ignoreCase:true),
-                                assembly,
-                                assembly,
-                                assembly);
+            TypeGetTypeTestCase(
+                () =>
+                    _fixture.isolatedAlcFixtureInstance.TypeGetType(
+                        typeName,
+                        null,
+                        null,
+                        throwOnError: false,
+                        ignoreCase: true
+                    ),
+                assembly,
+                assembly,
+                assembly
+            );
         }
 
         [Fact]
@@ -749,35 +943,54 @@ namespace System.Runtime.Loader.Tests
         {
             string typeName = typeof(ContextualReflectionTestFixture).AssemblyQualifiedName;
 
-            TypeGetTypeTestCase(() => _fixture.TypeGetType(typeName),
-                                _fixture.defaultAlcAssembly,
-                                _fixture.defaultAlcAssembly,
-                                _fixture.isolatedAlcAssembly);
+            TypeGetTypeTestCase(
+                () => _fixture.TypeGetType(typeName),
+                _fixture.defaultAlcAssembly,
+                _fixture.defaultAlcAssembly,
+                _fixture.isolatedAlcAssembly
+            );
 
-            TypeGetTypeTestCase(() => _fixture.TypeGetType(typeName, throwOnError:false),
-                                _fixture.defaultAlcAssembly,
-                                _fixture.defaultAlcAssembly,
-                                _fixture.isolatedAlcAssembly);
+            TypeGetTypeTestCase(
+                () => _fixture.TypeGetType(typeName, throwOnError: false),
+                _fixture.defaultAlcAssembly,
+                _fixture.defaultAlcAssembly,
+                _fixture.isolatedAlcAssembly
+            );
 
-            TypeGetTypeTestCase(() => _fixture.TypeGetType(typeName, throwOnError:false, ignoreCase:true),
-                                _fixture.defaultAlcAssembly,
-                                _fixture.defaultAlcAssembly,
-                                _fixture.isolatedAlcAssembly);
+            TypeGetTypeTestCase(
+                () => _fixture.TypeGetType(typeName, throwOnError: false, ignoreCase: true),
+                _fixture.defaultAlcAssembly,
+                _fixture.defaultAlcAssembly,
+                _fixture.isolatedAlcAssembly
+            );
 
-            TypeGetTypeTestCase(() => _fixture.TypeGetType(typeName, null, null),
-                                _fixture.defaultAlcAssembly,
-                                _fixture.defaultAlcAssembly,
-                                _fixture.isolatedAlcAssembly);
+            TypeGetTypeTestCase(
+                () => _fixture.TypeGetType(typeName, null, null),
+                _fixture.defaultAlcAssembly,
+                _fixture.defaultAlcAssembly,
+                _fixture.isolatedAlcAssembly
+            );
 
-            TypeGetTypeTestCase(() => _fixture.TypeGetType(typeName, null, null, throwOnError:false),
-                                _fixture.defaultAlcAssembly,
-                                _fixture.defaultAlcAssembly,
-                                _fixture.isolatedAlcAssembly);
+            TypeGetTypeTestCase(
+                () => _fixture.TypeGetType(typeName, null, null, throwOnError: false),
+                _fixture.defaultAlcAssembly,
+                _fixture.defaultAlcAssembly,
+                _fixture.isolatedAlcAssembly
+            );
 
-            TypeGetTypeTestCase(() => _fixture.TypeGetType(typeName, null, null, throwOnError:false, ignoreCase:true),
-                                _fixture.defaultAlcAssembly,
-                                _fixture.defaultAlcAssembly,
-                                _fixture.isolatedAlcAssembly);
+            TypeGetTypeTestCase(
+                () =>
+                    _fixture.TypeGetType(
+                        typeName,
+                        null,
+                        null,
+                        throwOnError: false,
+                        ignoreCase: true
+                    ),
+                _fixture.defaultAlcAssembly,
+                _fixture.defaultAlcAssembly,
+                _fixture.isolatedAlcAssembly
+            );
         }
 
         [Fact]
@@ -785,41 +998,77 @@ namespace System.Runtime.Loader.Tests
         {
             string typeName = typeof(ContextualReflectionTestFixture).AssemblyQualifiedName;
 
-            TypeGetTypeTestCase(() => _fixture.isolatedAlcFixtureInstance.TypeGetType(typeName),
-                                _fixture.isolatedAlcAssembly,
-                                _fixture.defaultAlcAssembly,
-                                _fixture.isolatedAlcAssembly);
+            TypeGetTypeTestCase(
+                () => _fixture.isolatedAlcFixtureInstance.TypeGetType(typeName),
+                _fixture.isolatedAlcAssembly,
+                _fixture.defaultAlcAssembly,
+                _fixture.isolatedAlcAssembly
+            );
 
-            TypeGetTypeTestCase(() => _fixture.isolatedAlcFixtureInstance.TypeGetType(typeName, throwOnError:false),
-                                _fixture.isolatedAlcAssembly,
-                                _fixture.defaultAlcAssembly,
-                                _fixture.isolatedAlcAssembly);
+            TypeGetTypeTestCase(
+                () =>
+                    _fixture.isolatedAlcFixtureInstance.TypeGetType(typeName, throwOnError: false),
+                _fixture.isolatedAlcAssembly,
+                _fixture.defaultAlcAssembly,
+                _fixture.isolatedAlcAssembly
+            );
 
-            TypeGetTypeTestCase(() => _fixture.isolatedAlcFixtureInstance.TypeGetType(typeName, throwOnError:false, ignoreCase:true),
-                                _fixture.isolatedAlcAssembly,
-                                _fixture.defaultAlcAssembly,
-                                _fixture.isolatedAlcAssembly);
+            TypeGetTypeTestCase(
+                () =>
+                    _fixture.isolatedAlcFixtureInstance.TypeGetType(
+                        typeName,
+                        throwOnError: false,
+                        ignoreCase: true
+                    ),
+                _fixture.isolatedAlcAssembly,
+                _fixture.defaultAlcAssembly,
+                _fixture.isolatedAlcAssembly
+            );
 
-            TypeGetTypeTestCase(() => _fixture.isolatedAlcFixtureInstance.TypeGetType(typeName, null, null),
-                                _fixture.isolatedAlcAssembly,
-                                _fixture.defaultAlcAssembly,
-                                _fixture.isolatedAlcAssembly);
+            TypeGetTypeTestCase(
+                () => _fixture.isolatedAlcFixtureInstance.TypeGetType(typeName, null, null),
+                _fixture.isolatedAlcAssembly,
+                _fixture.defaultAlcAssembly,
+                _fixture.isolatedAlcAssembly
+            );
 
-            TypeGetTypeTestCase(() => _fixture.isolatedAlcFixtureInstance.TypeGetType(typeName, null, null, throwOnError:false),
-                                _fixture.isolatedAlcAssembly,
-                                _fixture.defaultAlcAssembly,
-                                _fixture.isolatedAlcAssembly);
+            TypeGetTypeTestCase(
+                () =>
+                    _fixture.isolatedAlcFixtureInstance.TypeGetType(
+                        typeName,
+                        null,
+                        null,
+                        throwOnError: false
+                    ),
+                _fixture.isolatedAlcAssembly,
+                _fixture.defaultAlcAssembly,
+                _fixture.isolatedAlcAssembly
+            );
 
-            TypeGetTypeTestCase(() => _fixture.isolatedAlcFixtureInstance.TypeGetType(typeName, null, null, throwOnError:false, ignoreCase:true),
-                                _fixture.isolatedAlcAssembly,
-                                _fixture.defaultAlcAssembly,
-                                _fixture.isolatedAlcAssembly);
+            TypeGetTypeTestCase(
+                () =>
+                    _fixture.isolatedAlcFixtureInstance.TypeGetType(
+                        typeName,
+                        null,
+                        null,
+                        throwOnError: false,
+                        ignoreCase: true
+                    ),
+                _fixture.isolatedAlcAssembly,
+                _fixture.defaultAlcAssembly,
+                _fixture.isolatedAlcAssembly
+            );
         }
 
-#endregion
+        #endregion
 
-#region Assembly.GetType
-        void AssemblyGetTypeTestCase(Func<Type> func, Assembly nullExpected, Assembly defaultExpected, Assembly isolatedExpected)
+        #region Assembly.GetType
+        void AssemblyGetTypeTestCase(
+            Func<Type> func,
+            Assembly nullExpected,
+            Assembly defaultExpected,
+            Assembly isolatedExpected
+        )
         {
             AssertAssemblyEqual(nullExpected, func().GenericTypeArguments?[0].Assembly);
 
@@ -839,21 +1088,39 @@ namespace System.Runtime.Loader.Tests
         {
             Assembly assembly = typeof(IContextualReflectionTestFixture).Assembly;
             string typeNameAGenericClass = typeof(AGenericClass<>).FullName;
-            string typeNameGenericArgument = typeof(IContextualReflectionTestFixture).AssemblyQualifiedName;
+            string typeNameGenericArgument =
+                typeof(IContextualReflectionTestFixture).AssemblyQualifiedName;
             string typeName = $"{typeNameAGenericClass}[[{typeNameGenericArgument}]]";
 
-            AssemblyGetTypeTestCase(() => _fixture.AssemblyGetType(_fixture.defaultAlcAssembly, typeName),
-                                    assembly,
-                                    assembly,
-                                    assembly);
-            AssemblyGetTypeTestCase(() => _fixture.AssemblyGetType(_fixture.defaultAlcAssembly, typeName, throwOnError:false),
-                                    assembly,
-                                    assembly,
-                                    assembly);
-            AssemblyGetTypeTestCase(() => _fixture.AssemblyGetType(_fixture.defaultAlcAssembly, typeName, throwOnError:false, ignoreCase:true),
-                                    assembly,
-                                    assembly,
-                                    assembly);
+            AssemblyGetTypeTestCase(
+                () => _fixture.AssemblyGetType(_fixture.defaultAlcAssembly, typeName),
+                assembly,
+                assembly,
+                assembly
+            );
+            AssemblyGetTypeTestCase(
+                () =>
+                    _fixture.AssemblyGetType(
+                        _fixture.defaultAlcAssembly,
+                        typeName,
+                        throwOnError: false
+                    ),
+                assembly,
+                assembly,
+                assembly
+            );
+            AssemblyGetTypeTestCase(
+                () =>
+                    _fixture.AssemblyGetType(
+                        _fixture.defaultAlcAssembly,
+                        typeName,
+                        throwOnError: false,
+                        ignoreCase: true
+                    ),
+                assembly,
+                assembly,
+                assembly
+            );
         }
 
         [Fact]
@@ -861,80 +1128,144 @@ namespace System.Runtime.Loader.Tests
         {
             Assembly assembly = typeof(IContextualReflectionTestFixture).Assembly;
             string typeNameAGenericClass = typeof(AGenericClass<>).FullName;
-            string typeNameGenericArgument = typeof(IContextualReflectionTestFixture).AssemblyQualifiedName;
+            string typeNameGenericArgument =
+                typeof(IContextualReflectionTestFixture).AssemblyQualifiedName;
             string typeName = $"{typeNameAGenericClass}[[{typeNameGenericArgument}]]";
 
-            AssemblyGetTypeTestCase(() => _fixture.isolatedAlcFixtureInstance.AssemblyGetType(_fixture.defaultAlcAssembly, typeName),
-                                    assembly,
-                                    assembly,
-                                    assembly);
-            AssemblyGetTypeTestCase(() => _fixture.isolatedAlcFixtureInstance.AssemblyGetType(_fixture.defaultAlcAssembly, typeName, throwOnError:false),
-                                    assembly,
-                                    assembly,
-                                    assembly);
-            AssemblyGetTypeTestCase(() => _fixture.isolatedAlcFixtureInstance.AssemblyGetType(_fixture.defaultAlcAssembly, typeName, throwOnError:false, ignoreCase:true),
-                                    assembly,
-                                    assembly,
-                                    assembly);
+            AssemblyGetTypeTestCase(
+                () =>
+                    _fixture.isolatedAlcFixtureInstance.AssemblyGetType(
+                        _fixture.defaultAlcAssembly,
+                        typeName
+                    ),
+                assembly,
+                assembly,
+                assembly
+            );
+            AssemblyGetTypeTestCase(
+                () =>
+                    _fixture.isolatedAlcFixtureInstance.AssemblyGetType(
+                        _fixture.defaultAlcAssembly,
+                        typeName,
+                        throwOnError: false
+                    ),
+                assembly,
+                assembly,
+                assembly
+            );
+            AssemblyGetTypeTestCase(
+                () =>
+                    _fixture.isolatedAlcFixtureInstance.AssemblyGetType(
+                        _fixture.defaultAlcAssembly,
+                        typeName,
+                        throwOnError: false,
+                        ignoreCase: true
+                    ),
+                assembly,
+                assembly,
+                assembly
+            );
         }
 
         [Fact]
         void AssemblyGetTypeStringMultiLoadedAssemblyDefault()
         {
             string typeNameAGenericClass = typeof(AGenericClass<>).FullName;
-            string typeNameGenericArgument = typeof(ContextualReflectionTestFixture).AssemblyQualifiedName;
+            string typeNameGenericArgument =
+                typeof(ContextualReflectionTestFixture).AssemblyQualifiedName;
             string typeName = $"{typeNameAGenericClass}[[{typeNameGenericArgument}]]";
 
-            AssemblyGetTypeTestCase(() => _fixture.AssemblyGetType(_fixture.defaultAlcAssembly, typeName),
-                                _fixture.defaultAlcAssembly,
-                                _fixture.defaultAlcAssembly,
-                                _fixture.isolatedAlcAssembly);
+            AssemblyGetTypeTestCase(
+                () => _fixture.AssemblyGetType(_fixture.defaultAlcAssembly, typeName),
+                _fixture.defaultAlcAssembly,
+                _fixture.defaultAlcAssembly,
+                _fixture.isolatedAlcAssembly
+            );
 
-            AssemblyGetTypeTestCase(() => _fixture.AssemblyGetType(_fixture.defaultAlcAssembly, typeName, throwOnError:false),
-                                _fixture.defaultAlcAssembly,
-                                _fixture.defaultAlcAssembly,
-                                _fixture.isolatedAlcAssembly);
+            AssemblyGetTypeTestCase(
+                () =>
+                    _fixture.AssemblyGetType(
+                        _fixture.defaultAlcAssembly,
+                        typeName,
+                        throwOnError: false
+                    ),
+                _fixture.defaultAlcAssembly,
+                _fixture.defaultAlcAssembly,
+                _fixture.isolatedAlcAssembly
+            );
 
-            AssemblyGetTypeTestCase(() => _fixture.AssemblyGetType(_fixture.defaultAlcAssembly, typeName, throwOnError:false, ignoreCase:true),
-                                _fixture.defaultAlcAssembly,
-                                _fixture.defaultAlcAssembly,
-                                _fixture.isolatedAlcAssembly);
+            AssemblyGetTypeTestCase(
+                () =>
+                    _fixture.AssemblyGetType(
+                        _fixture.defaultAlcAssembly,
+                        typeName,
+                        throwOnError: false,
+                        ignoreCase: true
+                    ),
+                _fixture.defaultAlcAssembly,
+                _fixture.defaultAlcAssembly,
+                _fixture.isolatedAlcAssembly
+            );
         }
 
         [Fact]
         void AssemblyGetTypeStringMultiLoadedAssemblyIsolated()
         {
             string typeNameAGenericClass = typeof(AGenericClass<>).FullName;
-            string typeNameGenericArgument = typeof(ContextualReflectionTestFixture).AssemblyQualifiedName;
+            string typeNameGenericArgument =
+                typeof(ContextualReflectionTestFixture).AssemblyQualifiedName;
             string typeName = $"{typeNameAGenericClass}[[{typeNameGenericArgument}]]";
 
-            AssemblyGetTypeTestCase(() => _fixture.isolatedAlcFixtureInstance.AssemblyGetType(_fixture.isolatedAlcAssembly, typeName),
-                                _fixture.isolatedAlcAssembly,
-                                _fixture.defaultAlcAssembly,
-                                _fixture.isolatedAlcAssembly);
+            AssemblyGetTypeTestCase(
+                () =>
+                    _fixture.isolatedAlcFixtureInstance.AssemblyGetType(
+                        _fixture.isolatedAlcAssembly,
+                        typeName
+                    ),
+                _fixture.isolatedAlcAssembly,
+                _fixture.defaultAlcAssembly,
+                _fixture.isolatedAlcAssembly
+            );
 
-            AssemblyGetTypeTestCase(() => _fixture.isolatedAlcFixtureInstance.AssemblyGetType(_fixture.isolatedAlcAssembly, typeName, throwOnError:false),
-                                _fixture.isolatedAlcAssembly,
-                                _fixture.defaultAlcAssembly,
-                                _fixture.isolatedAlcAssembly);
+            AssemblyGetTypeTestCase(
+                () =>
+                    _fixture.isolatedAlcFixtureInstance.AssemblyGetType(
+                        _fixture.isolatedAlcAssembly,
+                        typeName,
+                        throwOnError: false
+                    ),
+                _fixture.isolatedAlcAssembly,
+                _fixture.defaultAlcAssembly,
+                _fixture.isolatedAlcAssembly
+            );
 
-            AssemblyGetTypeTestCase(() => _fixture.isolatedAlcFixtureInstance.AssemblyGetType(_fixture.isolatedAlcAssembly, typeName, throwOnError:false, ignoreCase:true),
-                                _fixture.isolatedAlcAssembly,
-                                _fixture.defaultAlcAssembly,
-                                _fixture.isolatedAlcAssembly);
+            AssemblyGetTypeTestCase(
+                () =>
+                    _fixture.isolatedAlcFixtureInstance.AssemblyGetType(
+                        _fixture.isolatedAlcAssembly,
+                        typeName,
+                        throwOnError: false,
+                        ignoreCase: true
+                    ),
+                _fixture.isolatedAlcAssembly,
+                _fixture.defaultAlcAssembly,
+                _fixture.isolatedAlcAssembly
+            );
         }
-#endregion
+        #endregion
 
-#region Activator.CreateInstance
+        #region Activator.CreateInstance
         [Fact]
         void ActivatorCreateInstanceNullMultiLoadedAssemblyDefault()
         {
             string typeName = typeof(ContextualReflectionTestFixture).FullName;
 
-            TypeGetTypeTestCase(() => _fixture.ActivatorCreateInstance(null, typeName).Unwrap().GetType(),
-                                _fixture.defaultAlcAssembly,
-                                _fixture.defaultAlcAssembly,
-                                _fixture.defaultAlcAssembly);
+            TypeGetTypeTestCase(
+                () => _fixture.ActivatorCreateInstance(null, typeName).Unwrap().GetType(),
+                _fixture.defaultAlcAssembly,
+                _fixture.defaultAlcAssembly,
+                _fixture.defaultAlcAssembly
+            );
         }
 
         [Fact]
@@ -942,10 +1273,16 @@ namespace System.Runtime.Loader.Tests
         {
             string typeName = typeof(ContextualReflectionTestFixture).FullName;
 
-            TypeGetTypeTestCase(() => _fixture.isolatedAlcFixtureInstance.ActivatorCreateInstance(null, typeName).Unwrap().GetType(),
-                                _fixture.isolatedAlcAssembly,
-                                _fixture.isolatedAlcAssembly,
-                                _fixture.isolatedAlcAssembly);
+            TypeGetTypeTestCase(
+                () =>
+                    _fixture
+                        .isolatedAlcFixtureInstance.ActivatorCreateInstance(null, typeName)
+                        .Unwrap()
+                        .GetType(),
+                _fixture.isolatedAlcAssembly,
+                _fixture.isolatedAlcAssembly,
+                _fixture.isolatedAlcAssembly
+            );
         }
 
         [Fact]
@@ -954,10 +1291,12 @@ namespace System.Runtime.Loader.Tests
             string typeName = typeof(ContextualReflectionTestFixture).FullName;
             string assemblyName = _fixture.defaultAlcAssembly.GetName().Name;
 
-            TypeGetTypeTestCase(() => _fixture.ActivatorCreateInstance(assemblyName, typeName).Unwrap().GetType(),
-                                _fixture.defaultAlcAssembly,
-                                _fixture.defaultAlcAssembly,
-                                _fixture.isolatedAlcAssembly);
+            TypeGetTypeTestCase(
+                () => _fixture.ActivatorCreateInstance(assemblyName, typeName).Unwrap().GetType(),
+                _fixture.defaultAlcAssembly,
+                _fixture.defaultAlcAssembly,
+                _fixture.isolatedAlcAssembly
+            );
         }
 
         [Fact]
@@ -966,66 +1305,91 @@ namespace System.Runtime.Loader.Tests
             string typeName = typeof(ContextualReflectionTestFixture).FullName;
             string assemblyName = _fixture.defaultAlcAssembly.GetName().Name;
 
-            TypeGetTypeTestCase(() => _fixture.isolatedAlcFixtureInstance.ActivatorCreateInstance(assemblyName, typeName).Unwrap().GetType(),
-                                _fixture.isolatedAlcAssembly,
-                                _fixture.defaultAlcAssembly,
-                                _fixture.isolatedAlcAssembly);
+            TypeGetTypeTestCase(
+                () =>
+                    _fixture
+                        .isolatedAlcFixtureInstance.ActivatorCreateInstance(assemblyName, typeName)
+                        .Unwrap()
+                        .GetType(),
+                _fixture.isolatedAlcAssembly,
+                _fixture.defaultAlcAssembly,
+                _fixture.isolatedAlcAssembly
+            );
         }
 
         [Fact]
         void ActivatorCreateInstanceNullGenericMultiLoadedAssemblyDefault()
         {
             string typeNameAGenericClass = typeof(AGenericClass<>).FullName;
-            string typeNameGenericArgument = typeof(ContextualReflectionTestFixture).AssemblyQualifiedName;
+            string typeNameGenericArgument =
+                typeof(ContextualReflectionTestFixture).AssemblyQualifiedName;
             string typeName = $"{typeNameAGenericClass}[[{typeNameGenericArgument}]]";
 
-            AssemblyGetTypeTestCase(() => _fixture.ActivatorCreateInstance(null, typeName).Unwrap().GetType(),
-                                _fixture.defaultAlcAssembly,
-                                _fixture.defaultAlcAssembly,
-                                _fixture.isolatedAlcAssembly);
+            AssemblyGetTypeTestCase(
+                () => _fixture.ActivatorCreateInstance(null, typeName).Unwrap().GetType(),
+                _fixture.defaultAlcAssembly,
+                _fixture.defaultAlcAssembly,
+                _fixture.isolatedAlcAssembly
+            );
         }
 
         [Fact]
         void ActivatorCreateInstanceNullGenericMultiLoadedAssemblyIsolated()
         {
             string typeNameAGenericClass = typeof(AGenericClass<>).FullName;
-            string typeNameGenericArgument = typeof(ContextualReflectionTestFixture).AssemblyQualifiedName;
+            string typeNameGenericArgument =
+                typeof(ContextualReflectionTestFixture).AssemblyQualifiedName;
             string typeName = $"{typeNameAGenericClass}[[{typeNameGenericArgument}]]";
 
-            AssemblyGetTypeTestCase(() => _fixture.isolatedAlcFixtureInstance.ActivatorCreateInstance(null, typeName).Unwrap().GetType(),
-                                _fixture.isolatedAlcAssembly,
-                                _fixture.defaultAlcAssembly,
-                                _fixture.isolatedAlcAssembly);
+            AssemblyGetTypeTestCase(
+                () =>
+                    _fixture
+                        .isolatedAlcFixtureInstance.ActivatorCreateInstance(null, typeName)
+                        .Unwrap()
+                        .GetType(),
+                _fixture.isolatedAlcAssembly,
+                _fixture.defaultAlcAssembly,
+                _fixture.isolatedAlcAssembly
+            );
         }
 
         [Fact]
         void ActivatorCreateInstanceNameGenericMultiLoadedAssemblyDefault()
         {
             string typeNameAGenericClass = typeof(AGenericClass<>).FullName;
-            string typeNameGenericArgument = typeof(ContextualReflectionTestFixture).AssemblyQualifiedName;
+            string typeNameGenericArgument =
+                typeof(ContextualReflectionTestFixture).AssemblyQualifiedName;
             string typeName = $"{typeNameAGenericClass}[[{typeNameGenericArgument}]]";
             string assemblyName = _fixture.defaultAlcAssembly.GetName().Name;
 
-            AssemblyGetTypeTestCase(() => _fixture.ActivatorCreateInstance(assemblyName, typeName).Unwrap().GetType(),
-                                _fixture.defaultAlcAssembly,
-                                _fixture.defaultAlcAssembly,
-                                _fixture.isolatedAlcAssembly);
+            AssemblyGetTypeTestCase(
+                () => _fixture.ActivatorCreateInstance(assemblyName, typeName).Unwrap().GetType(),
+                _fixture.defaultAlcAssembly,
+                _fixture.defaultAlcAssembly,
+                _fixture.isolatedAlcAssembly
+            );
         }
 
         [Fact]
         void ActivatorCreateInstanceNameGenericMultiLoadedAssemblyIsolated()
         {
             string typeNameAGenericClass = typeof(AGenericClass<>).FullName;
-            string typeNameGenericArgument = typeof(ContextualReflectionTestFixture).AssemblyQualifiedName;
+            string typeNameGenericArgument =
+                typeof(ContextualReflectionTestFixture).AssemblyQualifiedName;
             string typeName = $"{typeNameAGenericClass}[[{typeNameGenericArgument}]]";
             string assemblyName = _fixture.defaultAlcAssembly.GetName().Name;
 
-            AssemblyGetTypeTestCase(() => _fixture.isolatedAlcFixtureInstance.ActivatorCreateInstance(assemblyName, typeName).Unwrap().GetType(),
-                                _fixture.isolatedAlcAssembly,
-                                _fixture.defaultAlcAssembly,
-                                _fixture.isolatedAlcAssembly);
+            AssemblyGetTypeTestCase(
+                () =>
+                    _fixture
+                        .isolatedAlcFixtureInstance.ActivatorCreateInstance(assemblyName, typeName)
+                        .Unwrap()
+                        .GetType(),
+                _fixture.isolatedAlcAssembly,
+                _fixture.defaultAlcAssembly,
+                _fixture.isolatedAlcAssembly
+            );
         }
-#endregion
-
+        #endregion
     }
 }

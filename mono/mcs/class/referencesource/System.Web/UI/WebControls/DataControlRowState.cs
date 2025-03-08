@@ -1,57 +1,50 @@
 //------------------------------------------------------------------------------
 // <copyright file="DataControlRowState.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     using System;
-    
 
     /// <devdoc>
     ///    <para>Specifies the type of the item in a list.</para>
     /// </devdoc>
     [Flags]
-    public enum DataControlRowState {
-        
-
+    public enum DataControlRowState
+    {
         /// <devdoc>
-        ///    <para> 
+        ///    <para>
         ///       An item. It is databound.</para>
         /// </devdoc>
         Normal = 0,
 
-
         /// <devdoc>
-        ///    <para> 
+        ///    <para>
         ///       An alternate (even-indexed) item. It is databound.</para>
         /// </devdoc>
         Alternate = 1,
 
-
         /// <devdoc>
-        ///    <para> 
+        ///    <para>
         ///       The selected item. It is databound.</para>
         /// </devdoc>
         Selected = 2,
 
-
         /// <devdoc>
-        ///    <para> 
+        ///    <para>
         ///       The item in edit mode. It is databound.</para>
         /// </devdoc>
         Edit = 4,
 
-
         /// <devdoc>
-        ///    <para> 
+        ///    <para>
         ///       The item in insert mode. It is databound.</para>
         /// </devdoc>
-        Insert = 8
+        Insert = 8,
     }
 }
-

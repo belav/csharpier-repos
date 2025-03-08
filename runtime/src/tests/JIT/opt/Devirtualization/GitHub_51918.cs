@@ -11,7 +11,7 @@ public interface IMakeClassMethodSealedVirtual
     int ClassMethod();
 }
 
-public class GenericClass<A,B> : IMakeClassMethodSealedVirtual
+public class GenericClass<A, B> : IMakeClassMethodSealedVirtual
 {
     public static int _sv1;
     public static int _sv2;
@@ -31,12 +31,12 @@ public class GenericClass<A,B> : IMakeClassMethodSealedVirtual
     }
 
     public InnerClass GetInnerClass() => new InnerClass(this);
-  
+
     public sealed class InnerClass : IGeneric<A>
     {
-        GenericClass<A,B> _localPointer;
+        GenericClass<A, B> _localPointer;
 
-        public InnerClass(GenericClass<A,B> pointer)
+        public InnerClass(GenericClass<A, B> pointer)
         {
             _localPointer = pointer;
         }

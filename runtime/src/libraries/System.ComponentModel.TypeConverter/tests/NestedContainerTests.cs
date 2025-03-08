@@ -19,7 +19,10 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void Ctor_NullOwner_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("owner", () => new NestedContainer(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "owner",
+                () => new NestedContainer(null)
+            );
         }
 
         [Fact]
@@ -56,7 +59,9 @@ namespace System.ComponentModel.Tests
 
             var owner = new Component();
             var container = new SubNestedContainer(owner);
-            INestedSite site = Assert.IsAssignableFrom<INestedSite>(container.CreateSiteEntryPoint(component, name));
+            INestedSite site = Assert.IsAssignableFrom<INestedSite>(
+                container.CreateSiteEntryPoint(component, name)
+            );
             Assert.Same(component, site.Component);
             Assert.Same(container, site.Container);
             Assert.False(site.DesignMode);
@@ -125,7 +130,10 @@ namespace System.ComponentModel.Tests
         {
             var owner = new Component();
             var container = new SubNestedContainer(owner);
-            AssertExtensions.Throws<ArgumentNullException>("component", () => container.CreateSiteEntryPoint(null, "name"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "component",
+                () => container.CreateSiteEntryPoint(null, "name")
+            );
         }
 
         [Fact]
@@ -160,11 +168,13 @@ namespace System.ComponentModel.Tests
 
         public class SubNestedContainer : NestedContainer
         {
-            public SubNestedContainer(IComponent owner) : base(owner) { }
+            public SubNestedContainer(IComponent owner)
+                : base(owner) { }
 
             public string OwnerNameEntryPoint => OwnerName;
 
-            public ISite CreateSiteEntryPoint(IComponent component, string name) => CreateSite(component, name);
+            public ISite CreateSiteEntryPoint(IComponent component, string name) =>
+                CreateSite(component, name);
 
             public object GetServiceEntryPoint(Type service) => GetService(service);
         }

@@ -26,8 +26,17 @@ namespace Microsoft.EntityFrameworkCore.Tools
             string? rootNamespace,
             string? language,
             bool nullable,
-            string[] remainingArguments)
-            : base(assembly, startupAssembly, projectDir, rootNamespace, language, nullable, remainingArguments)
+            string[] remainingArguments
+        )
+            : base(
+                assembly,
+                startupAssembly,
+                projectDir,
+                rootNamespace,
+                language,
+                nullable,
+                remainingArguments
+            )
         {
             var info = new AppDomainSetup { ApplicationBase = AppBasePath };
 
@@ -50,7 +59,8 @@ namespace Microsoft.EntityFrameworkCore.Tools
                 Reporter.WriteError,
                 Reporter.WriteWarning,
                 Reporter.WriteInformation,
-                Reporter.WriteVerbose);
+                Reporter.WriteVerbose
+            );
 
             _executor = _domain.CreateInstanceAndUnwrap(
                 DesignAssemblyName,
@@ -70,18 +80,22 @@ namespace Microsoft.EntityFrameworkCore.Tools
                         { "language", Language },
                         { "nullable", Nullable },
                         { "toolsVersion", ProductInfo.GetVersion() },
-                        { "remainingArguments", RemainingArguments }
-                    }
+                        { "remainingArguments", RemainingArguments },
+                    },
                 },
                 null,
-                null);
+                null
+            );
         }
 
-        protected override object CreateResultHandler()
-            => new OperationResultHandler();
+        protected override object CreateResultHandler() => new OperationResultHandler();
 
-        protected override void Execute(string operationName, object resultHandler, IDictionary arguments)
-            => _domain.CreateInstance(
+        protected override void Execute(
+            string operationName,
+            object resultHandler,
+            IDictionary arguments
+        ) =>
+            _domain.CreateInstance(
                 DesignAssemblyName,
                 ExecutorTypeName + "+" + operationName,
                 false,
@@ -89,7 +103,8 @@ namespace Microsoft.EntityFrameworkCore.Tools
                 null,
                 new[] { _executor, resultHandler, arguments },
                 null,
-                null);
+                null
+            );
 
         public override void Dispose()
         {

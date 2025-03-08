@@ -19,14 +19,29 @@ namespace System.Net.Mime.Tests
         [InlineData("Hello World", "Hello World", "ASCII", true)]
         [InlineData("Hello World \x00E9", "Hello World =C3=A9", "Default", true)]
         [InlineData("Hello World \x7406", "Hello World =E7=90=86", "UTF8", true)]
-        [InlineData("Hello World \x7406\x7406\x7406\x7406\x7406\x7406\x7406", "Hello World =E7=90=86=E7=90=86=E7=90=86=E7=90=86=E7=90=86=E7=90=86=\r\n=E7=90=86", "UTF8", true)]
-        [InlineData("Hello World 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23", "Hello World 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21=\r\n 22 23", "ASCII", true)]
-        public static void TestEncodeStream(string input, string expectedOutput, string encodingName, bool encodeCRLF)
+        [InlineData(
+            "Hello World \x7406\x7406\x7406\x7406\x7406\x7406\x7406",
+            "Hello World =E7=90=86=E7=90=86=E7=90=86=E7=90=86=E7=90=86=E7=90=86=\r\n=E7=90=86",
+            "UTF8",
+            true
+        )]
+        [InlineData(
+            "Hello World 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23",
+            "Hello World 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21=\r\n 22 23",
+            "ASCII",
+            true
+        )]
+        public static void TestEncodeStream(
+            string input,
+            string expectedOutput,
+            string encodingName,
+            bool encodeCRLF
+        )
         {
             Encoding encoding =
-                encodingName == "ASCII" ? Encoding.ASCII :
-                encodingName == "UTF8" ? Encoding.UTF8 :
-                Encoding.Default;
+                encodingName == "ASCII" ? Encoding.ASCII
+                : encodingName == "UTF8" ? Encoding.UTF8
+                : Encoding.Default;
 
             var outputStream = new MemoryStream();
             var testStream = new QuotedPrintableStream(outputStream, encodeCRLF);

@@ -22,12 +22,14 @@ internal partial class HubClientProxyGenerator
 
         public void Emit()
         {
-            if (string.IsNullOrEmpty(_spec.SetterClassAccessibility) ||
-                string.IsNullOrEmpty(_spec.SetterMethodAccessibility) ||
-                string.IsNullOrEmpty(_spec.SetterClassName) ||
-                string.IsNullOrEmpty(_spec.SetterMethodName) ||
-                string.IsNullOrEmpty(_spec.SetterTypeParameterName) ||
-                string.IsNullOrEmpty(_spec.SetterHubConnectionParameterName))
+            if (
+                string.IsNullOrEmpty(_spec.SetterClassAccessibility)
+                || string.IsNullOrEmpty(_spec.SetterMethodAccessibility)
+                || string.IsNullOrEmpty(_spec.SetterClassName)
+                || string.IsNullOrEmpty(_spec.SetterMethodName)
+                || string.IsNullOrEmpty(_spec.SetterTypeParameterName)
+                || string.IsNullOrEmpty(_spec.SetterHubConnectionParameterName)
+            )
             {
                 return;
             }
@@ -48,20 +50,25 @@ internal partial class HubClientProxyGenerator
             // Generate body of RegisterCallbackProvider<T>
             foreach (var typeSpec in _spec.Types)
             {
-                var methodName = $"Register{typeSpec.FullyQualifiedTypeName.Replace(".", string.Empty)}";
+                var methodName =
+                    $"Register{typeSpec.FullyQualifiedTypeName.Replace(".", string.Empty)}";
                 var fqtn = typeSpec.FullyQualifiedTypeName;
-                registerProviderBody.AppendLine($@"
+                registerProviderBody.AppendLine(
+                    $@"
             if (typeof({_spec.SetterTypeParameterName}) == typeof({fqtn}))
             {{
                 return (System.IDisposable) new CallbackProviderRegistration({methodName}({_spec.SetterHubConnectionParameterName}, ({fqtn}) {_spec.SetterProviderParameterName}));
-            }}");
+            }}"
+                );
             }
 
             // Generate RegisterCallbackProvider<T> extension method and CallbackProviderRegistration class
             // RegisterCallbackProvider<T> is used by end-user to register their callback provider types
             // CallbackProviderRegistration is a private implementation of IDisposable which simply holds
             //  an array of IDisposables acquired from registration of each callback method from HubConnection
-            var extensions = GeneratorHelpers.SourceFilePrefix() + $@"
+            var extensions =
+                GeneratorHelpers.SourceFilePrefix()
+                + $@"
 using Microsoft.AspNetCore.SignalR.Client;
 
 namespace {_spec.SetterNamespace}
@@ -120,7 +127,10 @@ namespace {_spec.SetterNamespace}
     }}
 }}";
 
-            _context.AddSource("HubClientProxy.g.cs", SourceText.From(extensions.ToString(), Encoding.UTF8));
+            _context.AddSource(
+                "HubClientProxy.g.cs",
+                SourceText.From(extensions.ToString(), Encoding.UTF8)
+            );
         }
 
         private void EmitRegistrationMethod(TypeSpec typeSpec)
@@ -128,7 +138,9 @@ namespace {_spec.SetterNamespace}
             // The actual registration method goes thru each method that the callback provider type has and then
             //  registers the method with HubConnection and stashes the returned IDisposable into an array for
             //  later consumption by CallbackProviderRegistration's constructor
-            var registrationMethodBody = new StringBuilder(GeneratorHelpers.SourceFilePrefix() + $@"
+            var registrationMethodBody = new StringBuilder(
+                GeneratorHelpers.SourceFilePrefix()
+                    + $@"
 using Microsoft.AspNetCore.SignalR.Client;
 
 namespace {_spec.SetterNamespace}
@@ -137,7 +149,8 @@ namespace {_spec.SetterNamespace}
     {{
         private static System.IDisposable[] Register{typeSpec.FullyQualifiedTypeName.Replace(".", string.Empty)}(HubConnection connection, {typeSpec.FullyQualifiedTypeName} provider)
         {{
-            var registrations = new System.IDisposable[{typeSpec.Methods.Count}];");
+            var registrations = new System.IDisposable[{typeSpec.Methods.Count}];"
+            );
 
             // Generate each of the methods
             var i = 0;
@@ -179,17 +192,24 @@ namespace {_spec.SetterNamespace}
                 var lambda = $"{lambaParams} => provider.{member.Name}{lambaParams}";
                 var call = $"connection.On{genericArgs}(\"{member.Name}\", {lambda})";
 
-                registrationMethodBody.AppendLine($@"
-            registrations[{i}] = {call};");
+                registrationMethodBody.AppendLine(
+                    $@"
+            registrations[{i}] = {call};"
+                );
                 ++i;
             }
-            registrationMethodBody.AppendLine(@"
+            registrationMethodBody.AppendLine(
+                @"
             return registrations;
         }
     }
-}");
+}"
+            );
 
-            _context.AddSource($"HubClientProxy.{typeSpec.TypeName}.g.cs", SourceText.From(registrationMethodBody.ToString(), Encoding.UTF8));
+            _context.AddSource(
+                $"HubClientProxy.{typeSpec.TypeName}.g.cs",
+                SourceText.From(registrationMethodBody.ToString(), Encoding.UTF8)
+            );
         }
     }
 }

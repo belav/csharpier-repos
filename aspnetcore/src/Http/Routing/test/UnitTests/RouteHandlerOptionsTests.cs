@@ -15,15 +15,17 @@ public class RouteHandlerOptionsTests
     [InlineData("DEVELOPMENT", true)]
     [InlineData("Production", false)]
     [InlineData("Custom", false)]
-    public void ThrowOnBadRequestIsTrueIfInDevelopmentEnvironmentFalseOtherwise(string environmentName, bool expectedThrowOnBadRequest)
+    public void ThrowOnBadRequestIsTrueIfInDevelopmentEnvironmentFalseOtherwise(
+        string environmentName,
+        bool expectedThrowOnBadRequest
+    )
     {
         var services = new ServiceCollection();
         services.AddOptions();
         services.AddRouting();
-        services.AddSingleton<IHostEnvironment>(new HostEnvironment
-        {
-            EnvironmentName = environmentName,
-        });
+        services.AddSingleton<IHostEnvironment>(
+            new HostEnvironment { EnvironmentName = environmentName }
+        );
         var serviceProvider = services.BuildServiceProvider();
 
         var options = serviceProvider.GetRequiredService<IOptions<RouteHandlerOptions>>().Value;
@@ -40,10 +42,9 @@ public class RouteHandlerOptionsTests
             options.ThrowOnBadRequest = true;
         });
 
-        services.AddSingleton<IHostEnvironment>(new HostEnvironment
-        {
-            EnvironmentName = "Production",
-        });
+        services.AddSingleton<IHostEnvironment>(
+            new HostEnvironment { EnvironmentName = "Production" }
+        );
 
         services.AddOptions();
         services.AddRouting();

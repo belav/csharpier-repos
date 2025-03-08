@@ -28,7 +28,14 @@ namespace System.Speech.Internal.SrgsCompiler
         /// <summary>
         /// Add transition corresponding to Special or Uri.
         /// </summary>
-        internal RuleRef(ParseElementCollection parent, Backend backend, Uri uri, List<Rule> undefRules, string semanticKey, string initParameters)
+        internal RuleRef(
+            ParseElementCollection parent,
+            Backend backend,
+            Uri uri,
+            List<Rule> undefRules,
+            string semanticKey,
+            string initParameters
+        )
             : base(parent._rule)
         {
             string id = uri.OriginalString;
@@ -118,7 +125,9 @@ namespace System.Speech.Internal.SrgsCompiler
                     // Garbage transition is optional whereas Wildcard is not.  So we need additional epsilon transition.
                     OneOf oneOf = new(parent._rule, backend);
                     // Add the garbage transition
-                    oneOf.AddArc(backend.RuleTransition(CfgGrammar.SPRULETRANS_WILDCARD, parent._rule, 0.5f));
+                    oneOf.AddArc(
+                        backend.RuleTransition(CfgGrammar.SPRULETRANS_WILDCARD, parent._rule, 0.5f)
+                    );
                     // Add a parallel epsilon path
                     oneOf.AddArc(backend.EpsilonTransition(0.5f));
                     ((IOneOf)oneOf).PostParse(parent);
@@ -161,25 +170,16 @@ namespace System.Speech.Internal.SrgsCompiler
 
         internal static IRuleRef Null
         {
-            get
-            {
-                return new RuleRef(SpecialRuleRefType.Null, null);
-            }
+            get { return new RuleRef(SpecialRuleRefType.Null, null); }
         }
 
         internal static IRuleRef Void
         {
-            get
-            {
-                return new RuleRef(SpecialRuleRefType.Void, null);
-            }
+            get { return new RuleRef(SpecialRuleRefType.Void, null); }
         }
         internal static IRuleRef Garbage
         {
-            get
-            {
-                return new RuleRef(SpecialRuleRefType.Garbage, null);
-            }
+            get { return new RuleRef(SpecialRuleRefType.Garbage, null); }
         }
 
         #endregion
@@ -195,9 +195,11 @@ namespace System.Speech.Internal.SrgsCompiler
             // Defines a rule that is automatically matched that is, matched without
             // the user speaking any word.
             Null,
+
             // Defines a rule that can never be spoken. Inserting VOID into a sequence
             // automatically makes that sequence unspeakable.
             Void,
+
             // Defines a rule that may match any speech up until the next rule match,
             // the next token or until the end of spoken input.
             // Designed for applications that would like to recognize some phrases

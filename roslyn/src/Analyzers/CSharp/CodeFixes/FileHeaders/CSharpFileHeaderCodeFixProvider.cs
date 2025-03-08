@@ -19,10 +19,9 @@ namespace Microsoft.CodeAnalysis.CSharp.FileHeaders
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpFileHeaderCodeFixProvider()
-        {
-        }
+        public CSharpFileHeaderCodeFixProvider() { }
 
-        protected override AbstractFileHeaderHelper FileHeaderHelper => CSharpFileHeaderHelper.Instance;
+        protected override AbstractFileHeaderHelper FileHeaderHelper =>
+            CSharpFileHeaderHelper.Instance;
     }
 }

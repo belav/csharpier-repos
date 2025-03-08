@@ -17,7 +17,8 @@ internal sealed class DefaultProblemDetailsFactory : ProblemDetailsFactory
 
     public DefaultProblemDetailsFactory(
         IOptions<ApiBehaviorOptions> options,
-        IOptions<ProblemDetailsOptions>? problemDetailsOptions = null)
+        IOptions<ProblemDetailsOptions>? problemDetailsOptions = null
+    )
     {
         _options = options?.Value ?? throw new ArgumentNullException(nameof(options));
         _configure = problemDetailsOptions?.Value?.CustomizeProblemDetails;
@@ -29,7 +30,8 @@ internal sealed class DefaultProblemDetailsFactory : ProblemDetailsFactory
         string? title = null,
         string? type = null,
         string? detail = null,
-        string? instance = null)
+        string? instance = null
+    )
     {
         statusCode ??= 500;
 
@@ -54,7 +56,8 @@ internal sealed class DefaultProblemDetailsFactory : ProblemDetailsFactory
         string? title = null,
         string? type = null,
         string? detail = null,
-        string? instance = null)
+        string? instance = null
+    )
     {
         ArgumentNullException.ThrowIfNull(modelStateDictionary);
 
@@ -79,7 +82,11 @@ internal sealed class DefaultProblemDetailsFactory : ProblemDetailsFactory
         return problemDetails;
     }
 
-    private void ApplyProblemDetailsDefaults(HttpContext httpContext, ProblemDetails problemDetails, int statusCode)
+    private void ApplyProblemDetailsDefaults(
+        HttpContext httpContext,
+        ProblemDetails problemDetails,
+        int statusCode
+    )
     {
         problemDetails.Status ??= statusCode;
 

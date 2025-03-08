@@ -1,66 +1,62 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-namespace DefaultNamespace {
-    using System.Threading;
+namespace DefaultNamespace
+{
     using System;
     using System.IO;
+    using System.Threading;
 
     public class LivingObject
     {
-
-        internal byte [ ]GlobalContainer;
+        internal byte[] GlobalContainer;
         internal bool Switch = true;
         internal static int iCounter = 0;
 
-        public LivingObject( )
+        public LivingObject()
         {
-            Thread Mv_Thread = new Thread( new ThreadStart(this.ThreadStart) );
-            Mv_Thread.Start( );
+            Thread Mv_Thread = new Thread(new ThreadStart(this.ThreadStart));
+            Mv_Thread.Start();
         }
 
-
-        public void ThreadStart( )
+        public void ThreadStart()
         {
             // console synchronization Console.SetOut(TextWriter.Synchronized(Console.Out));
 
-            if( iCounter%100 == 0)
+            if (iCounter % 100 == 0)
             {
-                Console.Out.WriteLine( iCounter + " number of threads has been started" );
+                Console.Out.WriteLine(iCounter + " number of threads has been started");
             }
 
-            byte [ ]MethodContainer = new byte[ 1024 ]; // 1K
+            byte[] MethodContainer = new byte[1024]; // 1K
 
-            if( Switch )
+            if (Switch)
             {
-                GlobalContainer = new byte[ 1024 ]; // 1K
+                GlobalContainer = new byte[1024]; // 1K
             }
             Switch = !Switch;
 
-            GlobalContainer[ 0 ] = ( byte ) 1;
-            GlobalContainer[ GlobalContainer.Length - 1 ] = ( byte ) 1;
+            GlobalContainer[0] = (byte)1;
+            GlobalContainer[GlobalContainer.Length - 1] = (byte)1;
 
-            MethodContainer[ 0 ] = ( byte ) 1;
-            MethodContainer[ MethodContainer.Length - 1 ] = ( byte ) 1;
+            MethodContainer[0] = (byte)1;
+            MethodContainer[MethodContainer.Length - 1] = (byte)1;
 
-            IncreatCount( );
+            IncreatCount();
 
-            if( LivingObject.iCounter < ThdChaos.iThrd )
+            if (LivingObject.iCounter < ThdChaos.iThrd)
             {
-                Thread Mv_Thread = new Thread( new ThreadStart (this.ThreadStart) );
-                Mv_Thread.Start( );
+                Thread Mv_Thread = new Thread(new ThreadStart(this.ThreadStart));
+                Mv_Thread.Start();
             }
-
         }
-
 
         public void IncreatCount()
         {
-            lock(this)
+            lock (this)
             {
                 iCounter += 1;
             }
         }
-
     }
 }

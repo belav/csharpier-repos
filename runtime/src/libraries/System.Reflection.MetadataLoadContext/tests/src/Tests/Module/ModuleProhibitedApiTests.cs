@@ -10,13 +10,23 @@ namespace System.Reflection.Tests
         [Fact]
         public static void CannotDoWithReflectionOnlyModule()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new EmptyCoreMetadataAssemblyResolver()))
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new EmptyCoreMetadataAssemblyResolver()
+                )
+            )
             {
                 // Storing as ICustomAttributeProvider so we don't accidentally pick up the CustomAttributeExtensions extension methods.
-                ICustomAttributeProvider icp = lc.LoadFromByteArray(TestData.s_SimpleAssemblyImage).ManifestModule;
+                ICustomAttributeProvider icp = lc.LoadFromByteArray(
+                    TestData.s_SimpleAssemblyImage
+                ).ManifestModule;
 
-                Assert.Throws<InvalidOperationException>(() => icp.GetCustomAttributes(inherit: false));
-                Assert.Throws<InvalidOperationException>(() => icp.GetCustomAttributes(null, inherit: false));
+                Assert.Throws<InvalidOperationException>(() =>
+                    icp.GetCustomAttributes(inherit: false)
+                );
+                Assert.Throws<InvalidOperationException>(() =>
+                    icp.GetCustomAttributes(null, inherit: false)
+                );
                 Assert.Throws<InvalidOperationException>(() => icp.IsDefined(null, inherit: false));
             }
         }

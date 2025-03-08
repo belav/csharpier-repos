@@ -5,11 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.IO.Pipelines;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 #if NET8_0_OR_GREATER
 using System.Runtime.Versioning;
 #endif
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Connections.Abstractions;
 

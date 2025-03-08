@@ -27,108 +27,115 @@
 //
 
 using System;
-using System.Text;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Mono.Tools.LocaleBuilder
 {
-	public class Entry
-	{
-		public static readonly Mapping General = new Mapping ();
-		public static readonly Mapping Patterns  = new Mapping ();
-		public static readonly Mapping DateTimeStrings  = new Mapping ();
+    public class Entry
+    {
+        public static readonly Mapping General = new Mapping();
+        public static readonly Mapping Patterns = new Mapping();
+        public static readonly Mapping DateTimeStrings = new Mapping();
 
-		public class Mapping
-		{
-			// maps strings to indexes
-			Dictionary<string, int> hash = new Dictionary<string, int> ();
-			List<string> string_order = new List<string> ();
-			// idx 0 is reserved to indicate null
-			int curpos = 1;
+        public class Mapping
+        {
+            // maps strings to indexes
+            Dictionary<string, int> hash = new Dictionary<string, int>();
+            List<string> string_order = new List<string>();
 
-			// serialize the strings in Hashtable.
-			public string GetStrings ()
-			{
-				Console.WriteLine ("Total string data size: {0}", curpos);
-				if (curpos > UInt16.MaxValue)
-					throw new Exception ("need to increase idx size in culture-info.h");
-				StringBuilder ret = new StringBuilder ();
-				// the null entry
-				ret.Append ("\t\"\\0\"\n");
-				foreach (string s in string_order) {
-					ret.Append ("\t\"");
-					ret.Append (s);
-					ret.Append ("\\0\"\n");
-				}
-				return ret.ToString ();
-			}
+            // idx 0 is reserved to indicate null
+            int curpos = 1;
 
-			public int AddString (string s, int size)
-			{
-				if (!hash.ContainsKey (s)) {
-					int ret;
-					string_order.Add (s);
-					ret = curpos;
-					hash.Add (s, curpos);
-					curpos += size + 1; // null terminator
-					return ret;
-				}
+            // serialize the strings in Hashtable.
+            public string GetStrings()
+            {
+                Console.WriteLine("Total string data size: {0}", curpos);
+                if (curpos > UInt16.MaxValue)
+                    throw new Exception("need to increase idx size in culture-info.h");
+                StringBuilder ret = new StringBuilder();
+                // the null entry
+                ret.Append("\t\"\\0\"\n");
+                foreach (string s in string_order)
+                {
+                    ret.Append("\t\"");
+                    ret.Append(s);
+                    ret.Append("\\0\"\n");
+                }
+                return ret.ToString();
+            }
 
-				return hash[s];
-			}
-		}
+            public int AddString(string s, int size)
+            {
+                if (!hash.ContainsKey(s))
+                {
+                    int ret;
+                    string_order.Add(s);
+                    ret = curpos;
+                    hash.Add(s, curpos);
+                    curpos += size + 1; // null terminator
+                    return ret;
+                }
 
-		protected static StringBuilder AppendNames (StringBuilder builder, IList<string> names)
-		{
-			builder.Append ('{');
-			for (int i = 0; i < names.Count; i++) {
-				if (i > 0)
-					builder.Append (", ");
+                return hash[s];
+            }
+        }
 
-				builder.Append (Encode (DateTimeStrings, names[i]));
-			}
-			builder.Append ("}");
+        protected static StringBuilder AppendNames(StringBuilder builder, IList<string> names)
+        {
+            builder.Append('{');
+            for (int i = 0; i < names.Count; i++)
+            {
+                if (i > 0)
+                    builder.Append(", ");
 
-			return builder;
-		}
+                builder.Append(Encode(DateTimeStrings, names[i]));
+            }
+            builder.Append("}");
 
+            return builder;
+        }
 
-		public static string EncodeStringIdx (string str)
-		{
-			return Encode (General, str);
-		}
+        public static string EncodeStringIdx(string str)
+        {
+            return Encode(General, str);
+        }
 
-		protected static string EncodePatternStringIdx (string str)
-		{
-			return Encode (Patterns, str);
-		}
+        protected static string EncodePatternStringIdx(string str)
+        {
+            return Encode(Patterns, str);
+        }
 
-		static string Encode (Mapping mapping, string str)
-		{
-			if (str == null)
-				return "0";
+        static string Encode(Mapping mapping, string str)
+        {
+            if (str == null)
+                return "0";
 
-			StringBuilder ret = new StringBuilder ();
-			byte[] ba = new UTF8Encoding ().GetBytes (str);
-			bool in_hex = false;
-			foreach (byte b in ba) {
-				if (b > 127 || (in_hex && is_hex (b))) {
-					ret.AppendFormat ("\\x{0:x}", b);
-					in_hex = true;
-				} else {
-					if (b == '\\')
-						ret.Append ('\\');
-					ret.Append ((char) b);
-					in_hex = false;
-				}
-			}
-			int res = mapping.AddString (ret.ToString (), ba.Length);
-			return res.ToString ();
-		}
+            StringBuilder ret = new StringBuilder();
+            byte[] ba = new UTF8Encoding().GetBytes(str);
+            bool in_hex = false;
+            foreach (byte b in ba)
+            {
+                if (b > 127 || (in_hex && is_hex(b)))
+                {
+                    ret.AppendFormat("\\x{0:x}", b);
+                    in_hex = true;
+                }
+                else
+                {
+                    if (b == '\\')
+                        ret.Append('\\');
+                    ret.Append((char)b);
+                    in_hex = false;
+                }
+            }
+            int res = mapping.AddString(ret.ToString(), ba.Length);
+            return res.ToString();
+        }
 
-		static bool is_hex (int e)
-		{
-			return (e >= '0' && e <= '9') || (e >= 'A' && e <= 'F') || (e >= 'a' && e <= 'f');
-		}
-	}
+        static bool is_hex(int e)
+        {
+            return (e >= '0' && e <= '9') || (e >= 'A' && e <= 'F') || (e >= 'a' && e <= 'f');
+        }
+    }
 }

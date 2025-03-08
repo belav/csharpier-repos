@@ -8,7 +8,8 @@ namespace System.Security.Cryptography.Xml.Tests
 {
     public class EncryptionPropertyTest
     {
-        private const string ValidXml = @"<EncryptionProperty xmlns=""http://www.w3.org/2001/04/xmlenc#"" Id=""ID_val"" Target=""Target_val"" />";
+        private const string ValidXml =
+            @"<EncryptionProperty xmlns=""http://www.w3.org/2001/04/xmlenc#"" Id=""ID_val"" Target=""Target_val"" />";
         private const string IDValue = "ID_val";
         private const string TargetValue = "Target_val";
 
@@ -43,7 +44,8 @@ namespace System.Security.Cryptography.Xml.Tests
             string xml = "<a />";
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml);
-            Assert.Throws<CryptographicException>(() => new EncryptionProperty(doc.DocumentElement));
+            Assert.Throws<CryptographicException>(() => new EncryptionProperty(doc.DocumentElement)
+            );
         }
 
         [Fact]
@@ -60,7 +62,9 @@ namespace System.Security.Cryptography.Xml.Tests
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml);
             EncryptionProperty encryptionProperty = new EncryptionProperty();
-            Assert.Throws<CryptographicException>(() => encryptionProperty.PropertyElement = doc.DocumentElement);
+            Assert.Throws<CryptographicException>(() =>
+                encryptionProperty.PropertyElement = doc.DocumentElement
+            );
         }
 
         [Fact]
@@ -87,7 +91,9 @@ namespace System.Security.Cryptography.Xml.Tests
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(xml);
             EncryptionProperty encryptionProperty = new EncryptionProperty();
-            Assert.Throws<CryptographicException>(() => encryptionProperty.LoadXml(doc.DocumentElement));
+            Assert.Throws<CryptographicException>(() =>
+                encryptionProperty.LoadXml(doc.DocumentElement)
+            );
         }
 
         [Fact]

@@ -13,25 +13,28 @@ public class StartupCustomCulturePreserved
         services.AddLocalization();
     }
 
-    public void Configure(
-        IApplicationBuilder app)
+    public void Configure(IApplicationBuilder app)
     {
-        app.UseRequestLocalization(new RequestLocalizationOptions
-        {
-            DefaultRequestCulture = new RequestCulture("en-US"),
-            SupportedCultures = new List<CultureInfo>()
+        app.UseRequestLocalization(
+            new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("en-US"),
+                SupportedCultures = new List<CultureInfo>()
                 {
-                    new CultureInfo("en-US") { NumberFormat= { CurrencySymbol = "kr" } }
+                    new CultureInfo("en-US") { NumberFormat = { CurrencySymbol = "kr" } },
                 },
-            SupportedUICultures = new List<CultureInfo>()
+                SupportedUICultures = new List<CultureInfo>()
                 {
-                    new CultureInfo("en-US") { NumberFormat= { CurrencySymbol = "kr" } }
-                }
-        });
+                    new CultureInfo("en-US") { NumberFormat = { CurrencySymbol = "kr" } },
+                },
+            }
+        );
 
-        app.Run(async (context) =>
-        {
-            await context.Response.WriteAsync(10.ToString("C", CultureInfo.CurrentCulture));
-        });
+        app.Run(
+            async (context) =>
+            {
+                await context.Response.WriteAsync(10.ToString("C", CultureInfo.CurrentCulture));
+            }
+        );
     }
 }

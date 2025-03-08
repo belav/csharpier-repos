@@ -29,8 +29,14 @@ namespace System.ComponentModel.Composition.Hosting
                     _notifyCatalog.Changing += OnCatalogChanging;
                 }
 
-                var compositionOptions = CompositionOptions.DisableSilentRejection | CompositionOptions.IsThreadSafe | CompositionOptions.ExportCompositionService;
-                var compositionContainer = new CompositionContainer(composablePartCatalog, compositionOptions);
+                var compositionOptions =
+                    CompositionOptions.DisableSilentRejection
+                    | CompositionOptions.IsThreadSafe
+                    | CompositionOptions.ExportCompositionService;
+                var compositionContainer = new CompositionContainer(
+                    composablePartCatalog,
+                    compositionOptions
+                );
 
                 _compositionContainer = compositionContainer;
             }

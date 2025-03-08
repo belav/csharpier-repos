@@ -72,7 +72,9 @@ namespace Microsoft.WebAssembly.Diagnostics
             get
             {
                 if (_intValue == null)
-                    throw new ArgumentException($"DotnetObjectId (scheme: {Scheme}, ValueAsJson: {ValueAsJson}) does not have an int value");
+                    throw new ArgumentException(
+                        $"DotnetObjectId (scheme: {Scheme}, ValueAsJson: {ValueAsJson}) does not have an int value"
+                    );
                 return _intValue.Value;
             }
         }
@@ -81,7 +83,8 @@ namespace Microsoft.WebAssembly.Diagnostics
 
         public JObject ValueAsJson { get; init; }
 
-        public static bool TryParse(JToken jToken, out DotnetObjectId objectId) => TryParse(jToken?.Value<string>(), out objectId);
+        public static bool TryParse(JToken jToken, out DotnetObjectId objectId) =>
+            TryParse(jToken?.Value<string>(), out objectId);
 
         public static bool TryParse(string id, out DotnetObjectId objectId)
         {
@@ -102,7 +105,7 @@ namespace Microsoft.WebAssembly.Diagnostics
         }
 
         public DotnetObjectId(string scheme, int value)
-                : this(scheme, value.ToString()) { }
+            : this(scheme, value.ToString()) { }
 
         public DotnetObjectId(string scheme, string value)
         {
@@ -121,10 +124,8 @@ namespace Microsoft.WebAssembly.Diagnostics
             }
         }
 
-        public override string ToString()
-            => _intValue != null
-                    ? $"dotnet:{Scheme}:{_intValue}"
-                    : $"dotnet:{Scheme}:{ValueAsJson}";
+        public override string ToString() =>
+            _intValue != null ? $"dotnet:{Scheme}:{_intValue}" : $"dotnet:{Scheme}:{ValueAsJson}";
     }
 
     public struct Result
@@ -139,7 +140,12 @@ namespace Microsoft.WebAssembly.Diagnostics
         {
             ArgumentNullException.ThrowIfNull(resultOrError);
 
-            bool resultHasError = isError || string.Equals((resultOrError["result"] as JObject)?["subtype"]?.Value<string>(), "error");
+            bool resultHasError =
+                isError
+                || string.Equals(
+                    (resultOrError["result"] as JObject)?["subtype"]?.Value<string>(),
+                    "error"
+                );
             resultHasError |= resultOrError["exceptionDetails"] != null;
             if (resultHasError)
             {
@@ -153,6 +159,7 @@ namespace Microsoft.WebAssembly.Diagnostics
             }
             FullContent = fullContent;
         }
+
         public static Result FromJson(JObject obj)
         {
             var error = obj["error"] as JObject;
@@ -161,11 +168,15 @@ namespace Microsoft.WebAssembly.Diagnostics
             var result = (obj["result"] as JObject) ?? new JObject();
             return new Result(result, false);
         }
+
         public static Result FromJsonFirefox(JObject obj)
         {
             //Log ("protocol", $"from result: {obj}");
             JObject o;
-            if (obj["ownProperties"] != null && obj["prototype"]?["class"]?.Value<string>() == "Array")
+            if (
+                obj["ownProperties"] != null
+                && obj["prototype"]?["class"]?.Value<string>() == "Array"
+            )
             {
                 var ret = new JArray();
                 var arrayItems = obj["ownProperties"];
@@ -174,68 +185,53 @@ namespace Microsoft.WebAssembly.Diagnostics
                     if (arrayItem.Name != "length")
                         ret.Add(arrayItem.Value["value"]);
                 }
-                o = JObject.FromObject(new
-                {
-                    result = new
-                    {
-                        value = ret
-                    }
-                });
+                o = JObject.FromObject(new { result = new { value = ret } });
             }
-            else if (obj["result"] is JObject && obj["result"]?["type"]?.Value<string>() == "object")
+            else if (
+                obj["result"] is JObject
+                && obj["result"]?["type"]?.Value<string>() == "object"
+            )
             {
                 if (obj["result"]["class"].Value<string>() == "Array")
                 {
-                    o = JObject.FromObject(new
-                    {
-                        result = new
-                        {
-                            value = obj["result"]["preview"]["items"]
-                        }
-                    });
+                    o = JObject.FromObject(
+                        new { result = new { value = obj["result"]["preview"]["items"] } }
+                    );
                 }
                 else if (obj["result"]?["preview"] != null)
                 {
-                    o = JObject.FromObject(new
-                    {
-                        result = new
+                    o = JObject.FromObject(
+                        new
                         {
-                            value = obj["result"]?["preview"]?["ownProperties"]?["value"]
+                            result = new
+                            {
+                                value = obj["result"]?["preview"]?["ownProperties"]?["value"],
+                            },
                         }
-                    });
+                    );
                 }
                 else
                 {
-                    o = JObject.FromObject(new
-                    {
-                        result = new
-                        {
-                            value = obj["result"]
-                        }
-                    });
+                    o = JObject.FromObject(new { result = new { value = obj["result"] } });
                 }
             }
             else if (obj["result"] != null)
             {
-                o = JObject.FromObject(new
-                {
-                    result = new
+                o = JObject.FromObject(
+                    new
                     {
-                        value = obj["result"],
-                        type = obj["resultType"],
-                        description = obj["resultDescription"]
+                        result = new
+                        {
+                            value = obj["result"],
+                            type = obj["resultType"],
+                            description = obj["resultDescription"],
+                        },
                     }
-                });
+                );
             }
             else
             {
-                o = JObject.FromObject(new
-                {
-                    result = new
-                    {
-                        value = obj
-                    }
-                });
+                o = JObject.FromObject(new { result = new { value = obj } });
             }
             bool resultHasError = obj["hasException"] != null && obj["hasException"].Value<bool>();
             if (resultHasError)
@@ -251,31 +247,37 @@ namespace Microsoft.WebAssembly.Diagnostics
 
         public static Result Err(JObject err) => new Result(err, true);
 
-        public static Result Err(string msg) => new Result(JObject.FromObject(new { message = msg }), true);
+        public static Result Err(string msg) =>
+            new Result(JObject.FromObject(new { message = msg }), true);
 
         public static Result UserVisibleErr(JObject result) => new Result { Value = result };
 
-        public static Result Exception(Exception e) => new Result(JObject.FromObject(new { message = e.Message }), true);
+        public static Result Exception(Exception e) =>
+            new Result(JObject.FromObject(new { message = e.Message }), true);
 
         public JObject ToJObject(MessageId target)
         {
             if (IsOk)
             {
-                return JObject.FromObject(new
-                {
-                    target.id,
-                    target.sessionId,
-                    result = Value
-                });
+                return JObject.FromObject(
+                    new
+                    {
+                        target.id,
+                        target.sessionId,
+                        result = Value,
+                    }
+                );
             }
             else
             {
-                return JObject.FromObject(new
-                {
-                    target.id,
-                    target.sessionId,
-                    error = Error
-                });
+                return JObject.FromObject(
+                    new
+                    {
+                        target.id,
+                        target.sessionId,
+                        error = Error,
+                    }
+                );
             }
         }
 
@@ -295,35 +297,80 @@ namespace Microsoft.WebAssembly.Diagnostics
 
         public MonoCommands(string expression) => this.expression = expression;
 
-        public static MonoCommands GetDebuggerAgentBufferReceived(int runtimeId) => new MonoCommands($"getDotnetRuntime({runtimeId}).INTERNAL.mono_wasm_get_dbg_command_info()");
+        public static MonoCommands GetDebuggerAgentBufferReceived(int runtimeId) =>
+            new MonoCommands(
+                $"getDotnetRuntime({runtimeId}).INTERNAL.mono_wasm_get_dbg_command_info()"
+            );
 
-        public static MonoCommands IsRuntimeReady(int runtimeId) => new MonoCommands($"getDotnetRuntime({runtimeId}).INTERNAL.mono_wasm_runtime_is_ready");
+        public static MonoCommands IsRuntimeReady(int runtimeId) =>
+            new MonoCommands($"getDotnetRuntime({runtimeId}).INTERNAL.mono_wasm_runtime_is_ready");
 
-        public static MonoCommands GetLoadedFiles(int runtimeId) => new MonoCommands($"getDotnetRuntime({runtimeId}).INTERNAL.mono_wasm_get_loaded_files()");
+        public static MonoCommands GetLoadedFiles(int runtimeId) =>
+            new MonoCommands(
+                $"getDotnetRuntime({runtimeId}).INTERNAL.mono_wasm_get_loaded_files()"
+            );
 
-        public static MonoCommands SetDebuggerAttached(int runtimeId) => new MonoCommands($"getDotnetRuntime({runtimeId}).INTERNAL.mono_wasm_debugger_attached()");
+        public static MonoCommands SetDebuggerAttached(int runtimeId) =>
+            new MonoCommands(
+                $"getDotnetRuntime({runtimeId}).INTERNAL.mono_wasm_debugger_attached()"
+            );
 
-        public static MonoCommands SendDebuggerAgentCommand(int runtimeId, int id, int command_set, int command, string command_parameters)
+        public static MonoCommands SendDebuggerAgentCommand(
+            int runtimeId,
+            int id,
+            int command_set,
+            int command,
+            string command_parameters
+        )
         {
-            return new MonoCommands($"getDotnetRuntime({runtimeId}).INTERNAL.mono_wasm_send_dbg_command ({id}, {command_set}, {command},'{command_parameters}')");
+            return new MonoCommands(
+                $"getDotnetRuntime({runtimeId}).INTERNAL.mono_wasm_send_dbg_command ({id}, {command_set}, {command},'{command_parameters}')"
+            );
         }
 
-        public static MonoCommands SendDebuggerAgentCommandWithParms(int runtimeId, int id, int command_set, int command, string command_parameters, int len, int type, string parm)
+        public static MonoCommands SendDebuggerAgentCommandWithParms(
+            int runtimeId,
+            int id,
+            int command_set,
+            int command,
+            string command_parameters,
+            int len,
+            int type,
+            string parm
+        )
         {
-            return new MonoCommands($"getDotnetRuntime({runtimeId}).INTERNAL.mono_wasm_send_dbg_command_with_parms ({id}, {command_set}, {command},'{command_parameters}', {len}, {type}, '{parm}')");
+            return new MonoCommands(
+                $"getDotnetRuntime({runtimeId}).INTERNAL.mono_wasm_send_dbg_command_with_parms ({id}, {command_set}, {command},'{command_parameters}', {len}, {type}, '{parm}')"
+            );
         }
 
-        public static MonoCommands CallFunctionOn(int runtimeId, JToken args) => new MonoCommands($"getDotnetRuntime({runtimeId}).INTERNAL.mono_wasm_call_function_on ({args})");
+        public static MonoCommands CallFunctionOn(int runtimeId, JToken args) =>
+            new MonoCommands(
+                $"getDotnetRuntime({runtimeId}).INTERNAL.mono_wasm_call_function_on ({args})"
+            );
 
-        public static MonoCommands GetDetails(int runtimeId, int objectId, JToken args = null) => new MonoCommands($"getDotnetRuntime({runtimeId}).INTERNAL.mono_wasm_get_details ({objectId}, {(args ?? "{ }")})");
+        public static MonoCommands GetDetails(int runtimeId, int objectId, JToken args = null) =>
+            new MonoCommands(
+                $"getDotnetRuntime({runtimeId}).INTERNAL.mono_wasm_get_details ({objectId}, {(args ?? "{ }")})"
+            );
 
-        public static MonoCommands Resume(int runtimeId) => new MonoCommands($"getDotnetRuntime({runtimeId}).INTERNAL.mono_wasm_debugger_resume ()");
+        public static MonoCommands Resume(int runtimeId) =>
+            new MonoCommands(
+                $"getDotnetRuntime({runtimeId}).INTERNAL.mono_wasm_debugger_resume ()"
+            );
 
-        public static MonoCommands DetachDebugger(int runtimeId) => new MonoCommands($"getDotnetRuntime({runtimeId}).INTERNAL.mono_wasm_detach_debugger()");
+        public static MonoCommands DetachDebugger(int runtimeId) =>
+            new MonoCommands($"getDotnetRuntime({runtimeId}).INTERNAL.mono_wasm_detach_debugger()");
 
-        public static MonoCommands ReleaseObject(int runtimeId, DotnetObjectId objectId) => new MonoCommands($"getDotnetRuntime({runtimeId}).INTERNAL.mono_wasm_release_object('{objectId}')");
+        public static MonoCommands ReleaseObject(int runtimeId, DotnetObjectId objectId) =>
+            new MonoCommands(
+                $"getDotnetRuntime({runtimeId}).INTERNAL.mono_wasm_release_object('{objectId}')"
+            );
 
-        public static MonoCommands GetWasmFunctionIds(int runtimeId) => new MonoCommands($"getDotnetRuntime({runtimeId}).INTERNAL.mono_wasm_get_func_id_to_name_mappings()");
+        public static MonoCommands GetWasmFunctionIds(int runtimeId) =>
+            new MonoCommands(
+                $"getDotnetRuntime({runtimeId}).INTERNAL.mono_wasm_get_func_id_to_name_mappings()"
+            );
     }
 
     internal enum MonoErrorCodes
@@ -333,7 +380,8 @@ namespace Microsoft.WebAssembly.Diagnostics
 
     internal static class MonoConstants
     {
-        public const string EVENT_RAISED = "mono_wasm_debug_event_raised:aef14bca-5519-4dfe-b35a-f867abc123ae";
+        public const string EVENT_RAISED =
+            "mono_wasm_debug_event_raised:aef14bca-5519-4dfe-b35a-f867abc123ae";
     }
 
     internal sealed class Frame
@@ -358,6 +406,7 @@ namespace Microsoft.WebAssembly.Diagnostics
         public string StackId { get; private set; }
         public string Condition { get; set; }
         public bool ConditionAlreadyEvaluatedWithError { get; set; }
+
         public static bool TryParseId(string stackId, out int id)
         {
             id = -1;
@@ -367,7 +416,12 @@ namespace Microsoft.WebAssembly.Diagnostics
             return int.TryParse(stackId.AsSpan("dotnet:".Length), out id);
         }
 
-        public Breakpoint(string stackId, SourceLocation loc, string condition, BreakpointState state)
+        public Breakpoint(
+            string stackId,
+            SourceLocation loc,
+            string condition,
+            BreakpointState state
+        )
         {
             this.StackId = stackId;
             this.Location = loc;
@@ -381,14 +435,14 @@ namespace Microsoft.WebAssembly.Diagnostics
     {
         Active,
         Disabled,
-        Pending
+        Pending,
     }
 
     internal enum StepKind
     {
         Into,
         Over,
-        Out
+        Out,
     }
 
     internal enum PauseOnExceptionsKind
@@ -396,12 +450,17 @@ namespace Microsoft.WebAssembly.Diagnostics
         Unset,
         None,
         Uncaught,
-        All
+        All,
     }
 
     internal class ExecutionContext
     {
-        public ExecutionContext(MonoSDBHelper sdbAgent, int id, object auxData, PauseOnExceptionsKind pauseOnExceptions)
+        public ExecutionContext(
+            MonoSDBHelper sdbAgent,
+            int id,
+            object auxData,
+            PauseOnExceptionsKind pauseOnExceptions
+        )
         {
             Id = id;
             AuxData = auxData;
@@ -410,12 +469,14 @@ namespace Microsoft.WebAssembly.Diagnostics
             Destroyed = false;
             FrameworkScriptList = new();
         }
-        public ExecutionContext CreateChildAsyncExecutionContext(SessionId sessionId)
-            => new ExecutionContext(null, Id, AuxData, PauseOnExceptions)
+
+        public ExecutionContext CreateChildAsyncExecutionContext(SessionId sessionId) =>
+            new ExecutionContext(null, Id, AuxData, PauseOnExceptions)
             {
                 ParentContext = this,
-                SessionId = sessionId
+                SessionId = sessionId,
             };
+
         public bool CopyDataFromParentContext()
         {
             if (SdbAgent != null)
@@ -426,8 +487,10 @@ namespace Microsoft.WebAssembly.Diagnostics
             SdbAgent = ParentContext.SdbAgent.Clone(SessionId);
             return true;
         }
+
         public string DebugId { get; set; }
-        public Dictionary<string, BreakpointRequest> BreakpointRequests { get; } = new Dictionary<string, BreakpointRequest>();
+        public Dictionary<string, BreakpointRequest> BreakpointRequests { get; } =
+            new Dictionary<string, BreakpointRequest>();
         public int breakpointId;
         public TaskCompletionSource<DebugStore> ready;
         public bool IsRuntimeReady => ready != null && ready.Task.IsCompleted;
@@ -456,9 +519,11 @@ namespace Microsoft.WebAssembly.Diagnostics
         public string[] LoadedFiles { get; set; }
         internal DebugStore store;
         internal MonoSDBHelper SdbAgent { get; private set; }
-        public TaskCompletionSource<DebugStore> Source { get; private set; } = new TaskCompletionSource<DebugStore>();
+        public TaskCompletionSource<DebugStore> Source { get; private set; } =
+            new TaskCompletionSource<DebugStore>();
 
-        private Dictionary<int, PerScopeCache> perScopeCaches { get; } = new Dictionary<int, PerScopeCache>();
+        private Dictionary<int, PerScopeCache> perScopeCaches { get; } =
+            new Dictionary<int, PerScopeCache>();
 
         internal int TempBreakpointForSetNextIP { get; set; }
         internal bool FirstBreakpoint { get; set; }
@@ -498,9 +563,12 @@ namespace Microsoft.WebAssembly.Diagnostics
     internal sealed class PerScopeCache
     {
         public Dictionary<string, JObject> Locals { get; } = new Dictionary<string, JObject>();
-        public Dictionary<string, JObject> MemberReferences { get; } = new Dictionary<string, JObject>();
-        public Dictionary<string, JObject> ObjectFields { get; } = new Dictionary<string, JObject>();
+        public Dictionary<string, JObject> MemberReferences { get; } =
+            new Dictionary<string, JObject>();
+        public Dictionary<string, JObject> ObjectFields { get; } =
+            new Dictionary<string, JObject>();
         public Dictionary<string, JObject> EvaluationResults { get; } = new();
+
         public PerScopeCache(JArray objectValues)
         {
             foreach (var objectValue in objectValues)
@@ -508,20 +576,26 @@ namespace Microsoft.WebAssembly.Diagnostics
                 ObjectFields[objectValue["name"].Value<string>()] = objectValue.Value<JObject>();
             }
         }
-        public PerScopeCache()
-        {
-        }
+
+        public PerScopeCache() { }
     }
 
     internal sealed class ConcurrentExecutionContextDictionary
     {
-        private ConcurrentDictionary<SessionId, ConcurrentBag<ExecutionContext>> contexts = new ();
-        public ExecutionContext GetCurrentContext(SessionId sessionId)
-            => TryGetCurrentExecutionContextValue(sessionId, out ExecutionContext context)
-                ? context
-                : throw new KeyNotFoundException($"No execution context found for session {sessionId}");
+        private ConcurrentDictionary<SessionId, ConcurrentBag<ExecutionContext>> contexts = new();
 
-        public bool TryGetCurrentExecutionContextValue(SessionId id, out ExecutionContext executionContext, bool ignoreDestroyedContext = true)
+        public ExecutionContext GetCurrentContext(SessionId sessionId) =>
+            TryGetCurrentExecutionContextValue(sessionId, out ExecutionContext context)
+                ? context
+                : throw new KeyNotFoundException(
+                    $"No execution context found for session {sessionId}"
+                );
+
+        public bool TryGetCurrentExecutionContextValue(
+            SessionId id,
+            out ExecutionContext executionContext,
+            bool ignoreDestroyedContext = true
+        )
         {
             executionContext = null;
             if (!contexts.TryGetValue(id, out ConcurrentBag<ExecutionContext> contextBag))
@@ -544,7 +618,12 @@ namespace Microsoft.WebAssembly.Diagnostics
         {
             if (TryGetAndAddContext(sessionId, newContext, out ExecutionContext previousContext))
             {
-                foreach (KeyValuePair<string, BreakpointRequest> kvp in previousContext.BreakpointRequests)
+                foreach (
+                    KeyValuePair<
+                        string,
+                        BreakpointRequest
+                    > kvp in previousContext.BreakpointRequests
+                )
                 {
                     newContext.BreakpointRequests[kvp.Key] = kvp.Value.Clone();
                 }
@@ -552,15 +631,30 @@ namespace Microsoft.WebAssembly.Diagnostics
             }
         }
 
-        public bool TryGetAndAddContext(SessionId sessionId, ExecutionContext newExecutionContext, out ExecutionContext previousExecutionContext)
+        public bool TryGetAndAddContext(
+            SessionId sessionId,
+            ExecutionContext newExecutionContext,
+            out ExecutionContext previousExecutionContext
+        )
         {
-            bool hasExisting = TryGetCurrentExecutionContextValue(sessionId, out previousExecutionContext, ignoreDestroyedContext: false);
-            ConcurrentBag<ExecutionContext> bag = contexts.GetOrAdd(sessionId, _ => new ConcurrentBag<ExecutionContext>());
+            bool hasExisting = TryGetCurrentExecutionContextValue(
+                sessionId,
+                out previousExecutionContext,
+                ignoreDestroyedContext: false
+            );
+            ConcurrentBag<ExecutionContext> bag = contexts.GetOrAdd(
+                sessionId,
+                _ => new ConcurrentBag<ExecutionContext>()
+            );
             bag.Add(newExecutionContext);
             return hasExisting;
         }
 
-        public void CreateWorkerExecutionContext(SessionId workerSessionId, SessionId originSessionId, ILogger logger)
+        public void CreateWorkerExecutionContext(
+            SessionId workerSessionId,
+            SessionId originSessionId,
+            ILogger logger
+        )
         {
             if (!TryGetCurrentExecutionContextValue(originSessionId, out ExecutionContext context))
             {
@@ -573,7 +667,8 @@ namespace Microsoft.WebAssembly.Diagnostics
                 return;
             }
             contexts[workerSessionId] = new();
-            contexts[workerSessionId].Add(context.CreateChildAsyncExecutionContext(workerSessionId));
+            contexts[workerSessionId]
+                .Add(context.CreateChildAsyncExecutionContext(workerSessionId));
         }
 
         public void DestroyContext(SessionId sessionId, int id)
@@ -583,6 +678,7 @@ namespace Microsoft.WebAssembly.Diagnostics
             foreach (ExecutionContext context in contextBag.Where(x => x.Id == id).ToList())
                 context.Destroyed = true;
         }
+
         public void ClearContexts(SessionId sessionId)
         {
             if (!contexts.TryGetValue(sessionId, out ConcurrentBag<ExecutionContext> contextBag))
@@ -590,6 +686,7 @@ namespace Microsoft.WebAssembly.Diagnostics
             foreach (ExecutionContext context in contextBag)
                 context.Destroyed = true;
         }
+
         public bool ContainsKey(SessionId sessionId) => contexts.ContainsKey(sessionId);
     }
 }

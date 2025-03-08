@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,94 +33,115 @@ using System.Drawing.Printing;
 using System.Runtime.InteropServices;
 using NUnit.Framework;
 
-namespace MonoTests.System.Drawing.Printing {
+namespace MonoTests.System.Drawing.Printing
+{
+    [TestFixture]
+    public class PrintingServicesUnixTest
+    {
+        [DllImport("gdiplus.dll")]
+        static extern Status GdipGetPostScriptSavePage(IntPtr graphics);
 
-	[TestFixture]
-	public class PrintingServicesUnixTest {
+        [Test]
+        public void BuiltInPrinting()
+        {
+            // ensure libgdiplus is built with printing support enabled
+            if (GDIPlus.RunningOnWindows())
+                Assert.Ignore("Running on Windows.");
 
-		[DllImport ("gdiplus.dll")]
-		static extern Status GdipGetPostScriptSavePage (IntPtr graphics);
+            Assert.AreEqual(
+                Status.InvalidParameter,
+                GdipGetPostScriptSavePage(IntPtr.Zero),
+                "Missing printing support"
+            );
+        }
 
-		[Test]
-		public void BuiltInPrinting ()
-		{
-			// ensure libgdiplus is built with printing support enabled
-			if (GDIPlus.RunningOnWindows ())
-				Assert.Ignore ("Running on Windows.");
+        #region Novell Bug #602934
 
-			Assert.AreEqual (Status.InvalidParameter, GdipGetPostScriptSavePage (IntPtr.Zero), "Missing printing support");
-		}
+        #region CUPS methods and structs
 
-		#region Novell Bug #602934
+        [StructLayout(LayoutKind.Sequential)]
+        struct CUPS_DEST
+        {
+            public string Name;
+            public string Instance;
+            public int IsDefault;
+            public int NumOptions;
+            public IntPtr Options;
+        }
 
-		#region CUPS methods and structs
+        [StructLayout(LayoutKind.Sequential)]
+        struct CUPS_OPTION
+        {
+            public string Name;
+            public string Value;
+        }
 
-		[StructLayout (LayoutKind.Sequential)]
-		struct CUPS_DEST
-		{
-			public string Name;
-			public string Instance;
-			public int IsDefault;
-			public int NumOptions;
-			public IntPtr Options;
-		}
+        readonly IntPtr CUPS_HTTP_DEFAULT = IntPtr.Zero;
 
-		[StructLayout (LayoutKind.Sequential)]
-		struct CUPS_OPTION
-		{
-			public string Name;
-			public string Value;
-		}
+        [DllImport("libcups")]
+        static extern IntPtr cupsGetNamedDest(IntPtr http, string name, string instance);
 
-		readonly IntPtr CUPS_HTTP_DEFAULT = IntPtr.Zero;
+        [DllImport("libcups")]
+        static extern void cupsFreeDests(int num_dests, IntPtr dests);
 
-		[DllImport ("libcups")]
-		static extern IntPtr cupsGetNamedDest (IntPtr http, string name, string instance);
+        [DllImport("libcups")]
+        static extern void cupsFreeDests(int num_dests, ref CUPS_DEST dests);
 
-		[DllImport ("libcups")]
-		static extern void cupsFreeDests (int num_dests, IntPtr dests);
+        #endregion
 
-		[DllImport ("libcups")]
-		static extern void cupsFreeDests (int num_dests, ref CUPS_DEST dests);
+        Dictionary<string, string> GetOptionsOfFirstPrinterThroughCups()
+        {
+            var options = new Dictionary<string, string>();
 
-		#endregion
+            var destPtr = cupsGetNamedDest(
+                CUPS_HTTP_DEFAULT,
+                PrinterSettings.InstalledPrinters[0],
+                null
+            );
+            var dest = (CUPS_DEST)Marshal.PtrToStructure(destPtr, typeof(CUPS_DEST));
+            var optionPtr = dest.Options;
+            int cupsOptionSize = Marshal.SizeOf(typeof(CUPS_OPTION));
+            for (int i = 0; i < dest.NumOptions; i++)
+            {
+                var cupsOption = (CUPS_OPTION)
+                    Marshal.PtrToStructure(optionPtr, typeof(CUPS_OPTION));
+                options.Add(cupsOption.Name, cupsOption.Value);
+                optionPtr = (IntPtr)((long)optionPtr + cupsOptionSize);
+            }
+            cupsFreeDests(1, destPtr);
+            return options;
+        }
 
-		Dictionary<string, string> GetOptionsOfFirstPrinterThroughCups ()
-		{
-			var options = new Dictionary<string, string> ();
+        [Test]
+        [Platform(
+            Exclude = "Win",
+            Reason = "Depends on CUPS which is usually not installed on Windows"
+        )]
+        [Ignore]
+        public void Bug602934_PrinterSettingsReturnActualValues()
+        {
+            if (PrinterSettings.InstalledPrinters.Count < 1)
+                Assert.Ignore("Need at least one printer installed.");
 
-			var destPtr = cupsGetNamedDest (CUPS_HTTP_DEFAULT, PrinterSettings.InstalledPrinters [0], null);
-			var dest = (CUPS_DEST)Marshal.PtrToStructure (destPtr, typeof(CUPS_DEST));
-			var optionPtr = dest.Options;
-			int cupsOptionSize = Marshal.SizeOf (typeof(CUPS_OPTION));
-			for (int i = 0; i < dest.NumOptions; i++) {
-				var cupsOption = (CUPS_OPTION)Marshal.PtrToStructure (optionPtr, typeof(CUPS_OPTION));
-				options.Add (cupsOption.Name, cupsOption.Value);
-				optionPtr = (IntPtr)((long)optionPtr + cupsOptionSize);
-			}
-			cupsFreeDests (1, destPtr);
-			return options;
-		}
+            var options = GetOptionsOfFirstPrinterThroughCups();
 
-		[Test]
-		[Platform (Exclude = "Win", Reason = "Depends on CUPS which is usually not installed on Windows")]
-		[Ignore]
-		public void Bug602934_PrinterSettingsReturnActualValues ()
-		{
-			if (PrinterSettings.InstalledPrinters.Count < 1)
-				Assert.Ignore ("Need at least one printer installed.");
+            var settings = new PrinterSettings()
+            {
+                PrinterName = PrinterSettings.InstalledPrinters[0],
+            };
+            Assert.AreEqual(
+                options["PageSize"],
+                settings.DefaultPageSettings.PaperSize.PaperName,
+                "Bug #602934 (https://bugzilla.novell.com/show_bug.cgi?id=602934) not fixed (PaperSize)"
+            );
+            if (options.ContainsKey("Resolution"))
+                Assert.AreEqual(
+                    options["Resolution"],
+                    string.Format("{0}dpi", settings.DefaultPageSettings.PrinterResolution.X),
+                    "Bug #602934 (https://bugzilla.novell.com/show_bug.cgi?id=602934) not fixed (Resolution)"
+                );
+        }
 
-			var options = GetOptionsOfFirstPrinterThroughCups ();
-
-			var settings = new PrinterSettings () { PrinterName = PrinterSettings.InstalledPrinters [0] };
-			Assert.AreEqual (options ["PageSize"], settings.DefaultPageSettings.PaperSize.PaperName,
-				"Bug #602934 (https://bugzilla.novell.com/show_bug.cgi?id=602934) not fixed (PaperSize)");
-			if (options.ContainsKey("Resolution"))
-				Assert.AreEqual (options ["Resolution"], string.Format ("{0}dpi", settings.DefaultPageSettings.PrinterResolution.X),
-					"Bug #602934 (https://bugzilla.novell.com/show_bug.cgi?id=602934) not fixed (Resolution)");
-		}
-
-		#endregion
-
-	}
+        #endregion
+    }
 }

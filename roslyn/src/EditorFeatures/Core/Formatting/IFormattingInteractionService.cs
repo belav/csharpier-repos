@@ -29,23 +29,43 @@ namespace Microsoft.CodeAnalysis.Formatting
         /// Returns the text changes necessary to format the document. If <paramref name="textSpan"/> is provided,
         /// only the text changes necessary to format that span are needed.
         /// </summary>
-        Task<ImmutableArray<TextChange>> GetFormattingChangesAsync(Document document, ITextBuffer textBuffer, TextSpan? textSpan, CancellationToken cancellationToken);
+        Task<ImmutableArray<TextChange>> GetFormattingChangesAsync(
+            Document document,
+            ITextBuffer textBuffer,
+            TextSpan? textSpan,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Returns the text changes necessary to format the document on paste operation.
         /// </summary>
-        Task<ImmutableArray<TextChange>> GetFormattingChangesOnPasteAsync(Document document, ITextBuffer textBuffer, TextSpan textSpan, CancellationToken cancellationToken);
+        Task<ImmutableArray<TextChange>> GetFormattingChangesOnPasteAsync(
+            Document document,
+            ITextBuffer textBuffer,
+            TextSpan textSpan,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
-        /// Returns the text changes necessary to format the document after the user enters a 
+        /// Returns the text changes necessary to format the document after the user enters a
         /// character.  The position provided is the position of the caret in the document after
         /// the character been inserted into the document.
         /// </summary>
-        Task<ImmutableArray<TextChange>> GetFormattingChangesAsync(Document document, ITextBuffer textBuffer, char typedChar, int position, CancellationToken cancellationToken);
+        Task<ImmutableArray<TextChange>> GetFormattingChangesAsync(
+            Document document,
+            ITextBuffer textBuffer,
+            char typedChar,
+            int position,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Returns the text changes necessary to format the document after the user enters a Return
         /// The position provided is the position of the caret in the document after Return.</summary>
-        Task<ImmutableArray<TextChange>> GetFormattingChangesOnReturnAsync(Document document, int position, CancellationToken cancellationToken);
+        Task<ImmutableArray<TextChange>> GetFormattingChangesOnReturnAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        );
     }
 }

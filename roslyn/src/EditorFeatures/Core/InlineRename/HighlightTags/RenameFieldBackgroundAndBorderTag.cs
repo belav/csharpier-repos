@@ -11,12 +11,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename.HighlightTag
         // Only used for theming, does not need localized
         internal const string TagId = "RoslynRenameFieldBackgroundAndBorderTag";
 
-        public static readonly RenameFieldBackgroundAndBorderTag Instance = new RenameFieldBackgroundAndBorderTag();
+        public static readonly RenameFieldBackgroundAndBorderTag Instance =
+            new RenameFieldBackgroundAndBorderTag();
 
         private RenameFieldBackgroundAndBorderTag()
-            : base(TagId)
-        {
-        }
+            : base(TagId) { }
     }
 
     // Only used to keep the closed repository building. This will be removed once the

@@ -39,10 +39,7 @@ namespace System.ServiceModel.Channels
 
         public int BufferSize
         {
-            get
-            {
-                return this.bufferSize;
-            }
+            get { return this.bufferSize; }
         }
 
         protected override byte[] Create()

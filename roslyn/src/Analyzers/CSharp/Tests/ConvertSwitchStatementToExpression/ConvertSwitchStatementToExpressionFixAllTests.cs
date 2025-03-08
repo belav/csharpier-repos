@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
 {
     using VerifyCS = CSharpCodeFixVerifier<
         ConvertSwitchStatementToExpressionDiagnosticAnalyzer,
-        ConvertSwitchStatementToExpressionCodeFixProvider>;
+        ConvertSwitchStatementToExpressionCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsConvertSwitchStatementToExpression)]
     public class ConvertSwitchStatementToExpressionFixAllTests
@@ -165,7 +166,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -283,8 +285,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                         return value;
                     }
                 }
-                """);
+                """
+            );
         }
+
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44572")]
         public async Task TestImplicitConversion()
         {
@@ -328,7 +332,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertSwitchStatementT
                         };
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

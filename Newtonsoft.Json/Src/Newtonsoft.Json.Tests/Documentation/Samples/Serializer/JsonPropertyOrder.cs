@@ -72,7 +72,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 Deleted = true,
                 DeletedDate = new DateTime(2013, 1, 25),
                 UpdatedDate = new DateTime(2013, 1, 25),
-                CreatedDate = new DateTime(2010, 10, 1)
+                CreatedDate = new DateTime(2010, 10, 1),
             };
 
             string json = JsonConvert.SerializeObject(account, Formatting.Indented);
@@ -88,14 +88,17 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""FullName"": ""Aaron Account"",
   ""EmailAddress"": ""aaron@example.com"",
   ""CreatedDate"": ""2010-10-01T00:00:00"",
   ""UpdatedDate"": ""2013-01-25T00:00:00"",
   ""Deleted"": true,
   ""DeletedDate"": ""2013-01-25T00:00:00""
-}", json);
+}",
+                json
+            );
         }
     }
 }

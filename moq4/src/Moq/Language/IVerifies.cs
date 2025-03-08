@@ -13,8 +13,8 @@ namespace Moq.Language
     public interface IVerifies : IFluentInterface
     {
         /// <summary>
-        /// Marks the expectation as verifiable, meaning that a call 
-        /// to <see cref="Mock.Verify()"/> will check if this particular 
+        /// Marks the expectation as verifiable, meaning that a call
+        /// to <see cref="Mock.Verify()"/> will check if this particular
         /// expectation was met.
         /// </summary>
         /// <example>
@@ -28,8 +28,8 @@ namespace Moq.Language
         void Verifiable();
 
         /// <summary>
-        /// Marks the expectation as verifiable, meaning that a call 
-        /// to <see cref="Mock.Verify()"/> will check if this particular 
+        /// Marks the expectation as verifiable, meaning that a call
+        /// to <see cref="Mock.Verify()"/> will check if this particular
         /// expectation was met, and specifies a message for failures.
         /// </summary>
         /// <example>

@@ -11,7 +11,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
 {
     internal sealed class ComEventSink
     {
-        public static ComEventSink Advise<T>(object obj, T sink) where T : class
+        public static ComEventSink Advise<T>(object obj, T sink)
+            where T : class
         {
             if (!typeof(T).IsInterface)
             {
@@ -26,7 +27,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             connectionPointContainer.FindConnectionPoint(typeof(T).GUID, out var connectionPoint);
             if (connectionPoint == null)
             {
-                throw new InvalidOperationException("Could not find connection point for " + typeof(T).FullName);
+                throw new InvalidOperationException(
+                    "Could not find connection point for " + typeof(T).FullName
+                );
             }
 
             connectionPoint.Advise(sink, out var cookie);

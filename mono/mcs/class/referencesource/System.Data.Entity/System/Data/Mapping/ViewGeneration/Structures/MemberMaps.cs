@@ -7,18 +7,15 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-
 using System.Diagnostics;
 
 namespace System.Data.Mapping.ViewGeneration.Structures
 {
-
     // This class manages the different maps used in the view generation
     // process. These maps keep track of indexes of memberpaths, domains of
     // member paths, etc
     internal class MemberMaps
     {
-
         #region Fields
         private MemberProjectionIndex m_projectedSlotMap;
         private MemberDomainMap m_queryDomainMap;
@@ -27,10 +24,13 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         #endregion
 
         #region Constructors
-        internal MemberMaps(ViewTarget viewTarget, MemberProjectionIndex projectedSlotMap,
-                            MemberDomainMap queryDomainMap, MemberDomainMap updateDomainMap)
+        internal MemberMaps(
+            ViewTarget viewTarget,
+            MemberProjectionIndex projectedSlotMap,
+            MemberDomainMap queryDomainMap,
+            MemberDomainMap updateDomainMap
+        )
         {
-
             m_projectedSlotMap = projectedSlotMap;
             m_queryDomainMap = queryDomainMap;
             m_updateDomainMap = updateDomainMap;

@@ -13,7 +13,9 @@ public class RateLimitingApplicationBuilderExtensionsTests : LoggedTest
     [Fact]
     public void UseRateLimiter_ThrowsOnNullAppBuilder()
     {
-        Assert.Throws<ArgumentNullException>(() => RateLimiterApplicationBuilderExtensions.UseRateLimiter(null));
+        Assert.Throws<ArgumentNullException>(() =>
+            RateLimiterApplicationBuilderExtensions.UseRateLimiter(null)
+        );
     }
 
     [Fact]
@@ -32,7 +34,10 @@ public class RateLimitingApplicationBuilderExtensionsTests : LoggedTest
 
         // Act
         var ex = Assert.Throws<InvalidOperationException>(() => appBuilder.UseRateLimiter());
-        Assert.Equal("Unable to find the required services. Please add all the required services by calling 'IServiceCollection.AddRateLimiter' in the application startup code.", ex.Message);
+        Assert.Equal(
+            "Unable to find the required services. Please add all the required services by calling 'IServiceCollection.AddRateLimiter' in the application startup code.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -41,13 +46,17 @@ public class RateLimitingApplicationBuilderExtensionsTests : LoggedTest
         // These are the options that should get used
         var options = new RateLimiterOptions();
         options.RejectionStatusCode = 429;
-        options.GlobalLimiter = new TestPartitionedRateLimiter<HttpContext>(new TestRateLimiter(false));
+        options.GlobalLimiter = new TestPartitionedRateLimiter<HttpContext>(
+            new TestRateLimiter(false)
+        );
 
         // These should not get used
         var services = new ServiceCollection();
         services.AddRateLimiter(options =>
         {
-            options.GlobalLimiter = new TestPartitionedRateLimiter<HttpContext>(new TestRateLimiter(false));
+            options.GlobalLimiter = new TestPartitionedRateLimiter<HttpContext>(
+                new TestRateLimiter(false)
+            );
             options.RejectionStatusCode = 404;
         });
         services.AddLogging();

@@ -14,7 +14,10 @@ public static class C
 {
     struct S
     {
-        int a, b, c, d;
+        int a,
+            b,
+            c,
+            d;
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]

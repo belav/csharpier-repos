@@ -18,15 +18,17 @@ public class HeaderPropagationMessageHandlerTest
 
         Configuration = new HeaderPropagationMessageHandlerOptions();
 
-        var headerPropagationMessageHandler =
-            new HeaderPropagationMessageHandler(Configuration, State)
-            {
-                InnerHandler = Handler
-            };
+        var headerPropagationMessageHandler = new HeaderPropagationMessageHandler(
+            Configuration,
+            State
+        )
+        {
+            InnerHandler = Handler,
+        };
 
         Client = new HttpClient(headerPropagationMessageHandler)
         {
-            BaseAddress = new Uri("http://example.com")
+            BaseAddress = new Uri("http://example.com"),
         };
     }
 
@@ -76,7 +78,10 @@ public class HeaderPropagationMessageHandlerTest
 
         // Assert
         Assert.True(Handler.Content.Headers.Contains("Content-Type"));
-        Assert.Equal(new[] { "text/plain; charset=utf-8" }, Handler.Content.Headers.GetValues("Content-Type"));
+        Assert.Equal(
+            new[] { "text/plain; charset=utf-8" },
+            Handler.Content.Headers.GetValues("Content-Type")
+        );
     }
 
     [Fact]
@@ -187,8 +192,10 @@ public class HeaderPropagationMessageHandlerTest
     [InlineData("", new[] { "" })]
     [InlineData(null, new[] { "" })]
     [InlineData("42", new[] { "42" })]
-    public async Task HeaderInState_HeaderAlreadyInOutgoingRequest_DoesNotOverrideIt(string outgoingValue,
-        string[] expectedValues)
+    public async Task HeaderInState_HeaderAlreadyInOutgoingRequest_DoesNotOverrideIt(
+        string outgoingValue,
+        string[] expectedValues
+    )
     {
         // Arrange
         State.Headers.Add("inout", "test");
@@ -261,8 +268,10 @@ public class HeaderPropagationMessageHandlerTest
         public HttpHeaders Headers { get; private set; }
         public HttpContent Content { get; private set; }
 
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
-            CancellationToken cancellationToken)
+        protected override Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             Headers = request.Headers;
             Content = request.Content;

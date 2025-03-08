@@ -16,9 +16,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
     public class CSharpErrorListWeb : AbstractWebApplicationTest
     {
         public CSharpErrorListWeb()
-            : base(nameof(CSharpErrorListWeb))
-        {
-        }
+            : base(nameof(CSharpErrorListWeb)) { }
 
         protected override string LanguageName => LanguageNames.CSharp;
 
@@ -31,17 +29,34 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
     var x = "Hello"
 }
 """;
-            await TestServices.SolutionExplorer.OpenFileAsync(ProjectName, @"Pages\\Index.razor", HangMitigatingCancellationToken);
+            await TestServices.SolutionExplorer.OpenFileAsync(
+                ProjectName,
+                @"Pages\\Index.razor",
+                HangMitigatingCancellationToken
+            );
             await TestServices.Editor.SetTextAsync(source, HangMitigatingCancellationToken);
             await TestServices.SolutionExplorer.SaveAllAsync(HangMitigatingCancellationToken);
             await TestServices.SolutionExplorer.CloseActiveWindow(HangMitigatingCancellationToken);
 
-            await TestServices.SolutionExplorer.BuildSolutionAndWaitAsync(HangMitigatingCancellationToken);
-            await TestServices.Workspace.WaitForAllAsyncOperationsAsync([FeatureAttribute.Workspace, FeatureAttribute.SolutionCrawlerLegacy, FeatureAttribute.DiagnosticService, FeatureAttribute.ErrorSquiggles, FeatureAttribute.ErrorList], HangMitigatingCancellationToken);
+            await TestServices.SolutionExplorer.BuildSolutionAndWaitAsync(
+                HangMitigatingCancellationToken
+            );
+            await TestServices.Workspace.WaitForAllAsyncOperationsAsync(
+                [
+                    FeatureAttribute.Workspace,
+                    FeatureAttribute.SolutionCrawlerLegacy,
+                    FeatureAttribute.DiagnosticService,
+                    FeatureAttribute.ErrorSquiggles,
+                    FeatureAttribute.ErrorList,
+                ],
+                HangMitigatingCancellationToken
+            );
 
             await TestServices.ErrorList.ShowErrorListAsync(HangMitigatingCancellationToken);
 
-            var actualContents = await TestServices.ErrorList.GetErrorsAsync(HangMitigatingCancellationToken);
+            var actualContents = await TestServices.ErrorList.GetErrorsAsync(
+                HangMitigatingCancellationToken
+            );
 
             string[] expectedContents =
             [
@@ -52,7 +67,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
 
             AssertEx.EqualOrDiff(
                 string.Join(Environment.NewLine, expectedContents),
-                string.Join(Environment.NewLine, actualContents));
+                string.Join(Environment.NewLine, actualContents)
+            );
         }
     }
 }

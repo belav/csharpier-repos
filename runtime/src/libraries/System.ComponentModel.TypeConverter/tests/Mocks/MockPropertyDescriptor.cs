@@ -6,31 +6,21 @@ namespace System.ComponentModel.Tests
     internal class MockPropertyDescriptor : PropertyDescriptor
     {
         public MockPropertyDescriptor(string name = null, Attribute[] attributes = null)
-            : base(name ?? nameof(MockPropertyDescriptor), attributes ?? new Attribute[0])
-        { }
+            : base(name ?? nameof(MockPropertyDescriptor), attributes ?? new Attribute[0]) { }
 
         public override Type ComponentType
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override bool IsReadOnly
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override Type PropertyType
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
         }
 
         public override bool CanResetValue(object component)

@@ -10,16 +10,27 @@ using Microsoft.CodeAnalysis.PopulateSwitch;
 
 namespace Microsoft.CodeAnalysis.CSharp.PopulateSwitch
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp,
-        Name = PredefinedCodeFixProviderNames.PopulateSwitch), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.PopulateSwitch
+        ),
+        Shared
+    ]
     [ExtensionOrder(After = PredefinedCodeFixProviderNames.ImplementInterface)]
-    internal class CSharpPopulateSwitchStatementCodeFixProvider : AbstractPopulateSwitchStatementCodeFixProvider<
-        SwitchStatementSyntax, SwitchSectionSyntax, MemberAccessExpressionSyntax>
+    internal class CSharpPopulateSwitchStatementCodeFixProvider
+        : AbstractPopulateSwitchStatementCodeFixProvider<
+            SwitchStatementSyntax,
+            SwitchSectionSyntax,
+            MemberAccessExpressionSyntax
+        >
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpPopulateSwitchStatementCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpPopulateSwitchStatementCodeFixProvider() { }
     }
 }

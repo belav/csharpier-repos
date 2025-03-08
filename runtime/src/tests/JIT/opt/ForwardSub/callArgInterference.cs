@@ -11,15 +11,15 @@ using System;
 using System.Runtime.CompilerServices;
 using Xunit;
 
-public interface I1
-{
-}
+public interface I1 { }
 
 public struct S0 : I1
 {
     public static bool result;
     public short F5;
-    public S0(short f5): this()
+
+    public S0(short f5)
+        : this()
     {
         F5 = f5;
     }
@@ -41,6 +41,7 @@ public struct S0 : I1
 public class ForwardSubCallArgInterference
 {
     public static IRT s_rt;
+
     [Fact]
     public static int TestEntryPoint()
     {

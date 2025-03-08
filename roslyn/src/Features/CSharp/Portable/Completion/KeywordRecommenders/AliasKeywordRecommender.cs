@@ -12,11 +12,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class AliasKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public AliasKeywordRecommender()
-            : base(SyntaxKind.AliasKeyword)
-        {
-        }
+            : base(SyntaxKind.AliasKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             // cases:
             //   extern |

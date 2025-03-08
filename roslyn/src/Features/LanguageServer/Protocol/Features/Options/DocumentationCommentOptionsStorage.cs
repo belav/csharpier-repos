@@ -11,15 +11,22 @@ namespace Microsoft.CodeAnalysis.DocumentationComments;
 
 internal static class DocumentationCommentOptionsStorage
 {
-
-    public static DocumentationCommentOptions GetDocumentationCommentOptions(this IGlobalOptionService globalOptions, LineFormattingOptions lineFormatting, string language)
-      => new()
-      {
-          LineFormatting = lineFormatting,
-          AutoXmlDocCommentGeneration = globalOptions.GetOption(AutoXmlDocCommentGeneration, language),
-      };
+    public static DocumentationCommentOptions GetDocumentationCommentOptions(
+        this IGlobalOptionService globalOptions,
+        LineFormattingOptions lineFormatting,
+        string language
+    ) =>
+        new()
+        {
+            LineFormatting = lineFormatting,
+            AutoXmlDocCommentGeneration = globalOptions.GetOption(
+                AutoXmlDocCommentGeneration,
+                language
+            ),
+        };
 
     public static readonly PerLanguageOption2<bool> AutoXmlDocCommentGeneration = new(
-        "dotnet_auto_xml_doc_comment_generation", DocumentationCommentOptions.Default.AutoXmlDocCommentGeneration);
-
+        "dotnet_auto_xml_doc_comment_generation",
+        DocumentationCommentOptions.Default.AutoXmlDocCommentGeneration
+    );
 }

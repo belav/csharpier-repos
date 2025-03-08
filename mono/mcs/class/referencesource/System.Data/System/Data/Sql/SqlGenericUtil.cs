@@ -6,15 +6,18 @@
 // <owner current="true" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data.Sql {
+namespace System.Data.Sql
+{
     using System;
     using System.Data;
     using System.Data.Common;
     using System.Diagnostics;
 
-    sealed internal class SqlGenericUtil {
-
-        private SqlGenericUtil() { /* prevent utility class from being insantiated*/ }
+    internal sealed class SqlGenericUtil
+    {
+        private SqlGenericUtil()
+        { /* prevent utility class from being insantiated*/
+        }
 
         //
         // Sql generic exceptions
@@ -24,13 +27,14 @@ namespace System.Data.Sql {
         // Sql.Definition
         //
 
-        static internal Exception NullCommandText() {
+        static internal Exception NullCommandText()
+        {
             return ADP.Argument(Res.GetString(Res.Sql_NullCommandText));
         }
-        static internal Exception MismatchedMetaDataDirectionArrayLengths() {
+
+        internal static Exception MismatchedMetaDataDirectionArrayLengths()
+        {
             return ADP.Argument(Res.GetString(Res.Sql_MismatchedMetaDataDirectionArrayLengths));
         }
     }
-
- }//namespace
-
+} //namespace

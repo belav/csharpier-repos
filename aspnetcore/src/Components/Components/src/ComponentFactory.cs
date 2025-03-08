@@ -13,40 +13,54 @@ namespace Microsoft.AspNetCore.Components;
 
 internal sealed class ComponentFactory
 {
-    private const BindingFlags _injectablePropertyBindingFlags
-        = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+    private const BindingFlags _injectablePropertyBindingFlags =
+        BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
 
-    private static readonly ConcurrentDictionary<Type, ComponentTypeInfoCacheEntry> _cachedComponentTypeInfo = new();
+    private static readonly ConcurrentDictionary<
+        Type,
+        ComponentTypeInfoCacheEntry
+    > _cachedComponentTypeInfo = new();
 
     private readonly IComponentActivator _componentActivator;
     private readonly Renderer _renderer;
 
     public ComponentFactory(IComponentActivator componentActivator, Renderer renderer)
     {
-        _componentActivator = componentActivator ?? throw new ArgumentNullException(nameof(componentActivator));
+        _componentActivator =
+            componentActivator ?? throw new ArgumentNullException(nameof(componentActivator));
         _renderer = renderer ?? throw new ArgumentNullException(nameof(renderer));
     }
 
     public static void ClearCache() => _cachedComponentTypeInfo.Clear();
 
-    private static ComponentTypeInfoCacheEntry GetComponentTypeInfo([DynamicallyAccessedMembers(Component)] Type componentType)
+    private static ComponentTypeInfoCacheEntry GetComponentTypeInfo(
+        [DynamicallyAccessedMembers(Component)] Type componentType
+    )
     {
         // Unfortunately we can't use 'GetOrAdd' here because the DynamicallyAccessedMembers annotation doesn't flow through to the
         // callback, so it becomes an IL2111 warning. The following is equivalent and thread-safe because it's a ConcurrentDictionary
         // and it doesn't matter if we build a cache entry more than once.
         if (!_cachedComponentTypeInfo.TryGetValue(componentType, out var cacheEntry))
         {
-            var componentTypeRenderMode = componentType.GetCustomAttribute<RenderModeAttribute>()?.Mode;
+            var componentTypeRenderMode = componentType
+                .GetCustomAttribute<RenderModeAttribute>()
+                ?.Mode;
             cacheEntry = new ComponentTypeInfoCacheEntry(
                 componentTypeRenderMode,
-                CreatePropertyInjector(componentType));
+                CreatePropertyInjector(componentType)
+            );
             _cachedComponentTypeInfo.TryAdd(componentType, cacheEntry);
         }
 
         return cacheEntry;
     }
 
-    public IComponent InstantiateComponent(IServiceProvider serviceProvider, [DynamicallyAccessedMembers(Component)] Type componentType, IComponentRenderMode? callerSpecifiedRenderMode, int? parentComponentId)
+    public IComponent InstantiateComponent(
+        IServiceProvider serviceProvider,
+        [DynamicallyAccessedMembers(Component)] Type componentType,
+        IComponentRenderMode? callerSpecifiedRenderMode,
+        int? parentComponentId
+    )
     {
         var (componentTypeRenderMode, propertyInjector) = GetComponentTypeInfo(componentType);
         IComponent component;
@@ -59,18 +73,26 @@ internal sealed class ComponentFactory
         else
         {
             // At least one rendermode is specified. We require that it's exactly one, and use ResolveComponentForRenderMode with it.
-            var effectiveRenderMode = callerSpecifiedRenderMode is null
-                ? componentTypeRenderMode!
-                : componentTypeRenderMode is null
-                    ? callerSpecifiedRenderMode
-                    : throw new InvalidOperationException($"The component type '{componentType}' has a fixed rendermode of '{componentTypeRenderMode}', so it is not valid to specify any rendermode when using this component.");
-            component = _renderer.ResolveComponentForRenderMode(componentType, parentComponentId, _componentActivator, effectiveRenderMode);
+            var effectiveRenderMode =
+                callerSpecifiedRenderMode is null ? componentTypeRenderMode!
+                : componentTypeRenderMode is null ? callerSpecifiedRenderMode
+                : throw new InvalidOperationException(
+                    $"The component type '{componentType}' has a fixed rendermode of '{componentTypeRenderMode}', so it is not valid to specify any rendermode when using this component."
+                );
+            component = _renderer.ResolveComponentForRenderMode(
+                componentType,
+                parentComponentId,
+                _componentActivator,
+                effectiveRenderMode
+            );
         }
 
         if (component is null)
         {
             // The default activator/resolver will never do this, but an externally-supplied one might
-            throw new InvalidOperationException($"The component activator returned a null value for a component of type {componentType.FullName}.");
+            throw new InvalidOperationException(
+                $"The component activator returned a null value for a component of type {componentType.FullName}."
+            );
         }
 
         if (component.GetType() == componentType)
@@ -87,21 +109,36 @@ internal sealed class ComponentFactory
         return component;
     }
 
-    private static void PerformPropertyInjection(IServiceProvider serviceProvider, IComponent instance)
+    private static void PerformPropertyInjection(
+        IServiceProvider serviceProvider,
+        IComponent instance
+    )
     {
         // Suppressed with "pragma warning disable" so ILLink Roslyn Anayzer doesn't report the warning.
-        #pragma warning disable IL2072 // 'componentType' argument does not satisfy 'DynamicallyAccessedMemberTypes.All' in call to 'Microsoft.AspNetCore.Components.ComponentFactory.GetComponentTypeInfo(Type)'.
+#pragma warning disable IL2072 // 'componentType' argument does not satisfy 'DynamicallyAccessedMemberTypes.All' in call to 'Microsoft.AspNetCore.Components.ComponentFactory.GetComponentTypeInfo(Type)'.
         var componentTypeInfo = GetComponentTypeInfo(instance.GetType());
-        #pragma warning restore IL2072 // 'componentType' argument does not satisfy 'DynamicallyAccessedMemberTypes.All' in call to 'Microsoft.AspNetCore.Components.ComponentFactory.GetComponentTypeInfo(Type)'.
+#pragma warning restore IL2072 // 'componentType' argument does not satisfy 'DynamicallyAccessedMemberTypes.All' in call to 'Microsoft.AspNetCore.Components.ComponentFactory.GetComponentTypeInfo(Type)'.
 
         componentTypeInfo.PerformPropertyInjection(serviceProvider, instance);
     }
 
-    private static Action<IServiceProvider, IComponent> CreatePropertyInjector([DynamicallyAccessedMembers(Component)] Type type)
+    private static Action<IServiceProvider, IComponent> CreatePropertyInjector(
+        [DynamicallyAccessedMembers(Component)] Type type
+    )
     {
         // Do all the reflection up front
-        List<(string name, Type propertyType, PropertySetter setter, object? serviceKey)>? injectables = null;
-        foreach (var property in MemberAssignment.GetPropertiesIncludingInherited(type, _injectablePropertyBindingFlags))
+        List<(
+            string name,
+            Type propertyType,
+            PropertySetter setter,
+            object? serviceKey
+        )>? injectables = null;
+        foreach (
+            var property in MemberAssignment.GetPropertiesIncludingInherited(
+                type,
+                _injectablePropertyBindingFlags
+            )
+        )
         {
             var injectAttribute = property.GetCustomAttribute<InjectAttribute>();
             if (injectAttribute is null)
@@ -110,7 +147,14 @@ internal sealed class ComponentFactory
             }
 
             injectables ??= new();
-            injectables.Add((property.Name, property.PropertyType, new PropertySetter(type, property), injectAttribute.Key));
+            injectables.Add(
+                (
+                    property.Name,
+                    property.PropertyType,
+                    new PropertySetter(type, property),
+                    injectAttribute.Key
+                )
+            );
         }
 
         if (injectables is null)
@@ -132,23 +176,31 @@ internal sealed class ComponentFactory
                 {
                     if (serviceProvider is not IKeyedServiceProvider keyedServiceProvider)
                     {
-                        throw new InvalidOperationException($"Cannot provide a value for property " +
-                            $"'{propertyName}' on type '{type.FullName}'. The service provider " +
-                            $"does not implement '{nameof(IKeyedServiceProvider)}' and therefore " +
-                            $"cannot provide keyed services.");
+                        throw new InvalidOperationException(
+                            $"Cannot provide a value for property "
+                                + $"'{propertyName}' on type '{type.FullName}'. The service provider "
+                                + $"does not implement '{nameof(IKeyedServiceProvider)}' and therefore "
+                                + $"cannot provide keyed services."
+                        );
                     }
 
-                    serviceInstance = keyedServiceProvider.GetKeyedService(propertyType, serviceKey)
-                        ?? throw new InvalidOperationException($"Cannot provide a value for property " +
-                        $"'{propertyName}' on type '{type.FullName}'. There is no " +
-                        $"registered keyed service of type '{propertyType}' with key '{serviceKey}'.");
+                    serviceInstance =
+                        keyedServiceProvider.GetKeyedService(propertyType, serviceKey)
+                        ?? throw new InvalidOperationException(
+                            $"Cannot provide a value for property "
+                                + $"'{propertyName}' on type '{type.FullName}'. There is no "
+                                + $"registered keyed service of type '{propertyType}' with key '{serviceKey}'."
+                        );
                 }
                 else
                 {
-                    serviceInstance = serviceProvider.GetService(propertyType)
-                        ?? throw new InvalidOperationException($"Cannot provide a value for property " +
-                        $"'{propertyName}' on type '{type.FullName}'. There is no " +
-                        $"registered service of type '{propertyType}'.");
+                    serviceInstance =
+                        serviceProvider.GetService(propertyType)
+                        ?? throw new InvalidOperationException(
+                            $"Cannot provide a value for property "
+                                + $"'{propertyName}' on type '{type.FullName}'. There is no "
+                                + $"registered service of type '{propertyType}'."
+                        );
                 }
 
                 setter.SetValue(component, serviceInstance);
@@ -165,7 +217,8 @@ internal sealed class ComponentFactory
 
         public ComponentTypeInfoCacheEntry(
             IComponentRenderMode? componentTypeRenderMode,
-            Action<IServiceProvider, IComponent> performPropertyInjection)
+            Action<IServiceProvider, IComponent> performPropertyInjection
+        )
         {
             ComponentTypeRenderMode = componentTypeRenderMode;
             PerformPropertyInjection = performPropertyInjection;
@@ -173,7 +226,8 @@ internal sealed class ComponentFactory
 
         public void Deconstruct(
             out IComponentRenderMode? componentTypeRenderMode,
-            out Action<IServiceProvider, IComponent> performPropertyInjection)
+            out Action<IServiceProvider, IComponent> performPropertyInjection
+        )
         {
             componentTypeRenderMode = ComponentTypeRenderMode;
             performPropertyInjection = PerformPropertyInjection;

@@ -2,10 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Text;
 using System.Runtime.InteropServices;
+using System.Text;
 using TestLibrary;
-
 using Xunit;
 
 public class Program
@@ -15,7 +14,9 @@ public class Program
     {
         if (System.Globalization.CultureInfo.CurrentCulture.Name != "en-US")
         {
-            Console.WriteLine("Non-US English platforms are not supported.\nPassing without running tests");
+            Console.WriteLine(
+                "Non-US English platforms are not supported.\nPassing without running tests"
+            );
 
             Console.WriteLine("--- Success");
             return;

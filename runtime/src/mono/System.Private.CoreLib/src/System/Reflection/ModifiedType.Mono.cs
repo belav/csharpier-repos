@@ -27,26 +27,33 @@ namespace System.Reflection
 
             internal TypeSignature(RuntimeType signatureHolderType, int parameterIndex)
             {
-               SignatureHolderType = signatureHolderType;
-               SignatureHolderInfo = null;
-               ParameterIndex = parameterIndex;
+                SignatureHolderType = signatureHolderType;
+                SignatureHolderInfo = null;
+                ParameterIndex = parameterIndex;
             }
 
             internal TypeSignature(object signatureHolderInfo, int parameterIndex)
             {
-               SignatureHolderType = null;
-               SignatureHolderInfo = signatureHolderInfo;
-               ParameterIndex = parameterIndex;
+                SignatureHolderType = null;
+                SignatureHolderInfo = signatureHolderInfo;
+                ParameterIndex = parameterIndex;
             }
 
-            internal TypeSignature(RuntimeType signatureHolderType, object signatureHolderInfo, int parameterIndex)
+            internal TypeSignature(
+                RuntimeType signatureHolderType,
+                object signatureHolderInfo,
+                int parameterIndex
+            )
             {
-               SignatureHolderType = signatureHolderType;
-               SignatureHolderInfo = signatureHolderInfo;
-               ParameterIndex = parameterIndex;
+                SignatureHolderType = signatureHolderType;
+                SignatureHolderInfo = signatureHolderInfo;
+                ParameterIndex = parameterIndex;
             }
 
-            internal bool TryGetCustomModifiersFromSignatureHolderInfo(bool required, out Type[] modifiers)
+            internal bool TryGetCustomModifiersFromSignatureHolderInfo(
+                bool required,
+                out Type[] modifiers
+            )
             {
                 if (SignatureHolderInfo is null)
                 {
@@ -58,22 +65,36 @@ namespace System.Reflection
                     switch (SignatureHolderInfo)
                     {
                         case RuntimeFieldInfo fieldInfo:
-                            modifiers = fieldInfo.GetCustomModifiersFromModifiedType(!required, fieldInfo.FieldType.IsGenericType ? ParameterIndex : -1);
+                            modifiers = fieldInfo.GetCustomModifiersFromModifiedType(
+                                !required,
+                                fieldInfo.FieldType.IsGenericType ? ParameterIndex : -1
+                            );
                             break;
                         case RuntimeParameterInfo parameterInfo:
-                            modifiers = parameterInfo.GetCustomModifiersFromModifiedType(!required, parameterInfo.ParameterType.IsGenericType ? ParameterIndex : -1);
+                            modifiers = parameterInfo.GetCustomModifiersFromModifiedType(
+                                !required,
+                                parameterInfo.ParameterType.IsGenericType ? ParameterIndex : -1
+                            );
                             break;
                         case RuntimePropertyInfo propertyInfo:
-                            modifiers = propertyInfo.GetCustomModifiersFromModifiedType(!required, propertyInfo.PropertyType.IsGenericType ? ParameterIndex : -1);
+                            modifiers = propertyInfo.GetCustomModifiersFromModifiedType(
+                                !required,
+                                propertyInfo.PropertyType.IsGenericType ? ParameterIndex : -1
+                            );
                             break;
                         default:
-                            throw new Exception($"SignatureHolderInfo: {SignatureHolderInfo} is not recognized");
+                            throw new Exception(
+                                $"SignatureHolderInfo: {SignatureHolderInfo} is not recognized"
+                            );
                     }
                     return true;
                 }
             }
 
-            internal bool TryGetCustomModifiersFromSignatureHolderType(bool required, out Type[] modifiers)
+            internal bool TryGetCustomModifiersFromSignatureHolderType(
+                bool required,
+                out Type[] modifiers
+            )
             {
                 if (SignatureHolderType is null)
                 {
@@ -82,7 +103,10 @@ namespace System.Reflection
                 }
                 else
                 {
-                    modifiers = SignatureHolderType.GetCustomModifiersFromFunctionPointer(ParameterIndex, optional: !required);
+                    modifiers = SignatureHolderType.GetCustomModifiersFromFunctionPointer(
+                        ParameterIndex,
+                        optional: !required
+                    );
                     return true;
                 }
             }
@@ -120,14 +144,20 @@ namespace System.Reflection
             {
                 if (parentUnmodifiedType.IsFunctionPointer)
                 {
-                    var parentSignatureHolderType = _typeSignature.SignatureHolderType ??
-                        throw new Exception($"Parent's {nameof(_typeSignature.SignatureHolderType)} cannot be null");
+                    var parentSignatureHolderType =
+                        _typeSignature.SignatureHolderType
+                        ?? throw new Exception(
+                            $"Parent's {nameof(_typeSignature.SignatureHolderType)} cannot be null"
+                        );
                     childTypeSignature = new TypeSignature(parentSignatureHolderType, index);
                 }
                 else
                 {
-                    var parentSignatureHolderInfo = _typeSignature.SignatureHolderInfo ??
-                        throw new Exception($"Parent's {nameof(_typeSignature.SignatureHolderInfo)} cannot be null");
+                    var parentSignatureHolderInfo =
+                        _typeSignature.SignatureHolderInfo
+                        ?? throw new Exception(
+                            $"Parent's {nameof(_typeSignature.SignatureHolderInfo)} cannot be null"
+                        );
                     childTypeSignature = new TypeSignature(parentSignatureHolderInfo, index);
                 }
             }
@@ -138,18 +168,32 @@ namespace System.Reflection
         internal SignatureCallingConvention GetCallingConventionFromFunctionPointer()
         {
             if (_typeSignature.SignatureHolderType is null)
-                throw new Exception($"{nameof(_typeSignature.SignatureHolderType)} cannot be null when retrieving calling conventions from a function pointer type ");
+                throw new Exception(
+                    $"{nameof(_typeSignature.SignatureHolderType)} cannot be null when retrieving calling conventions from a function pointer type "
+                );
             return _typeSignature.SignatureHolderType.GetCallingConventionFromFunctionPointer();
         }
 
         private Type[] GetCustomModifiers(bool required)
         {
-            if (_typeSignature.TryGetCustomModifiersFromSignatureHolderInfo(required, out var modifiersFromInfo))
+            if (
+                _typeSignature.TryGetCustomModifiersFromSignatureHolderInfo(
+                    required,
+                    out var modifiersFromInfo
+                )
+            )
                 return modifiersFromInfo;
-            else if (_typeSignature.TryGetCustomModifiersFromSignatureHolderType(required, out var modifiersFromType))
+            else if (
+                _typeSignature.TryGetCustomModifiersFromSignatureHolderType(
+                    required,
+                    out var modifiersFromType
+                )
+            )
                 return modifiersFromType;
             else
-                throw new Exception($"Failed to retrieve custom modifiers on a modified type: {this}");
+                throw new Exception(
+                    $"Failed to retrieve custom modifiers on a modified type: {this}"
+                );
         }
     }
 }

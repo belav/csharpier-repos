@@ -17,10 +17,10 @@ namespace System.ServiceModel.Channels
     /// The HttpHeadersWebHeaderCollection is an implementation of the <see cref="WebHeaderCollection"/> class
     /// that uses the HttpHeader collections on an <see cref="HttpRequestMessage"/> or an <see cref="HttpResponseMessage"/>
     /// instance to hold the header data instead of the traditional <see cref="NameValueCollection"/> of the
-    /// <see cref="WebHeaderCollection"/>.  This is because the <see cref="HttpRequestMessage"/> or 
+    /// <see cref="WebHeaderCollection"/>.  This is because the <see cref="HttpRequestMessage"/> or
     /// <see cref="HttpResponseMessage"/> is the true data structure holding the HTTP information of the request/response
-    /// being processed and we want to avoid copying header information between the <see cref="HttpRequestMessage"/> or 
-    /// <see cref="HttpResponseMessage"/> and a <see cref="NameValueCollection"/>. 
+    /// being processed and we want to avoid copying header information between the <see cref="HttpRequestMessage"/> or
+    /// <see cref="HttpResponseMessage"/> and a <see cref="NameValueCollection"/>.
     /// </summary>
     internal class HttpHeadersWebHeaderCollection : WebHeaderCollection
     {
@@ -29,16 +29,51 @@ namespace System.ServiceModel.Channels
         private static readonly string[] stringSplitArray = new string[] { ", " };
 
         // Cloned from WebHeaderCollection
-        private static readonly char[] HttpTrimCharacters = new char[] { (char)0x09, (char)0xA, (char)0xB, (char)0xC, (char)0xD, (char)0x20 };
-        private static readonly char[] InvalidParamChars = new char[] { '(', ')', '<', '>', '@', ',', ';', ':', '\\', '"', '\'', '/', '[', ']', '?', '=', '{', '}', ' ', '\t', '\r', '\n' };
-        
+        private static readonly char[] HttpTrimCharacters = new char[]
+        {
+            (char)0x09,
+            (char)0xA,
+            (char)0xB,
+            (char)0xC,
+            (char)0xD,
+            (char)0x20,
+        };
+        private static readonly char[] InvalidParamChars = new char[]
+        {
+            '(',
+            ')',
+            '<',
+            '>',
+            '@',
+            ',',
+            ';',
+            ':',
+            '\\',
+            '"',
+            '\'',
+            '/',
+            '[',
+            ']',
+            '?',
+            '=',
+            '{',
+            '}',
+            ' ',
+            '\t',
+            '\r',
+            '\n',
+        };
+
         private HttpRequestMessage httpRequestMessage;
         private HttpResponseMessage httpResponseMessage;
         private bool hasKeys;
 
         public HttpHeadersWebHeaderCollection(HttpRequestMessage httpRequestMessage)
         {
-            Fx.Assert(httpRequestMessage != null, "The 'httpRequestMessage' parameter should never be null.");
+            Fx.Assert(
+                httpRequestMessage != null,
+                "The 'httpRequestMessage' parameter should never be null."
+            );
 
             this.httpRequestMessage = httpRequestMessage;
             this.EnsureBaseHasKeysIsAccurate();
@@ -46,7 +81,10 @@ namespace System.ServiceModel.Channels
 
         public HttpHeadersWebHeaderCollection(HttpResponseMessage httpResponseMessage)
         {
-            Fx.Assert(httpResponseMessage != null, "The 'httpResponseMessage' parameter should never be null.");
+            Fx.Assert(
+                httpResponseMessage != null,
+                "The 'httpResponseMessage' parameter should never be null."
+            );
 
             this.httpResponseMessage = httpResponseMessage;
             this.EnsureBaseHasKeysIsAccurate();
@@ -54,18 +92,12 @@ namespace System.ServiceModel.Channels
 
         public override string[] AllKeys
         {
-            get
-            {
-                return this.AllHeaders.Select(header => header.Key).ToArray();
-            }
+            get { return this.AllHeaders.Select(header => header.Key).ToArray(); }
         }
 
         public override int Count
         {
-            get
-            {
-                return this.AllHeaders.Count();
-            }
+            get { return this.AllHeaders.Count(); }
         }
 
         public override KeysCollection Keys
@@ -110,7 +142,10 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    Fx.Assert(this.httpResponseMessage != null, "Either the 'httpRequestMessage' field or the 'httpResponseMessage' field should be non-null.");
+                    Fx.Assert(
+                        this.httpResponseMessage != null,
+                        "Either the 'httpRequestMessage' field or the 'httpResponseMessage' field should be non-null."
+                    );
                     headers = this.httpResponseMessage.Headers;
                     content = this.httpResponseMessage.Content;
                 }
@@ -131,11 +166,14 @@ namespace System.ServiceModel.Channels
 
             if (this.httpRequestMessage != null)
             {
-                this.httpRequestMessage.AddHeader(name, value);              
+                this.httpRequestMessage.AddHeader(name, value);
             }
             else
             {
-                Fx.Assert(this.httpResponseMessage != null, "Either the 'httpRequestMessage' field or the 'httpResponseMessage' field should be non-null.");
+                Fx.Assert(
+                    this.httpResponseMessage != null,
+                    "Either the 'httpRequestMessage' field or the 'httpResponseMessage' field should be non-null."
+                );
                 this.httpResponseMessage.AddHeader(name, value);
             }
 
@@ -153,7 +191,10 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                Fx.Assert(this.httpResponseMessage != null, "Either the 'httpRequestMessage' field or the 'httpResponseMessage' field should be non-null.");
+                Fx.Assert(
+                    this.httpResponseMessage != null,
+                    "Either the 'httpRequestMessage' field or the 'httpResponseMessage' field should be non-null."
+                );
                 this.httpResponseMessage.Headers.Clear();
                 content = this.httpResponseMessage.Content;
             }
@@ -193,7 +234,10 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                Fx.Assert(this.httpResponseMessage != null, "Either the 'httpRequestMessage' field or the 'httpResponseMessage' field should be non-null.");
+                Fx.Assert(
+                    this.httpResponseMessage != null,
+                    "Either the 'httpRequestMessage' field or the 'httpResponseMessage' field should be non-null."
+                );
                 this.httpResponseMessage.SetHeader(name, value);
             }
 
@@ -253,7 +297,10 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                Fx.Assert(this.httpResponseMessage != null, "Either the 'httpRequestMessage' field or the 'httpResponseMessage' field should be non-null.");
+                Fx.Assert(
+                    this.httpResponseMessage != null,
+                    "Either the 'httpRequestMessage' field or the 'httpResponseMessage' field should be non-null."
+                );
                 values = this.httpResponseMessage.GetHeader(header);
             }
 
@@ -261,8 +308,10 @@ namespace System.ServiceModel.Channels
             {
                 return emptyStringArray;
             }
-            
-            return values.SelectMany(str => str.Split(stringSplitArray, StringSplitOptions.None)).ToArray();
+
+            return values
+                .SelectMany(str => str.Split(stringSplitArray, StringSplitOptions.None))
+                .ToArray();
         }
 
         private static string GetSingleValue(string[] values)
@@ -283,8 +332,11 @@ namespace System.ServiceModel.Channels
         }
 
         // Cloned from WebHeaderCollection
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(FxCop.Category.ReliabilityBasic, FxCop.Rule.WrapExceptionsRule,
-            Justification = "This code is being used to reproduce behavior from the WebHeaderCollection, which does not trace exceptions via FxTrace.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            FxCop.Category.ReliabilityBasic,
+            FxCop.Rule.WrapExceptionsRule,
+            Justification = "This code is being used to reproduce behavior from the WebHeaderCollection, which does not trace exceptions via FxTrace."
+        )]
         private static string CheckBadChars(string name, bool isHeaderValue)
         {
             if (name == null || name.Length == 0)
@@ -292,9 +344,12 @@ namespace System.ServiceModel.Channels
                 // emtpy name is invlaid
                 if (!isHeaderValue)
                 {
-                    throw name == null ? 
-                        new ArgumentNullException("name") :
-                        new ArgumentException(SR.GetString(SR.WebHeaderEmptyStringCall, "name"), "name");
+                    throw name == null
+                        ? new ArgumentNullException("name")
+                        : new ArgumentException(
+                            SR.GetString(SR.WebHeaderEmptyStringCall, "name"),
+                            "name"
+                        );
                 }
 
                 // empty value is OK
@@ -328,7 +383,10 @@ namespace System.ServiceModel.Channels
                             }
                             else if (c == 127 || (c < ' ' && c != '\t'))
                             {
-                                throw new ArgumentException(SR.GetString(SR.WebHeaderInvalidControlChars), "value");
+                                throw new ArgumentException(
+                                    SR.GetString(SR.WebHeaderInvalidControlChars),
+                                    "value"
+                                );
                             }
 
                             break;
@@ -340,7 +398,10 @@ namespace System.ServiceModel.Channels
                                 break;
                             }
 
-                            throw new ArgumentException(SR.GetString(SR.WebHeaderInvalidCRLFChars), "value");
+                            throw new ArgumentException(
+                                SR.GetString(SR.WebHeaderInvalidCRLFChars),
+                                "value"
+                            );
 
                         case 2:
                             if (c == ' ' || c == '\t')
@@ -349,13 +410,19 @@ namespace System.ServiceModel.Channels
                                 break;
                             }
 
-                            throw new ArgumentException(SR.GetString(SR.WebHeaderInvalidCRLFChars), "value");
+                            throw new ArgumentException(
+                                SR.GetString(SR.WebHeaderInvalidCRLFChars),
+                                "value"
+                            );
                     }
                 }
 
                 if (crlf != 0)
                 {
-                    throw new ArgumentException(SR.GetString(SR.WebHeaderInvalidCRLFChars), "value");
+                    throw new ArgumentException(
+                        SR.GetString(SR.WebHeaderInvalidCRLFChars),
+                        "value"
+                    );
                 }
             }
             else
@@ -364,13 +431,19 @@ namespace System.ServiceModel.Channels
                 // First, check for absence of separators and spaces
                 if (name.IndexOfAny(InvalidParamChars) != -1)
                 {
-                    throw new ArgumentException(SR.GetString(SR.WebHeaderInvalidHeaderChars), "name");
+                    throw new ArgumentException(
+                        SR.GetString(SR.WebHeaderInvalidHeaderChars),
+                        "name"
+                    );
                 }
 
                 // Second, check for non CTL ASCII-7 characters (32-126)
                 if (ContainsNonAsciiChars(name))
                 {
-                    throw new ArgumentException(SR.GetString(SR.WebHeaderInvalidNonAsciiChars), "name");
+                    throw new ArgumentException(
+                        SR.GetString(SR.WebHeaderInvalidNonAsciiChars),
+                        "name"
+                    );
                 }
             }
 
@@ -407,13 +480,24 @@ namespace System.ServiceModel.Channels
 
         private bool BackingHttpHeadersHasKeys()
         {
-            return this.httpRequestMessage != null ?
-                this.httpRequestMessage.Headers.Any() || (this.httpRequestMessage.Content != null && this.httpRequestMessage.Content.Headers.Any()) :
-                this.httpResponseMessage.Headers.Any() || (this.httpResponseMessage.Content != null && this.httpResponseMessage.Content.Headers.Any());
+            return this.httpRequestMessage != null
+                ? this.httpRequestMessage.Headers.Any()
+                    || (
+                        this.httpRequestMessage.Content != null
+                        && this.httpRequestMessage.Content.Headers.Any()
+                    )
+                : this.httpResponseMessage.Headers.Any()
+                    || (
+                        this.httpResponseMessage.Content != null
+                        && this.httpResponseMessage.Content.Headers.Any()
+                    );
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage(FxCop.Category.ReliabilityBasic, FxCop.Rule.WrapExceptionsRule,
-            Justification = "This code is being used to reproduce behavior from the WebHeaderCollection, which does not trace exceptions via FxTrace.")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            FxCop.Category.ReliabilityBasic,
+            FxCop.Rule.WrapExceptionsRule,
+            Justification = "This code is being used to reproduce behavior from the WebHeaderCollection, which does not trace exceptions via FxTrace."
+        )]
         private KeyValuePair<string, IEnumerable<string>> GetHeaderAt(int index)
         {
             if (index >= 0)
@@ -443,15 +527,20 @@ namespace System.ServiceModel.Channels
                 this.position = -1;
             }
 
-            [System.Diagnostics.CodeAnalysis.SuppressMessage(FxCop.Category.ReliabilityBasic, FxCop.Rule.WrapExceptionsRule,
-                Justification = "This code is being used to reproduce behavior from the WebHeaderCollection, which does not trace exceptions via FxTrace.")]
+            [System.Diagnostics.CodeAnalysis.SuppressMessage(
+                FxCop.Category.ReliabilityBasic,
+                FxCop.Rule.WrapExceptionsRule,
+                Justification = "This code is being used to reproduce behavior from the WebHeaderCollection, which does not trace exceptions via FxTrace."
+            )]
             public object Current
             {
                 get
                 {
                     if ((this.position < 0) || (this.position >= this.keys.Length))
                     {
-                        throw new InvalidOperationException(SR.GetString(SR.WebHeaderEnumOperationCantHappen));
+                        throw new InvalidOperationException(
+                            SR.GetString(SR.WebHeaderEnumOperationCantHappen)
+                        );
                     }
 
                     return this.keys[this.position];
@@ -473,7 +562,7 @@ namespace System.ServiceModel.Channels
             public void Reset()
             {
                 this.position = -1;
-            }            
+            }
         }
     }
 }

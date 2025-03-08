@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.Win32.SafeHandles;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Win32.SafeHandles;
 using Xunit;
 
 namespace System.IO.Pipes.Tests
@@ -14,8 +14,19 @@ namespace System.IO.Pipes.Tests
         {
             ServerClientPair ret = new ServerClientPair();
             string pipeName = GetUniquePipeName();
-            var writeablePipe = new NamedPipeServerStream(pipeName, PipeDirection.Out, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous);
-            var readablePipe = new NamedPipeClientStream(".", pipeName, PipeDirection.In, PipeOptions.Asynchronous);
+            var writeablePipe = new NamedPipeServerStream(
+                pipeName,
+                PipeDirection.Out,
+                1,
+                PipeTransmissionMode.Byte,
+                PipeOptions.Asynchronous
+            );
+            var readablePipe = new NamedPipeClientStream(
+                ".",
+                pipeName,
+                PipeDirection.In,
+                PipeOptions.Asynchronous
+            );
 
             Task clientConnect = readablePipe.ConnectAsync();
             writeablePipe.WaitForConnection();
@@ -30,8 +41,19 @@ namespace System.IO.Pipes.Tests
         public void SetAccessControl_NamedPipeStream()
         {
             string pipeName = GetUniquePipeName();
-            var server = new NamedPipeServerStream(pipeName, PipeDirection.Out, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous);
-            var client = new NamedPipeClientStream(".", pipeName, PipeDirection.In, PipeOptions.Asynchronous);
+            var server = new NamedPipeServerStream(
+                pipeName,
+                PipeDirection.Out,
+                1,
+                PipeTransmissionMode.Byte,
+                PipeOptions.Asynchronous
+            );
+            var client = new NamedPipeClientStream(
+                ".",
+                pipeName,
+                PipeDirection.In,
+                PipeOptions.Asynchronous
+            );
 
             Task clientConnect = client.ConnectAsync();
             server.WaitForConnection();
@@ -47,22 +69,46 @@ namespace System.IO.Pipes.Tests
         public void SetAccessControl_NamedPipeStream_BeforeWaitingToConnect()
         {
             string pipeName = GetUniquePipeName();
-            var server = new NamedPipeServerStream(pipeName, PipeDirection.Out, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous);
-            var client = new NamedPipeClientStream(".", pipeName, PipeDirection.In, PipeOptions.Asynchronous);
+            var server = new NamedPipeServerStream(
+                pipeName,
+                PipeDirection.Out,
+                1,
+                PipeTransmissionMode.Byte,
+                PipeOptions.Asynchronous
+            );
+            var client = new NamedPipeClientStream(
+                ".",
+                pipeName,
+                PipeDirection.In,
+                PipeOptions.Asynchronous
+            );
 
             // ServerStream.State = WaitingToConnect, ClientStream.State = WaitingToConnect
             Assert.NotNull(server.GetAccessControl());
             server.SetAccessControl(new PipeSecurity());
             Assert.Throws<InvalidOperationException>(() => client.GetAccessControl());
-            Assert.Throws<InvalidOperationException>(() => client.SetAccessControl(new PipeSecurity()));
+            Assert.Throws<InvalidOperationException>(() =>
+                client.SetAccessControl(new PipeSecurity())
+            );
         }
 
         [Fact]
         public void SetAccessControl_NamedPipeStream_ClientDisposed()
         {
             string pipeName = GetUniquePipeName();
-            var server = new NamedPipeServerStream(pipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous);
-            var client = new NamedPipeClientStream(".", pipeName, PipeDirection.InOut, PipeOptions.Asynchronous);
+            var server = new NamedPipeServerStream(
+                pipeName,
+                PipeDirection.InOut,
+                1,
+                PipeTransmissionMode.Byte,
+                PipeOptions.Asynchronous
+            );
+            var client = new NamedPipeClientStream(
+                ".",
+                pipeName,
+                PipeDirection.InOut,
+                PipeOptions.Asynchronous
+            );
 
             Task clientConnect = client.ConnectAsync();
             server.WaitForConnection();
@@ -74,15 +120,27 @@ namespace System.IO.Pipes.Tests
             Assert.NotNull(server.GetAccessControl());
             server.SetAccessControl(new PipeSecurity());
             Assert.Throws<ObjectDisposedException>(() => client.GetAccessControl());
-            Assert.Throws<ObjectDisposedException>(() => client.SetAccessControl(new PipeSecurity()));
+            Assert.Throws<ObjectDisposedException>(() => client.SetAccessControl(new PipeSecurity())
+            );
         }
 
         [Fact]
         public void SetAccessControl_NamedPipeStream_ClientHandleClosed()
         {
             string pipeName = GetUniquePipeName();
-            var server = new NamedPipeServerStream(pipeName, PipeDirection.Out, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous);
-            var client = new NamedPipeClientStream(".", pipeName, PipeDirection.In, PipeOptions.Asynchronous);
+            var server = new NamedPipeServerStream(
+                pipeName,
+                PipeDirection.Out,
+                1,
+                PipeTransmissionMode.Byte,
+                PipeOptions.Asynchronous
+            );
+            var client = new NamedPipeClientStream(
+                ".",
+                pipeName,
+                PipeDirection.In,
+                PipeOptions.Asynchronous
+            );
 
             Task clientConnect = client.ConnectAsync();
             server.WaitForConnection();
@@ -94,15 +152,27 @@ namespace System.IO.Pipes.Tests
             Assert.NotNull(server.GetAccessControl());
             server.SetAccessControl(new PipeSecurity());
             Assert.Throws<ObjectDisposedException>(() => client.GetAccessControl());
-            Assert.Throws<ObjectDisposedException>(() => client.SetAccessControl(new PipeSecurity()));
+            Assert.Throws<ObjectDisposedException>(() => client.SetAccessControl(new PipeSecurity())
+            );
         }
 
         [Fact]
         public void SetAccessControl_NamedPipeStream_ServerDisconnected()
         {
             string pipeName = GetUniquePipeName();
-            var server = new NamedPipeServerStream(pipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous);
-            var client = new NamedPipeClientStream(".", pipeName, PipeDirection.InOut, PipeOptions.Asynchronous);
+            var server = new NamedPipeServerStream(
+                pipeName,
+                PipeDirection.InOut,
+                1,
+                PipeTransmissionMode.Byte,
+                PipeOptions.Asynchronous
+            );
+            var client = new NamedPipeClientStream(
+                ".",
+                pipeName,
+                PipeDirection.InOut,
+                PipeOptions.Asynchronous
+            );
 
             Task clientConnect = client.ConnectAsync();
             server.WaitForConnection();
@@ -121,8 +191,19 @@ namespace System.IO.Pipes.Tests
         public void SetAccessControl_NamedPipeStream_ServerDisposed()
         {
             string pipeName = GetUniquePipeName();
-            var server = new NamedPipeServerStream(pipeName, PipeDirection.In, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous);
-            var client = new NamedPipeClientStream(".", pipeName, PipeDirection.Out, PipeOptions.Asynchronous);
+            var server = new NamedPipeServerStream(
+                pipeName,
+                PipeDirection.In,
+                1,
+                PipeTransmissionMode.Byte,
+                PipeOptions.Asynchronous
+            );
+            var client = new NamedPipeClientStream(
+                ".",
+                pipeName,
+                PipeDirection.Out,
+                PipeOptions.Asynchronous
+            );
 
             Task clientConnect = client.ConnectAsync();
             server.WaitForConnection();
@@ -132,7 +213,8 @@ namespace System.IO.Pipes.Tests
             server.Dispose();
             Assert.Throws<IOException>(() => client.Write(new byte[] { 0 }, 0, 1));
             Assert.Throws<ObjectDisposedException>(() => server.GetAccessControl());
-            Assert.Throws<ObjectDisposedException>(() => server.SetAccessControl(new PipeSecurity()));
+            Assert.Throws<ObjectDisposedException>(() => server.SetAccessControl(new PipeSecurity())
+            );
             Assert.NotNull(client.GetAccessControl());
             Assert.Throws<IOException>(() => client.SetAccessControl(new PipeSecurity()));
         }
@@ -141,8 +223,19 @@ namespace System.IO.Pipes.Tests
         public void SetAccessControl_NamedPipeStream_ServerHandleClosed()
         {
             string pipeName = GetUniquePipeName();
-            var server = new NamedPipeServerStream(pipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous);
-            var client = new NamedPipeClientStream(".", pipeName, PipeDirection.InOut, PipeOptions.Asynchronous);
+            var server = new NamedPipeServerStream(
+                pipeName,
+                PipeDirection.InOut,
+                1,
+                PipeTransmissionMode.Byte,
+                PipeOptions.Asynchronous
+            );
+            var client = new NamedPipeClientStream(
+                ".",
+                pipeName,
+                PipeDirection.InOut,
+                PipeOptions.Asynchronous
+            );
 
             Task clientConnect = client.ConnectAsync();
             server.WaitForConnection();
@@ -152,7 +245,8 @@ namespace System.IO.Pipes.Tests
             server.SafePipeHandle.Close();
             Assert.Throws<IOException>(() => client.Write(new byte[] { 0 }, 0, 1));
             Assert.Throws<ObjectDisposedException>(() => server.GetAccessControl());
-            Assert.Throws<ObjectDisposedException>(() => server.SetAccessControl(new PipeSecurity()));
+            Assert.Throws<ObjectDisposedException>(() => server.SetAccessControl(new PipeSecurity())
+            );
             Assert.NotNull(client.GetAccessControl());
             Assert.Throws<IOException>(() => client.SetAccessControl(new PipeSecurity()));
         }

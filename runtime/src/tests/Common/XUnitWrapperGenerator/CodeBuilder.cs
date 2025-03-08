@@ -15,14 +15,16 @@ namespace XUnitWrapperGenerator;
 ///     Trailing whitespace is removed from lines.
 /// </summary>
 [DebuggerDisplay("Code = {_code}")]
-public class CodeBuilder {
+public class CodeBuilder
+{
     private readonly Stack<int> _indentLevels;
     private string _currentIndentString;
     private readonly int _indentSize;
     private readonly StringBuilder _code;
     private const int DefaultAdditionalIndent = 1;
 
-    private sealed class IndentationContext : IDisposable {
+    private sealed class IndentationContext : IDisposable
+    {
         private CodeBuilder Builder { get; }
         private bool _disposed;
         private string? EndLine { get; }
@@ -33,7 +35,12 @@ public class CodeBuilder {
         /// <param name="builder">The <see cref="CodeBuilder"/> associated with this object.</param>
         /// <param name="additionalIndent">The number of indentation levels to add.</param>
         /// <param name="endLine">Line to add after disposing the indentation context</param>
-        public IndentationContext(CodeBuilder builder, uint additionalIndent = DefaultAdditionalIndent, string? endLine = null) {
+        public IndentationContext(
+            CodeBuilder builder,
+            uint additionalIndent = DefaultAdditionalIndent,
+            string? endLine = null
+        )
+        {
             Builder = builder;
             _disposed = false;
             EndLine = endLine;
@@ -46,10 +53,13 @@ public class CodeBuilder {
         ///     the <see cref="CodeBuilder"/> object that was used to
         ///     construct this <see cref="IndentationContext"/>.
         /// </summary>
-        public void Dispose() {
-            if (_disposed) return;
+        public void Dispose()
+        {
+            if (_disposed)
+                return;
             Builder.PopIndent();
-            if (EndLine != null) Builder.AppendLine(EndLine);
+            if (EndLine != null)
+                Builder.AppendLine(EndLine);
             _disposed = true;
         }
     }
@@ -58,7 +68,8 @@ public class CodeBuilder {
     ///     Constructor.
     /// </summary>
     /// <param name="indentSize">The number of spaces each level of indentation adds.</param>
-    public CodeBuilder(uint indentSize = 4) {
+    public CodeBuilder(uint indentSize = 4)
+    {
         _indentLevels = new Stack<int>();
         _indentSize = Convert.ToInt32(indentSize);
         _currentIndentString = "";
@@ -68,13 +79,15 @@ public class CodeBuilder {
 
     public bool IsEmpty => _code.Length == 0;
 
-    public static CodeBuilder Create(string initialCode) {
+    public static CodeBuilder Create(string initialCode)
+    {
         var code = new CodeBuilder();
         code.Append(initialCode);
         return code;
     }
 
-    public static CodeBuilder CreateNewLine(string initialCode) {
+    public static CodeBuilder CreateNewLine(string initialCode)
+    {
         var code = new CodeBuilder();
         code.Append(initialCode);
         code.AppendLine();
@@ -85,9 +98,10 @@ public class CodeBuilder {
     ///     Push a new indent level.
     /// </summary>
     /// <param name="additionalIndent">The amount of indentation to add.</param>
-    public void PushIndent(uint additionalIndent = DefaultAdditionalIndent) {
+    public void PushIndent(uint additionalIndent = DefaultAdditionalIndent)
+    {
         int existingIndent = _indentLevels.Peek();
-        var newIndent = (int) (existingIndent + additionalIndent);
+        var newIndent = (int)(existingIndent + additionalIndent);
         _indentLevels.Push(newIndent);
         _currentIndentString = new string(' ', newIndent * _indentSize);
     }
@@ -95,39 +109,57 @@ public class CodeBuilder {
     /// <summary>
     ///     Pop an indent level (and restore the indent level to before the last call to <see cref="PushIndent" />).
     /// </summary>
-    public void PopIndent() {
+    public void PopIndent()
+    {
         _indentLevels.Pop();
         _currentIndentString = new string(' ', _indentLevels.Peek() * _indentSize);
     }
 
-    private bool AtStartOfLine() {
-        if (_code.Length == 0) {
+    private bool AtStartOfLine()
+    {
+        if (_code.Length == 0)
+        {
             return true;
         }
 
         return _code[_code.Length - 1] == '\n';
     }
 
-    private void Append(string code, bool allowLeadingWhiteSpace) {
-        if (string.IsNullOrEmpty(code)) return;
+    private void Append(string code, bool allowLeadingWhiteSpace)
+    {
+        if (string.IsNullOrEmpty(code))
+            return;
 
         string[] lines = code.Split('\n');
 
         // Do entire check first to avoid a partial write in the case of failure
-        if (!allowLeadingWhiteSpace) {
-            for (int i = 0; i < lines.Length; ++i) {
-                if ((i > 0 || AtStartOfLine())
-                    && (lines[i].Length > 0) && char.IsWhiteSpace(lines[i][0])) {
-                    throw new ArgumentException(Invariant($@"Whitespace (0x{(int)lines[i][0]:x2}) at start of line {i} in input '{code}'"));
+        if (!allowLeadingWhiteSpace)
+        {
+            for (int i = 0; i < lines.Length; ++i)
+            {
+                if (
+                    (i > 0 || AtStartOfLine())
+                    && (lines[i].Length > 0)
+                    && char.IsWhiteSpace(lines[i][0])
+                )
+                {
+                    throw new ArgumentException(
+                        Invariant(
+                            $@"Whitespace (0x{(int)lines[i][0]:x2}) at start of line {i} in input '{code}'"
+                        )
+                    );
                 }
             }
         }
 
-        for (int i = 0; i < lines.Length; ++i) {
-            if (i != 0) AppendLine();
+        for (int i = 0; i < lines.Length; ++i)
+        {
+            if (i != 0)
+                AppendLine();
 
             string line = lines[i];
-            if (AtStartOfLine() && !string.IsNullOrWhiteSpace(line)) _code.Append(_currentIndentString);
+            if (AtStartOfLine() && !string.IsNullOrWhiteSpace(line))
+                _code.Append(_currentIndentString);
             _code.Append(line);
         }
     }
@@ -155,16 +187,20 @@ public class CodeBuilder {
     ///     Append the given code followed by a line terminator.  The currently active indentation level is applied at newlines.
     /// </summary>
     /// <param name="codeLine">The line to append.</param>
-    public void AppendLine(string codeLine) {
+    public void AppendLine(string codeLine)
+    {
         Append(codeLine);
         AppendLine();
     }
 
     /// <summary>Append a blank line.</summary>
-    public void AppendLine() {
+    public void AppendLine()
+    {
         int lastToKeep;
-        for (lastToKeep = _code.Length - 1; lastToKeep >= 0; --lastToKeep) {
-            if (_code[lastToKeep] == '\n' || !char.IsWhiteSpace(_code[lastToKeep])) {
+        for (lastToKeep = _code.Length - 1; lastToKeep >= 0; --lastToKeep)
+        {
+            if (_code[lastToKeep] == '\n' || !char.IsWhiteSpace(_code[lastToKeep]))
+            {
                 break;
             }
         }
@@ -176,15 +212,20 @@ public class CodeBuilder {
     ///     Appends a block of code using the current indentation.
     /// </summary>
     /// <param name="block">The code block.</param>
-    public void AppendBlock(string block) {
-        if (block == null) throw new ArgumentNullException(nameof(block));
+    public void AppendBlock(string block)
+    {
+        if (block == null)
+            throw new ArgumentNullException(nameof(block));
 
-        using (var reader = new StringReader(block)) {
+        using (var reader = new StringReader(block))
+        {
             string line = reader.ReadLine();
-            if (line == null) return;
+            if (line == null)
+                return;
 
             AppendIndented(line);
-            while ((line = reader.ReadLine()) != null) {
+            while ((line = reader.ReadLine()) != null)
+            {
                 AppendLine();
                 AppendIndented(line);
             }
@@ -200,8 +241,13 @@ public class CodeBuilder {
     /// </param>
     /// <param name="additionalIndent">Number of indentation levels to add.</param>
     /// <returns>A new <see cref="IndentationContext"/>.</returns>
-    public IDisposable NewScope(string? introduction = null, uint additionalIndent = DefaultAdditionalIndent) {
-        if (!string.IsNullOrEmpty(introduction)) {
+    public IDisposable NewScope(
+        string? introduction = null,
+        uint additionalIndent = DefaultAdditionalIndent
+    )
+    {
+        if (!string.IsNullOrEmpty(introduction))
+        {
             this.AppendLine(introduction!);
         }
         return new IndentationContext(this, additionalIndent);
@@ -214,8 +260,13 @@ public class CodeBuilder {
     /// <param name="introduction">String to add before the braces and indentation context.</param>
     /// <param name="additionalIndent">Number of indentation levels to add.</param>
     /// <returns>A new <see cref="IndentationContext"/>.</returns>
-    public IDisposable NewBracesScope(string? introduction = null, uint additionalIndent = DefaultAdditionalIndent) {
-        if (!string.IsNullOrEmpty(introduction)) {
+    public IDisposable NewBracesScope(
+        string? introduction = null,
+        uint additionalIndent = DefaultAdditionalIndent
+    )
+    {
+        if (!string.IsNullOrEmpty(introduction))
+        {
             this.Append(introduction!);
         }
         this.AppendLine(string.IsNullOrEmpty(introduction) ? "{" : " {");

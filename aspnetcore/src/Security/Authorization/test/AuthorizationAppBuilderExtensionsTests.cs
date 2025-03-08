@@ -27,7 +27,8 @@ public class AuthorizationAppBuilderExtensionsTests
         var endpoint = new Endpoint(
             null,
             new EndpointMetadataCollection(new AuthorizeAttribute()),
-            "Test endpoint");
+            "Test endpoint"
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.RequestServices = services;
@@ -56,9 +57,10 @@ public class AuthorizationAppBuilderExtensionsTests
 
         // Assert
         Assert.Equal(
-            "Unable to find the required services. Please add all the required services by calling " +
-            "'IServiceCollection.AddAuthorization' in the application startup code.",
-            ex.Message);
+            "Unable to find the required services. Please add all the required services by calling "
+                + "'IServiceCollection.AddAuthorization' in the application startup code.",
+            ex.Message
+        );
     }
 
     private IServiceProvider CreateServices(IAuthenticationService authenticationService)

@@ -10,25 +10,23 @@ namespace System.Reflection.Emit
             // Prevent generating a default constructor
         }
 
-        public void AddArgument(Type clsArgument)
-        {
-        }
+        public void AddArgument(Type clsArgument) { }
 
-        public void AddArgument(Type argument, bool pinned)
-        {
-        }
+        public void AddArgument(Type argument, bool pinned) { }
 
-        public void AddArgument(Type argument, Type[] requiredCustomModifiers, Type[] optionalCustomModifiers)
-        {
-        }
+        public void AddArgument(
+            Type argument,
+            Type[] requiredCustomModifiers,
+            Type[] optionalCustomModifiers
+        ) { }
 
-        public void AddArguments(Type[] arguments, Type[][] requiredCustomModifiers, Type[][] optionalCustomModifiers)
-        {
-        }
+        public void AddArguments(
+            Type[] arguments,
+            Type[][] requiredCustomModifiers,
+            Type[][] optionalCustomModifiers
+        ) { }
 
-        public void AddSentinel()
-        {
-        }
+        public void AddSentinel() { }
 
         public override bool Equals(object? obj)
         {
@@ -58,37 +56,69 @@ namespace System.Reflection.Emit
             return default;
         }
 
-        public static SignatureHelper GetMethodSigHelper(CallingConventions callingConvention, Type returnType)
+        public static SignatureHelper GetMethodSigHelper(
+            CallingConventions callingConvention,
+            Type returnType
+        )
         {
             ReflectionEmitThrower.ThrowPlatformNotSupportedException();
             return default;
         }
 
-        public static SignatureHelper GetMethodSigHelper(Module mod, CallingConventions callingConvention, Type returnType)
+        public static SignatureHelper GetMethodSigHelper(
+            Module mod,
+            CallingConventions callingConvention,
+            Type returnType
+        )
         {
             ReflectionEmitThrower.ThrowPlatformNotSupportedException();
             return default;
         }
 
-        public static SignatureHelper GetMethodSigHelper(Module mod, Type returnType, Type[] parameterTypes)
+        public static SignatureHelper GetMethodSigHelper(
+            Module mod,
+            Type returnType,
+            Type[] parameterTypes
+        )
         {
             ReflectionEmitThrower.ThrowPlatformNotSupportedException();
             return default;
         }
 
-        public static SignatureHelper GetPropertySigHelper(Module mod, CallingConventions callingConvention, Type returnType, Type[] requiredReturnTypeCustomModifiers, Type[] optionalReturnTypeCustomModifiers, Type[] parameterTypes, Type[][] requiredParameterTypeCustomModifiers, Type[][] optionalParameterTypeCustomModifiers)
+        public static SignatureHelper GetPropertySigHelper(
+            Module mod,
+            CallingConventions callingConvention,
+            Type returnType,
+            Type[] requiredReturnTypeCustomModifiers,
+            Type[] optionalReturnTypeCustomModifiers,
+            Type[] parameterTypes,
+            Type[][] requiredParameterTypeCustomModifiers,
+            Type[][] optionalParameterTypeCustomModifiers
+        )
         {
             ReflectionEmitThrower.ThrowPlatformNotSupportedException();
             return default;
         }
 
-        public static SignatureHelper GetPropertySigHelper(Module mod, Type returnType, Type[] parameterTypes)
+        public static SignatureHelper GetPropertySigHelper(
+            Module mod,
+            Type returnType,
+            Type[] parameterTypes
+        )
         {
             ReflectionEmitThrower.ThrowPlatformNotSupportedException();
             return default;
         }
 
-        public static SignatureHelper GetPropertySigHelper(Module mod, Type returnType, Type[] requiredReturnTypeCustomModifiers, Type[] optionalReturnTypeCustomModifiers, Type[] parameterTypes, Type[][] requiredParameterTypeCustomModifiers, Type[][] optionalParameterTypeCustomModifiers)
+        public static SignatureHelper GetPropertySigHelper(
+            Module mod,
+            Type returnType,
+            Type[] requiredReturnTypeCustomModifiers,
+            Type[] optionalReturnTypeCustomModifiers,
+            Type[] parameterTypes,
+            Type[][] requiredParameterTypeCustomModifiers,
+            Type[][] optionalParameterTypeCustomModifiers
+        )
         {
             ReflectionEmitThrower.ThrowPlatformNotSupportedException();
             return default;

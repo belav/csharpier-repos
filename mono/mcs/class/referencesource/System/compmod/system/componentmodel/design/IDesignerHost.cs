@@ -1,17 +1,18 @@
 //------------------------------------------------------------------------------
 // <copyright file="IDesignerHost.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel.Design {
-    using System.Diagnostics;
+namespace System.ComponentModel.Design
+{
     using System;
     using System.ComponentModel;
-    using Microsoft.Win32;
+    using System.Diagnostics;
     using System.Reflection;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>
@@ -20,8 +21,8 @@ namespace System.ComponentModel.Design {
     ///    </para>
     /// </devdoc>
     [System.Runtime.InteropServices.ComVisible(true)]
-    public interface IDesignerHost : IServiceContainer {
-
+    public interface IDesignerHost : IServiceContainer
+    {
         /// <devdoc>
         ///    <para>
         ///       Gets or sets a value indicating whether the designer host
@@ -34,7 +35,7 @@ namespace System.ComponentModel.Design {
         ///    <para>Gets a value indicating whether the designer host is currently in a transaction.</para>
         /// </devdoc>
         bool InTransaction { get; }
-        
+
         /// <devdoc>
         ///    <para>
         ///       Gets the container for this designer host.
@@ -90,7 +91,7 @@ namespace System.ComponentModel.Design {
         ///    </para>
         /// </devdoc>
         event DesignerTransactionCloseEventHandler TransactionClosed;
-        
+
         /// <devdoc>
         /// <para>Adds an event handler for the <see cref='System.ComponentModel.Design.IDesignerHost.TransactionClosing'/> event.</para>
         /// </devdoc>
@@ -107,7 +108,7 @@ namespace System.ComponentModel.Design {
         ///    </para>
         /// </devdoc>
         event EventHandler TransactionOpening;
-        
+
         /// <devdoc>
         ///    <para>
         ///       Activates the designer that this host is hosting.
@@ -135,7 +136,7 @@ namespace System.ComponentModel.Design {
         ///     may cause other side-effects, such as flicker or performance degradation.  When operating
         ///     on multiple components at one time, or setting multiple properties on a single component,
         ///     you should encompass these changes inside a transaction.  Transactions are used
-        ///     to improve performance and reduce flicker.  Slow operations can listen to 
+        ///     to improve performance and reduce flicker.  Slow operations can listen to
         ///     transaction events and only do work when the transaction completes.
         /// </para>
         /// </devdoc>
@@ -147,7 +148,7 @@ namespace System.ComponentModel.Design {
         ///     may cause other side-effects, such as flicker or performance degradation.  When operating
         ///     on multiple components at one time, or setting multiple properties on a single component,
         ///     you should encompass these changes inside a transaction.  Transactions are used
-        ///     to improve performance and reduce flicker.  Slow operations can listen to 
+        ///     to improve performance and reduce flicker.  Slow operations can listen to
         ///     transaction events and only do work when the transaction completes.
         /// </para>
         /// </devdoc>
@@ -175,4 +176,3 @@ namespace System.ComponentModel.Design {
         Type GetType(string typeName);
     }
 }
-

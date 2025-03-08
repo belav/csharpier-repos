@@ -20,12 +20,14 @@ public sealed class QuicReceiveWindowSizes
     /// <summary>
     /// The initial flow-control window size for locally initiated bidirectional streams.
     /// </summary>
-    public int LocallyInitiatedBidirectionalStream { get; set; } = QuicDefaults.DefaultStreamMaxData;
+    public int LocallyInitiatedBidirectionalStream { get; set; } =
+        QuicDefaults.DefaultStreamMaxData;
 
     /// <summary>
     /// The initial flow-control window size for remotely initiated bidirectional streams.
     /// </summary>
-    public int RemotelyInitiatedBidirectionalStream { get; set; } = QuicDefaults.DefaultStreamMaxData;
+    public int RemotelyInitiatedBidirectionalStream { get; set; } =
+        QuicDefaults.DefaultStreamMaxData;
 
     /// <summary>
     /// The initial flow-control window size for (remotely initiated) unidirectional streams.
@@ -39,11 +41,22 @@ public sealed class QuicReceiveWindowSizes
         ValidatePowerOf2(argumentName, RemotelyInitiatedBidirectionalStream);
         ValidatePowerOf2(argumentName, UnidirectionalStream);
 
-        static void ValidatePowerOf2(string argumentName, int value, [CallerArgumentExpression(nameof(value))] string? propertyName = null)
+        static void ValidatePowerOf2(
+            string argumentName,
+            int value,
+            [CallerArgumentExpression(nameof(value))] string? propertyName = null
+        )
         {
             if (value <= 0 || ((value - 1) & value) != 0)
             {
-                throw new ArgumentOutOfRangeException(argumentName, value, SR.Format(SR.net_quic_power_of_2, $"{nameof(QuicConnectionOptions.InitialReceiveWindowSizes)}.{propertyName}"));
+                throw new ArgumentOutOfRangeException(
+                    argumentName,
+                    value,
+                    SR.Format(
+                        SR.net_quic_power_of_2,
+                        $"{nameof(QuicConnectionOptions.InitialReceiveWindowSizes)}.{propertyName}"
+                    )
+                );
             }
         }
     }
@@ -57,8 +70,7 @@ public abstract class QuicConnectionOptions
     /// <summary>
     /// Prevent sub-classing by code outside of this assembly.
     /// </summary>
-    internal QuicConnectionOptions()
-    { }
+    internal QuicConnectionOptions() { }
 
     /// <summary>
     /// The maximum number of concurrent bidirectional streams that the remote peer connection can create on an open connection.
@@ -139,19 +151,36 @@ public abstract class QuicConnectionOptions
 
         _initialRecieveWindowSizes?.Validate(argumentName);
 
-        static void ValidateInRange(string argumentName, long value, long max, [CallerArgumentExpression(nameof(value))] string? propertyName = null)
+        static void ValidateInRange(
+            string argumentName,
+            long value,
+            long max,
+            [CallerArgumentExpression(nameof(value))] string? propertyName = null
+        )
         {
             if (value < 0 || value > max)
             {
-                throw new ArgumentOutOfRangeException(argumentName, value, SR.Format(SR.net_quic_in_range, propertyName, max));
+                throw new ArgumentOutOfRangeException(
+                    argumentName,
+                    value,
+                    SR.Format(SR.net_quic_in_range, propertyName, max)
+                );
             }
         }
 
-        static void ValidateTimespan(string argumentName, TimeSpan value, [CallerArgumentExpression(nameof(value))] string? propertyName = null)
+        static void ValidateTimespan(
+            string argumentName,
+            TimeSpan value,
+            [CallerArgumentExpression(nameof(value))] string? propertyName = null
+        )
         {
             if (value < TimeSpan.Zero && value != Timeout.InfiniteTimeSpan)
             {
-                throw new ArgumentOutOfRangeException(argumentName, value, SR.Format(SR.net_quic_timeout_use_gt_zero, propertyName));
+                throw new ArgumentOutOfRangeException(
+                    argumentName,
+                    value,
+                    SR.Format(SR.net_quic_timeout_use_gt_zero, propertyName)
+                );
             }
         }
     }
@@ -200,11 +229,18 @@ public sealed class QuicClientConnectionOptions : QuicConnectionOptions
         ValidateNotNull(argumentName, ClientAuthenticationOptions);
         ValidateNotNull(argumentName, RemoteEndPoint);
 
-        static void ValidateNotNull(string argumentName, object value, [CallerArgumentExpression(nameof(value))] string? propertyName = null)
+        static void ValidateNotNull(
+            string argumentName,
+            object value,
+            [CallerArgumentExpression(nameof(value))] string? propertyName = null
+        )
         {
             if (value is null)
             {
-                throw new ArgumentNullException(argumentName, SR.Format(SR.net_quic_not_null_open_connection, propertyName));
+                throw new ArgumentNullException(
+                    argumentName,
+                    SR.Format(SR.net_quic_not_null_open_connection, propertyName)
+                );
             }
         }
     }
@@ -241,11 +277,18 @@ public sealed class QuicServerConnectionOptions : QuicConnectionOptions
         // The content of ServerAuthenticationOptions gets validate in MsQuicConfiguration.Create.
         ValidateNotNull(argumentName, ServerAuthenticationOptions);
 
-        static void ValidateNotNull(string argumentName, object value, [CallerArgumentExpression(nameof(value))] string? propertyName = null)
+        static void ValidateNotNull(
+            string argumentName,
+            object value,
+            [CallerArgumentExpression(nameof(value))] string? propertyName = null
+        )
         {
             if (value is null)
             {
-                throw new ArgumentNullException(argumentName, SR.Format(SR.net_quic_not_null_accept_connection, propertyName));
+                throw new ArgumentNullException(
+                    argumentName,
+                    SR.Format(SR.net_quic_not_null_accept_connection, propertyName)
+                );
             }
         }
     }

@@ -12,12 +12,19 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> salt,
             int iterations,
             HashAlgorithmName hashAlgorithmName,
-            Span<byte> destination)
+            Span<byte> destination
+        )
         {
             Debug.Assert(!destination.IsEmpty);
             Debug.Assert(hashAlgorithmName.Name is not null);
             IntPtr evpHashType = Interop.Crypto.HashAlgorithmToEvp(hashAlgorithmName.Name);
-            int result = Interop.Crypto.Pbkdf2(password, salt, iterations, evpHashType, destination);
+            int result = Interop.Crypto.Pbkdf2(
+                password,
+                salt,
+                iterations,
+                evpHashType,
+                destination
+            );
             const int Success = 1;
 
             if (result != Success)

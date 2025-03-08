@@ -74,19 +74,25 @@ namespace System.Linq.Expressions.Tests
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNewWithParameterGenericWithStructRestrictionWithEnumTest(bool useInterpreter)
+        public static void CheckNewWithParameterGenericWithStructRestrictionWithEnumTest(
+            bool useInterpreter
+        )
         {
             CheckNewWithParameterGenericWithStructRestrictionHelper<E>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNewWithParameterGenericWithStructRestrictionWithStructTest(bool useInterpreter)
+        public static void CheckNewWithParameterGenericWithStructRestrictionWithStructTest(
+            bool useInterpreter
+        )
         {
             CheckNewWithParameterGenericWithStructRestrictionHelper<S>(useInterpreter);
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
-        public static void CheckNewWithParameterGenericWithStructRestrictionWithStructWithStringAndFieldTest(bool useInterpreter)
+        public static void CheckNewWithParameterGenericWithStructRestrictionWithStructWithStringAndFieldTest(
+            bool useInterpreter
+        )
         {
             CheckNewWithParameterGenericWithStructRestrictionHelper<Scs>(useInterpreter);
         }
@@ -95,7 +101,10 @@ namespace System.Linq.Expressions.Tests
 
         #region Generic helpers
 
-        private static void CheckNewWithParameterGenericWithStructRestrictionHelper<Ts>(bool useInterpreter) where Ts : struct
+        private static void CheckNewWithParameterGenericWithStructRestrictionHelper<Ts>(
+            bool useInterpreter
+        )
+            where Ts : struct
         {
             foreach (Ts value in new Ts[] { default(Ts), new Ts() })
             {
@@ -111,10 +120,10 @@ namespace System.Linq.Expressions.Tests
         {
             ConstructorInfo constructor = typeof(E?).GetConstructor(new Type[] { typeof(E) });
             Expression[] exprArgs = new Expression[] { Expression.Constant(value, typeof(E)) };
-            Expression<Func<E?>> e =
-                Expression.Lambda<Func<E?>>(
-                    Expression.New(constructor, exprArgs),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<E?>> e = Expression.Lambda<Func<E?>>(
+                Expression.New(constructor, exprArgs),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<E?> f = e.Compile(useInterpreter);
             Assert.Equal(new E?(value), f());
         }
@@ -123,10 +132,10 @@ namespace System.Linq.Expressions.Tests
         {
             ConstructorInfo constructor = typeof(int?).GetConstructor(new Type[] { typeof(int) });
             Expression[] exprArgs = new Expression[] { Expression.Constant(value, typeof(int)) };
-            Expression<Func<int?>> e =
-                Expression.Lambda<Func<int?>>(
-                    Expression.New(constructor, exprArgs),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int?>> e = Expression.Lambda<Func<int?>>(
+                Expression.New(constructor, exprArgs),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<int?> f = e.Compile(useInterpreter);
             Assert.Equal(new int?(value), f());
         }
@@ -135,10 +144,10 @@ namespace System.Linq.Expressions.Tests
         {
             ConstructorInfo constructor = typeof(S?).GetConstructor(new Type[] { typeof(S) });
             Expression[] exprArgs = new Expression[] { Expression.Constant(value, typeof(S)) };
-            Expression<Func<S?>> e =
-                Expression.Lambda<Func<S?>>(
-                    Expression.New(constructor, exprArgs),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<S?>> e = Expression.Lambda<Func<S?>>(
+                Expression.New(constructor, exprArgs),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<S?> f = e.Compile(useInterpreter);
             Assert.Equal(new S?(value), f());
         }
@@ -147,22 +156,25 @@ namespace System.Linq.Expressions.Tests
         {
             ConstructorInfo constructor = typeof(Sc?).GetConstructor(new Type[] { typeof(Sc) });
             Expression[] exprArgs = new Expression[] { Expression.Constant(value, typeof(Sc)) };
-            Expression<Func<Sc?>> e =
-                Expression.Lambda<Func<Sc?>>(
-                    Expression.New(constructor, exprArgs),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<Sc?>> e = Expression.Lambda<Func<Sc?>>(
+                Expression.New(constructor, exprArgs),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<Sc?> f = e.Compile(useInterpreter);
             Assert.Equal(new Sc?(value), f());
         }
 
-        private static void VerifyWithParameterStructWithStringAndField(Scs value, bool useInterpreter)
+        private static void VerifyWithParameterStructWithStringAndField(
+            Scs value,
+            bool useInterpreter
+        )
         {
             ConstructorInfo constructor = typeof(Scs?).GetConstructor(new Type[] { typeof(Scs) });
             Expression[] exprArgs = new Expression[] { Expression.Constant(value, typeof(Scs)) };
-            Expression<Func<Scs?>> e =
-                Expression.Lambda<Func<Scs?>>(
-                    Expression.New(constructor, exprArgs),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<Scs?>> e = Expression.Lambda<Func<Scs?>>(
+                Expression.New(constructor, exprArgs),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<Scs?> f = e.Compile(useInterpreter);
             Assert.Equal(new Scs?(value), f());
         }
@@ -171,10 +183,10 @@ namespace System.Linq.Expressions.Tests
         {
             ConstructorInfo constructor = typeof(Sc?).GetConstructor(new Type[] { typeof(Sc) });
             Expression[] exprArgs = new Expression[] { Expression.Constant(value, typeof(Sc)) };
-            Expression<Func<Sc?>> e =
-                Expression.Lambda<Func<Sc?>>(
-                    Expression.New(constructor, exprArgs),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<Sc?>> e = Expression.Lambda<Func<Sc?>>(
+                Expression.New(constructor, exprArgs),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<Sc?> f = e.Compile(useInterpreter);
             Assert.Equal(new Sc?(value), f());
         }
@@ -183,22 +195,26 @@ namespace System.Linq.Expressions.Tests
         {
             ConstructorInfo constructor = typeof(Sp?).GetConstructor(new Type[] { typeof(Sp) });
             Expression[] exprArgs = new Expression[] { Expression.Constant(value, typeof(Sp)) };
-            Expression<Func<Sp?>> e =
-                Expression.Lambda<Func<Sp?>>(
-                    Expression.New(constructor, exprArgs),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<Sp?>> e = Expression.Lambda<Func<Sp?>>(
+                Expression.New(constructor, exprArgs),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<Sp?> f = e.Compile(useInterpreter);
             Assert.Equal(new Sp?(value), f());
         }
 
-        private static void VerifyWithParameterGenericWithStructRestriction<Ts>(Ts value, bool useInterpreter) where Ts : struct
+        private static void VerifyWithParameterGenericWithStructRestriction<Ts>(
+            Ts value,
+            bool useInterpreter
+        )
+            where Ts : struct
         {
             ConstructorInfo constructor = typeof(Ts?).GetConstructor(new Type[] { typeof(Ts) });
             Expression[] exprArgs = new Expression[] { Expression.Constant(value, typeof(Ts)) };
-            Expression<Func<Ts?>> e =
-                Expression.Lambda<Func<Ts?>>(
-                    Expression.New(constructor, exprArgs),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<Ts?>> e = Expression.Lambda<Func<Ts?>>(
+                Expression.New(constructor, exprArgs),
+                Enumerable.Empty<ParameterExpression>()
+            );
             Func<Ts?> f = e.Compile(useInterpreter);
             Assert.Equal(new Ts?(value), f());
         }

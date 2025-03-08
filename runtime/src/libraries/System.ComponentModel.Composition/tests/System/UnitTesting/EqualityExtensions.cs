@@ -16,7 +16,11 @@ namespace System.UnitTesting
             IsTrueForAll(source, predicate, "IsTrueForAll Failed");
         }
 
-        public static void IsTrueForAll<T>(IEnumerable<T> source, Predicate<T> predicate, string message)
+        public static void IsTrueForAll<T>(
+            IEnumerable<T> source,
+            Predicate<T> predicate,
+            string message
+        )
         {
             Assert.NotNull(source);
 
@@ -30,25 +34,32 @@ namespace System.UnitTesting
         {
             if (extendedType.IsGenericType)
             {
-                var x = typeof(EqualityExtensions).GetMethods()
+                var x = typeof(EqualityExtensions)
+                    .GetMethods()
                     ?.Where(m =>
-                        m.Name == "IsEqual" &&
-                        m.GetParameters().Length == 2 &&
-                        m.IsGenericMethodDefinition);
+                        m.Name == "IsEqual"
+                        && m.GetParameters().Length == 2
+                        && m.IsGenericMethodDefinition
+                    );
 
-                MethodInfo method = typeof(EqualityExtensions).GetMethods()
+                MethodInfo method = typeof(EqualityExtensions)
+                    .GetMethods()
                     ?.SingleOrDefault(m =>
-                        m.Name == "IsEqual" &&
-                        m.GetParameters().Length == 2 &&
-                        m.GetParameters()[0].ParameterType.Name == extendedType.Name &&
-                        m.IsGenericMethodDefinition);
+                        m.Name == "IsEqual"
+                        && m.GetParameters().Length == 2
+                        && m.GetParameters()[0].ParameterType.Name == extendedType.Name
+                        && m.IsGenericMethodDefinition
+                    );
 
                 // If extension method found, make it generic and return
                 if (method != null)
                     return method.MakeGenericMethod(extendedType.GenericTypeArguments[0]);
             }
 
-            return typeof(EqualityExtensions).GetMethod("IsEqual", new[] { extendedType, extendedType });
+            return typeof(EqualityExtensions).GetMethod(
+                "IsEqual",
+                new[] { extendedType, extendedType }
+            );
         }
 
         public static bool CheckEquals(object objA, object objB)
@@ -70,12 +81,17 @@ namespace System.UnitTesting
                 else
                 {
                     // Check if object.Equals(object) is overridden and if not check if there is a more concrete equality check implementation
-                    bool equalsNotOverridden = objType.GetMethod("Equals", new Type[] { typeof(object) }).DeclaringType == typeof(object);
+                    bool equalsNotOverridden =
+                        objType.GetMethod("Equals", new Type[] { typeof(object) }).DeclaringType
+                        == typeof(object);
                     if (equalsNotOverridden)
                     {
                         // If type doesn't override Equals(object) method then check if there is a more concrete implementation
                         // e.g. if type implements IEquatable<T>.
-                        MethodInfo equalsMethod = objType.GetMethod("Equals", new Type[] { objType });
+                        MethodInfo equalsMethod = objType.GetMethod(
+                            "Equals",
+                            new Type[] { objType }
+                        );
                         if (equalsMethod.DeclaringType != typeof(object))
                         {
                             equalityResult = equalsMethod.Invoke(objA, new object[] { objB });

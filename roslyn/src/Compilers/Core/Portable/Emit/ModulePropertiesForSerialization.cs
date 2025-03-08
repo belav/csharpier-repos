@@ -21,8 +21,8 @@ namespace Microsoft.Cci
         public readonly int FileAlignment;
 
         /// <summary>
-        /// The alignment (in bytes) of sections when they are loaded into memory. 
-        /// It must be greater than or equal to <see cref="FileAlignment"/>. 
+        /// The alignment (in bytes) of sections when they are loaded into memory.
+        /// It must be greater than or equal to <see cref="FileAlignment"/>.
         /// The default is the page size for the architecture.
         /// </summary>
         public readonly int SectionAlignment;
@@ -131,7 +131,8 @@ namespace Microsoft.Cci
             ushort majorSubsystemVersion,
             ushort minorSubsystemVersion,
             byte linkerMajorVersion,
-            byte linkerMinorVersion)
+            byte linkerMinorVersion
+        )
         {
             this.PersistentIdentifier = persistentIdentifier;
             this.FileAlignment = fileAlignment;

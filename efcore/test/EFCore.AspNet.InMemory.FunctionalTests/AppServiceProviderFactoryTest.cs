@@ -18,8 +18,7 @@ public class AppServiceProviderFactoryTest
 
     private static void TestCreateServices(Type programType)
     {
-        var factory = new TestAppServiceProviderFactory(
-            MockAssembly.Create(programType));
+        var factory = new TestAppServiceProviderFactory(MockAssembly.Create(programType));
 
         Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", null);
         Environment.SetEnvironmentVariable("DOTNET_ENVIRONMENT", null);
@@ -64,7 +63,9 @@ public class AppServiceProviderFactoryTest
         var factory = new TestAppServiceProviderFactory(
             MockAssembly.Create(
                 new[] { typeof(ProgramWithNoHostBuilder) },
-                new MockMethodInfo(typeof(ProgramWithNoHostBuilder), InjectHostIntoDiagnostics)));
+                new MockMethodInfo(typeof(ProgramWithNoHostBuilder), InjectHostIntoDiagnostics)
+            )
+        );
 
         Environment.SetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", null);
         Environment.SetEnvironmentVariable("DOTNET_ENVIRONMENT", null);
@@ -82,14 +83,10 @@ public class AppServiceProviderFactoryTest
 
         using var diagnosticListener = new DiagnosticListener("Microsoft.Extensions.Hosting");
 
-        diagnosticListener.Write(
-            "HostBuilt",
-            new TestWebHost(BuildTestServiceProvider()));
+        diagnosticListener.Write("HostBuilt", new TestWebHost(BuildTestServiceProvider()));
     }
 
-    private class ProgramWithNoHostBuilder
-    {
-    }
+    private class ProgramWithNoHostBuilder { }
 
     private static void ValidateEnvironmentAndArgs(string[] args)
     {
@@ -98,29 +95,24 @@ public class AppServiceProviderFactoryTest
         Assert.Equal(args, new[] { "arg1" });
     }
 
-    private static ServiceProvider BuildTestServiceProvider()
-        => new ServiceCollection()
-            .AddScoped<TestService>()
-            .BuildServiceProvider(validateScopes: true);
+    private static ServiceProvider BuildTestServiceProvider() =>
+        new ServiceCollection().AddScoped<TestService>().BuildServiceProvider(validateScopes: true);
 
-    private class TestService
-    {
-    }
+    private class TestService { }
 
     [ConditionalFact]
     public void Create_works_when_no_BuildWebHost()
     {
         var factory = new TestAppServiceProviderFactory(
-            MockAssembly.Create(typeof(ProgramWithoutBuildWebHost)));
+            MockAssembly.Create(typeof(ProgramWithoutBuildWebHost))
+        );
 
         var services = factory.Create(Array.Empty<string>());
 
         Assert.NotNull(services);
     }
 
-    private class ProgramWithoutBuildWebHost
-    {
-    }
+    private class ProgramWithoutBuildWebHost { }
 
     [ConditionalFact]
     public void Create_works_when_BuildWebHost_throws()
@@ -128,29 +120,32 @@ public class AppServiceProviderFactoryTest
         var reporter = new TestOperationReporter();
         var factory = new TestAppServiceProviderFactory(
             MockAssembly.Create(typeof(ProgramWithThrowingBuildWebHost)),
-            reporter);
+            reporter
+        );
 
         var services = factory.Create(Array.Empty<string>());
 
         Assert.NotNull(services);
         Assert.Contains(
             "warn: " + DesignStrings.InvokeCreateHostBuilderFailed("This is a test."),
-            reporter.Messages);
+            reporter.Messages
+        );
     }
 
     private static class ProgramWithThrowingBuildWebHost
     {
-        public static TestWebHost BuildWebHost(string[] args)
-            => throw new Exception("This is a test.");
+        public static TestWebHost BuildWebHost(string[] args) =>
+            throw new Exception("This is a test.");
     }
 }
 
 public class TestAppServiceProviderFactory : AppServiceProviderFactory
 {
-    public TestAppServiceProviderFactory(Assembly startupAssembly, IOperationReporter reporter = null)
-        : base(startupAssembly, reporter ?? new TestOperationReporter())
-    {
-    }
+    public TestAppServiceProviderFactory(
+        Assembly startupAssembly,
+        IOperationReporter reporter = null
+    )
+        : base(startupAssembly, reporter ?? new TestOperationReporter()) { }
 }
 
 public class TestWebHost
@@ -172,29 +167,22 @@ public class TestWebHostBuilder
 
     public IServiceProvider Services { get; }
 
-    public TestWebHost Build()
-        => new(Services);
+    public TestWebHost Build() => new(Services);
 }
 
 public class TestOperationReporter : IOperationReporter
 {
     private readonly List<string> _messages = new();
 
-    public IReadOnlyList<string> Messages
-        => _messages;
+    public IReadOnlyList<string> Messages => _messages;
 
-    public void Clear()
-        => _messages.Clear();
+    public void Clear() => _messages.Clear();
 
-    public void WriteInformation(string message)
-        => _messages.Add("info: " + message);
+    public void WriteInformation(string message) => _messages.Add("info: " + message);
 
-    public void WriteVerbose(string message)
-        => _messages.Add("verbose: " + message);
+    public void WriteVerbose(string message) => _messages.Add("verbose: " + message);
 
-    public void WriteWarning(string message)
-        => _messages.Add("warn: " + message);
+    public void WriteWarning(string message) => _messages.Add("warn: " + message);
 
-    public void WriteError(string message)
-        => _messages.Add("error: " + message);
+    public void WriteError(string message) => _messages.Add("error: " + message);
 }

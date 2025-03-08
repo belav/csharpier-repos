@@ -4,14 +4,13 @@
 
 namespace System.ServiceModel.Activities
 {
-    
     using System;
-    using System.Activities.Statements;
     using System.Activities;
-    using System.Collections.ObjectModel;
+    using System.Activities.Statements;
     using System.Collections.Generic;
-    using System.Windows.Markup;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.Windows.Markup;
 
     [ContentProperty("Body")]
     class NoPersistScope : NativeActivity
@@ -24,18 +23,14 @@ namespace System.ServiceModel.Activities
         }
 
         [DefaultValue(null)]
-        public Activity Body 
-        {
-            get;
-            set;
-        }
-        
+        public Activity Body { get; set; }
+
         protected override void CacheMetadata(NativeActivityMetadata metadata)
         {
             metadata.AddChild(this.Body);
             metadata.AddImplementationVariable(this.noPersistHandle);
         }
-        
+
         protected override void Execute(NativeActivityContext context)
         {
             if (this.Body != null)
@@ -45,5 +40,5 @@ namespace System.ServiceModel.Activities
                 context.ScheduleActivity(this.Body);
             }
         }
-    }         
+    }
 }

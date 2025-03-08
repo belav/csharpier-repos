@@ -22,6 +22,7 @@ namespace System.ServiceModel.Diagnostics
     class SecurityTraceRecord : TraceRecord
     {
         String traceName;
+
         internal SecurityTraceRecord(String traceName)
         {
             if (String.IsNullOrEmpty(traceName))
@@ -30,33 +31,55 @@ namespace System.ServiceModel.Diagnostics
                 this.traceName = traceName;
         }
 
-        internal override string EventId { get { return BuildEventId(traceName); } }
+        internal override string EventId
+        {
+            get { return BuildEventId(traceName); }
+        }
     }
 
     internal static class SecurityTraceRecordHelper
     {
-        internal static void TraceRemovedCachedServiceToken<T>(IssuanceTokenProviderBase<T> provider, SecurityToken serviceToken)
+        internal static void TraceRemovedCachedServiceToken<T>(
+            IssuanceTokenProviderBase<T> provider,
+            SecurityToken serviceToken
+        )
             where T : IssuanceTokenProviderState
         {
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.IssuanceTokenProviderRemovedCachedToken, SR.GetString(SR.TraceCodeIssuanceTokenProviderRemovedCachedToken), new IssuanceProviderTraceRecord<T>(provider, serviceToken));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.IssuanceTokenProviderRemovedCachedToken,
+                    SR.GetString(SR.TraceCodeIssuanceTokenProviderRemovedCachedToken),
+                    new IssuanceProviderTraceRecord<T>(provider, serviceToken)
+                );
             }
         }
 
-        internal static void TraceUsingCachedServiceToken<T>(IssuanceTokenProviderBase<T> provider, SecurityToken serviceToken, EndpointAddress target)
-             where T : IssuanceTokenProviderState
+        internal static void TraceUsingCachedServiceToken<T>(
+            IssuanceTokenProviderBase<T> provider,
+            SecurityToken serviceToken,
+            EndpointAddress target
+        )
+            where T : IssuanceTokenProviderState
         {
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.IssuanceTokenProviderUsingCachedToken, SR.GetString(SR.TraceCodeIssuanceTokenProviderUsingCachedToken), new IssuanceProviderTraceRecord<T>(provider, serviceToken, target));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.IssuanceTokenProviderUsingCachedToken,
+                    SR.GetString(SR.TraceCodeIssuanceTokenProviderUsingCachedToken),
+                    new IssuanceProviderTraceRecord<T>(provider, serviceToken, target)
+                );
             }
         }
 
-        internal static void TraceBeginSecurityNegotiation<T>(IssuanceTokenProviderBase<T> provider, EndpointAddress target)
-             where T : IssuanceTokenProviderState
+        internal static void TraceBeginSecurityNegotiation<T>(
+            IssuanceTokenProviderBase<T> provider,
+            EndpointAddress target
+        )
+            where T : IssuanceTokenProviderState
         {
-
             if (TD.SecurityNegotiationStartIsEnabled())
             {
                 TD.SecurityNegotiationStart(provider.EventTraceActivity);
@@ -64,12 +87,21 @@ namespace System.ServiceModel.Diagnostics
 
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.IssuanceTokenProviderBeginSecurityNegotiation, SR.GetString(SR.TraceCodeIssuanceTokenProviderBeginSecurityNegotiation), new IssuanceProviderTraceRecord<T>(provider, target));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.IssuanceTokenProviderBeginSecurityNegotiation,
+                    SR.GetString(SR.TraceCodeIssuanceTokenProviderBeginSecurityNegotiation),
+                    new IssuanceProviderTraceRecord<T>(provider, target)
+                );
             }
         }
 
-        internal static void TraceEndSecurityNegotiation<T>(IssuanceTokenProviderBase<T> provider, SecurityToken serviceToken, EndpointAddress target)
-             where T : IssuanceTokenProviderState
+        internal static void TraceEndSecurityNegotiation<T>(
+            IssuanceTokenProviderBase<T> provider,
+            SecurityToken serviceToken,
+            EndpointAddress target
+        )
+            where T : IssuanceTokenProviderState
         {
             if (TD.SecurityNegotiationStopIsEnabled())
             {
@@ -78,25 +110,47 @@ namespace System.ServiceModel.Diagnostics
 
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.IssuanceTokenProviderEndSecurityNegotiation, SR.GetString(SR.TraceCodeIssuanceTokenProviderEndSecurityNegotiation), new IssuanceProviderTraceRecord<T>(provider, serviceToken, target));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.IssuanceTokenProviderEndSecurityNegotiation,
+                    SR.GetString(SR.TraceCodeIssuanceTokenProviderEndSecurityNegotiation),
+                    new IssuanceProviderTraceRecord<T>(provider, serviceToken, target)
+                );
             }
         }
 
-        internal static void TraceRedirectApplied<T>(IssuanceTokenProviderBase<T> provider, EndpointAddress newTarget, EndpointAddress oldTarget)
-             where T : IssuanceTokenProviderState
+        internal static void TraceRedirectApplied<T>(
+            IssuanceTokenProviderBase<T> provider,
+            EndpointAddress newTarget,
+            EndpointAddress oldTarget
+        )
+            where T : IssuanceTokenProviderState
         {
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.IssuanceTokenProviderRedirectApplied, SR.GetString(SR.TraceCodeIssuanceTokenProviderRedirectApplied), new IssuanceProviderTraceRecord<T>(provider, newTarget, oldTarget));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.IssuanceTokenProviderRedirectApplied,
+                    SR.GetString(SR.TraceCodeIssuanceTokenProviderRedirectApplied),
+                    new IssuanceProviderTraceRecord<T>(provider, newTarget, oldTarget)
+                );
             }
         }
 
-        internal static void TraceClientServiceTokenCacheFull<T>(IssuanceTokenProviderBase<T> provider, int cacheSize)
-             where T : IssuanceTokenProviderState
+        internal static void TraceClientServiceTokenCacheFull<T>(
+            IssuanceTokenProviderBase<T> provider,
+            int cacheSize
+        )
+            where T : IssuanceTokenProviderState
         {
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.IssuanceTokenProviderServiceTokenCacheFull, SR.GetString(SR.TraceCodeIssuanceTokenProviderServiceTokenCacheFull), new IssuanceProviderTraceRecord<T>(provider, cacheSize));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.IssuanceTokenProviderServiceTokenCacheFull,
+                    SR.GetString(SR.TraceCodeIssuanceTokenProviderServiceTokenCacheFull),
+                    new IssuanceProviderTraceRecord<T>(provider, cacheSize)
+                );
             }
         }
 
@@ -104,7 +158,12 @@ namespace System.ServiceModel.Diagnostics
         {
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SpnegoClientNegotiationCompleted, SR.GetString(SR.TraceCodeSpnegoClientNegotiationCompleted), new WindowsSspiNegotiationTraceRecord(windowsNegotiation));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SpnegoClientNegotiationCompleted,
+                    SR.GetString(SR.TraceCodeSpnegoClientNegotiationCompleted),
+                    new WindowsSspiNegotiationTraceRecord(windowsNegotiation)
+                );
             }
         }
 
@@ -112,7 +171,12 @@ namespace System.ServiceModel.Diagnostics
         {
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SpnegoServiceNegotiationCompleted, SR.GetString(SR.TraceCodeSpnegoServiceNegotiationCompleted), new WindowsSspiNegotiationTraceRecord(windowsNegotiation));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SpnegoServiceNegotiationCompleted,
+                    SR.GetString(SR.TraceCodeSpnegoServiceNegotiationCompleted),
+                    new WindowsSspiNegotiationTraceRecord(windowsNegotiation)
+                );
             }
         }
 
@@ -120,7 +184,12 @@ namespace System.ServiceModel.Diagnostics
         {
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SpnegoClientNegotiation, SR.GetString(SR.TraceCodeSpnegoClientNegotiation), new WindowsSspiNegotiationTraceRecord(windowsNegotiation));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SpnegoClientNegotiation,
+                    SR.GetString(SR.TraceCodeSpnegoClientNegotiation),
+                    new WindowsSspiNegotiationTraceRecord(windowsNegotiation)
+                );
             }
         }
 
@@ -128,26 +197,50 @@ namespace System.ServiceModel.Diagnostics
         {
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SpnegoServiceNegotiation, SR.GetString(SR.TraceCodeSpnegoServiceNegotiation), new WindowsSspiNegotiationTraceRecord(windowsNegotiation));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SpnegoServiceNegotiation,
+                    SR.GetString(SR.TraceCodeSpnegoServiceNegotiation),
+                    new WindowsSspiNegotiationTraceRecord(windowsNegotiation)
+                );
             }
         }
 
-        internal static void TraceNegotiationTokenAuthenticatorAttached<T>(NegotiationTokenAuthenticator<T> authenticator, IChannelListener transportChannelListener)
+        internal static void TraceNegotiationTokenAuthenticatorAttached<T>(
+            NegotiationTokenAuthenticator<T> authenticator,
+            IChannelListener transportChannelListener
+        )
             where T : NegotiationTokenAuthenticatorState
         {
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.NegotiationAuthenticatorAttached, SR.GetString(SR.TraceCodeNegotiationAuthenticatorAttached), new NegotiationAuthenticatorTraceRecord<T>(authenticator, transportChannelListener));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.NegotiationAuthenticatorAttached,
+                    SR.GetString(SR.TraceCodeNegotiationAuthenticatorAttached),
+                    new NegotiationAuthenticatorTraceRecord<T>(
+                        authenticator,
+                        transportChannelListener
+                    )
+                );
             }
         }
 
-        internal static void TraceServiceSecurityNegotiationCompleted<T>(Message message, NegotiationTokenAuthenticator<T> authenticator, SecurityContextSecurityToken serviceToken)
+        internal static void TraceServiceSecurityNegotiationCompleted<T>(
+            Message message,
+            NegotiationTokenAuthenticator<T> authenticator,
+            SecurityContextSecurityToken serviceToken
+        )
             where T : NegotiationTokenAuthenticatorState
         {
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.ServiceSecurityNegotiationCompleted, SR.GetString(SR.TraceCodeServiceSecurityNegotiationCompleted),
-                    new NegotiationAuthenticatorTraceRecord<T>(authenticator, serviceToken));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.ServiceSecurityNegotiationCompleted,
+                    SR.GetString(SR.TraceCodeServiceSecurityNegotiationCompleted),
+                    new NegotiationAuthenticatorTraceRecord<T>(authenticator, serviceToken)
+                );
             }
 
             if (TD.ServiceSecurityNegotiationCompletedIsEnabled())
@@ -157,12 +250,21 @@ namespace System.ServiceModel.Diagnostics
             }
         }
 
-        internal static void TraceServiceSecurityNegotiationFailure<T>(EventTraceActivity eventTraceActivity, NegotiationTokenAuthenticator<T> authenticator, Exception e)
+        internal static void TraceServiceSecurityNegotiationFailure<T>(
+            EventTraceActivity eventTraceActivity,
+            NegotiationTokenAuthenticator<T> authenticator,
+            Exception e
+        )
             where T : NegotiationTokenAuthenticatorState
         {
             if (DiagnosticUtility.ShouldTraceWarning)
             {
-                TraceUtility.TraceEvent(TraceEventType.Warning, TraceCode.SecurityNegotiationProcessingFailure, SR.GetString(SR.TraceCodeSecurityNegotiationProcessingFailure), new NegotiationAuthenticatorTraceRecord<T>(authenticator, e));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Warning,
+                    TraceCode.SecurityNegotiationProcessingFailure,
+                    SR.GetString(SR.TraceCodeSecurityNegotiationProcessingFailure),
+                    new NegotiationAuthenticatorTraceRecord<T>(authenticator, e)
+                );
             }
 
             if (TD.SecurityNegotiationProcessingFailureIsEnabled())
@@ -171,20 +273,33 @@ namespace System.ServiceModel.Diagnostics
             }
         }
 
-
         internal static void TraceSecurityContextTokenCacheFull(int capacity, int pruningAmount)
         {
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SecurityContextTokenCacheFull, SR.GetString(SR.TraceCodeSecurityContextTokenCacheFull),
-                    new SecurityContextTokenCacheTraceRecord(capacity, pruningAmount));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SecurityContextTokenCacheFull,
+                    SR.GetString(SR.TraceCodeSecurityContextTokenCacheFull),
+                    new SecurityContextTokenCacheTraceRecord(capacity, pruningAmount)
+                );
             }
         }
 
-        internal static void TraceIdentityVerificationSuccess(EventTraceActivity eventTraceActivity, EndpointIdentity identity, Claim claim, Type identityVerifier)
+        internal static void TraceIdentityVerificationSuccess(
+            EventTraceActivity eventTraceActivity,
+            EndpointIdentity identity,
+            Claim claim,
+            Type identityVerifier
+        )
         {
             if (DiagnosticUtility.ShouldTraceInformation)
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SecurityIdentityVerificationSuccess, SR.GetString(SR.TraceCodeSecurityIdentityVerificationSuccess), new IdentityVerificationSuccessTraceRecord(identity, claim, identityVerifier));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SecurityIdentityVerificationSuccess,
+                    SR.GetString(SR.TraceCodeSecurityIdentityVerificationSuccess),
+                    new IdentityVerificationSuccessTraceRecord(identity, claim, identityVerifier)
+                );
 
             if (TD.SecurityIdentityVerificationSuccessIsEnabled())
             {
@@ -192,55 +307,115 @@ namespace System.ServiceModel.Diagnostics
             }
         }
 
-        internal static void TraceIdentityVerificationFailure(EndpointIdentity identity, AuthorizationContext authContext, Type identityVerifier)
+        internal static void TraceIdentityVerificationFailure(
+            EndpointIdentity identity,
+            AuthorizationContext authContext,
+            Type identityVerifier
+        )
         {
             if (DiagnosticUtility.ShouldTraceInformation)
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SecurityIdentityVerificationFailure, SR.GetString(SR.TraceCodeSecurityIdentityVerificationFailure), new IdentityVerificationFailureTraceRecord(identity, authContext, identityVerifier));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SecurityIdentityVerificationFailure,
+                    SR.GetString(SR.TraceCodeSecurityIdentityVerificationFailure),
+                    new IdentityVerificationFailureTraceRecord(
+                        identity,
+                        authContext,
+                        identityVerifier
+                    )
+                );
         }
 
-        internal static void TraceIdentityDeterminationSuccess(EndpointAddress epr, EndpointIdentity identity, Type identityVerifier)
+        internal static void TraceIdentityDeterminationSuccess(
+            EndpointAddress epr,
+            EndpointIdentity identity,
+            Type identityVerifier
+        )
         {
             if (DiagnosticUtility.ShouldTraceInformation)
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SecurityIdentityDeterminationSuccess, SR.GetString(SR.TraceCodeSecurityIdentityDeterminationSuccess), new IdentityDeterminationSuccessTraceRecord(epr, identity, identityVerifier));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SecurityIdentityDeterminationSuccess,
+                    SR.GetString(SR.TraceCodeSecurityIdentityDeterminationSuccess),
+                    new IdentityDeterminationSuccessTraceRecord(epr, identity, identityVerifier)
+                );
         }
 
-        internal static void TraceIdentityDeterminationFailure(EndpointAddress epr, Type identityVerifier)
+        internal static void TraceIdentityDeterminationFailure(
+            EndpointAddress epr,
+            Type identityVerifier
+        )
         {
             if (DiagnosticUtility.ShouldTraceInformation)
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SecurityIdentityDeterminationFailure, SR.GetString(SR.TraceCodeSecurityIdentityDeterminationFailure), new IdentityDeterminationFailureTraceRecord(epr, identityVerifier));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SecurityIdentityDeterminationFailure,
+                    SR.GetString(SR.TraceCodeSecurityIdentityDeterminationFailure),
+                    new IdentityDeterminationFailureTraceRecord(epr, identityVerifier)
+                );
         }
 
-        internal static void TraceIdentityHostNameNormalizationFailure(EndpointAddress epr, Type identityVerifier, Exception e)
+        internal static void TraceIdentityHostNameNormalizationFailure(
+            EndpointAddress epr,
+            Type identityVerifier,
+            Exception e
+        )
         {
             if (DiagnosticUtility.ShouldTraceInformation)
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SecurityIdentityHostNameNormalizationFailure, SR.GetString(SR.TraceCodeSecurityIdentityHostNameNormalizationFailure), new IdentityHostNameNormalizationFailureTraceRecord(epr, identityVerifier, e));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SecurityIdentityHostNameNormalizationFailure,
+                    SR.GetString(SR.TraceCodeSecurityIdentityHostNameNormalizationFailure),
+                    new IdentityHostNameNormalizationFailureTraceRecord(epr, identityVerifier, e)
+                );
         }
 
         internal static void TraceExportChannelBindingEntry()
         {
             if (DiagnosticUtility.ShouldTraceInformation)
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.ExportSecurityChannelBindingEntry, SR.GetString(SR.TraceCodeExportSecurityChannelBindingEntry), (object)null);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.ExportSecurityChannelBindingEntry,
+                    SR.GetString(SR.TraceCodeExportSecurityChannelBindingEntry),
+                    (object)null
+                );
         }
 
         internal static void TraceExportChannelBindingExit()
         {
             if (DiagnosticUtility.ShouldTraceInformation)
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.ExportSecurityChannelBindingExit, SR.GetString(SR.TraceCodeExportSecurityChannelBindingExit));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.ExportSecurityChannelBindingExit,
+                    SR.GetString(SR.TraceCodeExportSecurityChannelBindingExit)
+                );
         }
 
         internal static void TraceImportChannelBindingEntry()
         {
             if (DiagnosticUtility.ShouldTraceInformation)
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.ImportSecurityChannelBindingEntry, SR.GetString(SR.TraceCodeImportSecurityChannelBindingEntry), (object)null);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.ImportSecurityChannelBindingEntry,
+                    SR.GetString(SR.TraceCodeImportSecurityChannelBindingEntry),
+                    (object)null
+                );
         }
 
         internal static void TraceImportChannelBindingExit()
         {
             if (DiagnosticUtility.ShouldTraceInformation)
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.ImportSecurityChannelBindingExit, SR.GetString(SR.TraceCodeImportSecurityChannelBindingExit));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.ImportSecurityChannelBindingExit,
+                    SR.GetString(SR.TraceCodeImportSecurityChannelBindingExit)
+                );
         }
 
-        internal static void TraceTokenProviderOpened(EventTraceActivity eventTraceActivity, SecurityTokenProvider provider)
+        internal static void TraceTokenProviderOpened(
+            EventTraceActivity eventTraceActivity,
+            SecurityTokenProvider provider
+        )
         {
             if (TD.SecurityTokenProviderOpenedIsEnabled())
             {
@@ -248,280 +423,650 @@ namespace System.ServiceModel.Diagnostics
             }
 
             if (DiagnosticUtility.ShouldTraceInformation)
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SecurityTokenProviderOpened, SR.GetString(SR.TraceCodeSecurityTokenProviderOpened), new TokenProviderTraceRecord(provider));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SecurityTokenProviderOpened,
+                    SR.GetString(SR.TraceCodeSecurityTokenProviderOpened),
+                    new TokenProviderTraceRecord(provider)
+                );
         }
 
         internal static void TraceTokenProviderClosed(SecurityTokenProvider provider)
         {
             if (DiagnosticUtility.ShouldTraceInformation)
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SecurityTokenProviderClosed, SR.GetString(SR.TraceCodeSecurityTokenProviderClosed), new TokenProviderTraceRecord(provider));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SecurityTokenProviderClosed,
+                    SR.GetString(SR.TraceCodeSecurityTokenProviderClosed),
+                    new TokenProviderTraceRecord(provider)
+                );
         }
 
         internal static void TraceTokenAuthenticatorOpened(SecurityTokenAuthenticator authenticator)
         {
             if (DiagnosticUtility.ShouldTraceVerbose)
-                TraceUtility.TraceEvent(TraceEventType.Verbose, TraceCode.SecurityTokenAuthenticatorOpened, SR.GetString(SR.TraceCodeSecurityTokenAuthenticatorOpened), new TokenAuthenticatorTraceRecord(authenticator));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Verbose,
+                    TraceCode.SecurityTokenAuthenticatorOpened,
+                    SR.GetString(SR.TraceCodeSecurityTokenAuthenticatorOpened),
+                    new TokenAuthenticatorTraceRecord(authenticator)
+                );
         }
 
         internal static void TraceTokenAuthenticatorClosed(SecurityTokenAuthenticator authenticator)
         {
             if (DiagnosticUtility.ShouldTraceInformation)
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SecurityTokenAuthenticatorClosed, SR.GetString(SR.TraceCodeSecurityTokenAuthenticatorClosed), new TokenAuthenticatorTraceRecord(authenticator));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SecurityTokenAuthenticatorClosed,
+                    SR.GetString(SR.TraceCodeSecurityTokenAuthenticatorClosed),
+                    new TokenAuthenticatorTraceRecord(authenticator)
+                );
         }
 
         internal static void TraceOutgoingMessageSecured(SecurityProtocol binding, Message message)
         {
             if (TD.OutgoingMessageSecuredIsEnabled())
-            {                
-                EventTraceActivity eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(message);
+            {
+                EventTraceActivity eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(
+                    message
+                );
                 TD.OutgoingMessageSecured(eventTraceActivity);
             }
 
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SecurityBindingOutgoingMessageSecured,
-                    SR.GetString(SR.TraceCodeSecurityBindingOutgoingMessageSecured), new MessageSecurityTraceRecord(binding, message), null, null, message);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SecurityBindingOutgoingMessageSecured,
+                    SR.GetString(SR.TraceCodeSecurityBindingOutgoingMessageSecured),
+                    new MessageSecurityTraceRecord(binding, message),
+                    null,
+                    null,
+                    message
+                );
             }
         }
 
         internal static void TraceIncomingMessageVerified(SecurityProtocol binding, Message message)
         {
             if (TD.IncomingMessageVerifiedIsEnabled())
-            {                
-                EventTraceActivity eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(message);
+            {
+                EventTraceActivity eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(
+                    message
+                );
                 TD.IncomingMessageVerified(eventTraceActivity);
             }
 
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SecurityBindingIncomingMessageVerified,
-                    SR.GetString(SR.TraceCodeSecurityBindingIncomingMessageVerified), new MessageSecurityTraceRecord(binding, message), null, null, message);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SecurityBindingIncomingMessageVerified,
+                    SR.GetString(SR.TraceCodeSecurityBindingIncomingMessageVerified),
+                    new MessageSecurityTraceRecord(binding, message),
+                    null,
+                    null,
+                    message
+                );
             }
         }
 
-        internal static void TraceSecureOutgoingMessageFailure(SecurityProtocol binding, Message message)
+        internal static void TraceSecureOutgoingMessageFailure(
+            SecurityProtocol binding,
+            Message message
+        )
         {
             if (DiagnosticUtility.ShouldTraceWarning)
             {
-                TraceUtility.TraceEvent(TraceEventType.Warning, TraceCode.SecurityBindingSecureOutgoingMessageFailure,
-                    SR.GetString(SR.TraceCodeSecurityBindingSecureOutgoingMessageFailure), new MessageSecurityTraceRecord(binding, message), null, null, message);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Warning,
+                    TraceCode.SecurityBindingSecureOutgoingMessageFailure,
+                    SR.GetString(SR.TraceCodeSecurityBindingSecureOutgoingMessageFailure),
+                    new MessageSecurityTraceRecord(binding, message),
+                    null,
+                    null,
+                    message
+                );
             }
         }
 
-        internal static void TraceVerifyIncomingMessageFailure(SecurityProtocol binding, Message message)
+        internal static void TraceVerifyIncomingMessageFailure(
+            SecurityProtocol binding,
+            Message message
+        )
         {
             if (DiagnosticUtility.ShouldTraceWarning)
             {
-                TraceUtility.TraceEvent(TraceEventType.Warning, TraceCode.SecurityBindingVerifyIncomingMessageFailure,
-                    SR.GetString(SR.TraceCodeSecurityBindingVerifyIncomingMessageFailure), new MessageSecurityTraceRecord(binding, message), null, null, message);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Warning,
+                    TraceCode.SecurityBindingVerifyIncomingMessageFailure,
+                    SR.GetString(SR.TraceCodeSecurityBindingVerifyIncomingMessageFailure),
+                    new MessageSecurityTraceRecord(binding, message),
+                    null,
+                    null,
+                    message
+                );
             }
         }
 
         internal static void TraceSpnToSidMappingFailure(string spn, Exception e)
         {
             if (DiagnosticUtility.ShouldTraceWarning)
-                TraceUtility.TraceEvent(TraceEventType.Warning, TraceCode.SecuritySpnToSidMappingFailure, SR.GetString(SR.TraceCodeSecuritySpnToSidMappingFailure), new SpnToSidMappingTraceRecord(spn, e));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Warning,
+                    TraceCode.SecuritySpnToSidMappingFailure,
+                    SR.GetString(SR.TraceCodeSecuritySpnToSidMappingFailure),
+                    new SpnToSidMappingTraceRecord(spn, e)
+                );
         }
 
-        internal static void TraceSessionRedirectApplied(EndpointAddress previousTarget, EndpointAddress newTarget, GenericXmlSecurityToken sessionToken)
+        internal static void TraceSessionRedirectApplied(
+            EndpointAddress previousTarget,
+            EndpointAddress newTarget,
+            GenericXmlSecurityToken sessionToken
+        )
         {
             if (DiagnosticUtility.ShouldTraceInformation)
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SecuritySessionRedirectApplied, SR.GetString(SR.TraceCodeSecuritySessionRedirectApplied), new SessionRedirectAppliedTraceRecord(previousTarget, newTarget, sessionToken));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SecuritySessionRedirectApplied,
+                    SR.GetString(SR.TraceCodeSecuritySessionRedirectApplied),
+                    new SessionRedirectAppliedTraceRecord(previousTarget, newTarget, sessionToken)
+                );
         }
 
-        internal static void TraceCloseMessageSent(SecurityToken sessionToken, EndpointAddress remoteTarget)
+        internal static void TraceCloseMessageSent(
+            SecurityToken sessionToken,
+            EndpointAddress remoteTarget
+        )
         {
             if (DiagnosticUtility.ShouldTraceInformation)
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SecurityClientSessionCloseSent, SR.GetString(SR.TraceCodeSecurityClientSessionCloseSent), new ClientSessionTraceRecord(sessionToken, null, remoteTarget));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SecurityClientSessionCloseSent,
+                    SR.GetString(SR.TraceCodeSecurityClientSessionCloseSent),
+                    new ClientSessionTraceRecord(sessionToken, null, remoteTarget)
+                );
         }
 
-        internal static void TraceCloseResponseMessageSent(SecurityToken sessionToken, EndpointAddress remoteTarget)
+        internal static void TraceCloseResponseMessageSent(
+            SecurityToken sessionToken,
+            EndpointAddress remoteTarget
+        )
         {
             if (DiagnosticUtility.ShouldTraceInformation)
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SecurityClientSessionCloseResponseSent, SR.GetString(SR.TraceCodeSecurityClientSessionCloseResponseSent), new ClientSessionTraceRecord(sessionToken, null, remoteTarget));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SecurityClientSessionCloseResponseSent,
+                    SR.GetString(SR.TraceCodeSecurityClientSessionCloseResponseSent),
+                    new ClientSessionTraceRecord(sessionToken, null, remoteTarget)
+                );
         }
 
-        internal static void TraceCloseMessageReceived(SecurityToken sessionToken, EndpointAddress remoteTarget)
+        internal static void TraceCloseMessageReceived(
+            SecurityToken sessionToken,
+            EndpointAddress remoteTarget
+        )
         {
             if (DiagnosticUtility.ShouldTraceInformation)
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SecurityClientSessionCloseMessageReceived, SR.GetString(SR.TraceCodeSecurityClientSessionCloseMessageReceived), new ClientSessionTraceRecord(sessionToken, null, remoteTarget));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SecurityClientSessionCloseMessageReceived,
+                    SR.GetString(SR.TraceCodeSecurityClientSessionCloseMessageReceived),
+                    new ClientSessionTraceRecord(sessionToken, null, remoteTarget)
+                );
         }
 
-        internal static void TraceSessionKeyRenewalFault(SecurityToken sessionToken, EndpointAddress remoteTarget)
+        internal static void TraceSessionKeyRenewalFault(
+            SecurityToken sessionToken,
+            EndpointAddress remoteTarget
+        )
         {
             if (DiagnosticUtility.ShouldTraceWarning)
-                TraceUtility.TraceEvent(TraceEventType.Warning, TraceCode.SecuritySessionKeyRenewalFaultReceived, SR.GetString(SR.TraceCodeSecuritySessionKeyRenewalFaultReceived), new ClientSessionTraceRecord(sessionToken, null, remoteTarget));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Warning,
+                    TraceCode.SecuritySessionKeyRenewalFaultReceived,
+                    SR.GetString(SR.TraceCodeSecuritySessionKeyRenewalFaultReceived),
+                    new ClientSessionTraceRecord(sessionToken, null, remoteTarget)
+                );
         }
 
-        internal static void TraceRemoteSessionAbortedFault(SecurityToken sessionToken, EndpointAddress remoteTarget)
+        internal static void TraceRemoteSessionAbortedFault(
+            SecurityToken sessionToken,
+            EndpointAddress remoteTarget
+        )
         {
             if (DiagnosticUtility.ShouldTraceWarning)
-                TraceUtility.TraceEvent(TraceEventType.Warning, TraceCode.SecuritySessionAbortedFaultReceived, SR.GetString(SR.TraceCodeSecuritySessionAbortedFaultReceived), new ClientSessionTraceRecord(sessionToken, null, remoteTarget));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Warning,
+                    TraceCode.SecuritySessionAbortedFaultReceived,
+                    SR.GetString(SR.TraceCodeSecuritySessionAbortedFaultReceived),
+                    new ClientSessionTraceRecord(sessionToken, null, remoteTarget)
+                );
         }
 
-        internal static void TraceCloseResponseReceived(SecurityToken sessionToken, EndpointAddress remoteTarget)
+        internal static void TraceCloseResponseReceived(
+            SecurityToken sessionToken,
+            EndpointAddress remoteTarget
+        )
         {
             if (DiagnosticUtility.ShouldTraceInformation)
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SecuritySessionClosedResponseReceived, SR.GetString(SR.TraceCodeSecuritySessionClosedResponseReceived), new ClientSessionTraceRecord(sessionToken, null, remoteTarget));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SecuritySessionClosedResponseReceived,
+                    SR.GetString(SR.TraceCodeSecuritySessionClosedResponseReceived),
+                    new ClientSessionTraceRecord(sessionToken, null, remoteTarget)
+                );
         }
 
-        internal static void TracePreviousSessionKeyDiscarded(SecurityToken previousSessionToken, SecurityToken currentSessionToken, EndpointAddress remoteAddress)
+        internal static void TracePreviousSessionKeyDiscarded(
+            SecurityToken previousSessionToken,
+            SecurityToken currentSessionToken,
+            EndpointAddress remoteAddress
+        )
         {
             if (DiagnosticUtility.ShouldTraceInformation)
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SecurityClientSessionPreviousKeyDiscarded, SR.GetString(SR.TraceCodeSecurityClientSessionPreviousKeyDiscarded), new ClientSessionTraceRecord(currentSessionToken, previousSessionToken, remoteAddress));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SecurityClientSessionPreviousKeyDiscarded,
+                    SR.GetString(SR.TraceCodeSecurityClientSessionPreviousKeyDiscarded),
+                    new ClientSessionTraceRecord(
+                        currentSessionToken,
+                        previousSessionToken,
+                        remoteAddress
+                    )
+                );
         }
 
-        internal static void TraceSessionKeyRenewed(SecurityToken newSessionToken, SecurityToken currentSessionToken, EndpointAddress remoteAddress)
+        internal static void TraceSessionKeyRenewed(
+            SecurityToken newSessionToken,
+            SecurityToken currentSessionToken,
+            EndpointAddress remoteAddress
+        )
         {
             if (DiagnosticUtility.ShouldTraceInformation)
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SecurityClientSessionKeyRenewed, SR.GetString(SR.TraceCodeSecurityClientSessionKeyRenewed), new ClientSessionTraceRecord(newSessionToken, currentSessionToken, remoteAddress));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SecurityClientSessionKeyRenewed,
+                    SR.GetString(SR.TraceCodeSecurityClientSessionKeyRenewed),
+                    new ClientSessionTraceRecord(
+                        newSessionToken,
+                        currentSessionToken,
+                        remoteAddress
+                    )
+                );
         }
 
         internal static void TracePendingSessionAdded(UniqueId sessionId, Uri listenAddress)
         {
             if (DiagnosticUtility.ShouldTraceInformation)
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SecurityPendingServerSessionAdded, SR.GetString(SR.TraceCodeSecurityPendingServerSessionAdded), new ServerSessionTraceRecord(sessionId, listenAddress));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SecurityPendingServerSessionAdded,
+                    SR.GetString(SR.TraceCodeSecurityPendingServerSessionAdded),
+                    new ServerSessionTraceRecord(sessionId, listenAddress)
+                );
         }
 
         internal static void TracePendingSessionClosed(UniqueId sessionId, Uri listenAddress)
         {
             if (DiagnosticUtility.ShouldTraceWarning)
-                TraceUtility.TraceEvent(TraceEventType.Warning, TraceCode.SecurityPendingServerSessionClosed, SR.GetString(SR.TraceCodeSecurityPendingServerSessionClosed), new ServerSessionTraceRecord(sessionId, listenAddress));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Warning,
+                    TraceCode.SecurityPendingServerSessionClosed,
+                    SR.GetString(SR.TraceCodeSecurityPendingServerSessionClosed),
+                    new ServerSessionTraceRecord(sessionId, listenAddress)
+                );
         }
 
         internal static void TracePendingSessionActivated(UniqueId sessionId, Uri listenAddress)
         {
             if (DiagnosticUtility.ShouldTraceInformation)
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SecurityPendingServerSessionActivated, SR.GetString(SR.TraceCodeSecurityPendingServerSessionActivated), new ServerSessionTraceRecord(sessionId, listenAddress));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SecurityPendingServerSessionActivated,
+                    SR.GetString(SR.TraceCodeSecurityPendingServerSessionActivated),
+                    new ServerSessionTraceRecord(sessionId, listenAddress)
+                );
         }
 
         internal static void TraceActiveSessionRemoved(UniqueId sessionId, Uri listenAddress)
         {
             if (DiagnosticUtility.ShouldTraceInformation)
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SecurityActiveServerSessionRemoved, SR.GetString(SR.TraceCodeSecurityActiveServerSessionRemoved), new ServerSessionTraceRecord(sessionId, listenAddress));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SecurityActiveServerSessionRemoved,
+                    SR.GetString(SR.TraceCodeSecurityActiveServerSessionRemoved),
+                    new ServerSessionTraceRecord(sessionId, listenAddress)
+                );
         }
 
-        internal static void TraceNewServerSessionKeyIssued(SecurityContextSecurityToken newToken, SecurityContextSecurityToken supportingToken, Uri listenAddress)
+        internal static void TraceNewServerSessionKeyIssued(
+            SecurityContextSecurityToken newToken,
+            SecurityContextSecurityToken supportingToken,
+            Uri listenAddress
+        )
         {
             if (DiagnosticUtility.ShouldTraceInformation)
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SecurityNewServerSessionKeyIssued, SR.GetString(SR.TraceCodeSecurityNewServerSessionKeyIssued), new ServerSessionTraceRecord(newToken, supportingToken, listenAddress));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SecurityNewServerSessionKeyIssued,
+                    SR.GetString(SR.TraceCodeSecurityNewServerSessionKeyIssued),
+                    new ServerSessionTraceRecord(newToken, supportingToken, listenAddress)
+                );
         }
 
-        internal static void TraceInactiveSessionFaulted(SecurityContextSecurityToken sessionToken, Uri listenAddress)
+        internal static void TraceInactiveSessionFaulted(
+            SecurityContextSecurityToken sessionToken,
+            Uri listenAddress
+        )
         {
             if (DiagnosticUtility.ShouldTraceWarning)
-                TraceUtility.TraceEvent(TraceEventType.Warning, TraceCode.SecurityInactiveSessionFaulted, SR.GetString(SR.TraceCodeSecurityInactiveSessionFaulted), new ServerSessionTraceRecord(sessionToken, (SecurityContextSecurityToken)null, listenAddress));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Warning,
+                    TraceCode.SecurityInactiveSessionFaulted,
+                    SR.GetString(SR.TraceCodeSecurityInactiveSessionFaulted),
+                    new ServerSessionTraceRecord(
+                        sessionToken,
+                        (SecurityContextSecurityToken)null,
+                        listenAddress
+                    )
+                );
         }
 
-        internal static void TraceServerSessionKeyUpdated(SecurityContextSecurityToken sessionToken, Uri listenAddress)
+        internal static void TraceServerSessionKeyUpdated(
+            SecurityContextSecurityToken sessionToken,
+            Uri listenAddress
+        )
         {
             if (DiagnosticUtility.ShouldTraceInformation)
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SecurityServerSessionKeyUpdated, SR.GetString(SR.TraceCodeSecurityServerSessionKeyUpdated), new ServerSessionTraceRecord(sessionToken, (SecurityContextSecurityToken)null, listenAddress));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SecurityServerSessionKeyUpdated,
+                    SR.GetString(SR.TraceCodeSecurityServerSessionKeyUpdated),
+                    new ServerSessionTraceRecord(
+                        sessionToken,
+                        (SecurityContextSecurityToken)null,
+                        listenAddress
+                    )
+                );
         }
 
-        internal static void TraceServerSessionCloseReceived(SecurityContextSecurityToken sessionToken, Uri listenAddress)
+        internal static void TraceServerSessionCloseReceived(
+            SecurityContextSecurityToken sessionToken,
+            Uri listenAddress
+        )
         {
             if (DiagnosticUtility.ShouldTraceInformation)
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SecurityServerSessionCloseReceived, SR.GetString(SR.TraceCodeSecurityServerSessionCloseReceived), new ServerSessionTraceRecord(sessionToken, (SecurityContextSecurityToken)null, listenAddress));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SecurityServerSessionCloseReceived,
+                    SR.GetString(SR.TraceCodeSecurityServerSessionCloseReceived),
+                    new ServerSessionTraceRecord(
+                        sessionToken,
+                        (SecurityContextSecurityToken)null,
+                        listenAddress
+                    )
+                );
         }
 
-        internal static void TraceServerSessionCloseResponseReceived(SecurityContextSecurityToken sessionToken, Uri listenAddress)
+        internal static void TraceServerSessionCloseResponseReceived(
+            SecurityContextSecurityToken sessionToken,
+            Uri listenAddress
+        )
         {
             if (DiagnosticUtility.ShouldTraceInformation)
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SecurityServerSessionCloseResponseReceived, SR.GetString(SR.TraceCodeSecurityServerSessionCloseResponseReceived), new ServerSessionTraceRecord(sessionToken, (SecurityContextSecurityToken)null, listenAddress));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SecurityServerSessionCloseResponseReceived,
+                    SR.GetString(SR.TraceCodeSecurityServerSessionCloseResponseReceived),
+                    new ServerSessionTraceRecord(
+                        sessionToken,
+                        (SecurityContextSecurityToken)null,
+                        listenAddress
+                    )
+                );
         }
 
-        internal static void TraceSessionRenewalFaultSent(SecurityContextSecurityToken sessionToken, Uri listenAddress, Message message)
+        internal static void TraceSessionRenewalFaultSent(
+            SecurityContextSecurityToken sessionToken,
+            Uri listenAddress,
+            Message message
+        )
         {
             if (DiagnosticUtility.ShouldTraceWarning)
             {
-                TraceUtility.TraceEvent(TraceEventType.Warning, TraceCode.SecurityServerSessionRenewalFaultSent,
-                    SR.GetString(SR.TraceCodeSecurityServerSessionRenewalFaultSent), new ServerSessionTraceRecord(sessionToken, message, listenAddress), null, null, message);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Warning,
+                    TraceCode.SecurityServerSessionRenewalFaultSent,
+                    SR.GetString(SR.TraceCodeSecurityServerSessionRenewalFaultSent),
+                    new ServerSessionTraceRecord(sessionToken, message, listenAddress),
+                    null,
+                    null,
+                    message
+                );
             }
         }
 
-        internal static void TraceSessionAbortedFaultSent(SecurityContextSecurityToken sessionToken, Uri listenAddress)
+        internal static void TraceSessionAbortedFaultSent(
+            SecurityContextSecurityToken sessionToken,
+            Uri listenAddress
+        )
         {
             if (DiagnosticUtility.ShouldTraceWarning)
-                TraceUtility.TraceEvent(TraceEventType.Warning, TraceCode.SecurityServerSessionAbortedFaultSent, SR.GetString(SR.TraceCodeSecurityServerSessionAbortedFaultSent), new ServerSessionTraceRecord(sessionToken, (SecurityContextSecurityToken)null, listenAddress));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Warning,
+                    TraceCode.SecurityServerSessionAbortedFaultSent,
+                    SR.GetString(SR.TraceCodeSecurityServerSessionAbortedFaultSent),
+                    new ServerSessionTraceRecord(
+                        sessionToken,
+                        (SecurityContextSecurityToken)null,
+                        listenAddress
+                    )
+                );
         }
 
-        internal static void TraceSessionClosedResponseSent(SecurityContextSecurityToken sessionToken, Uri listenAddress)
+        internal static void TraceSessionClosedResponseSent(
+            SecurityContextSecurityToken sessionToken,
+            Uri listenAddress
+        )
         {
             if (DiagnosticUtility.ShouldTraceInformation)
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SecuritySessionCloseResponseSent, SR.GetString(SR.TraceCodeSecuritySessionCloseResponseSent), new ServerSessionTraceRecord(sessionToken, (SecurityContextSecurityToken)null, listenAddress));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SecuritySessionCloseResponseSent,
+                    SR.GetString(SR.TraceCodeSecuritySessionCloseResponseSent),
+                    new ServerSessionTraceRecord(
+                        sessionToken,
+                        (SecurityContextSecurityToken)null,
+                        listenAddress
+                    )
+                );
         }
 
-        internal static void TraceSessionClosedSent(SecurityContextSecurityToken sessionToken, Uri listenAddress)
+        internal static void TraceSessionClosedSent(
+            SecurityContextSecurityToken sessionToken,
+            Uri listenAddress
+        )
         {
             if (DiagnosticUtility.ShouldTraceInformation)
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SecuritySessionServerCloseSent, SR.GetString(SR.TraceCodeSecuritySessionServerCloseSent), new ServerSessionTraceRecord(sessionToken, (SecurityContextSecurityToken)null, listenAddress));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SecuritySessionServerCloseSent,
+                    SR.GetString(SR.TraceCodeSecuritySessionServerCloseSent),
+                    new ServerSessionTraceRecord(
+                        sessionToken,
+                        (SecurityContextSecurityToken)null,
+                        listenAddress
+                    )
+                );
         }
 
-        internal static void TraceRenewFaultSendFailure(SecurityContextSecurityToken sessionToken, Uri listenAddress, Exception e)
+        internal static void TraceRenewFaultSendFailure(
+            SecurityContextSecurityToken sessionToken,
+            Uri listenAddress,
+            Exception e
+        )
         {
             if (DiagnosticUtility.ShouldTraceWarning)
-                TraceUtility.TraceEvent(TraceEventType.Warning, TraceCode.SecuritySessionRenewFaultSendFailure, SR.GetString(SR.TraceCodeSecuritySessionRenewFaultSendFailure), new ServerSessionTraceRecord(sessionToken, listenAddress), e);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Warning,
+                    TraceCode.SecuritySessionRenewFaultSendFailure,
+                    SR.GetString(SR.TraceCodeSecuritySessionRenewFaultSendFailure),
+                    new ServerSessionTraceRecord(sessionToken, listenAddress),
+                    e
+                );
         }
 
-        internal static void TraceSessionAbortedFaultSendFailure(SecurityContextSecurityToken sessionToken, Uri listenAddress, Exception e)
+        internal static void TraceSessionAbortedFaultSendFailure(
+            SecurityContextSecurityToken sessionToken,
+            Uri listenAddress,
+            Exception e
+        )
         {
             if (DiagnosticUtility.ShouldTraceWarning)
-                TraceUtility.TraceEvent(TraceEventType.Warning, TraceCode.SecuritySessionAbortedFaultSendFailure, SR.GetString(SR.TraceCodeSecuritySessionAbortedFaultSendFailure), new ServerSessionTraceRecord(sessionToken, listenAddress), e);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Warning,
+                    TraceCode.SecuritySessionAbortedFaultSendFailure,
+                    SR.GetString(SR.TraceCodeSecuritySessionAbortedFaultSendFailure),
+                    new ServerSessionTraceRecord(sessionToken, listenAddress),
+                    e
+                );
         }
 
-        internal static void TraceSessionClosedResponseSendFailure(SecurityContextSecurityToken sessionToken, Uri listenAddress, Exception e)
+        internal static void TraceSessionClosedResponseSendFailure(
+            SecurityContextSecurityToken sessionToken,
+            Uri listenAddress,
+            Exception e
+        )
         {
             if (DiagnosticUtility.ShouldTraceWarning)
-                TraceUtility.TraceEvent(TraceEventType.Warning, TraceCode.SecuritySessionClosedResponseSendFailure, SR.GetString(SR.TraceCodeSecuritySessionClosedResponseSendFailure), new ServerSessionTraceRecord(sessionToken, listenAddress), e);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Warning,
+                    TraceCode.SecuritySessionClosedResponseSendFailure,
+                    SR.GetString(SR.TraceCodeSecuritySessionClosedResponseSendFailure),
+                    new ServerSessionTraceRecord(sessionToken, listenAddress),
+                    e
+                );
         }
 
-        internal static void TraceSessionCloseSendFailure(SecurityContextSecurityToken sessionToken, Uri listenAddress, Exception e)
+        internal static void TraceSessionCloseSendFailure(
+            SecurityContextSecurityToken sessionToken,
+            Uri listenAddress,
+            Exception e
+        )
         {
             if (DiagnosticUtility.ShouldTraceWarning)
-                TraceUtility.TraceEvent(TraceEventType.Warning, TraceCode.SecuritySessionServerCloseSendFailure, SR.GetString(SR.TraceCodeSecuritySessionServerCloseSendFailure), new ServerSessionTraceRecord(sessionToken, listenAddress), e);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Warning,
+                    TraceCode.SecuritySessionServerCloseSendFailure,
+                    SR.GetString(SR.TraceCodeSecuritySessionServerCloseSendFailure),
+                    new ServerSessionTraceRecord(sessionToken, listenAddress),
+                    e
+                );
         }
 
-        internal static void TraceBeginSecuritySessionOperation(SecuritySessionOperation operation, EndpointAddress target, SecurityToken currentToken)
+        internal static void TraceBeginSecuritySessionOperation(
+            SecuritySessionOperation operation,
+            EndpointAddress target,
+            SecurityToken currentToken
+        )
         {
             if (DiagnosticUtility.ShouldTraceInformation)
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SecuritySessionRequestorStartOperation, SR.GetString(SR.TraceCodeSecuritySessionRequestorStartOperation), new SessionRequestorTraceRecord(operation, currentToken, (GenericXmlSecurityToken)null, target));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SecuritySessionRequestorStartOperation,
+                    SR.GetString(SR.TraceCodeSecuritySessionRequestorStartOperation),
+                    new SessionRequestorTraceRecord(
+                        operation,
+                        currentToken,
+                        (GenericXmlSecurityToken)null,
+                        target
+                    )
+                );
         }
 
-        internal static void TraceSecuritySessionOperationSuccess(SecuritySessionOperation operation, EndpointAddress target, SecurityToken currentToken, SecurityToken issuedToken)
+        internal static void TraceSecuritySessionOperationSuccess(
+            SecuritySessionOperation operation,
+            EndpointAddress target,
+            SecurityToken currentToken,
+            SecurityToken issuedToken
+        )
         {
             if (DiagnosticUtility.ShouldTraceInformation)
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SecuritySessionRequestorOperationSuccess, SR.GetString(SR.TraceCodeSecuritySessionRequestorOperationSuccess), new SessionRequestorTraceRecord(operation, currentToken, issuedToken, target));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SecuritySessionRequestorOperationSuccess,
+                    SR.GetString(SR.TraceCodeSecuritySessionRequestorOperationSuccess),
+                    new SessionRequestorTraceRecord(operation, currentToken, issuedToken, target)
+                );
         }
 
-        internal static void TraceSecuritySessionOperationFailure(SecuritySessionOperation operation, EndpointAddress target, SecurityToken currentToken, Exception e)
+        internal static void TraceSecuritySessionOperationFailure(
+            SecuritySessionOperation operation,
+            EndpointAddress target,
+            SecurityToken currentToken,
+            Exception e
+        )
         {
             if (DiagnosticUtility.ShouldTraceWarning)
-                TraceUtility.TraceEvent(TraceEventType.Warning, TraceCode.SecuritySessionRequestorOperationFailure, SR.GetString(SR.TraceCodeSecuritySessionRequestorOperationFailure), new SessionRequestorTraceRecord(operation, currentToken, e, target));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Warning,
+                    TraceCode.SecuritySessionRequestorOperationFailure,
+                    SR.GetString(SR.TraceCodeSecuritySessionRequestorOperationFailure),
+                    new SessionRequestorTraceRecord(operation, currentToken, e, target)
+                );
         }
 
-        internal static void TraceServerSessionOperationException(SecuritySessionOperation operation, Exception e, Uri listenAddress)
+        internal static void TraceServerSessionOperationException(
+            SecuritySessionOperation operation,
+            Exception e,
+            Uri listenAddress
+        )
         {
             if (DiagnosticUtility.ShouldTraceWarning)
-                TraceUtility.TraceEvent(TraceEventType.Warning, TraceCode.SecuritySessionResponderOperationFailure, SR.GetString(SR.TraceCodeSecuritySessionResponderOperationFailure), new SessionResponderTraceRecord(operation, e, listenAddress));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Warning,
+                    TraceCode.SecuritySessionResponderOperationFailure,
+                    SR.GetString(SR.TraceCodeSecuritySessionResponderOperationFailure),
+                    new SessionResponderTraceRecord(operation, e, listenAddress)
+                );
         }
 
-        internal static void TraceImpersonationSucceeded(EventTraceActivity eventTraceActivity, DispatchOperationRuntime operation)
+        internal static void TraceImpersonationSucceeded(
+            EventTraceActivity eventTraceActivity,
+            DispatchOperationRuntime operation
+        )
         {
             if (DiagnosticUtility.ShouldTraceInformation)
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.SecurityImpersonationSuccess, SR.GetString(SR.TraceCodeSecurityImpersonationSuccess), new ImpersonationTraceRecord(operation));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SecurityImpersonationSuccess,
+                    SR.GetString(SR.TraceCodeSecurityImpersonationSuccess),
+                    new ImpersonationTraceRecord(operation)
+                );
 
             if (TD.SecurityImpersonationSuccessIsEnabled())
             {
                 TD.SecurityImpersonationSuccess(eventTraceActivity);
             }
-
         }
 
-        internal static void TraceImpersonationFailed(EventTraceActivity eventTraceActivity, DispatchOperationRuntime operation, Exception e)
+        internal static void TraceImpersonationFailed(
+            EventTraceActivity eventTraceActivity,
+            DispatchOperationRuntime operation,
+            Exception e
+        )
         {
             if (DiagnosticUtility.ShouldTraceWarning)
-                TraceUtility.TraceEvent(TraceEventType.Warning, TraceCode.SecurityImpersonationFailure, SR.GetString(SR.TraceCodeSecurityImpersonationFailure), new ImpersonationTraceRecord(operation), e);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Warning,
+                    TraceCode.SecurityImpersonationFailure,
+                    SR.GetString(SR.TraceCodeSecurityImpersonationFailure),
+                    new ImpersonationTraceRecord(operation),
+                    e
+                );
 
             if (TD.SecurityImpersonationFailureIsEnabled())
             {
@@ -529,7 +1074,11 @@ namespace System.ServiceModel.Diagnostics
             }
         }
 
-        static void WritePossibleGenericXmlToken(XmlWriter writer, string startElement, SecurityToken token)
+        static void WritePossibleGenericXmlToken(
+            XmlWriter writer,
+            string startElement,
+            SecurityToken token
+        )
         {
             if (writer == null)
                 return;
@@ -553,18 +1102,30 @@ namespace System.ServiceModel.Diagnostics
             if (xml == null || sessiontoken == null)
                 return;
             xml.WriteElementString("SessionTokenType", sessiontoken.GetType().ToString());
-            xml.WriteElementString("ValidFrom", XmlConvert.ToString(sessiontoken.ValidFrom, XmlDateTimeSerializationMode.Utc));
-            xml.WriteElementString("ValidTo", XmlConvert.ToString(sessiontoken.ValidTo, XmlDateTimeSerializationMode.Utc));
+            xml.WriteElementString(
+                "ValidFrom",
+                XmlConvert.ToString(sessiontoken.ValidFrom, XmlDateTimeSerializationMode.Utc)
+            );
+            xml.WriteElementString(
+                "ValidTo",
+                XmlConvert.ToString(sessiontoken.ValidTo, XmlDateTimeSerializationMode.Utc)
+            );
             GenericXmlSecurityToken token = sessiontoken as GenericXmlSecurityToken;
             if (token != null)
             {
                 if (token.InternalTokenReference != null)
                 {
-                    xml.WriteElementString("InternalTokenReference", token.InternalTokenReference.ToString());
+                    xml.WriteElementString(
+                        "InternalTokenReference",
+                        token.InternalTokenReference.ToString()
+                    );
                 }
                 if (token.ExternalTokenReference != null)
                 {
-                    xml.WriteElementString("ExternalTokenReference", token.ExternalTokenReference.ToString());
+                    xml.WriteElementString(
+                        "ExternalTokenReference",
+                        token.ExternalTokenReference.ToString()
+                    );
                 }
                 xml.WriteElementString("IssuedTokenElementName", token.TokenXml.LocalName);
                 xml.WriteElementString("IssuedTokenElementNamespace", token.TokenXml.NamespaceURI);
@@ -573,7 +1134,6 @@ namespace System.ServiceModel.Diagnostics
 
         static void WriteSecurityContextToken(XmlWriter xml, SecurityContextSecurityToken token)
         {
-
             xml.WriteElementString("ContextId", token.ContextId.ToString());
             if (token.KeyGeneration != null)
             {
@@ -581,7 +1141,7 @@ namespace System.ServiceModel.Diagnostics
             }
         }
 
-        static internal void WriteClaim(XmlWriter xml, Claim claim)
+        internal static void WriteClaim(XmlWriter xml, Claim claim)
         {
             if (xml == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("xml");
@@ -590,9 +1150,11 @@ namespace System.ServiceModel.Diagnostics
             {
                 xml.WriteStartElement("Claim");
 
-                if (null != DiagnosticUtility.DiagnosticTrace
+                if (
+                    null != DiagnosticUtility.DiagnosticTrace
                     && null != DiagnosticUtility.DiagnosticTrace.TraceSource
-                    && DiagnosticUtility.DiagnosticTrace.ShouldLogPii)
+                    && DiagnosticUtility.DiagnosticTrace.ShouldLogPii
+                )
                 {
                     //
                     // ClaimType
@@ -617,7 +1179,6 @@ namespace System.ServiceModel.Diagnostics
                     xml.WriteString(claim.GetType().AssemblyQualifiedName);
                 }
 
-
                 xml.WriteEndElement();
             }
         }
@@ -628,7 +1189,11 @@ namespace System.ServiceModel.Diagnostics
             Exception e;
             Uri listenAddress;
 
-            public SessionResponderTraceRecord(SecuritySessionOperation operation, Exception e, Uri listenAddress)
+            public SessionResponderTraceRecord(
+                SecuritySessionOperation operation,
+                Exception e,
+                Uri listenAddress
+            )
                 : base("SecuritySession")
             {
                 this.operation = operation;
@@ -661,7 +1226,12 @@ namespace System.ServiceModel.Diagnostics
             EndpointAddress target;
             Exception e;
 
-            public SessionRequestorTraceRecord(SecuritySessionOperation operation, SecurityToken currentToken, SecurityToken issuedToken, EndpointAddress target)
+            public SessionRequestorTraceRecord(
+                SecuritySessionOperation operation,
+                SecurityToken currentToken,
+                SecurityToken issuedToken,
+                EndpointAddress target
+            )
                 : base("SecuritySession")
             {
                 this.operation = operation;
@@ -670,7 +1240,12 @@ namespace System.ServiceModel.Diagnostics
                 this.target = target;
             }
 
-            public SessionRequestorTraceRecord(SecuritySessionOperation operation, SecurityToken currentToken, Exception e, EndpointAddress target)
+            public SessionRequestorTraceRecord(
+                SecuritySessionOperation operation,
+                SecurityToken currentToken,
+                Exception e,
+                EndpointAddress target
+            )
                 : base("SecuritySession")
             {
                 this.operation = operation;
@@ -713,7 +1288,11 @@ namespace System.ServiceModel.Diagnostics
             Message message;
             Uri listenAddress;
 
-            public ServerSessionTraceRecord(SecurityContextSecurityToken currentSessionToken, SecurityContextSecurityToken newSessionToken, Uri listenAddress)
+            public ServerSessionTraceRecord(
+                SecurityContextSecurityToken currentSessionToken,
+                SecurityContextSecurityToken newSessionToken,
+                Uri listenAddress
+            )
                 : base("SecuritySession")
             {
                 this.currentSessionToken = currentSessionToken;
@@ -721,7 +1300,11 @@ namespace System.ServiceModel.Diagnostics
                 this.listenAddress = listenAddress;
             }
 
-            public ServerSessionTraceRecord(SecurityContextSecurityToken currentSessionToken, Message message, Uri listenAddress)
+            public ServerSessionTraceRecord(
+                SecurityContextSecurityToken currentSessionToken,
+                Message message,
+                Uri listenAddress
+            )
                 : base("SecuritySession")
             {
                 this.currentSessionToken = currentSessionToken;
@@ -729,7 +1312,10 @@ namespace System.ServiceModel.Diagnostics
                 this.listenAddress = listenAddress;
             }
 
-            public ServerSessionTraceRecord(SecurityContextSecurityToken currentSessionToken, Uri listenAddress)
+            public ServerSessionTraceRecord(
+                SecurityContextSecurityToken currentSessionToken,
+                Uri listenAddress
+            )
                 : base("SecuritySession")
             {
                 this.currentSessionToken = currentSessionToken;
@@ -781,7 +1367,11 @@ namespace System.ServiceModel.Diagnostics
             SecurityToken previousSessionToken;
             EndpointAddress remoteAddress;
 
-            public ClientSessionTraceRecord(SecurityToken currentSessionToken, SecurityToken previousSessionToken, EndpointAddress remoteAddress)
+            public ClientSessionTraceRecord(
+                SecurityToken currentSessionToken,
+                SecurityToken previousSessionToken,
+                EndpointAddress remoteAddress
+            )
                 : base("SecuritySession")
             {
                 this.currentSessionToken = currentSessionToken;
@@ -818,7 +1408,11 @@ namespace System.ServiceModel.Diagnostics
             EndpointAddress newTarget;
             GenericXmlSecurityToken sessionToken;
 
-            public SessionRedirectAppliedTraceRecord(EndpointAddress previousTarget, EndpointAddress newTarget, GenericXmlSecurityToken sessionToken)
+            public SessionRedirectAppliedTraceRecord(
+                EndpointAddress previousTarget,
+                EndpointAddress newTarget,
+                GenericXmlSecurityToken sessionToken
+            )
                 : base("SecuritySession")
             {
                 this.previousTarget = previousTarget;
@@ -957,7 +1551,10 @@ namespace System.ServiceModel.Diagnostics
                     return;
 
                 if (this.authenticator != null)
-                    xml.WriteElementString("SecurityTokenAuthenticator", this.authenticator.ToString());
+                    xml.WriteElementString(
+                        "SecurityTokenAuthenticator",
+                        this.authenticator.ToString()
+                    );
             }
         }
 
@@ -978,8 +1575,14 @@ namespace System.ServiceModel.Diagnostics
                 if (xml == null)
                     return;
 
-                xml.WriteElementString("Capacity", this.capacity.ToString(NumberFormatInfo.InvariantInfo));
-                xml.WriteElementString("PruningAmount", this.pruningAmount.ToString(NumberFormatInfo.InvariantInfo));
+                xml.WriteElementString(
+                    "Capacity",
+                    this.capacity.ToString(NumberFormatInfo.InvariantInfo)
+                );
+                xml.WriteElementString(
+                    "PruningAmount",
+                    this.pruningAmount.ToString(NumberFormatInfo.InvariantInfo)
+                );
             }
         }
 
@@ -991,21 +1594,30 @@ namespace System.ServiceModel.Diagnostics
             SecurityContextSecurityToken serviceToken;
             Exception e;
 
-            public NegotiationAuthenticatorTraceRecord(NegotiationTokenAuthenticator<T> authenticator, IChannelListener transportChannelListener)
+            public NegotiationAuthenticatorTraceRecord(
+                NegotiationTokenAuthenticator<T> authenticator,
+                IChannelListener transportChannelListener
+            )
                 : base("NegotiationTokenAuthenticator")
             {
                 this.authenticator = authenticator;
                 this.transportChannelListener = transportChannelListener;
             }
 
-            public NegotiationAuthenticatorTraceRecord(NegotiationTokenAuthenticator<T> authenticator, Exception e)
+            public NegotiationAuthenticatorTraceRecord(
+                NegotiationTokenAuthenticator<T> authenticator,
+                Exception e
+            )
                 : base("NegotiationTokenAuthenticator")
             {
                 this.authenticator = authenticator;
                 this.e = e;
             }
 
-            public NegotiationAuthenticatorTraceRecord(NegotiationTokenAuthenticator<T> authenticator, SecurityContextSecurityToken serviceToken)
+            public NegotiationAuthenticatorTraceRecord(
+                NegotiationTokenAuthenticator<T> authenticator,
+                SecurityContextSecurityToken serviceToken
+            )
                 : base("NegotiationTokenAuthenticator")
             {
                 this.authenticator = authenticator;
@@ -1018,10 +1630,16 @@ namespace System.ServiceModel.Diagnostics
                     return;
 
                 if (this.authenticator != null)
-                    xml.WriteElementString("NegotiationTokenAuthenticator", base.XmlEncode(this.authenticator.ToString()));
+                    xml.WriteElementString(
+                        "NegotiationTokenAuthenticator",
+                        base.XmlEncode(this.authenticator.ToString())
+                    );
 
                 if (this.authenticator != null && this.authenticator.ListenUri != null)
-                    xml.WriteElementString("AuthenticatorListenUri", this.authenticator.ListenUri.AbsoluteUri);
+                    xml.WriteElementString(
+                        "AuthenticatorListenUri",
+                        this.authenticator.ListenUri.AbsoluteUri
+                    );
 
                 if (this.serviceToken != null)
                 {
@@ -1031,10 +1649,16 @@ namespace System.ServiceModel.Diagnostics
                 }
                 if (this.transportChannelListener != null)
                 {
-                    xml.WriteElementString("TransportChannelListener", base.XmlEncode(this.transportChannelListener.ToString()));
+                    xml.WriteElementString(
+                        "TransportChannelListener",
+                        base.XmlEncode(this.transportChannelListener.ToString())
+                    );
 
                     if (this.transportChannelListener.Uri != null)
-                        xml.WriteElementString("ListenUri", this.transportChannelListener.Uri.AbsoluteUri);
+                        xml.WriteElementString(
+                            "ListenUri",
+                            this.transportChannelListener.Uri.AbsoluteUri
+                        );
                 }
                 if (this.e != null)
                 {
@@ -1049,7 +1673,11 @@ namespace System.ServiceModel.Diagnostics
             Claim claim;
             Type identityVerifier;
 
-            public IdentityVerificationSuccessTraceRecord(EndpointIdentity identity, Claim claim, Type identityVerifier)
+            public IdentityVerificationSuccessTraceRecord(
+                EndpointIdentity identity,
+                Claim claim,
+                Type identityVerifier
+            )
                 : base("ServiceIdentityVerification")
             {
                 this.identity = identity;
@@ -1065,7 +1693,10 @@ namespace System.ServiceModel.Diagnostics
                 XmlDictionaryWriter xmlWriter = XmlDictionaryWriter.CreateDictionaryWriter(xml);
 
                 if (this.identityVerifier != null)
-                    xml.WriteElementString("IdentityVerifierType", this.identityVerifier.ToString());
+                    xml.WriteElementString(
+                        "IdentityVerifierType",
+                        this.identityVerifier.ToString()
+                    );
 
                 if (this.identity != null)
                     this.identity.WriteTo(xmlWriter);
@@ -1081,7 +1712,11 @@ namespace System.ServiceModel.Diagnostics
             AuthorizationContext authContext;
             Type identityVerifier;
 
-            public IdentityVerificationFailureTraceRecord(EndpointIdentity identity, AuthorizationContext authContext, Type identityVerifier)
+            public IdentityVerificationFailureTraceRecord(
+                EndpointIdentity identity,
+                AuthorizationContext authContext,
+                Type identityVerifier
+            )
                 : base("ServiceIdentityVerification")
             {
                 this.identity = identity;
@@ -1097,7 +1732,10 @@ namespace System.ServiceModel.Diagnostics
                 XmlDictionaryWriter xmlWriter = XmlDictionaryWriter.CreateDictionaryWriter(xml);
 
                 if (this.identityVerifier != null)
-                    xml.WriteElementString("IdentityVerifierType", this.identityVerifier.ToString());
+                    xml.WriteElementString(
+                        "IdentityVerifierType",
+                        this.identityVerifier.ToString()
+                    );
 
                 if (this.identity != null)
                     this.identity.WriteTo(xmlWriter);
@@ -1130,7 +1768,10 @@ namespace System.ServiceModel.Diagnostics
                                 xml.WriteElementString("Right", "null");
 
                             if (claim.Resource != null)
-                                xml.WriteElementString("ResourceType", claim.Resource.GetType().ToString());
+                                xml.WriteElementString(
+                                    "ResourceType",
+                                    claim.Resource.GetType().ToString()
+                                );
                             else
                                 xml.WriteElementString("Resource", "null");
 
@@ -1147,7 +1788,11 @@ namespace System.ServiceModel.Diagnostics
             EndpointAddress epr;
             Type identityVerifier;
 
-            public IdentityDeterminationSuccessTraceRecord(EndpointAddress epr, EndpointIdentity identity, Type identityVerifier)
+            public IdentityDeterminationSuccessTraceRecord(
+                EndpointAddress epr,
+                EndpointIdentity identity,
+                Type identityVerifier
+            )
                 : base("ServiceIdentityDetermination")
             {
                 this.identity = identity;
@@ -1161,7 +1806,10 @@ namespace System.ServiceModel.Diagnostics
                     return;
 
                 if (this.identityVerifier != null)
-                    xml.WriteElementString("IdentityVerifierType", this.identityVerifier.ToString());
+                    xml.WriteElementString(
+                        "IdentityVerifierType",
+                        this.identityVerifier.ToString()
+                    );
 
                 if (this.identity != null)
                     this.identity.WriteTo(XmlDictionaryWriter.CreateDictionaryWriter(xml));
@@ -1176,7 +1824,10 @@ namespace System.ServiceModel.Diagnostics
             Type identityVerifier;
             EndpointAddress epr;
 
-            public IdentityDeterminationFailureTraceRecord(EndpointAddress epr, Type identityVerifier)
+            public IdentityDeterminationFailureTraceRecord(
+                EndpointAddress epr,
+                Type identityVerifier
+            )
                 : base("ServiceIdentityDetermination")
             {
                 this.epr = epr;
@@ -1189,7 +1840,10 @@ namespace System.ServiceModel.Diagnostics
                     return;
 
                 if (this.identityVerifier != null)
-                    xml.WriteElementString("IdentityVerifierType", this.identityVerifier.ToString());
+                    xml.WriteElementString(
+                        "IdentityVerifierType",
+                        this.identityVerifier.ToString()
+                    );
 
                 if (this.epr != null)
                     this.epr.WriteTo(AddressingVersion.WSAddressing10, xml);
@@ -1202,7 +1856,11 @@ namespace System.ServiceModel.Diagnostics
             Exception e;
             EndpointAddress epr;
 
-            public IdentityHostNameNormalizationFailureTraceRecord(EndpointAddress epr, Type identityVerifier, Exception e)
+            public IdentityHostNameNormalizationFailureTraceRecord(
+                EndpointAddress epr,
+                Type identityVerifier,
+                Exception e
+            )
                 : base("ServiceIdentityDetermination")
             {
                 this.epr = epr;
@@ -1216,7 +1874,10 @@ namespace System.ServiceModel.Diagnostics
                     return;
 
                 if (this.identityVerifier != null)
-                    xml.WriteElementString("IdentityVerifierType", this.identityVerifier.ToString());
+                    xml.WriteElementString(
+                        "IdentityVerifierType",
+                        this.identityVerifier.ToString()
+                    );
 
                 if (this.epr != null)
                     this.epr.WriteTo(AddressingVersion.WSAddressing10, xml);
@@ -1227,7 +1888,7 @@ namespace System.ServiceModel.Diagnostics
         }
 
         class IssuanceProviderTraceRecord<T> : SecurityTraceRecord
-           where T : IssuanceTokenProviderState
+            where T : IssuanceTokenProviderState
         {
             IssuanceTokenProviderBase<T> provider;
             EndpointAddress target;
@@ -1235,15 +1896,23 @@ namespace System.ServiceModel.Diagnostics
             SecurityToken serviceToken;
             int cacheSize;
 
-            public IssuanceProviderTraceRecord(IssuanceTokenProviderBase<T> provider, SecurityToken serviceToken)
-                : this(provider, serviceToken, null)
-            { }
+            public IssuanceProviderTraceRecord(
+                IssuanceTokenProviderBase<T> provider,
+                SecurityToken serviceToken
+            )
+                : this(provider, serviceToken, null) { }
 
-            public IssuanceProviderTraceRecord(IssuanceTokenProviderBase<T> provider, EndpointAddress target)
-                : this(provider, (SecurityToken)null, target)
-            { }
+            public IssuanceProviderTraceRecord(
+                IssuanceTokenProviderBase<T> provider,
+                EndpointAddress target
+            )
+                : this(provider, (SecurityToken)null, target) { }
 
-            public IssuanceProviderTraceRecord(IssuanceTokenProviderBase<T> provider, SecurityToken serviceToken, EndpointAddress target)
+            public IssuanceProviderTraceRecord(
+                IssuanceTokenProviderBase<T> provider,
+                SecurityToken serviceToken,
+                EndpointAddress target
+            )
                 : base("ClientSecurityNegotiation")
             {
                 this.provider = provider;
@@ -1251,7 +1920,11 @@ namespace System.ServiceModel.Diagnostics
                 this.target = target;
             }
 
-            public IssuanceProviderTraceRecord(IssuanceTokenProviderBase<T> provider, EndpointAddress newTarget, EndpointAddress oldTarget)
+            public IssuanceProviderTraceRecord(
+                IssuanceTokenProviderBase<T> provider,
+                EndpointAddress newTarget,
+                EndpointAddress oldTarget
+            )
                 : base("ClientSecurityNegotiation")
             {
                 this.provider = provider;
@@ -1277,7 +1950,6 @@ namespace System.ServiceModel.Diagnostics
                 if (this.serviceToken != null)
                     WritePossibleGenericXmlToken(xml, "ServiceToken", this.serviceToken);
 
-
                 if (this.target != null)
                 {
                     xml.WriteStartElement("Target");
@@ -1294,7 +1966,10 @@ namespace System.ServiceModel.Diagnostics
 
                 if (this.cacheSize != 0)
                 {
-                    xml.WriteElementString("CacheSize", this.cacheSize.ToString(NumberFormatInfo.InvariantInfo));
+                    xml.WriteElementString(
+                        "CacheSize",
+                        this.cacheSize.ToString(NumberFormatInfo.InvariantInfo)
+                    );
                 }
             }
         }
@@ -1317,8 +1992,14 @@ namespace System.ServiceModel.Diagnostics
                 if (this.windowsNegotiation != null)
                 {
                     xml.WriteElementString("Protocol", this.windowsNegotiation.ProtocolName);
-                    xml.WriteElementString("ServicePrincipalName", this.windowsNegotiation.ServicePrincipalName);
-                    xml.WriteElementString("MutualAuthentication", this.windowsNegotiation.IsMutualAuthFlag.ToString());
+                    xml.WriteElementString(
+                        "ServicePrincipalName",
+                        this.windowsNegotiation.ServicePrincipalName
+                    );
+                    xml.WriteElementString(
+                        "MutualAuthentication",
+                        this.windowsNegotiation.IsMutualAuthFlag.ToString()
+                    );
 
                     if (this.windowsNegotiation.IsIdentifyFlag)
                     {
@@ -1335,7 +2016,6 @@ namespace System.ServiceModel.Diagnostics
                 }
             }
         }
-
 
         class ImpersonationTraceRecord : SecurityTraceRecord
         {

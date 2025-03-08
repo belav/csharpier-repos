@@ -14,7 +14,8 @@ namespace Functions
 
         public static void TanSingleTest()
         {
-            var result = 0.0f; var value = -1.0f;
+            var result = 0.0f;
+            var value = -1.0f;
 
             for (var iteration = 0; iteration < iterations; iteration++)
             {
@@ -26,7 +27,9 @@ namespace Functions
 
             if (diff > singleEpsilon)
             {
-                throw new Exception($"Expected Result {tanSingleExpectedResult,10:g9}; Actual Result {result,10:g9}");
+                throw new Exception(
+                    $"Expected Result {tanSingleExpectedResult, 10:g9}; Actual Result {result, 10:g9}"
+                );
             }
         }
     }

@@ -14,6 +14,7 @@ namespace System.Runtime.InteropServices
         // VARIANT_BOOL constants.
         internal const short VARIANT_TRUE = -1;
         internal const short VARIANT_FALSE = 0;
+
         private static unsafe ref T GetByRefDataRef<T>(this ref ComVariant variant)
             where T : unmanaged
         {

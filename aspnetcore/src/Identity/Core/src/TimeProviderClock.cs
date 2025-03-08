@@ -12,7 +12,8 @@ internal class TimeProviderClock : ISystemClock
 {
     private readonly TimeProvider _timeProvider;
 
-    internal TimeProviderClock() : this(TimeProvider.System) { }
+    internal TimeProviderClock()
+        : this(TimeProvider.System) { }
 
     internal TimeProviderClock(TimeProvider timeProvider)
     {
@@ -26,7 +27,11 @@ internal class TimeProviderClock : ISystemClock
         {
             // the clock measures whole seconds only, to have integral expires_in results, and
             // because milliseconds do not round-trip serialization formats
-            var utcNowPrecisionSeconds = new DateTime((_timeProvider.GetUtcNow().Ticks / TimeSpan.TicksPerSecond) * TimeSpan.TicksPerSecond, DateTimeKind.Utc);
+            var utcNowPrecisionSeconds = new DateTime(
+                (_timeProvider.GetUtcNow().Ticks / TimeSpan.TicksPerSecond)
+                    * TimeSpan.TicksPerSecond,
+                DateTimeKind.Utc
+            );
             return new DateTimeOffset(utcNowPrecisionSeconds);
         }
     }

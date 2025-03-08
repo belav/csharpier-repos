@@ -18,23 +18,31 @@ namespace System.Activities.Statements
     using System.Globalization;
     using System.Linq;
     using System.Reflection;
+    using System.Runtime.Serialization;
     using System.Threading;
     using System.Transactions;
-    using System.Xml.Linq;
-    using System.Workflow.Runtime;
-    using System.Workflow.ComponentModel.Compiler;
-    using ValidationError = System.Activities.Validation.ValidationError;
-    using System.Workflow.Runtime.Hosting;
     using System.Workflow.Activities;
-    using System.Runtime.Serialization;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.Runtime;
+    using System.Workflow.Runtime.Hosting;
+    using System.Xml.Linq;
+    using ValidationError = System.Activities.Validation.ValidationError;
 
-    [SuppressMessage("Microsoft.Naming", "CA1724:TypeNamesShouldNotMatchNamespaces",
-        Justification = "The type name 'Interop' conflicts in whole or in part with the namespace name 'System.Web.Services.Interop' - not common usage")]
-    [Obsolete("The WF3 Types are deprecated. Instead, please use the new WF4 Types from System.Activities.*")] 
+    [SuppressMessage(
+        "Microsoft.Naming",
+        "CA1724:TypeNamesShouldNotMatchNamespaces",
+        Justification = "The type name 'Interop' conflicts in whole or in part with the namespace name 'System.Web.Services.Interop' - not common usage"
+    )]
+    [Obsolete(
+        "The WF3 Types are deprecated. Instead, please use the new WF4 Types from System.Activities.*"
+    )]
     public sealed class Interop : NativeActivity, ICustomTypeDescriptor
     {
-        static Func<TimerExtension> getDefaultTimerExtension = new Func<TimerExtension>(GetDefaultTimerExtension);
-        static Func<InteropPersistenceParticipant> getInteropPersistenceParticipant = new Func<InteropPersistenceParticipant>(GetInteropPersistenceParticipant);
+        static Func<TimerExtension> getDefaultTimerExtension = new Func<TimerExtension>(
+            GetDefaultTimerExtension
+        );
+        static Func<InteropPersistenceParticipant> getInteropPersistenceParticipant =
+            new Func<InteropPersistenceParticipant>(GetInteropPersistenceParticipant);
         Dictionary<string, Argument> properties;
         Dictionary<string, object> metaProperties;
         System.Workflow.ComponentModel.Activity v1Activity;
@@ -57,8 +65,10 @@ namespace System.Activities.Statements
         Variable<Exception> outstandingException;
 
         object thisLock;
+
         // true if the body type is a valid activity. used so we can have delayed validation support in the designer
         bool hasValidBody;
+
         // true if the V3 activity property names will conflict with our generated argument names
         bool hasNameCollision;
 
@@ -79,10 +89,7 @@ namespace System.Activities.Statements
         [DefaultValue(null)]
         public Type ActivityType
         {
-            get
-            {
-                return this.activityType;
-            }
+            get { return this.activityType; }
             set
             {
                 if (value != this.activityType)
@@ -90,8 +97,10 @@ namespace System.Activities.Statements
                     this.hasValidBody = false;
                     if (value != null)
                     {
-                        if (typeof(System.Workflow.ComponentModel.Activity).IsAssignableFrom(value)
-                            && value.GetConstructor(Type.EmptyTypes) != null)
+                        if (
+                            typeof(System.Workflow.ComponentModel.Activity).IsAssignableFrom(value)
+                            && value.GetConstructor(Type.EmptyTypes) != null
+                        )
                         {
                             this.hasValidBody = true;
                         }
@@ -155,10 +164,7 @@ namespace System.Activities.Statements
 
         protected override bool CanInduceIdle
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         internal System.Workflow.ComponentModel.Activity ComponentModelActivity
@@ -167,7 +173,10 @@ namespace System.Activities.Statements
             {
                 if (this.v1Activity == null && this.ActivityType != null)
                 {
-                    Debug.Assert(this.hasValidBody, "should only be called when we have a valid body");
+                    Debug.Assert(
+                        this.hasValidBody,
+                        "should only be called when we have a valid body"
+                    );
                     this.v1Activity = CreateActivity();
                 }
                 return this.v1Activity;
@@ -176,18 +185,12 @@ namespace System.Activities.Statements
 
         internal IList<PropertyInfo> OutputPropertyDefinitions
         {
-            get
-            {
-                return this.outputPropertyDefinitions;
-            }
+            get { return this.outputPropertyDefinitions; }
         }
 
         internal bool HasNameCollision
         {
-            get
-            {
-                return this.hasNameCollision;
-            }
+            get { return this.hasNameCollision; }
         }
 
         protected override void CacheMetadata(NativeActivityMetadata metadata)
@@ -221,7 +224,9 @@ namespace System.Activities.Statements
                 //Create matched pair of RuntimeArguments for every property: Property (InArgument) & PropertyOut (Argument)
                 PropertyInfo[] bodyProperties = this.ActivityType.GetProperties();
                 // recheck for name collisions
-                this.hasNameCollision = InteropEnvironment.ParameterHelper.HasPropertyNameCollision(bodyProperties);
+                this.hasNameCollision = InteropEnvironment.ParameterHelper.HasPropertyNameCollision(
+                    bodyProperties
+                );
                 foreach (PropertyInfo propertyInfo in bodyProperties)
                 {
                     if (InteropEnvironment.ParameterHelper.IsBindable(propertyInfo))
@@ -239,8 +244,16 @@ namespace System.Activities.Statements
                         //We always rename the OutArgument half of the pair
                         string propertyOutName = propertyInfo.Name + Interop.OutArgumentSuffix;
 
-                        RuntimeArgument inArgument = new RuntimeArgument(propertyInName, propertyInfo.PropertyType, ArgumentDirection.In);
-                        RuntimeArgument outArgument = new RuntimeArgument(propertyOutName, propertyInfo.PropertyType, ArgumentDirection.Out);
+                        RuntimeArgument inArgument = new RuntimeArgument(
+                            propertyInName,
+                            propertyInfo.PropertyType,
+                            ArgumentDirection.In
+                        );
+                        RuntimeArgument outArgument = new RuntimeArgument(
+                            propertyOutName,
+                            propertyInfo.PropertyType,
+                            ArgumentDirection.Out
+                        );
 
                         if (this.properties != null)
                         {
@@ -249,7 +262,14 @@ namespace System.Activities.Statements
                             {
                                 if (inBinding.Direction != ArgumentDirection.In)
                                 {
-                                    throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, ExecutionStringManager.InteropArgumentDirectionMismatch, propertyInName, propertyOutName));
+                                    throw new ArgumentException(
+                                        string.Format(
+                                            CultureInfo.CurrentCulture,
+                                            ExecutionStringManager.InteropArgumentDirectionMismatch,
+                                            propertyInName,
+                                            propertyOutName
+                                        )
+                                    );
                                 }
 
                                 this.extraDynamicArguments.Remove(propertyInName);
@@ -278,8 +298,9 @@ namespace System.Activities.Statements
                     this.runtimeTransactionHandle,
                     this.persistOnClose,
                     this.interopEnlistment,
-                    this.outstandingException
-                });
+                    this.outstandingException,
+                }
+            );
 
             metadata.AddImplementationChild(this.persistActivity);
 
@@ -287,20 +308,42 @@ namespace System.Activities.Statements
             {
                 if (this.ActivityType == null)
                 {
-                    metadata.AddValidationError(string.Format(CultureInfo.CurrentCulture, ExecutionStringManager.InteropBodyNotSet, this.DisplayName));
+                    metadata.AddValidationError(
+                        string.Format(
+                            CultureInfo.CurrentCulture,
+                            ExecutionStringManager.InteropBodyNotSet,
+                            this.DisplayName
+                        )
+                    );
                 }
                 else
                 {
                     // Body needs to be a WF 3.0 activity
-                    if (!typeof(System.Workflow.ComponentModel.Activity).IsAssignableFrom(this.ActivityType))
+                    if (
+                        !typeof(System.Workflow.ComponentModel.Activity).IsAssignableFrom(
+                            this.ActivityType
+                        )
+                    )
                     {
-                        metadata.AddValidationError(string.Format(CultureInfo.CurrentCulture, ExecutionStringManager.InteropWrongBody, this.DisplayName));
+                        metadata.AddValidationError(
+                            string.Format(
+                                CultureInfo.CurrentCulture,
+                                ExecutionStringManager.InteropWrongBody,
+                                this.DisplayName
+                            )
+                        );
                     }
 
                     // and have a default ctor
                     if (this.ActivityType.GetConstructor(Type.EmptyTypes) == null)
                     {
-                        metadata.AddValidationError(string.Format(CultureInfo.CurrentCulture, ExecutionStringManager.InteropBodyMustHavePublicDefaultConstructor, this.DisplayName));
+                        metadata.AddValidationError(
+                            string.Format(
+                                CultureInfo.CurrentCulture,
+                                ExecutionStringManager.InteropBodyMustHavePublicDefaultConstructor,
+                                this.DisplayName
+                            )
+                        );
                     }
                 }
             }
@@ -308,14 +351,21 @@ namespace System.Activities.Statements
             {
                 if (this.extraDynamicArguments != null && this.extraDynamicArguments.Count > 0)
                 {
-                    metadata.AddValidationError(string.Format(CultureInfo.CurrentCulture, ExecutionStringManager.AttemptToBindUnknownProperties, this.DisplayName, this.extraDynamicArguments.First()));
+                    metadata.AddValidationError(
+                        string.Format(
+                            CultureInfo.CurrentCulture,
+                            ExecutionStringManager.AttemptToBindUnknownProperties,
+                            this.DisplayName,
+                            this.extraDynamicArguments.First()
+                        )
+                    );
                 }
                 else
                 {
                     try
                     {
                         InitializeMetaProperties(this.ComponentModelActivity);
-                        // We call InitializeDefinitionForRuntime in the first call to execute to 
+                        // We call InitializeDefinitionForRuntime in the first call to execute to
                         // make sure it only happens once.
                     }
                     catch (InvalidOperationException e)
@@ -341,18 +391,29 @@ namespace System.Activities.Statements
 
         protected override void Execute(NativeActivityContext context)
         {
-            // 
+            //
 
-
-            WorkflowRuntimeService workflowRuntimeService = context.GetExtension<WorkflowRuntimeService>();
-            if (workflowRuntimeService != null && !(workflowRuntimeService is ExternalDataExchangeService))
+            WorkflowRuntimeService workflowRuntimeService =
+                context.GetExtension<WorkflowRuntimeService>();
+            if (
+                workflowRuntimeService != null
+                && !(workflowRuntimeService is ExternalDataExchangeService)
+            )
             {
-                throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, ExecutionStringManager.InteropWorkflowRuntimeServiceNotSupported));
+                throw new InvalidOperationException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        ExecutionStringManager.InteropWorkflowRuntimeServiceNotSupported
+                    )
+                );
             }
 
             lock (this.thisLock)
             {
-                ((System.Workflow.ComponentModel.IDependencyObjectAccessor)this.ComponentModelActivity).InitializeDefinitionForRuntime(null);
+                (
+                    (System.Workflow.ComponentModel.IDependencyObjectAccessor)
+                        this.ComponentModelActivity
+                ).InitializeDefinitionForRuntime(null);
             }
             if (!this.ComponentModelActivity.Enabled)
             {
@@ -361,13 +422,23 @@ namespace System.Activities.Statements
 
             System.Workflow.ComponentModel.Activity activityInstance = CreateActivity();
             InitializeMetaProperties(activityInstance);
-            activityInstance.SetValue(WorkflowExecutor.WorkflowInstanceIdProperty, context.WorkflowInstanceId);
+            activityInstance.SetValue(
+                WorkflowExecutor.WorkflowInstanceIdProperty,
+                context.WorkflowInstanceId
+            );
 
-            InteropExecutor interopExecutor = new InteropExecutor(context.WorkflowInstanceId, activityInstance, this.OutputPropertyDefinitions, this.ComponentModelActivity);
+            InteropExecutor interopExecutor = new InteropExecutor(
+                context.WorkflowInstanceId,
+                activityInstance,
+                this.OutputPropertyDefinitions,
+                this.ComponentModelActivity
+            );
 
             if (!interopExecutor.HasCheckedForTrackingParticipant)
             {
-                interopExecutor.TrackingEnabled = (context.GetExtension<TrackingParticipant>() != null);
+                interopExecutor.TrackingEnabled = (
+                    context.GetExtension<TrackingParticipant>() != null
+                );
                 interopExecutor.HasCheckedForTrackingParticipant = true;
             }
 
@@ -375,18 +446,27 @@ namespace System.Activities.Statements
 
             //Register the Handle as an execution property so that we can call GetCurrentTransaction or
             //RequestTransactionContext on it later
-            RuntimeTransactionHandle runtimeTransactionHandle = this.runtimeTransactionHandle.Get(context);
-            context.Properties.Add(runtimeTransactionHandle.ExecutionPropertyName, runtimeTransactionHandle);
+            RuntimeTransactionHandle runtimeTransactionHandle = this.runtimeTransactionHandle.Get(
+                context
+            );
+            context.Properties.Add(
+                runtimeTransactionHandle.ExecutionPropertyName,
+                runtimeTransactionHandle
+            );
 
             try
             {
                 using (new ServiceEnvironment(activityInstance))
                 {
-                    using (InteropEnvironment interopEnvironment = new InteropEnvironment(
-                        interopExecutor, context,
-                        this.onResumeBookmark,
-                        this,
-                        runtimeTransactionHandle.GetCurrentTransaction(context)))
+                    using (
+                        InteropEnvironment interopEnvironment = new InteropEnvironment(
+                            interopExecutor,
+                            context,
+                            this.onResumeBookmark,
+                            this,
+                            runtimeTransactionHandle.GetCurrentTransaction(context)
+                        )
+                    )
                     {
                         interopEnvironment.Execute(this.ComponentModelActivity, context);
                     }
@@ -394,12 +474,15 @@ namespace System.Activities.Statements
             }
             catch (Exception exception)
             {
-                if (WorkflowExecutor.IsIrrecoverableException(exception) || !this.persistOnClose.Get(context))
+                if (
+                    WorkflowExecutor.IsIrrecoverableException(exception)
+                    || !this.persistOnClose.Get(context)
+                )
                 {
                     throw;
                 }
 
-                // We are not ----ing the exception.  The exception is saved in this.outstandingException.  
+                // We are not ----ing the exception.  The exception is saved in this.outstandingException.
                 // We will throw the exception from OnPersistComplete.
             }
         }
@@ -410,7 +493,9 @@ namespace System.Activities.Statements
 
             if (!interopExecutor.HasCheckedForTrackingParticipant)
             {
-                interopExecutor.TrackingEnabled = (context.GetExtension<TrackingParticipant>() != null);
+                interopExecutor.TrackingEnabled = (
+                    context.GetExtension<TrackingParticipant>() != null
+                );
                 interopExecutor.HasCheckedForTrackingParticipant = true;
             }
 
@@ -418,28 +503,38 @@ namespace System.Activities.Statements
 
             try
             {
-                using (InteropEnvironment interopEnvironment = new InteropEnvironment(
-                    interopExecutor, context,
-                    this.onResumeBookmark,
-                    this,
-                    this.runtimeTransactionHandle.Get(context).GetCurrentTransaction(context)))
+                using (
+                    InteropEnvironment interopEnvironment = new InteropEnvironment(
+                        interopExecutor,
+                        context,
+                        this.onResumeBookmark,
+                        this,
+                        this.runtimeTransactionHandle.Get(context).GetCurrentTransaction(context)
+                    )
+                )
                 {
                     interopEnvironment.Cancel();
                 }
             }
             catch (Exception exception)
             {
-                if (WorkflowExecutor.IsIrrecoverableException(exception) || !this.persistOnClose.Get(context))
+                if (
+                    WorkflowExecutor.IsIrrecoverableException(exception)
+                    || !this.persistOnClose.Get(context)
+                )
                 {
                     throw;
                 }
 
-                // We are not ----ing the exception.  The exception is saved in this.outstandingException.  
+                // We are not ----ing the exception.  The exception is saved in this.outstandingException.
                 // We will throw the exception from OnPersistComplete.
             }
         }
 
-        internal void SetOutputArgumentValues(IDictionary<string, object> outputs, NativeActivityContext context)
+        internal void SetOutputArgumentValues(
+            IDictionary<string, object> outputs,
+            NativeActivityContext context
+        )
         {
             if ((this.properties != null) && (outputs != null))
             {
@@ -484,17 +579,28 @@ namespace System.Activities.Statements
 
         System.Workflow.ComponentModel.Activity CreateActivity()
         {
-            Debug.Assert(this.ActivityType != null, "ActivityType must be set by the time we get here");
+            Debug.Assert(
+                this.ActivityType != null,
+                "ActivityType must be set by the time we get here"
+            );
 
-            System.Workflow.ComponentModel.Activity activity = Activator.CreateInstance(this.ActivityType) as System.Workflow.ComponentModel.Activity;
-            Debug.Assert(activity != null, "We should have validated that the type has a default ctor() and derives from System.Workflow.ComponentModel.Activity.");
+            System.Workflow.ComponentModel.Activity activity =
+                Activator.CreateInstance(this.ActivityType)
+                as System.Workflow.ComponentModel.Activity;
+            Debug.Assert(
+                activity != null,
+                "We should have validated that the type has a default ctor() and derives from System.Workflow.ComponentModel.Activity."
+            );
 
             return activity;
         }
 
         void InitializeMetaProperties(System.Workflow.ComponentModel.Activity activity)
         {
-            Debug.Assert((activity.GetType() == this.ActivityType), "activity must be the same type as this.ActivityType");
+            Debug.Assert(
+                (activity.GetType() == this.ActivityType),
+                "activity must be the same type as this.ActivityType"
+            );
             if (this.metaProperties != null && this.metaProperties.Count > 0)
             {
                 foreach (string name in this.metaProperties.Keys)
@@ -502,7 +608,14 @@ namespace System.Activities.Statements
                     PropertyInfo property = this.ActivityType.GetProperty(name);
                     if (property == null)
                     {
-                        throw new InvalidOperationException(string.Format(CultureInfo.CurrentCulture, ExecutionStringManager.MetaPropertyDoesNotExist, name, this.ActivityType.FullName));
+                        throw new InvalidOperationException(
+                            string.Format(
+                                CultureInfo.CurrentCulture,
+                                ExecutionStringManager.MetaPropertyDoesNotExist,
+                                name,
+                                this.ActivityType.FullName
+                            )
+                        );
                     }
                     property.SetValue(activity, this.metaProperties[name], null);
                 }
@@ -515,7 +628,9 @@ namespace System.Activities.Statements
 
             if (!interopExecutor.HasCheckedForTrackingParticipant)
             {
-                interopExecutor.TrackingEnabled = (context.GetExtension<TrackingParticipant>() != null);
+                interopExecutor.TrackingEnabled = (
+                    context.GetExtension<TrackingParticipant>() != null
+                );
                 interopExecutor.HasCheckedForTrackingParticipant = true;
             }
 
@@ -523,11 +638,15 @@ namespace System.Activities.Statements
 
             try
             {
-                using (InteropEnvironment interopEnvironment = new InteropEnvironment(
-                    interopExecutor, context,
-                    this.onResumeBookmark,
-                    this,
-                    this.runtimeTransactionHandle.Get(context).GetCurrentTransaction(context)))
+                using (
+                    InteropEnvironment interopEnvironment = new InteropEnvironment(
+                        interopExecutor,
+                        context,
+                        this.onResumeBookmark,
+                        this,
+                        this.runtimeTransactionHandle.Get(context).GetCurrentTransaction(context)
+                    )
+                )
                 {
                     IComparable queueName = interopExecutor.BookmarkQueueMap[bookmark];
                     interopEnvironment.EnqueueEvent(queueName, state);
@@ -535,12 +654,15 @@ namespace System.Activities.Statements
             }
             catch (Exception exception)
             {
-                if (WorkflowExecutor.IsIrrecoverableException(exception) || !this.persistOnClose.Get(context))
+                if (
+                    WorkflowExecutor.IsIrrecoverableException(exception)
+                    || !this.persistOnClose.Get(context)
+                )
                 {
                     throw;
                 }
 
-                // We are not ----ing the exception.  The exception is saved in this.outstandingException.  
+                // We are not ----ing the exception.  The exception is saved in this.outstandingException.
                 // We will throw the exception from OnPersistComplete.
             }
         }
@@ -616,26 +738,45 @@ namespace System.Activities.Statements
                     //Create matched pair of RuntimeArguments for every property: Property (InArgument) & PropertyOut (Argument)
                     PropertyInfo[] bodyProperties = this.ActivityType.GetProperties();
                     // recheck for name collisions
-                    this.hasNameCollision = InteropEnvironment.ParameterHelper.HasPropertyNameCollision(bodyProperties);
+                    this.hasNameCollision =
+                        InteropEnvironment.ParameterHelper.HasPropertyNameCollision(bodyProperties);
                     for (int i = 0; i < bodyProperties.Length; i++)
                     {
                         PropertyInfo property = bodyProperties[i];
                         bool isMetaProperty;
-                        if (InteropEnvironment.ParameterHelper.IsBindableOrMetaProperty(property, out isMetaProperty))
+                        if (
+                            InteropEnvironment.ParameterHelper.IsBindableOrMetaProperty(
+                                property,
+                                out isMetaProperty
+                            )
+                        )
                         {
                             // Propagate the attributes to the PropertyDescriptor, appending a DesignerSerializationVisibility attribute
-                            Attribute[] customAttributes = Attribute.GetCustomAttributes(property, true);
+                            Attribute[] customAttributes = Attribute.GetCustomAttributes(
+                                property,
+                                true
+                            );
                             Attribute[] newAttributes = new Attribute[customAttributes.Length + 1];
                             customAttributes.CopyTo(newAttributes, 0);
-                            newAttributes[customAttributes.Length] = new DesignerSerializationVisibilityAttribute(DesignerSerializationVisibility.Hidden);
+                            newAttributes[customAttributes.Length] =
+                                new DesignerSerializationVisibilityAttribute(
+                                    DesignerSerializationVisibility.Hidden
+                                );
 
                             if (this.exposedBodyProperties == null)
                             {
-                                this.exposedBodyProperties = new List<InteropProperty>(bodyProperties.Length);
+                                this.exposedBodyProperties = new List<InteropProperty>(
+                                    bodyProperties.Length
+                                );
                             }
                             if (isMetaProperty)
                             {
-                                InteropProperty descriptor = new LiteralProperty(this, property.Name, property.PropertyType, newAttributes);
+                                InteropProperty descriptor = new LiteralProperty(
+                                    this,
+                                    property.Name,
+                                    property.PropertyType,
+                                    newAttributes
+                                );
                                 this.exposedBodyProperties.Add(descriptor);
                             }
                             else
@@ -644,15 +785,36 @@ namespace System.Activities.Statements
                                 //If there are any Property/PropertyOut name pairs already extant, we fall back to renaming the InArgument half of the pair as well
                                 if (this.hasNameCollision)
                                 {
-                                    inDescriptor = new ArgumentProperty(this, property.Name + InArgumentSuffix, Argument.Create(property.PropertyType, ArgumentDirection.In), newAttributes);
+                                    inDescriptor = new ArgumentProperty(
+                                        this,
+                                        property.Name + InArgumentSuffix,
+                                        Argument.Create(
+                                            property.PropertyType,
+                                            ArgumentDirection.In
+                                        ),
+                                        newAttributes
+                                    );
                                 }
                                 else
                                 {
-                                    inDescriptor = new ArgumentProperty(this, property.Name, Argument.Create(property.PropertyType, ArgumentDirection.In), newAttributes);
+                                    inDescriptor = new ArgumentProperty(
+                                        this,
+                                        property.Name,
+                                        Argument.Create(
+                                            property.PropertyType,
+                                            ArgumentDirection.In
+                                        ),
+                                        newAttributes
+                                    );
                                 }
                                 this.exposedBodyProperties.Add(inDescriptor);
                                 //We always rename the OutArgument half of the pair
-                                InteropProperty outDescriptor = new ArgumentProperty(this, property.Name + OutArgumentSuffix, Argument.Create(property.PropertyType, ArgumentDirection.Out), newAttributes);
+                                InteropProperty outDescriptor = new ArgumentProperty(
+                                    this,
+                                    property.Name + OutArgumentSuffix,
+                                    Argument.Create(property.PropertyType, ArgumentDirection.Out),
+                                    newAttributes
+                                );
                                 this.exposedBodyProperties.Add(outDescriptor);
                             }
                         }
@@ -762,7 +924,10 @@ namespace System.Activities.Statements
             context.ScheduleActivity(this.persistActivity, this.onPersistComplete);
         }
 
-        internal void OnPersistComplete(NativeActivityContext context, ActivityInstance completedInstance)
+        internal void OnPersistComplete(
+            NativeActivityContext context,
+            ActivityInstance completedInstance
+        )
         {
             this.persistOnClose.Set(context, false);
             Exception exception = this.outstandingException.Get(context);
@@ -780,7 +945,11 @@ namespace System.Activities.Statements
             RuntimeTransactionHandle transactionHandle = this.runtimeTransactionHandle.Get(context);
             Debug.Assert(transactionHandle != null, "RuntimeTransactionHandle is null");
 
-            transactionHandle.RequestTransactionContext(context, OnTransactionContextAcquired, txOptions);
+            transactionHandle.RequestTransactionContext(
+                context,
+                OnTransactionContextAcquired,
+                txOptions
+            );
         }
 
         void OnTransactionContextAcquired(NativeActivityTransactionContext context, object state)
@@ -814,7 +983,9 @@ namespace System.Activities.Statements
 
             if (!interopExecutor.HasCheckedForTrackingParticipant)
             {
-                interopExecutor.TrackingEnabled = (context.GetExtension<TrackingParticipant>() != null);
+                interopExecutor.TrackingEnabled = (
+                    context.GetExtension<TrackingParticipant>() != null
+                );
                 interopExecutor.HasCheckedForTrackingParticipant = true;
             }
 
@@ -822,43 +993,59 @@ namespace System.Activities.Statements
 
             try
             {
-                using (InteropEnvironment interopEnvironment = new InteropEnvironment(
-                    interopExecutor, context,
-                    this.onResumeBookmark,
-                    this,
-                    transaction))
+                using (
+                    InteropEnvironment interopEnvironment = new InteropEnvironment(
+                        interopExecutor,
+                        context,
+                        this.onResumeBookmark,
+                        this,
+                        transaction
+                    )
+                )
                 {
                     interopEnvironment.Resume();
                 }
             }
             catch (Exception exception)
             {
-                if (WorkflowExecutor.IsIrrecoverableException(exception) || !this.persistOnClose.Get(context))
+                if (
+                    WorkflowExecutor.IsIrrecoverableException(exception)
+                    || !this.persistOnClose.Get(context)
+                )
                 {
                     throw;
                 }
 
-                // We are not ----ing the exception.  The exception is saved in this.outstandingException.  
+                // We are not ----ing the exception.  The exception is saved in this.outstandingException.
                 // We will throw the exception from OnPersistComplete.
             }
         }
 
-        internal void AddResourceManager(NativeActivityContext context, VolatileResourceManager resourceManager)
+        internal void AddResourceManager(
+            NativeActivityContext context,
+            VolatileResourceManager resourceManager
+        )
         {
-            if (Transaction.Current != null &&
-                Transaction.Current.TransactionInformation.Status == TransactionStatus.Active)
+            if (
+                Transaction.Current != null
+                && Transaction.Current.TransactionInformation.Status == TransactionStatus.Active
+            )
             {
                 InteropEnlistment enlistment = this.interopEnlistment.Get(context);
                 if (enlistment == null || !enlistment.IsValid)
                 {
                     enlistment = new InteropEnlistment(Transaction.Current, resourceManager);
-                    Transaction.Current.EnlistVolatile(enlistment, EnlistmentOptions.EnlistDuringPrepareRequired);
+                    Transaction.Current.EnlistVolatile(
+                        enlistment,
+                        EnlistmentOptions.EnlistDuringPrepareRequired
+                    );
                     this.interopEnlistment.Set(context, enlistment);
                 }
             }
             else
             {
-                InteropPersistenceParticipant persistenceParticipant = context.GetExtension<InteropPersistenceParticipant>();
+                InteropPersistenceParticipant persistenceParticipant =
+                    context.GetExtension<InteropPersistenceParticipant>();
                 persistenceParticipant.Add(this.Id, resourceManager);
                 this.persistOnClose.Set(context, true);
             }
@@ -866,15 +1053,26 @@ namespace System.Activities.Statements
 
         Constraint ProcessAdvancedConstraints()
         {
-            DelegateInArgument<Interop> element = new DelegateInArgument<Interop>() { Name = "element" };
-            DelegateInArgument<ValidationContext> validationContext = new DelegateInArgument<ValidationContext>() { Name = "validationContext" };
-            DelegateInArgument<Activity> parent = new DelegateInArgument<Activity>() { Name = "parent" };
+            DelegateInArgument<Interop> element = new DelegateInArgument<Interop>()
+            {
+                Name = "element",
+            };
+            DelegateInArgument<ValidationContext> validationContext =
+                new DelegateInArgument<ValidationContext>() { Name = "validationContext" };
+            DelegateInArgument<Activity> parent = new DelegateInArgument<Activity>()
+            {
+                Name = "parent",
+            };
 
             //This will accumulate all potential violations at the root level. See the use case DIRECT of the Interop spec
-            Variable<HashSet<InteropValidationEnum>> rootValidationDataVar = new Variable<HashSet<InteropValidationEnum>>(context => new HashSet<InteropValidationEnum>());
+            Variable<HashSet<InteropValidationEnum>> rootValidationDataVar = new Variable<
+                HashSet<InteropValidationEnum>
+            >(context => new HashSet<InteropValidationEnum>());
 
             //This will accumulate all violations at the nested level. See the use case NESTED of the Interop spec
-            Variable<HashSet<InteropValidationEnum>> nestedChildrenValidationDataVar = new Variable<HashSet<InteropValidationEnum>>(context => new HashSet<InteropValidationEnum>());
+            Variable<HashSet<InteropValidationEnum>> nestedChildrenValidationDataVar = new Variable<
+                HashSet<InteropValidationEnum>
+            >(context => new HashSet<InteropValidationEnum>());
 
             return new Constraint<Interop>
             {
@@ -888,24 +1086,28 @@ namespace System.Activities.Statements
                         Then = new Sequence
                         {
                             Variables = { rootValidationDataVar, nestedChildrenValidationDataVar },
-                            Activities = 
-                             {
+                            Activities =
+                            {
                                 //First traverse the interop body and collect all available data for validation. This is done at all levels, DIRECT and NESTED
                                 new WalkInteropBodyAndGatherData()
                                 {
-                                     RootLevelValidationData = new InArgument<HashSet<InteropValidationEnum>>(rootValidationDataVar),
-                                     NestedChildrenValidationData = new InArgument<HashSet<InteropValidationEnum>>(nestedChildrenValidationDataVar),
-                                     InteropActivity = element
+                                    RootLevelValidationData = new InArgument<
+                                        HashSet<InteropValidationEnum>
+                                    >(rootValidationDataVar),
+                                    NestedChildrenValidationData = new InArgument<
+                                        HashSet<InteropValidationEnum>
+                                    >(nestedChildrenValidationDataVar),
+                                    InteropActivity = element,
                                 },
                                 //This is based off the table in the Interop spec.
                                 new ValidateAtRootAndNestedLevels()
                                 {
-                                     RootLevelValidationData = rootValidationDataVar,
-                                     NestedChildrenValidationData = nestedChildrenValidationDataVar,
-                                     Interop = element,
+                                    RootLevelValidationData = rootValidationDataVar,
+                                    NestedChildrenValidationData = nestedChildrenValidationDataVar,
+                                    Interop = element,
                                 },
                                 //Traverse the parent chain of the Interop activity to look for specifc violations regarding composition of 3.0 activities within 4.0 activities.
-                                //Specifically, 
+                                //Specifically,
                                 //  - 3.0 TransactionScope within a 4.0 TransactionScope
                                 //  - 3.0 PersistOnClose within a 4.0 TransactionScope
                                 //
@@ -918,81 +1120,85 @@ namespace System.Activities.Statements
                                     Body = new ActivityAction<Activity>
                                     {
                                         Argument = parent,
-                                        Handler = new Sequence                                   
+                                        Handler = new Sequence
                                         {
-                                            Activities = 
+                                            Activities =
                                             {
                                                 new If()
                                                 {
                                                     Condition = new Or<bool, bool, bool>
-                                                    { 
+                                                    {
                                                         Left = new Equal<Type, Type, bool>
                                                         {
                                                             Left = new ObtainType
                                                             {
                                                                 Input = parent,
                                                             },
-                                                            Right = new InArgument<Type>(context => typeof(System.Activities.Statements.TransactionScope))
+                                                            Right = new InArgument<Type>(context =>
+                                                                typeof(System.Activities.Statements.TransactionScope)
+                                                            ),
                                                         },
                                                         Right = new Equal<string, string, bool>
                                                         {
-                                                            Left = new InArgument<string>(env => parent.Get(env).GetType().FullName),
-                                                            Right = "System.ServiceModel.Activities.TransactedReceiveScope"
-                                                        }
+                                                            Left = new InArgument<string>(env =>
+                                                                parent.Get(env).GetType().FullName
+                                                            ),
+                                                            Right =
+                                                                "System.ServiceModel.Activities.TransactedReceiveScope",
+                                                        },
                                                     },
                                                     Then = new Sequence
                                                     {
-                                                        Activities = 
+                                                        Activities =
                                                         {
                                                             new AssertValidation
                                                             {
-                                                                //Here we only pass the NestedChildrenValidationData since root level use 
+                                                                //Here we only pass the NestedChildrenValidationData since root level use
                                                                 //of TransactionScope would have already been flagged as an error
-                                                                Assertion = new CheckForTransactionScope()
-                                                                {
-                                                                     ValidationResults = nestedChildrenValidationDataVar
-                                                                },
-                                                                Message = new InArgument<string>(ExecutionStringManager.InteropBodyNestedTransactionScope)
+                                                                Assertion =
+                                                                    new CheckForTransactionScope()
+                                                                    {
+                                                                        ValidationResults =
+                                                                            nestedChildrenValidationDataVar,
+                                                                    },
+                                                                Message = new InArgument<string>(
+                                                                    ExecutionStringManager.InteropBodyNestedTransactionScope
+                                                                ),
                                                             },
                                                             new AssertValidation
                                                             {
-                                                                Assertion = new CheckForPersistOnClose()
-                                                                {
-                                                                     NestedChildrenValidationData = nestedChildrenValidationDataVar,
-                                                                     RootLevelValidationData = rootValidationDataVar
-                                                                },
-                                                                Message = new InArgument<string>(ExecutionStringManager.InteropBodyNestedPersistOnCloseWithinTransactionScope)
+                                                                Assertion =
+                                                                    new CheckForPersistOnClose()
+                                                                    {
+                                                                        NestedChildrenValidationData =
+                                                                            nestedChildrenValidationDataVar,
+                                                                        RootLevelValidationData =
+                                                                            rootValidationDataVar,
+                                                                    },
+                                                                Message = new InArgument<string>(
+                                                                    ExecutionStringManager.InteropBodyNestedPersistOnCloseWithinTransactionScope
+                                                                ),
                                                             },
-
-                                                        }
+                                                        },
                                                     },
                                                 },
-                                            }
-                                        }                                   
-                                    }
+                                            },
+                                        },
+                                    },
                                 },
-                                new ActivityTreeValidation()
-                                {
-                                    Interop = element
-                                }
-                            }
-                        }
-                    }
-                }
+                                new ActivityTreeValidation() { Interop = element },
+                            },
+                        },
+                    },
+                },
             };
         }
 
         class ActivityTreeValidation : NativeActivity
         {
-            public ActivityTreeValidation()
-            {
-            }
+            public ActivityTreeValidation() { }
 
-            public InArgument<Interop> Interop
-            {
-                get;
-                set;
-            }
+            public InArgument<Interop> Interop { get; set; }
 
             protected override void Execute(NativeActivityContext context)
             {
@@ -1003,24 +1209,42 @@ namespace System.Activities.Statements
                     return;
                 }
 
-                if (!typeof(System.Workflow.ComponentModel.Activity).IsAssignableFrom(interop.ActivityType))
+                if (
+                    !typeof(System.Workflow.ComponentModel.Activity).IsAssignableFrom(
+                        interop.ActivityType
+                    )
+                )
                 {
                     return;
                 }
 
-                System.ComponentModel.Design.ServiceContainer container = new System.ComponentModel.Design.ServiceContainer();
-                container.AddService(typeof(ITypeProvider), CreateTypeProvider(interop.ActivityType));
+                System.ComponentModel.Design.ServiceContainer container =
+                    new System.ComponentModel.Design.ServiceContainer();
+                container.AddService(
+                    typeof(ITypeProvider),
+                    CreateTypeProvider(interop.ActivityType)
+                );
                 ValidationManager manager = new ValidationManager(container);
 
-                System.Workflow.ComponentModel.Activity interopBody = interop.ComponentModelActivity;
+                System.Workflow.ComponentModel.Activity interopBody =
+                    interop.ComponentModelActivity;
                 using (WorkflowCompilationContext.CreateScope(manager))
                 {
                     foreach (Validator validator in manager.GetValidators(interop.ActivityType))
                     {
                         ValidationErrorCollection errors = validator.Validate(manager, interopBody);
-                        foreach (System.Workflow.ComponentModel.Compiler.ValidationError error in errors)
+                        foreach (
+                            System.Workflow.ComponentModel.Compiler.ValidationError error in errors
+                        )
                         {
-                            Constraint.AddValidationError(context, new ValidationError(error.ErrorText, error.IsWarning, error.PropertyName));
+                            Constraint.AddValidationError(
+                                context,
+                                new ValidationError(
+                                    error.ErrorText,
+                                    error.IsWarning,
+                                    error.PropertyName
+                                )
+                            );
                         }
                     }
                 }
@@ -1042,9 +1266,7 @@ namespace System.Activities.Statements
                         if (referencedAssembly != null)
                             typeProvider.AddAssembly(referencedAssembly);
                     }
-                    catch
-                    {
-                    }
+                    catch { }
 
                     if (referencedAssembly == null && assemblyName.CodeBase != null)
                         typeProvider.AddAssemblyReference(assemblyName.CodeBase);
@@ -1056,15 +1278,13 @@ namespace System.Activities.Statements
 
         class CheckForTransactionScope : CodeActivity<bool>
         {
-            public InArgument<HashSet<InteropValidationEnum>> ValidationResults
-            {
-                get;
-                set;
-            }
+            public InArgument<HashSet<InteropValidationEnum>> ValidationResults { get; set; }
 
             protected override bool Execute(CodeActivityContext context)
             {
-                HashSet<InteropValidationEnum> validationResults = this.ValidationResults.Get(context);
+                HashSet<InteropValidationEnum> validationResults = this.ValidationResults.Get(
+                    context
+                );
                 if (validationResults.Contains(InteropValidationEnum.TransactionScope))
                 {
                     return false;
@@ -1076,24 +1296,23 @@ namespace System.Activities.Statements
 
         class CheckForPersistOnClose : CodeActivity<bool>
         {
-            public InArgument<HashSet<InteropValidationEnum>> NestedChildrenValidationData
-            {
-                get;
-                set;
-            }
+            public InArgument<
+                HashSet<InteropValidationEnum>
+            > NestedChildrenValidationData { get; set; }
 
-            public InArgument<HashSet<InteropValidationEnum>> RootLevelValidationData
-            {
-                get;
-                set;
-            }
+            public InArgument<HashSet<InteropValidationEnum>> RootLevelValidationData { get; set; }
 
             protected override bool Execute(CodeActivityContext context)
             {
-                HashSet<InteropValidationEnum> nestedValidationData = this.NestedChildrenValidationData.Get(context);
-                HashSet<InteropValidationEnum> rootValidationData = this.RootLevelValidationData.Get(context);
+                HashSet<InteropValidationEnum> nestedValidationData =
+                    this.NestedChildrenValidationData.Get(context);
+                HashSet<InteropValidationEnum> rootValidationData =
+                    this.RootLevelValidationData.Get(context);
 
-                if (nestedValidationData.Contains(InteropValidationEnum.PersistOnClose) || rootValidationData.Contains(InteropValidationEnum.PersistOnClose))
+                if (
+                    nestedValidationData.Contains(InteropValidationEnum.PersistOnClose)
+                    || rootValidationData.Contains(InteropValidationEnum.PersistOnClose)
+                )
                 {
                     return false;
                 }
@@ -1104,50 +1323,59 @@ namespace System.Activities.Statements
 
         class ValidateAtRootAndNestedLevels : NativeActivity
         {
-            public ValidateAtRootAndNestedLevels()
-            {
-            }
+            public ValidateAtRootAndNestedLevels() { }
 
-            public InArgument<Interop> Interop
-            {
-                get;
-                set;
-            }
+            public InArgument<Interop> Interop { get; set; }
 
-            public InArgument<HashSet<InteropValidationEnum>> RootLevelValidationData
-            {
-                get;
-                set;
-            }
+            public InArgument<HashSet<InteropValidationEnum>> RootLevelValidationData { get; set; }
 
-            public InArgument<HashSet<InteropValidationEnum>> NestedChildrenValidationData
-            {
-                get;
-                set;
-            }
+            public InArgument<
+                HashSet<InteropValidationEnum>
+            > NestedChildrenValidationData { get; set; }
 
             protected override void Execute(NativeActivityContext context)
             {
                 Interop activity = this.Interop.Get(context);
 
-                foreach (InteropValidationEnum validationEnum in this.RootLevelValidationData.Get(context))
+                foreach (
+                    InteropValidationEnum validationEnum in this.RootLevelValidationData.Get(
+                        context
+                    )
+                )
                 {
                     //We care to mark PersistOnClose during the walking algorithm because we need to check if it happens under a 4.0 TransactionScopActivity and flag that
-                    //That is done later, so skip here. 
+                    //That is done later, so skip here.
                     if (validationEnum != InteropValidationEnum.PersistOnClose)
                     {
-                        string message = string.Format(CultureInfo.CurrentCulture, ExecutionStringManager.InteropBodyRootLevelViolation, activity.DisplayName, validationEnum.ToString() + "Activity");
+                        string message = string.Format(
+                            CultureInfo.CurrentCulture,
+                            ExecutionStringManager.InteropBodyRootLevelViolation,
+                            activity.DisplayName,
+                            validationEnum.ToString() + "Activity"
+                        );
                         Constraint.AddValidationError(context, new ValidationError(message));
                     }
                 }
 
-                foreach (InteropValidationEnum validationEnum in this.NestedChildrenValidationData.Get(context))
+                foreach (
+                    InteropValidationEnum validationEnum in this.NestedChildrenValidationData.Get(
+                        context
+                    )
+                )
                 {
                     //We care to mark PersistOnClose or TransactionScope during the walking algorithm because we need to check if it happens under a 4.0 TransactionScopActivity and flag that
-                    //That is done later, so skip here. 
-                    if ((validationEnum != InteropValidationEnum.PersistOnClose) && (validationEnum != InteropValidationEnum.TransactionScope))
+                    //That is done later, so skip here.
+                    if (
+                        (validationEnum != InteropValidationEnum.PersistOnClose)
+                        && (validationEnum != InteropValidationEnum.TransactionScope)
+                    )
                     {
-                        string message = string.Format(CultureInfo.CurrentCulture, ExecutionStringManager.InteropBodyNestedViolation, activity.DisplayName, validationEnum.ToString() + "Activity");
+                        string message = string.Format(
+                            CultureInfo.CurrentCulture,
+                            ExecutionStringManager.InteropBodyNestedViolation,
+                            activity.DisplayName,
+                            validationEnum.ToString() + "Activity"
+                        );
                         Constraint.AddValidationError(context, new ValidationError(message));
                     }
                 }
@@ -1156,23 +1384,13 @@ namespace System.Activities.Statements
 
         class WalkInteropBodyAndGatherData : System.Activities.CodeActivity
         {
-            public InArgument<Interop> InteropActivity
-            {
-                get;
-                set;
-            }
+            public InArgument<Interop> InteropActivity { get; set; }
 
-            public InArgument<HashSet<InteropValidationEnum>> RootLevelValidationData
-            {
-                get;
-                set;
-            }
+            public InArgument<HashSet<InteropValidationEnum>> RootLevelValidationData { get; set; }
 
-            public InArgument<HashSet<InteropValidationEnum>> NestedChildrenValidationData
-            {
-                get;
-                set;
-            }
+            public InArgument<
+                HashSet<InteropValidationEnum>
+            > NestedChildrenValidationData { get; set; }
 
             protected override void Execute(CodeActivityContext context)
             {
@@ -1181,19 +1399,26 @@ namespace System.Activities.Statements
 
                 Debug.Assert(interop.hasValidBody, "Interop activity has an invalid body");
 
-                System.Workflow.ComponentModel.Activity interopBody = interop.ComponentModelActivity;
+                System.Workflow.ComponentModel.Activity interopBody =
+                    interop.ComponentModelActivity;
                 Debug.Assert(interopBody != null, "Interop Body was null");
 
                 HashSet<InteropValidationEnum> validationResults;
                 validationResults = this.RootLevelValidationData.Get(context);
-                Debug.Assert(validationResults != null, "The RootLevelValidationData hash set was null");
+                Debug.Assert(
+                    validationResults != null,
+                    "The RootLevelValidationData hash set was null"
+                );
 
                 //Gather data at root level first
                 ProcessAtRootLevel(interopBody, validationResults);
 
                 validationResults = null;
                 validationResults = this.NestedChildrenValidationData.Get(context);
-                Debug.Assert(validationResults != null, "The NestedChildrenValidationData hash set was null");
+                Debug.Assert(
+                    validationResults != null,
+                    "The NestedChildrenValidationData hash set was null"
+                );
 
                 //Next, process nested children of the Body
                 if (interopBody is System.Workflow.ComponentModel.CompositeActivity)
@@ -1204,10 +1429,16 @@ namespace System.Activities.Statements
                 return;
             }
 
-            void ProcessAtRootLevel(System.Workflow.ComponentModel.Activity interopBody, HashSet<InteropValidationEnum> validationResults)
+            void ProcessAtRootLevel(
+                System.Workflow.ComponentModel.Activity interopBody,
+                HashSet<InteropValidationEnum> validationResults
+            )
             {
                 Debug.Assert(interopBody != null, "Interop Body is null");
-                Debug.Assert(validationResults != null, "The HashSet of validation results is null");
+                Debug.Assert(
+                    validationResults != null,
+                    "The HashSet of validation results is null"
+                );
 
                 if (interopBody.PersistOnClose)
                 {
@@ -1215,7 +1446,10 @@ namespace System.Activities.Statements
                 }
 
                 Type interopBodyType = interopBody.GetType();
-                if (interopBodyType == typeof(System.Workflow.ComponentModel.TransactionScopeActivity))
+                if (
+                    interopBodyType
+                    == typeof(System.Workflow.ComponentModel.TransactionScopeActivity)
+                )
                 {
                     validationResults.Add(InteropValidationEnum.TransactionScope);
                 }
@@ -1227,11 +1461,15 @@ namespace System.Activities.Statements
                 {
                     validationResults.Add(InteropValidationEnum.Delay);
                 }
-                else if (interopBodyType == typeof(System.Workflow.Activities.InvokeWebServiceActivity))
+                else if (
+                    interopBodyType == typeof(System.Workflow.Activities.InvokeWebServiceActivity)
+                )
                 {
                     validationResults.Add(InteropValidationEnum.InvokeWebService);
                 }
-                else if (interopBodyType == typeof(System.Workflow.Activities.InvokeWorkflowActivity))
+                else if (
+                    interopBodyType == typeof(System.Workflow.Activities.InvokeWorkflowActivity)
+                )
                 {
                     validationResults.Add(InteropValidationEnum.InvokeWorkflow);
                 }
@@ -1247,19 +1485,27 @@ namespace System.Activities.Statements
                 {
                     validationResults.Add(InteropValidationEnum.SetState);
                 }
-                else if (interopBodyType == typeof(System.Workflow.Activities.WebServiceFaultActivity))
+                else if (
+                    interopBodyType == typeof(System.Workflow.Activities.WebServiceFaultActivity)
+                )
                 {
                     validationResults.Add(InteropValidationEnum.WebServiceFault);
                 }
-                else if (interopBodyType == typeof(System.Workflow.Activities.WebServiceInputActivity))
+                else if (
+                    interopBodyType == typeof(System.Workflow.Activities.WebServiceInputActivity)
+                )
                 {
                     validationResults.Add(InteropValidationEnum.WebServiceInput);
                 }
-                else if (interopBodyType == typeof(System.Workflow.Activities.WebServiceOutputActivity))
+                else if (
+                    interopBodyType == typeof(System.Workflow.Activities.WebServiceOutputActivity)
+                )
                 {
                     validationResults.Add(InteropValidationEnum.WebServiceOutput);
                 }
-                else if (interopBodyType == typeof(System.Workflow.ComponentModel.CompensateActivity))
+                else if (
+                    interopBodyType == typeof(System.Workflow.ComponentModel.CompensateActivity)
+                )
                 {
                     validationResults.Add(InteropValidationEnum.Compensate);
                 }
@@ -1267,7 +1513,9 @@ namespace System.Activities.Statements
                 {
                     validationResults.Add(InteropValidationEnum.Suspend);
                 }
-                else if (interopBodyType == typeof(System.Workflow.ComponentModel.TerminateActivity))
+                else if (
+                    interopBodyType == typeof(System.Workflow.ComponentModel.TerminateActivity)
+                )
                 {
                     validationResults.Add(InteropValidationEnum.Terminate);
                 }
@@ -1275,15 +1523,21 @@ namespace System.Activities.Statements
                 {
                     validationResults.Add(InteropValidationEnum.Throw);
                 }
-                else if (interopBodyType == typeof(System.Workflow.Activities.ConditionedActivityGroup))
+                else if (
+                    interopBodyType == typeof(System.Workflow.Activities.ConditionedActivityGroup)
+                )
                 {
                     validationResults.Add(InteropValidationEnum.ConditionedActivityGroup);
                 }
-                else if (interopBodyType == typeof(System.Workflow.Activities.EventHandlersActivity))
+                else if (
+                    interopBodyType == typeof(System.Workflow.Activities.EventHandlersActivity)
+                )
                 {
                     validationResults.Add(InteropValidationEnum.EventHandlers);
                 }
-                else if (interopBodyType == typeof(System.Workflow.Activities.EventHandlingScopeActivity))
+                else if (
+                    interopBodyType == typeof(System.Workflow.Activities.EventHandlingScopeActivity)
+                )
                 {
                     validationResults.Add(InteropValidationEnum.EventHandlingScope);
                 }
@@ -1307,7 +1561,10 @@ namespace System.Activities.Statements
                 {
                     validationResults.Add(InteropValidationEnum.Sequence);
                 }
-                else if (interopBodyType == typeof(System.Workflow.Activities.CompensatableSequenceActivity))
+                else if (
+                    interopBodyType
+                    == typeof(System.Workflow.Activities.CompensatableSequenceActivity)
+                )
                 {
                     validationResults.Add(InteropValidationEnum.CompensatableSequence);
                 }
@@ -1323,15 +1580,22 @@ namespace System.Activities.Statements
                 {
                     validationResults.Add(InteropValidationEnum.Receive);
                 }
-                else if (interopBodyType == typeof(System.Workflow.Activities.SequentialWorkflowActivity))
+                else if (
+                    interopBodyType == typeof(System.Workflow.Activities.SequentialWorkflowActivity)
+                )
                 {
                     validationResults.Add(InteropValidationEnum.SequentialWorkflow);
                 }
-                else if (interopBodyType == typeof(System.Workflow.Activities.StateFinalizationActivity))
+                else if (
+                    interopBodyType == typeof(System.Workflow.Activities.StateFinalizationActivity)
+                )
                 {
                     validationResults.Add(InteropValidationEnum.StateFinalization);
                 }
-                else if (interopBodyType == typeof(System.Workflow.Activities.StateInitializationActivity))
+                else if (
+                    interopBodyType
+                    == typeof(System.Workflow.Activities.StateInitializationActivity)
+                )
                 {
                     validationResults.Add(InteropValidationEnum.StateInitialization);
                 }
@@ -1339,7 +1603,10 @@ namespace System.Activities.Statements
                 {
                     validationResults.Add(InteropValidationEnum.State);
                 }
-                else if (interopBodyType == typeof(System.Workflow.Activities.StateMachineWorkflowActivity))
+                else if (
+                    interopBodyType
+                    == typeof(System.Workflow.Activities.StateMachineWorkflowActivity)
+                )
                 {
                     validationResults.Add(InteropValidationEnum.StateMachineWorkflow);
                 }
@@ -1347,43 +1614,69 @@ namespace System.Activities.Statements
                 {
                     validationResults.Add(InteropValidationEnum.While);
                 }
-                else if (interopBodyType == typeof(System.Workflow.ComponentModel.CancellationHandlerActivity))
+                else if (
+                    interopBodyType
+                    == typeof(System.Workflow.ComponentModel.CancellationHandlerActivity)
+                )
                 {
                     validationResults.Add(InteropValidationEnum.CancellationHandler);
                 }
-                else if (interopBodyType == typeof(System.Workflow.ComponentModel.CompensatableTransactionScopeActivity))
+                else if (
+                    interopBodyType
+                    == typeof(System.Workflow.ComponentModel.CompensatableTransactionScopeActivity)
+                )
                 {
                     validationResults.Add(InteropValidationEnum.CompensatableTransactionScope);
                 }
-                else if (interopBodyType == typeof(System.Workflow.ComponentModel.CompensationHandlerActivity))
+                else if (
+                    interopBodyType
+                    == typeof(System.Workflow.ComponentModel.CompensationHandlerActivity)
+                )
                 {
                     validationResults.Add(InteropValidationEnum.CompensationHandler);
                 }
-                else if (interopBodyType == typeof(System.Workflow.ComponentModel.FaultHandlerActivity))
+                else if (
+                    interopBodyType == typeof(System.Workflow.ComponentModel.FaultHandlerActivity)
+                )
                 {
                     validationResults.Add(InteropValidationEnum.FaultHandler);
                 }
-                else if (interopBodyType == typeof(System.Workflow.ComponentModel.FaultHandlersActivity))
+                else if (
+                    interopBodyType == typeof(System.Workflow.ComponentModel.FaultHandlersActivity)
+                )
                 {
                     validationResults.Add(InteropValidationEnum.FaultHandlers);
                 }
-                else if (interopBodyType == typeof(System.Workflow.ComponentModel.SynchronizationScopeActivity))
+                else if (
+                    interopBodyType
+                    == typeof(System.Workflow.ComponentModel.SynchronizationScopeActivity)
+                )
                 {
                     validationResults.Add(InteropValidationEnum.SynchronizationScope);
                 }
-                else if (interopBodyType == typeof(System.Workflow.ComponentModel.ICompensatableActivity))
+                else if (
+                    interopBodyType == typeof(System.Workflow.ComponentModel.ICompensatableActivity)
+                )
                 {
                     validationResults.Add(InteropValidationEnum.ICompensatable);
                 }
             }
 
-            void ProcessNestedChildren(System.Workflow.ComponentModel.Activity interopBody, HashSet<InteropValidationEnum> validationResults)
+            void ProcessNestedChildren(
+                System.Workflow.ComponentModel.Activity interopBody,
+                HashSet<InteropValidationEnum> validationResults
+            )
             {
                 Debug.Assert(interopBody != null, "Interop Body is null");
-                Debug.Assert(validationResults != null, "The HashSet of validation results is null");
+                Debug.Assert(
+                    validationResults != null,
+                    "The HashSet of validation results is null"
+                );
                 bool persistOnClose = false;
 
-                foreach (System.Workflow.ComponentModel.Activity activity in interopBody.CollectNestedActivities())
+                foreach (
+                    System.Workflow.ComponentModel.Activity activity in interopBody.CollectNestedActivities()
+                )
                 {
                     if (activity.PersistOnClose)
                     {
@@ -1399,7 +1692,9 @@ namespace System.Activities.Statements
                         validationResults.Add(InteropValidationEnum.InvokeWorkflow);
                     }
                     // SendActivity is sealed
-                    else if (activity.GetType().FullName == "System.Workflow.Activities.SendActivity")
+                    else if (
+                        activity.GetType().FullName == "System.Workflow.Activities.SendActivity"
+                    )
                     {
                         validationResults.Add(InteropValidationEnum.Send);
                     }
@@ -1428,11 +1723,16 @@ namespace System.Activities.Statements
                         validationResults.Add(InteropValidationEnum.CompensatableSequence);
                     }
                     // ReceiveActivity is sealed
-                    else if (activity.GetType().FullName == "System.Workflow.Activities.ReceiveActivity")
+                    else if (
+                        activity.GetType().FullName == "System.Workflow.Activities.ReceiveActivity"
+                    )
                     {
                         validationResults.Add(InteropValidationEnum.Receive);
                     }
-                    else if (activity is System.Workflow.ComponentModel.CompensatableTransactionScopeActivity)
+                    else if (
+                        activity
+                        is System.Workflow.ComponentModel.CompensatableTransactionScopeActivity
+                    )
                     {
                         validationResults.Add(InteropValidationEnum.CompensatableTransactionScope);
                     }
@@ -1497,20 +1797,14 @@ namespace System.Activities.Statements
             ICompensatable,
             PersistOnClose,
             Terminate,
-            Throw
+            Throw,
         }
 
         class ObtainType : CodeActivity<Type>
         {
-            public ObtainType()
-            {
-            }
+            public ObtainType() { }
 
-            public InArgument<Activity> Input
-            {
-                get;
-                set;
-            }
+            public InArgument<Activity> Input { get; set; }
 
             protected override Type Execute(CodeActivityContext context)
             {
@@ -1541,10 +1835,7 @@ namespace System.Activities.Statements
 
             protected internal Interop Owner
             {
-                get
-                {
-                    return this.owner;
-                }
+                get { return this.owner; }
             }
 
             public override bool CanResetValue(object component)
@@ -1568,7 +1859,9 @@ namespace System.Activities.Statements
             {
                 if (!this.isValid)
                 {
-                    throw new InvalidOperationException(ExecutionStringManager.InteropInvalidPropertyDescriptor);
+                    throw new InvalidOperationException(
+                        ExecutionStringManager.InteropInvalidPropertyDescriptor
+                    );
                 }
             }
 
@@ -1583,7 +1876,12 @@ namespace System.Activities.Statements
             string argumentName;
             Argument argument;
 
-            public ArgumentProperty(Interop owner, string argumentName, Argument argument, Attribute[] attributes)
+            public ArgumentProperty(
+                Interop owner,
+                string argumentName,
+                Argument argument,
+                Attribute[] attributes
+            )
                 : base(owner, argumentName, attributes)
             {
                 this.argumentName = argumentName;
@@ -1643,7 +1941,12 @@ namespace System.Activities.Statements
             string literalName;
             Type literalType;
 
-            public LiteralProperty(Interop owner, string literalName, Type literalType, Attribute[] attributes)
+            public LiteralProperty(
+                Interop owner,
+                string literalName,
+                Type literalType,
+                Attribute[] attributes
+            )
                 : base(owner, literalName, attributes)
             {
                 this.literalName = literalName;
@@ -1700,22 +2003,24 @@ namespace System.Activities.Statements
                 : base(true, false)
             {
                 this.ResourceManagers = new Dictionary<string, VolatileResourceManager>();
-                this.CommittedResourceManagers = new Dictionary<Transaction, Dictionary<string, VolatileResourceManager>>();
+                this.CommittedResourceManagers =
+                    new Dictionary<Transaction, Dictionary<string, VolatileResourceManager>>();
             }
 
-            Dictionary<string, VolatileResourceManager> ResourceManagers
-            {
-                get;
-                set;
-            }
+            Dictionary<string, VolatileResourceManager> ResourceManagers { get; set; }
 
-            Dictionary<Transaction, Dictionary<string, VolatileResourceManager>> CommittedResourceManagers
-            {
-                get;
-                set;
-            }
+            Dictionary<
+                Transaction,
+                Dictionary<string, VolatileResourceManager>
+            > CommittedResourceManagers { get; set; }
 
-            protected override IAsyncResult BeginOnSave(IDictionary<XName, object> readWriteValues, IDictionary<System.Xml.Linq.XName, object> writeOnlyValues, TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult BeginOnSave(
+                IDictionary<XName, object> readWriteValues,
+                IDictionary<System.Xml.Linq.XName, object> writeOnlyValues,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 try
                 {
@@ -1728,7 +2033,8 @@ namespace System.Activities.Statements
                 {
                     this.CommittedResourceManagers.Add(Transaction.Current, this.ResourceManagers);
                     this.ResourceManagers = new Dictionary<string, VolatileResourceManager>();
-                    Transaction.Current.TransactionCompleted += new TransactionCompletedEventHandler(Current_TransactionCompleted);
+                    Transaction.Current.TransactionCompleted +=
+                        new TransactionCompletedEventHandler(Current_TransactionCompleted);
                 }
 
                 return new CompletedAsyncResult(callback, state);
@@ -1743,14 +2049,22 @@ namespace System.Activities.Statements
             {
                 if (e.Transaction.TransactionInformation.Status == TransactionStatus.Committed)
                 {
-                    foreach (VolatileResourceManager rm in this.CommittedResourceManagers[e.Transaction].Values)
+                    foreach (
+                        VolatileResourceManager rm in this.CommittedResourceManagers[
+                            e.Transaction
+                        ].Values
+                    )
                     {
                         rm.Complete();
                     }
                 }
                 else
                 {
-                    foreach (VolatileResourceManager rm in this.CommittedResourceManagers[e.Transaction].Values)
+                    foreach (
+                        VolatileResourceManager rm in this.CommittedResourceManagers[
+                            e.Transaction
+                        ].Values
+                    )
                     {
                         rm.ClearAllBatchedWork();
                     }
@@ -1781,11 +2095,12 @@ namespace System.Activities.Statements
             VolatileResourceManager resourceManager;
             Transaction transaction;
 
-            public InteropEnlistment()
-            {
-            }
+            public InteropEnlistment() { }
 
-            public InteropEnlistment(Transaction transaction, VolatileResourceManager resourceManager)
+            public InteropEnlistment(
+                Transaction transaction,
+                VolatileResourceManager resourceManager
+            )
             {
                 this.resourceManager = resourceManager;
                 this.transaction = transaction;
@@ -1808,7 +2123,10 @@ namespace System.Activities.Statements
 
             public void Prepare(PreparingEnlistment preparingEnlistment)
             {
-                using (System.Transactions.TransactionScope ts = new System.Transactions.TransactionScope(this.transaction))
+                using (
+                    System.Transactions.TransactionScope ts =
+                        new System.Transactions.TransactionScope(this.transaction)
+                )
                 {
                     this.resourceManager.Commit();
                     ts.Complete();
@@ -1845,7 +2163,10 @@ namespace System.Activities.Statements
                     }
                     catch (Exception e) // transfer to another thread, this is a fatal situation
                     {
-                        throw new InvalidProgramException(ExecutionStringManager.AsyncCallbackThrewException, e);
+                        throw new InvalidProgramException(
+                            ExecutionStringManager.AsyncCallbackThrewException,
+                            e
+                        );
                     }
                 }
             }
@@ -1861,7 +2182,10 @@ namespace System.Activities.Statements
 
                 if (asyncResult == null)
                 {
-                    throw new ArgumentException(ExecutionStringManager.InvalidAsyncResult, "result");
+                    throw new ArgumentException(
+                        ExecutionStringManager.InvalidAsyncResult,
+                        "result"
+                    );
                 }
 
                 if (asyncResult.endCalled)
@@ -1879,10 +2203,7 @@ namespace System.Activities.Statements
 
             public object AsyncState
             {
-                get
-                {
-                    return state;
-                }
+                get { return state; }
             }
 
             public WaitHandle AsyncWaitHandle
@@ -1908,26 +2229,17 @@ namespace System.Activities.Statements
 
             public bool CompletedSynchronously
             {
-                get
-                {
-                    return true;
-                }
+                get { return true; }
             }
 
             public bool IsCompleted
             {
-                get
-                {
-                    return true;
-                }
+                get { return true; }
             }
 
             object ThisLock
             {
-                get
-                {
-                    return this.thisLock;
-                }
+                get { return this.thisLock; }
             }
         }
     }

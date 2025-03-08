@@ -19,7 +19,8 @@ namespace System.ServiceModel.Channels
     // reference) must also close the ICL. If the ref count is 0 any object may abort the ICL. This
     // means the last closing object may not release its reference until after the ICL's close.
     abstract class ReliableChannelListenerBase<TChannel>
-        : DelegatingChannelListener<TChannel>, IReliableFactorySettings
+        : DelegatingChannelListener<TChannel>,
+            IReliableFactorySettings
         where TChannel : class, IChannel
     {
         TimeSpan acknowledgementInterval;
@@ -36,7 +37,10 @@ namespace System.ServiceModel.Channels
         bool ordered;
         ReliableMessagingVersion reliableMessagingVersion;
 
-        protected ReliableChannelListenerBase(ReliableSessionBindingElement settings, Binding binding)
+        protected ReliableChannelListenerBase(
+            ReliableSessionBindingElement settings,
+            Binding binding
+        )
             : base(true, binding)
         {
             this.acknowledgementInterval = settings.AcknowledgementInterval;
@@ -118,10 +122,7 @@ namespace System.ServiceModel.Channels
             get { return this.InternalSendTimeout; }
         }
 
-        protected abstract bool Duplex
-        {
-            get;
-        }
+        protected abstract bool Duplex { get; }
 
         // Must call under lock.
         protected abstract bool HasChannels();
@@ -160,17 +161,31 @@ namespace System.ServiceModel.Channels
             this.InnerChannelListener.Close(timeoutHelper.RemainingTime());
         }
 
-        protected virtual IAsyncResult BeginCloseInnerListener(TimeSpan timeout, AsyncCallback callback, object state)
+        protected virtual IAsyncResult BeginCloseInnerListener(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            OperationWithTimeoutBeginCallback[] beginOperations = new OperationWithTimeoutBeginCallback[] {
-                new OperationWithTimeoutBeginCallback(this.faultHelper.BeginClose),
-                new OperationWithTimeoutBeginCallback(this.InnerChannelListener.BeginClose) };
-            OperationEndCallback[] endOperations = new OperationEndCallback[] {
+            OperationWithTimeoutBeginCallback[] beginOperations =
+                new OperationWithTimeoutBeginCallback[]
+                {
+                    new OperationWithTimeoutBeginCallback(this.faultHelper.BeginClose),
+                    new OperationWithTimeoutBeginCallback(this.InnerChannelListener.BeginClose),
+                };
+            OperationEndCallback[] endOperations = new OperationEndCallback[]
+            {
                 new OperationEndCallback(this.faultHelper.EndClose),
-                new OperationEndCallback(this.InnerChannelListener.EndClose) };
+                new OperationEndCallback(this.InnerChannelListener.EndClose),
+            };
 
-            return OperationWithTimeoutComposer.BeginComposeAsyncOperations(timeout, beginOperations, endOperations,
-                callback, state);
+            return OperationWithTimeoutComposer.BeginComposeAsyncOperations(
+                timeout,
+                beginOperations,
+                endOperations,
+                callback,
+                state
+            );
         }
 
         protected virtual void EndCloseInnerListener(IAsyncResult result)
@@ -190,11 +205,20 @@ namespace System.ServiceModel.Channels
             base.OnClose(timeoutHelper.RemainingTime());
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback,
-            object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new CloseAsyncResult(this, base.OnBeginClose, base.OnEndClose, timeout,
-                callback, state);
+            return new CloseAsyncResult(
+                this,
+                base.OnBeginClose,
+                base.OnEndClose,
+                timeout,
+                callback,
+                state
+            );
         }
 
         protected override void OnEndClose(IAsyncResult result)
@@ -209,23 +233,27 @@ namespace System.ServiceModel.Channels
             this.InnerChannelListener.Open(timeoutHelper.RemainingTime());
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback,
-            object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return OperationWithTimeoutComposer.BeginComposeAsyncOperations(
                 timeout,
-                new OperationWithTimeoutBeginCallback[] 
+                new OperationWithTimeoutBeginCallback[]
                 {
                     new OperationWithTimeoutBeginCallback(base.OnBeginOpen),
-                    new OperationWithTimeoutBeginCallback(this.InnerChannelListener.BeginOpen) 
+                    new OperationWithTimeoutBeginCallback(this.InnerChannelListener.BeginOpen),
                 },
-                new OperationEndCallback[] 
+                new OperationEndCallback[]
                 {
                     new OperationEndCallback(base.OnEndOpen),
-                    new OperationEndCallback(this.InnerChannelListener.EndOpen)
+                    new OperationEndCallback(this.InnerChannelListener.EndOpen),
                 },
-                callback, 
-                state);
+                callback,
+                state
+            );
         }
 
         protected override void OnEndOpen(IAsyncResult result)
@@ -248,8 +276,7 @@ namespace System.ServiceModel.Channels
             this.AbortInnerListener();
         }
 
-        public void OnReliableChannelClose(UniqueId inputId, UniqueId outputId,
-            TimeSpan timeout)
+        public void OnReliableChannelClose(UniqueId inputId, UniqueId outputId, TimeSpan timeout)
         {
             if (this.ShouldCloseOnReliableChannelClose(inputId, outputId))
             {
@@ -262,11 +289,22 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public IAsyncResult OnReliableChannelBeginClose(UniqueId inputId,
-            UniqueId outputId, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult OnReliableChannelBeginClose(
+            UniqueId inputId,
+            UniqueId outputId,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new OnReliableChannelCloseAsyncResult(this, inputId, outputId, timeout,
-                callback, state);
+            return new OnReliableChannelCloseAsyncResult(
+                this,
+                inputId,
+                outputId,
+                timeout,
+                callback,
+                state
+            );
         }
 
         public void OnReliableChannelEndClose(IAsyncResult result)
@@ -316,15 +354,21 @@ namespace System.ServiceModel.Channels
             ReliableChannelListenerBase<TChannel> parent;
             TimeoutHelper timeoutHelper;
 
-            static AsyncCallback onBaseChannelListenerCloseComplete =
-                Fx.ThunkCallback(OnBaseChannelListenerCloseCompleteStatic);
-            static AsyncCallback onInnerChannelListenerCloseComplete =
-                Fx.ThunkCallback(OnInnerChannelListenerCloseCompleteStatic);
+            static AsyncCallback onBaseChannelListenerCloseComplete = Fx.ThunkCallback(
+                OnBaseChannelListenerCloseCompleteStatic
+            );
+            static AsyncCallback onInnerChannelListenerCloseComplete = Fx.ThunkCallback(
+                OnInnerChannelListenerCloseCompleteStatic
+            );
 
-            public CloseAsyncResult(ReliableChannelListenerBase<TChannel> parent,
+            public CloseAsyncResult(
+                ReliableChannelListenerBase<TChannel> parent,
                 OperationWithTimeoutBeginCallback baseBeginClose,
-                OperationEndCallback baseEndClose, TimeSpan timeout, AsyncCallback callback,
-                object state)
+                OperationEndCallback baseEndClose,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.parent = parent;
@@ -338,7 +382,10 @@ namespace System.ServiceModel.Channels
                     this.timeoutHelper = new TimeoutHelper(timeout);
 
                     IAsyncResult result = this.parent.BeginCloseInnerListener(
-                        timeoutHelper.RemainingTime(), onInnerChannelListenerCloseComplete, this);
+                        timeoutHelper.RemainingTime(),
+                        onInnerChannelListenerCloseComplete,
+                        this
+                    );
 
                     if (result.CompletedSynchronously)
                     {
@@ -358,8 +405,11 @@ namespace System.ServiceModel.Channels
 
             bool CloseBaseChannelListener(TimeSpan timeout)
             {
-                IAsyncResult result = this.baseBeginClose(timeout,
-                    onBaseChannelListenerCloseComplete, this);
+                IAsyncResult result = this.baseBeginClose(
+                    timeout,
+                    onBaseChannelListenerCloseComplete,
+                    this
+                );
 
                 if (result.CompletedSynchronously)
                 {
@@ -459,12 +509,18 @@ namespace System.ServiceModel.Channels
             UniqueId inputId;
             UniqueId outputId;
 
-            static AsyncCallback onInnerChannelListenerCloseComplete =
-                Fx.ThunkCallback(new AsyncCallback(OnInnerChannelListenerCloseCompleteStatic));
+            static AsyncCallback onInnerChannelListenerCloseComplete = Fx.ThunkCallback(
+                new AsyncCallback(OnInnerChannelListenerCloseCompleteStatic)
+            );
 
             public OnReliableChannelCloseAsyncResult(
-                ReliableChannelListenerBase<TChannel> channelListener, UniqueId inputId,
-                UniqueId outputId, TimeSpan timeout, AsyncCallback callback, object state)
+                ReliableChannelListenerBase<TChannel> channelListener,
+                UniqueId inputId,
+                UniqueId outputId,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 if (!channelListener.ShouldCloseOnReliableChannelClose(inputId, outputId))
@@ -477,8 +533,11 @@ namespace System.ServiceModel.Channels
                 this.inputId = inputId;
                 this.outputId = outputId;
 
-                IAsyncResult result = this.channelListener.BeginCloseInnerListener(timeout,
-                    onInnerChannelListenerCloseComplete, this);
+                IAsyncResult result = this.channelListener.BeginCloseInnerListener(
+                    timeout,
+                    onInnerChannelListenerCloseComplete,
+                    this
+                );
 
                 if (result.CompletedSynchronously)
                 {
@@ -490,7 +549,6 @@ namespace System.ServiceModel.Channels
             void CompleteInnerChannelListenerClose(IAsyncResult result)
             {
                 this.channelListener.EndCloseInnerListener(result);
-
 
                 lock (this.channelListener.ThisLock)
                 {
@@ -547,10 +605,15 @@ namespace System.ServiceModel.Channels
         Dictionary<UniqueId, TReliableChannel> channelsByInput;
         Dictionary<UniqueId, TReliableChannel> channelsByOutput;
         InputQueueChannelAcceptor<TChannel> inputQueueChannelAcceptor;
-        static AsyncCallback onAcceptCompleted = Fx.ThunkCallback(new AsyncCallback(OnAcceptCompletedStatic));
+        static AsyncCallback onAcceptCompleted = Fx.ThunkCallback(
+            new AsyncCallback(OnAcceptCompletedStatic)
+        );
         IChannelListener<TInnerChannel> typedListener;
 
-        protected ReliableChannelListener(ReliableSessionBindingElement binding, BindingContext context)
+        protected ReliableChannelListener(
+            ReliableSessionBindingElement binding,
+            BindingContext context
+        )
             : base(binding, context.Binding)
         {
             this.typedListener = context.BuildInnerChannelListener<TInnerChannel>();
@@ -560,25 +623,37 @@ namespace System.ServiceModel.Channels
 
         internal override IChannelListener InnerChannelListener
         {
-            get
-            {
-                return this.typedListener;
-            }
+            get { return this.typedListener; }
             set
             {
                 // until the public setter is removed, throw
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException()
+                );
             }
         }
 
-        IServerReliableChannelBinder CreateBinder(TInnerChannel channel, EndpointAddress localAddress, EndpointAddress remoteAddress)
+        IServerReliableChannelBinder CreateBinder(
+            TInnerChannel channel,
+            EndpointAddress localAddress,
+            EndpointAddress remoteAddress
+        )
         {
-            return ServerReliableChannelBinder<TInnerChannel>.CreateBinder(channel, localAddress,
-                remoteAddress, TolerateFaultsMode.IfNotSecuritySession, this.DefaultCloseTimeout,
-                this.DefaultSendTimeout);
+            return ServerReliableChannelBinder<TInnerChannel>.CreateBinder(
+                channel,
+                localAddress,
+                remoteAddress,
+                TolerateFaultsMode.IfNotSecuritySession,
+                this.DefaultCloseTimeout,
+                this.DefaultSendTimeout
+            );
         }
 
-        protected abstract TReliableChannel CreateChannel(UniqueId id, CreateSequenceInfo createSequenceInfo, IServerReliableChannelBinder binder);
+        protected abstract TReliableChannel CreateChannel(
+            UniqueId id,
+            CreateSequenceInfo createSequenceInfo,
+            IServerReliableChannelBinder binder
+        );
 
         protected void Dispatch()
         {
@@ -586,9 +661,7 @@ namespace System.ServiceModel.Channels
         }
 
         // override to hook up events, etc pre-Open
-        protected virtual void OnInnerChannelAccepted(TInnerChannel channel)
-        {
-        }
+        protected virtual void OnInnerChannelAccepted(TInnerChannel channel) { }
 
         protected bool EnqueueWithoutDispatch(TChannel channel)
         {
@@ -606,7 +679,10 @@ namespace System.ServiceModel.Channels
                 {
                     if (this.Duplex)
                     {
-                        UniqueId outputId = WsrmUtilities.GetOutputId(this.ReliableMessagingVersion, info);
+                        UniqueId outputId = WsrmUtilities.GetOutputId(
+                            this.ReliableMessagingVersion,
+                            info
+                        );
                         if (outputId != null)
                         {
                             id = outputId;
@@ -648,8 +724,10 @@ namespace System.ServiceModel.Channels
 
         protected bool HandleException(Exception e, ICommunicationObject o)
         {
-            if ((e is CommunicationException || e is TimeoutException) &&
-                (o.State == CommunicationState.Opened))
+            if (
+                (e is CommunicationException || e is TimeoutException)
+                && (o.State == CommunicationState.Opened)
+            )
             {
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Warning);
 
@@ -720,8 +798,10 @@ namespace System.ServiceModel.Channels
             {
                 this.Fault(unexpectedException);
             }
-            else if ((expectedException != null)
-                && (this.typedListener.State == CommunicationState.Opened))
+            else if (
+                (expectedException != null)
+                && (this.typedListener.State == CommunicationState.Opened)
+            )
             {
                 DiagnosticUtility.TraceHandledException(expectedException, TraceEventType.Warning);
 
@@ -738,7 +818,8 @@ namespace System.ServiceModel.Channels
             if (!result.CompletedSynchronously)
             {
                 ReliableChannelListener<TChannel, TReliableChannel, TInnerChannel> listener =
-                    (ReliableChannelListener<TChannel, TReliableChannel, TInnerChannel>)result.AsyncState;
+                    (ReliableChannelListener<TChannel, TReliableChannel, TInnerChannel>)
+                        result.AsyncState;
 
                 try
                 {
@@ -791,7 +872,12 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected TReliableChannel ProcessCreateSequence(WsrmMessageInfo info, TInnerChannel channel, out bool dispatch, out bool newChannel)
+        protected TReliableChannel ProcessCreateSequence(
+            WsrmMessageInfo info,
+            TInnerChannel channel,
+            out bool dispatch,
+            out bool newChannel
+        )
         {
             dispatch = false;
             newChannel = false;
@@ -807,29 +893,44 @@ namespace System.ServiceModel.Channels
                 UniqueId id;
                 TReliableChannel reliableChannel = null;
 
-                if ((createSequenceInfo.OfferIdentifier != null)
+                if (
+                    (createSequenceInfo.OfferIdentifier != null)
                     && this.Duplex
-                    && this.channelsByOutput.TryGetValue(createSequenceInfo.OfferIdentifier, out reliableChannel))
+                    && this.channelsByOutput.TryGetValue(
+                        createSequenceInfo.OfferIdentifier,
+                        out reliableChannel
+                    )
+                )
                 {
                     return reliableChannel;
                 }
 
                 if (!this.IsAccepting)
                 {
-                    info.FaultReply = WsrmUtilities.CreateEndpointNotFoundFault(this.MessageVersion, SR.GetString(SR.RMEndpointNotFoundReason, this.Uri));
+                    info.FaultReply = WsrmUtilities.CreateEndpointNotFoundFault(
+                        this.MessageVersion,
+                        SR.GetString(SR.RMEndpointNotFoundReason, this.Uri)
+                    );
                     return null;
                 }
 
                 if (this.inputQueueChannelAcceptor.PendingCount >= this.MaxPendingChannels)
                 {
-                    info.FaultReply = WsrmUtilities.CreateCSRefusedServerTooBusyFault(this.MessageVersion, this.ReliableMessagingVersion, SR.GetString(SR.ServerTooBusy, this.Uri));
+                    info.FaultReply = WsrmUtilities.CreateCSRefusedServerTooBusyFault(
+                        this.MessageVersion,
+                        this.ReliableMessagingVersion,
+                        SR.GetString(SR.ServerTooBusy, this.Uri)
+                    );
                     return null;
                 }
 
                 id = WsrmUtilities.NextSequenceId();
 
-                reliableChannel = this.CreateChannel(id, createSequenceInfo,
-                    this.CreateBinder(channel, acksTo, createSequenceInfo.ReplyTo));
+                reliableChannel = this.CreateChannel(
+                    id,
+                    createSequenceInfo,
+                    this.CreateBinder(channel, acksTo, createSequenceInfo.ReplyTo)
+                );
                 this.channelsByInput.Add(id, reliableChannel);
                 if (this.Duplex)
                     this.channelsByOutput.Add(createSequenceInfo.OfferIdentifier, reliableChannel);
@@ -865,7 +966,11 @@ namespace System.ServiceModel.Channels
 
                 try
                 {
-                    IAsyncResult result = this.typedListener.BeginAcceptChannel(TimeSpan.MaxValue, onAcceptCompleted, this);
+                    IAsyncResult result = this.typedListener.BeginAcceptChannel(
+                        TimeSpan.MaxValue,
+                        onAcceptCompleted,
+                        this
+                    );
 
                     if (!result.CompletedSynchronously)
                         return;
@@ -938,11 +1043,16 @@ namespace System.ServiceModel.Channels
         AsyncCallback onTryReceiveComplete;
         ChannelTracker<TInnerChannel, object> channelTracker;
 
-        protected ReliableListenerOverDatagram(ReliableSessionBindingElement binding, BindingContext context)
+        protected ReliableListenerOverDatagram(
+            ReliableSessionBindingElement binding,
+            BindingContext context
+        )
             : base(binding, context)
         {
             this.asyncHandleReceiveComplete = new Action<object>(this.AsyncHandleReceiveComplete);
-            this.onTryReceiveComplete = Fx.ThunkCallback(new AsyncCallback(this.OnTryReceiveComplete));
+            this.onTryReceiveComplete = Fx.ThunkCallback(
+                new AsyncCallback(this.OnTryReceiveComplete)
+            );
             this.channelTracker = new ChannelTracker<TInnerChannel, object>();
         }
 
@@ -986,7 +1096,14 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        bool BeginProcessItem(TItem item, WsrmMessageInfo info, TInnerChannel channel, out TReliableChannel reliableChannel, out bool newChannel, out bool dispatch)
+        bool BeginProcessItem(
+            TItem item,
+            WsrmMessageInfo info,
+            TInnerChannel channel,
+            out TReliableChannel reliableChannel,
+            out bool newChannel,
+            out bool dispatch
+        )
         {
             dispatch = false;
             reliableChannel = null;
@@ -1011,12 +1128,19 @@ namespace System.ServiceModel.Channels
                     return true;
                 }
 
-                faultReply = new UnknownSequenceFault(id).CreateMessage(this.MessageVersion,
-                    this.ReliableMessagingVersion);
+                faultReply = new UnknownSequenceFault(id).CreateMessage(
+                    this.MessageVersion,
+                    this.ReliableMessagingVersion
+                );
             }
             else
             {
-                reliableChannel = this.ProcessCreateSequence(info, channel, out dispatch, out newChannel);
+                reliableChannel = this.ProcessCreateSequence(
+                    info,
+                    channel,
+                    out dispatch,
+                    out newChannel
+                );
 
                 if (reliableChannel != null)
                     return true;
@@ -1049,11 +1173,24 @@ namespace System.ServiceModel.Channels
             return true;
         }
 
-        protected abstract IAsyncResult BeginTryReceiveItem(TInnerChannel channel, AsyncCallback callback, object state);
+        protected abstract IAsyncResult BeginTryReceiveItem(
+            TInnerChannel channel,
+            AsyncCallback callback,
+            object state
+        );
         protected abstract void DisposeItem(TItem item);
-        protected abstract void EndTryReceiveItem(TInnerChannel channel, IAsyncResult result, out TItem item);
+        protected abstract void EndTryReceiveItem(
+            TInnerChannel channel,
+            IAsyncResult result,
+            out TItem item
+        );
 
-        void EndProcessItem(TItem item, WsrmMessageInfo info, TReliableChannel channel, bool dispatch)
+        void EndProcessItem(
+            TItem item,
+            WsrmMessageInfo info,
+            TReliableChannel channel,
+            bool dispatch
+        )
         {
             this.ProcessSequencedItem(channel, item, info);
 
@@ -1086,8 +1223,13 @@ namespace System.ServiceModel.Channels
                 return true;
             }
 
-            WsrmMessageInfo info = WsrmMessageInfo.Get(this.MessageVersion, this.ReliableMessagingVersion, channel,
-                null, message);
+            WsrmMessageInfo info = WsrmMessageInfo.Get(
+                this.MessageVersion,
+                this.ReliableMessagingVersion,
+                channel,
+                null,
+                message
+            );
 
             if (info.ParsingException != null)
             {
@@ -1100,7 +1242,16 @@ namespace System.ServiceModel.Channels
             bool newChannel;
             bool dispatch;
 
-            if (!this.BeginProcessItem(item, info, channel, out reliableChannel, out newChannel, out dispatch))
+            if (
+                !this.BeginProcessItem(
+                    item,
+                    info,
+                    channel,
+                    out reliableChannel,
+                    out newChannel,
+                    out dispatch
+                )
+            )
                 return false;
 
             if (reliableChannel == null)
@@ -1113,8 +1264,8 @@ namespace System.ServiceModel.Channels
             // it can block, but it will ensure the loop doesn't stall.
             // On the other hand we don't want to take on the cost of blindly jumping threads.
             // So, if we know EndProcessItem might block (dispatch || !newChannel) then we
-            // try another receive. If that completes async then we know it is safe for us to block, 
-            // if not then we force the receive to complete async and *make* it safe for us to block.             
+            // try another receive. If that completes async then we know it is safe for us to block,
+            // if not then we force the receive to complete async and *make* it safe for us to block.
             if (dispatch || !newChannel)
             {
                 this.StartReceiving(channel, false);
@@ -1170,10 +1321,21 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new ChainedAsyncResult(timeout, callback, state, this.channelTracker.BeginOpen, this.channelTracker.EndOpen,
-                base.OnBeginOpen, base.OnEndOpen);
+            return new ChainedAsyncResult(
+                timeout,
+                callback,
+                state,
+                this.channelTracker.BeginOpen,
+                this.channelTracker.EndOpen,
+                base.OnBeginOpen,
+                base.OnEndOpen
+            );
         }
 
         protected override void OnEndOpen(IAsyncResult result)
@@ -1224,10 +1386,21 @@ namespace System.ServiceModel.Channels
             this.channelTracker.Close(timeoutHelper.RemainingTime());
         }
 
-        protected override IAsyncResult BeginCloseInnerListener(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult BeginCloseInnerListener(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            return new ChainedAsyncResult(timeout, callback, state, base.BeginCloseInnerListener, base.EndCloseInnerListener,
-                channelTracker.BeginClose, channelTracker.EndClose);
+            return new ChainedAsyncResult(
+                timeout,
+                callback,
+                state,
+                base.BeginCloseInnerListener,
+                base.EndCloseInnerListener,
+                channelTracker.BeginClose,
+                channelTracker.EndClose
+            );
         }
 
         protected override void EndCloseInnerListener(IAsyncResult result)
@@ -1235,7 +1408,11 @@ namespace System.ServiceModel.Channels
             ChainedAsyncResult.End(result);
         }
 
-        protected abstract void ProcessSequencedItem(TReliableChannel reliableChannel, TItem item, WsrmMessageInfo info);
+        protected abstract void ProcessSequencedItem(
+            TReliableChannel reliableChannel,
+            TItem item,
+            WsrmMessageInfo info
+        );
         protected abstract void SendReply(Message reply, TInnerChannel channel, TItem item);
 
         void StartReceiving(TInnerChannel channel, bool canBlock)
@@ -1246,7 +1423,11 @@ namespace System.ServiceModel.Channels
 
                 try
                 {
-                    IAsyncResult result = this.BeginTryReceiveItem(channel, this.onTryReceiveComplete, channel);
+                    IAsyncResult result = this.BeginTryReceiveItem(
+                        channel,
+                        this.onTryReceiveComplete,
+                        channel
+                    );
                     if (!result.CompletedSynchronously)
                         break;
 
@@ -1280,18 +1461,28 @@ namespace System.ServiceModel.Channels
         }
     }
 
-    abstract class ReliableListenerOverDuplex<TChannel, TReliableChannel> :
-        ReliableListenerOverDatagram<TChannel, TReliableChannel, IDuplexChannel, Message>
+    abstract class ReliableListenerOverDuplex<TChannel, TReliableChannel>
+        : ReliableListenerOverDatagram<TChannel, TReliableChannel, IDuplexChannel, Message>
         where TChannel : class, IChannel
         where TReliableChannel : class, IChannel
     {
-        protected ReliableListenerOverDuplex(ReliableSessionBindingElement binding, BindingContext context)
+        protected ReliableListenerOverDuplex(
+            ReliableSessionBindingElement binding,
+            BindingContext context
+        )
             : base(binding, context)
         {
-            this.FaultHelper = new SendFaultHelper(context.Binding.SendTimeout, context.Binding.CloseTimeout);
+            this.FaultHelper = new SendFaultHelper(
+                context.Binding.SendTimeout,
+                context.Binding.CloseTimeout
+            );
         }
 
-        protected override IAsyncResult BeginTryReceiveItem(IDuplexChannel channel, AsyncCallback callback, object state)
+        protected override IAsyncResult BeginTryReceiveItem(
+            IDuplexChannel channel,
+            AsyncCallback callback,
+            object state
+        )
         {
             return channel.BeginTryReceive(TimeSpan.MaxValue, callback, state);
         }
@@ -1301,7 +1492,11 @@ namespace System.ServiceModel.Channels
             ((IDisposable)item).Dispose();
         }
 
-        protected override void EndTryReceiveItem(IDuplexChannel channel, IAsyncResult result, out Message item)
+        protected override void EndTryReceiveItem(
+            IDuplexChannel channel,
+            IAsyncResult result,
+            out Message item
+        )
         {
             channel.EndTryReceive(result, out item);
         }
@@ -1323,13 +1518,23 @@ namespace System.ServiceModel.Channels
         where TChannel : class, IChannel
         where TReliableChannel : class, IChannel
     {
-        protected ReliableListenerOverReply(ReliableSessionBindingElement binding, BindingContext context)
+        protected ReliableListenerOverReply(
+            ReliableSessionBindingElement binding,
+            BindingContext context
+        )
             : base(binding, context)
         {
-            this.FaultHelper = new ReplyFaultHelper(context.Binding.SendTimeout, context.Binding.CloseTimeout);
+            this.FaultHelper = new ReplyFaultHelper(
+                context.Binding.SendTimeout,
+                context.Binding.CloseTimeout
+            );
         }
 
-        protected override IAsyncResult BeginTryReceiveItem(IReplyChannel channel, AsyncCallback callback, object state)
+        protected override IAsyncResult BeginTryReceiveItem(
+            IReplyChannel channel,
+            AsyncCallback callback,
+            object state
+        )
         {
             return channel.BeginTryReceiveRequest(TimeSpan.MaxValue, callback, state);
         }
@@ -1340,7 +1545,11 @@ namespace System.ServiceModel.Channels
             ((IDisposable)item).Dispose();
         }
 
-        protected override void EndTryReceiveItem(IReplyChannel channel, IAsyncResult result, out RequestContext item)
+        protected override void EndTryReceiveItem(
+            IReplyChannel channel,
+            IAsyncResult result,
+            out RequestContext item
+        )
         {
             channel.EndTryReceiveRequest(result, out item);
         }
@@ -1357,8 +1566,13 @@ namespace System.ServiceModel.Channels
         }
     }
 
-    abstract class ReliableListenerOverSession<TChannel, TReliableChannel, TInnerChannel, TInnerSession, TItem>
-        : ReliableChannelListener<TChannel, TReliableChannel, TInnerChannel>
+    abstract class ReliableListenerOverSession<
+        TChannel,
+        TReliableChannel,
+        TInnerChannel,
+        TInnerSession,
+        TItem
+    > : ReliableChannelListener<TChannel, TReliableChannel, TInnerChannel>
         where TChannel : class, IChannel
         where TReliableChannel : class, IChannel
         where TInnerChannel : class, IChannel, ISessionChannel<TInnerSession>
@@ -1368,7 +1582,10 @@ namespace System.ServiceModel.Channels
         Action<object> asyncHandleReceiveComplete;
         AsyncCallback onReceiveComplete;
 
-        protected ReliableListenerOverSession(ReliableSessionBindingElement binding, BindingContext context)
+        protected ReliableListenerOverSession(
+            ReliableSessionBindingElement binding,
+            BindingContext context
+        )
             : base(binding, context)
         {
             this.asyncHandleReceiveComplete = new Action<object>(this.AsyncHandleReceiveComplete);
@@ -1418,15 +1635,28 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected abstract IAsyncResult BeginTryReceiveItem(TInnerChannel channel, AsyncCallback callback, object state);
+        protected abstract IAsyncResult BeginTryReceiveItem(
+            TInnerChannel channel,
+            AsyncCallback callback,
+            object state
+        );
         protected abstract void DisposeItem(TItem item);
-        protected abstract void EndTryReceiveItem(TInnerChannel channel, IAsyncResult result, out TItem item);
+        protected abstract void EndTryReceiveItem(
+            TInnerChannel channel,
+            IAsyncResult result,
+            out TItem item
+        );
         protected abstract Message GetMessage(TItem item);
 
         void HandleReceiveComplete(TItem item, TInnerChannel channel)
         {
-            WsrmMessageInfo info = WsrmMessageInfo.Get(this.MessageVersion, this.ReliableMessagingVersion, channel,
-                channel.Session as ISecureConversationSession, this.GetMessage(item));
+            WsrmMessageInfo info = WsrmMessageInfo.Get(
+                this.MessageVersion,
+                this.ReliableMessagingVersion,
+                channel,
+                channel.Session as ISecureConversationSession,
+                this.GetMessage(item)
+            );
 
             if (info.ParsingException != null)
             {
@@ -1457,12 +1687,19 @@ namespace System.ServiceModel.Channels
                 }
 
                 if (reliableChannel == null)
-                    faultReply = new UnknownSequenceFault(id).CreateMessage(this.MessageVersion,
-                        this.ReliableMessagingVersion);
+                    faultReply = new UnknownSequenceFault(id).CreateMessage(
+                        this.MessageVersion,
+                        this.ReliableMessagingVersion
+                    );
             }
             else
             {
-                reliableChannel = this.ProcessCreateSequence(info, channel, out dispatch, out newChannel);
+                reliableChannel = this.ProcessCreateSequence(
+                    info,
+                    channel,
+                    out dispatch,
+                    out newChannel
+                );
 
                 if (reliableChannel == null)
                     faultReply = info.FaultReply;
@@ -1549,7 +1786,11 @@ namespace System.ServiceModel.Channels
         {
             try
             {
-                IAsyncResult result = this.BeginTryReceiveItem(channel, this.onReceiveComplete, channel);
+                IAsyncResult result = this.BeginTryReceiveItem(
+                    channel,
+                    this.onReceiveComplete,
+                    channel
+                );
                 if (result.CompletedSynchronously)
                 {
                     ActionItem.Schedule(this.asyncHandleReceiveComplete, result);
@@ -1568,22 +1809,44 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected abstract void ProcessSequencedItem(TInnerChannel channel, TItem item, TReliableChannel reliableChannel, WsrmMessageInfo info, bool newChannel);
+        protected abstract void ProcessSequencedItem(
+            TInnerChannel channel,
+            TItem item,
+            TReliableChannel reliableChannel,
+            WsrmMessageInfo info,
+            bool newChannel
+        );
         protected abstract void SendReply(Message reply, TInnerChannel channel, TItem item);
     }
 
     abstract class ReliableListenerOverDuplexSession<TChannel, TReliableChannel>
-        : ReliableListenerOverSession<TChannel, TReliableChannel, IDuplexSessionChannel, IDuplexSession, Message>
+        : ReliableListenerOverSession<
+            TChannel,
+            TReliableChannel,
+            IDuplexSessionChannel,
+            IDuplexSession,
+            Message
+        >
         where TChannel : class, IChannel
         where TReliableChannel : class, IChannel
     {
-        protected ReliableListenerOverDuplexSession(ReliableSessionBindingElement binding, BindingContext context)
+        protected ReliableListenerOverDuplexSession(
+            ReliableSessionBindingElement binding,
+            BindingContext context
+        )
             : base(binding, context)
         {
-            this.FaultHelper = new SendFaultHelper(context.Binding.SendTimeout, context.Binding.CloseTimeout);
+            this.FaultHelper = new SendFaultHelper(
+                context.Binding.SendTimeout,
+                context.Binding.CloseTimeout
+            );
         }
 
-        protected override IAsyncResult BeginTryReceiveItem(IDuplexSessionChannel channel, AsyncCallback callback, object state)
+        protected override IAsyncResult BeginTryReceiveItem(
+            IDuplexSessionChannel channel,
+            AsyncCallback callback,
+            object state
+        )
         {
             return channel.BeginTryReceive(TimeSpan.MaxValue, callback, channel);
         }
@@ -1593,7 +1856,11 @@ namespace System.ServiceModel.Channels
             ((IDisposable)item).Dispose();
         }
 
-        protected override void EndTryReceiveItem(IDuplexSessionChannel channel, IAsyncResult result, out Message item)
+        protected override void EndTryReceiveItem(
+            IDuplexSessionChannel channel,
+            IAsyncResult result,
+            out Message item
+        )
         {
             channel.EndTryReceive(result, out item);
         }
@@ -1603,7 +1870,11 @@ namespace System.ServiceModel.Channels
             return item;
         }
 
-        protected override void SendReply(Message reply, IDuplexSessionChannel channel, Message item)
+        protected override void SendReply(
+            Message reply,
+            IDuplexSessionChannel channel,
+            Message item
+        )
         {
             if (FaultHelper.AddressReply(item, reply))
                 channel.Send(reply);
@@ -1611,17 +1882,33 @@ namespace System.ServiceModel.Channels
     }
 
     abstract class ReliableListenerOverReplySession<TChannel, TReliableChannel>
-        : ReliableListenerOverSession<TChannel, TReliableChannel, IReplySessionChannel, IInputSession, RequestContext>
+        : ReliableListenerOverSession<
+            TChannel,
+            TReliableChannel,
+            IReplySessionChannel,
+            IInputSession,
+            RequestContext
+        >
         where TChannel : class, IChannel
         where TReliableChannel : class, IChannel
     {
-        protected ReliableListenerOverReplySession(ReliableSessionBindingElement binding, BindingContext context)
+        protected ReliableListenerOverReplySession(
+            ReliableSessionBindingElement binding,
+            BindingContext context
+        )
             : base(binding, context)
         {
-            this.FaultHelper = new ReplyFaultHelper(context.Binding.SendTimeout, context.Binding.CloseTimeout);
+            this.FaultHelper = new ReplyFaultHelper(
+                context.Binding.SendTimeout,
+                context.Binding.CloseTimeout
+            );
         }
 
-        protected override IAsyncResult BeginTryReceiveItem(IReplySessionChannel channel, AsyncCallback callback, object state)
+        protected override IAsyncResult BeginTryReceiveItem(
+            IReplySessionChannel channel,
+            AsyncCallback callback,
+            object state
+        )
         {
             return channel.BeginTryReceiveRequest(TimeSpan.MaxValue, callback, channel);
         }
@@ -1632,7 +1919,11 @@ namespace System.ServiceModel.Channels
             ((IDisposable)item).Dispose();
         }
 
-        protected override void EndTryReceiveItem(IReplySessionChannel channel, IAsyncResult result, out RequestContext item)
+        protected override void EndTryReceiveItem(
+            IReplySessionChannel channel,
+            IAsyncResult result,
+            out RequestContext item
+        )
         {
             channel.EndTryReceiveRequest(result, out item);
         }
@@ -1642,19 +1933,25 @@ namespace System.ServiceModel.Channels
             return item.RequestMessage;
         }
 
-        protected override void SendReply(Message reply, IReplySessionChannel channel, RequestContext item)
+        protected override void SendReply(
+            Message reply,
+            IReplySessionChannel channel,
+            RequestContext item
+        )
         {
             if (FaultHelper.AddressReply(item.RequestMessage, reply))
                 item.Reply(reply);
         }
     }
 
-    class ReliableDuplexListenerOverDuplex : ReliableListenerOverDuplex<IDuplexSessionChannel, ServerReliableDuplexSessionChannel>
+    class ReliableDuplexListenerOverDuplex
+        : ReliableListenerOverDuplex<IDuplexSessionChannel, ServerReliableDuplexSessionChannel>
     {
-        public ReliableDuplexListenerOverDuplex(ReliableSessionBindingElement binding, BindingContext context)
-            : base(binding, context)
-        {
-        }
+        public ReliableDuplexListenerOverDuplex(
+            ReliableSessionBindingElement binding,
+            BindingContext context
+        )
+            : base(binding, context) { }
 
         protected override bool Duplex
         {
@@ -1664,69 +1961,108 @@ namespace System.ServiceModel.Channels
         protected override ServerReliableDuplexSessionChannel CreateChannel(
             UniqueId id,
             CreateSequenceInfo createSequenceInfo,
-            IServerReliableChannelBinder binder)
+            IServerReliableChannelBinder binder
+        )
         {
             binder.Open(this.InternalOpenTimeout);
-            return new ServerReliableDuplexSessionChannel(this, binder, this.FaultHelper, id, createSequenceInfo.OfferIdentifier);
+            return new ServerReliableDuplexSessionChannel(
+                this,
+                binder,
+                this.FaultHelper,
+                id,
+                createSequenceInfo.OfferIdentifier
+            );
         }
 
-        protected override void ProcessSequencedItem(ServerReliableDuplexSessionChannel channel, Message message, WsrmMessageInfo info)
+        protected override void ProcessSequencedItem(
+            ServerReliableDuplexSessionChannel channel,
+            Message message,
+            WsrmMessageInfo info
+        )
         {
             channel.ProcessDemuxedMessage(info);
         }
     }
 
-    class ReliableInputListenerOverDuplex : ReliableListenerOverDuplex<IInputSessionChannel, ReliableInputSessionChannelOverDuplex>
+    class ReliableInputListenerOverDuplex
+        : ReliableListenerOverDuplex<IInputSessionChannel, ReliableInputSessionChannelOverDuplex>
     {
-        public ReliableInputListenerOverDuplex(ReliableSessionBindingElement binding, BindingContext context)
-            : base(binding, context)
-        {
-        }
+        public ReliableInputListenerOverDuplex(
+            ReliableSessionBindingElement binding,
+            BindingContext context
+        )
+            : base(binding, context) { }
 
         protected override bool Duplex
         {
             get { return false; }
         }
 
-        protected override ReliableInputSessionChannelOverDuplex CreateChannel(UniqueId id,
+        protected override ReliableInputSessionChannelOverDuplex CreateChannel(
+            UniqueId id,
             CreateSequenceInfo createSequenceInfo,
-            IServerReliableChannelBinder binder)
+            IServerReliableChannelBinder binder
+        )
         {
             binder.Open(this.InternalOpenTimeout);
             return new ReliableInputSessionChannelOverDuplex(this, binder, this.FaultHelper, id);
         }
 
-        protected override void ProcessSequencedItem(ReliableInputSessionChannelOverDuplex channel, Message message, WsrmMessageInfo info)
+        protected override void ProcessSequencedItem(
+            ReliableInputSessionChannelOverDuplex channel,
+            Message message,
+            WsrmMessageInfo info
+        )
         {
             channel.ProcessDemuxedMessage(info);
         }
     }
 
-    class ReliableDuplexListenerOverDuplexSession : ReliableListenerOverDuplexSession<IDuplexSessionChannel, ServerReliableDuplexSessionChannel>
+    class ReliableDuplexListenerOverDuplexSession
+        : ReliableListenerOverDuplexSession<
+            IDuplexSessionChannel,
+            ServerReliableDuplexSessionChannel
+        >
     {
-        public ReliableDuplexListenerOverDuplexSession(ReliableSessionBindingElement binding, BindingContext context)
-            : base(binding, context)
-        {
-        }
+        public ReliableDuplexListenerOverDuplexSession(
+            ReliableSessionBindingElement binding,
+            BindingContext context
+        )
+            : base(binding, context) { }
 
         protected override bool Duplex
         {
             get { return true; }
         }
 
-        protected override ServerReliableDuplexSessionChannel CreateChannel(UniqueId id,
+        protected override ServerReliableDuplexSessionChannel CreateChannel(
+            UniqueId id,
             CreateSequenceInfo createSequenceInfo,
-            IServerReliableChannelBinder binder)
+            IServerReliableChannelBinder binder
+        )
         {
             binder.Open(this.InternalOpenTimeout);
-            return new ServerReliableDuplexSessionChannel(this, binder, this.FaultHelper, id, createSequenceInfo.OfferIdentifier);
+            return new ServerReliableDuplexSessionChannel(
+                this,
+                binder,
+                this.FaultHelper,
+                id,
+                createSequenceInfo.OfferIdentifier
+            );
         }
 
-        protected override void ProcessSequencedItem(IDuplexSessionChannel channel, Message message, ServerReliableDuplexSessionChannel reliableChannel, WsrmMessageInfo info, bool newChannel)
+        protected override void ProcessSequencedItem(
+            IDuplexSessionChannel channel,
+            Message message,
+            ServerReliableDuplexSessionChannel reliableChannel,
+            WsrmMessageInfo info,
+            bool newChannel
+        )
         {
             if (!newChannel)
             {
-                IServerReliableChannelBinder binder = (IServerReliableChannelBinder)reliableChannel.Binder;
+                IServerReliableChannelBinder binder = (IServerReliableChannelBinder)
+                    reliableChannel.Binder;
 
                 if (!binder.UseNewChannel(channel))
                 {
@@ -1741,27 +2077,39 @@ namespace System.ServiceModel.Channels
     }
 
     class ReliableInputListenerOverDuplexSession
-        : ReliableListenerOverDuplexSession<IInputSessionChannel, ReliableInputSessionChannelOverDuplex>
+        : ReliableListenerOverDuplexSession<
+            IInputSessionChannel,
+            ReliableInputSessionChannelOverDuplex
+        >
     {
-        public ReliableInputListenerOverDuplexSession(ReliableSessionBindingElement binding, BindingContext context)
-            : base(binding, context)
-        {
-        }
+        public ReliableInputListenerOverDuplexSession(
+            ReliableSessionBindingElement binding,
+            BindingContext context
+        )
+            : base(binding, context) { }
 
         protected override bool Duplex
         {
             get { return false; }
         }
 
-        protected override ReliableInputSessionChannelOverDuplex CreateChannel(UniqueId id,
+        protected override ReliableInputSessionChannelOverDuplex CreateChannel(
+            UniqueId id,
             CreateSequenceInfo createSequenceInfo,
-            IServerReliableChannelBinder binder)
+            IServerReliableChannelBinder binder
+        )
         {
             binder.Open(this.InternalOpenTimeout);
             return new ReliableInputSessionChannelOverDuplex(this, binder, this.FaultHelper, id);
         }
 
-        protected override void ProcessSequencedItem(IDuplexSessionChannel channel, Message message, ReliableInputSessionChannelOverDuplex reliableChannel, WsrmMessageInfo info, bool newChannel)
+        protected override void ProcessSequencedItem(
+            IDuplexSessionChannel channel,
+            Message message,
+            ReliableInputSessionChannelOverDuplex reliableChannel,
+            WsrmMessageInfo info,
+            bool newChannel
+        )
         {
             if (!newChannel)
             {
@@ -1779,64 +2127,14 @@ namespace System.ServiceModel.Channels
         }
     }
 
-    class ReliableInputListenerOverReply : ReliableListenerOverReply<IInputSessionChannel, ReliableInputSessionChannelOverReply>
+    class ReliableInputListenerOverReply
+        : ReliableListenerOverReply<IInputSessionChannel, ReliableInputSessionChannelOverReply>
     {
-        public ReliableInputListenerOverReply(ReliableSessionBindingElement binding, BindingContext context)
-            : base(binding, context)
-        {
-        }
-
-        protected override bool Duplex
-        {
-            get { return false; }
-        }
-
-        protected override ReliableInputSessionChannelOverReply CreateChannel(UniqueId id,
-            CreateSequenceInfo createSequenceInfo,
-            IServerReliableChannelBinder binder)
-        {
-            binder.Open(this.InternalOpenTimeout);
-            return new ReliableInputSessionChannelOverReply(this, binder, this.FaultHelper, id);
-        }
-
-        protected override void ProcessSequencedItem(ReliableInputSessionChannelOverReply reliableChannel, RequestContext context, WsrmMessageInfo info)
-        {
-            reliableChannel.ProcessDemuxedRequest(reliableChannel.Binder.WrapRequestContext(context), info);
-        }
-    }
-
-    class ReliableReplyListenerOverReply : ReliableListenerOverReply<IReplySessionChannel, ReliableReplySessionChannel>
-    {
-        public ReliableReplyListenerOverReply(ReliableSessionBindingElement binding, BindingContext context)
-            : base(binding, context)
-        {
-        }
-
-        protected override bool Duplex
-        {
-            get { return true; }
-        }
-
-        protected override ReliableReplySessionChannel CreateChannel(UniqueId id,
-            CreateSequenceInfo createSequenceInfo,
-            IServerReliableChannelBinder binder)
-        {
-            binder.Open(this.InternalOpenTimeout);
-            return new ReliableReplySessionChannel(this, binder, this.FaultHelper, id, createSequenceInfo.OfferIdentifier);
-        }
-
-        protected override void ProcessSequencedItem(ReliableReplySessionChannel reliableChannel, RequestContext context, WsrmMessageInfo info)
-        {
-            reliableChannel.ProcessDemuxedRequest(reliableChannel.Binder.WrapRequestContext(context), info);
-        }
-    }
-
-    class ReliableInputListenerOverReplySession : ReliableListenerOverReplySession<IInputSessionChannel, ReliableInputSessionChannelOverReply>
-    {
-        public ReliableInputListenerOverReplySession(ReliableSessionBindingElement binding, BindingContext context)
-            : base(binding, context)
-        {
-        }
+        public ReliableInputListenerOverReply(
+            ReliableSessionBindingElement binding,
+            BindingContext context
+        )
+            : base(binding, context) { }
 
         protected override bool Duplex
         {
@@ -1846,52 +2144,103 @@ namespace System.ServiceModel.Channels
         protected override ReliableInputSessionChannelOverReply CreateChannel(
             UniqueId id,
             CreateSequenceInfo createSequenceInfo,
-            IServerReliableChannelBinder binder)
+            IServerReliableChannelBinder binder
+        )
         {
             binder.Open(this.InternalOpenTimeout);
             return new ReliableInputSessionChannelOverReply(this, binder, this.FaultHelper, id);
         }
 
-        protected override void ProcessSequencedItem(IReplySessionChannel channel, RequestContext context, ReliableInputSessionChannelOverReply reliableChannel, WsrmMessageInfo info, bool newChannel)
+        protected override void ProcessSequencedItem(
+            ReliableInputSessionChannelOverReply reliableChannel,
+            RequestContext context,
+            WsrmMessageInfo info
+        )
         {
-            if (!newChannel)
-            {
-                IServerReliableChannelBinder binder = reliableChannel.Binder;
-
-                if (!binder.UseNewChannel(channel))
-                {
-                    context.RequestMessage.Close();
-                    context.Abort();
-                    channel.Abort();
-                    return;
-                }
-            }
-
-            reliableChannel.ProcessDemuxedRequest(reliableChannel.Binder.WrapRequestContext(context), info);
+            reliableChannel.ProcessDemuxedRequest(
+                reliableChannel.Binder.WrapRequestContext(context),
+                info
+            );
         }
     }
 
-    class ReliableReplyListenerOverReplySession : ReliableListenerOverReplySession<IReplySessionChannel, ReliableReplySessionChannel>
+    class ReliableReplyListenerOverReply
+        : ReliableListenerOverReply<IReplySessionChannel, ReliableReplySessionChannel>
     {
-        public ReliableReplyListenerOverReplySession(ReliableSessionBindingElement binding, BindingContext context)
-            : base(binding, context)
-        {
-        }
+        public ReliableReplyListenerOverReply(
+            ReliableSessionBindingElement binding,
+            BindingContext context
+        )
+            : base(binding, context) { }
 
         protected override bool Duplex
         {
             get { return true; }
         }
 
-        protected override ReliableReplySessionChannel CreateChannel(UniqueId id,
+        protected override ReliableReplySessionChannel CreateChannel(
+            UniqueId id,
             CreateSequenceInfo createSequenceInfo,
-            IServerReliableChannelBinder binder)
+            IServerReliableChannelBinder binder
+        )
         {
             binder.Open(this.InternalOpenTimeout);
-            return new ReliableReplySessionChannel(this, binder, this.FaultHelper, id, createSequenceInfo.OfferIdentifier);
+            return new ReliableReplySessionChannel(
+                this,
+                binder,
+                this.FaultHelper,
+                id,
+                createSequenceInfo.OfferIdentifier
+            );
         }
 
-        protected override void ProcessSequencedItem(IReplySessionChannel channel, RequestContext context, ReliableReplySessionChannel reliableChannel, WsrmMessageInfo info, bool newChannel)
+        protected override void ProcessSequencedItem(
+            ReliableReplySessionChannel reliableChannel,
+            RequestContext context,
+            WsrmMessageInfo info
+        )
+        {
+            reliableChannel.ProcessDemuxedRequest(
+                reliableChannel.Binder.WrapRequestContext(context),
+                info
+            );
+        }
+    }
+
+    class ReliableInputListenerOverReplySession
+        : ReliableListenerOverReplySession<
+            IInputSessionChannel,
+            ReliableInputSessionChannelOverReply
+        >
+    {
+        public ReliableInputListenerOverReplySession(
+            ReliableSessionBindingElement binding,
+            BindingContext context
+        )
+            : base(binding, context) { }
+
+        protected override bool Duplex
+        {
+            get { return false; }
+        }
+
+        protected override ReliableInputSessionChannelOverReply CreateChannel(
+            UniqueId id,
+            CreateSequenceInfo createSequenceInfo,
+            IServerReliableChannelBinder binder
+        )
+        {
+            binder.Open(this.InternalOpenTimeout);
+            return new ReliableInputSessionChannelOverReply(this, binder, this.FaultHelper, id);
+        }
+
+        protected override void ProcessSequencedItem(
+            IReplySessionChannel channel,
+            RequestContext context,
+            ReliableInputSessionChannelOverReply reliableChannel,
+            WsrmMessageInfo info,
+            bool newChannel
+        )
         {
             if (!newChannel)
             {
@@ -1906,7 +2255,68 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            reliableChannel.ProcessDemuxedRequest(reliableChannel.Binder.WrapRequestContext(context), info);
+            reliableChannel.ProcessDemuxedRequest(
+                reliableChannel.Binder.WrapRequestContext(context),
+                info
+            );
+        }
+    }
+
+    class ReliableReplyListenerOverReplySession
+        : ReliableListenerOverReplySession<IReplySessionChannel, ReliableReplySessionChannel>
+    {
+        public ReliableReplyListenerOverReplySession(
+            ReliableSessionBindingElement binding,
+            BindingContext context
+        )
+            : base(binding, context) { }
+
+        protected override bool Duplex
+        {
+            get { return true; }
+        }
+
+        protected override ReliableReplySessionChannel CreateChannel(
+            UniqueId id,
+            CreateSequenceInfo createSequenceInfo,
+            IServerReliableChannelBinder binder
+        )
+        {
+            binder.Open(this.InternalOpenTimeout);
+            return new ReliableReplySessionChannel(
+                this,
+                binder,
+                this.FaultHelper,
+                id,
+                createSequenceInfo.OfferIdentifier
+            );
+        }
+
+        protected override void ProcessSequencedItem(
+            IReplySessionChannel channel,
+            RequestContext context,
+            ReliableReplySessionChannel reliableChannel,
+            WsrmMessageInfo info,
+            bool newChannel
+        )
+        {
+            if (!newChannel)
+            {
+                IServerReliableChannelBinder binder = reliableChannel.Binder;
+
+                if (!binder.UseNewChannel(channel))
+                {
+                    context.RequestMessage.Close();
+                    context.Abort();
+                    channel.Abort();
+                    return;
+                }
+            }
+
+            reliableChannel.ProcessDemuxedRequest(
+                reliableChannel.Binder.WrapRequestContext(context),
+                info
+            );
         }
     }
 }

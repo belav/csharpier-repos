@@ -56,7 +56,10 @@ namespace System.Text.Json
         /// </remarks>
         [RequiresUnreferencedCode(SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(SerializationRequiresDynamicCodeMessage)]
-        public static TValue? Deserialize<TValue>(ref Utf8JsonReader reader, JsonSerializerOptions? options = null)
+        public static TValue? Deserialize<TValue>(
+            ref Utf8JsonReader reader,
+            JsonSerializerOptions? options = null
+        )
         {
             JsonTypeInfo<TValue> jsonTypeInfo = GetTypeInfo<TValue>(options);
             return Read<TValue>(ref reader, jsonTypeInfo);
@@ -109,7 +112,11 @@ namespace System.Text.Json
         /// </remarks>
         [RequiresUnreferencedCode(SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(SerializationRequiresDynamicCodeMessage)]
-        public static object? Deserialize(ref Utf8JsonReader reader, Type returnType, JsonSerializerOptions? options = null)
+        public static object? Deserialize(
+            ref Utf8JsonReader reader,
+            Type returnType,
+            JsonSerializerOptions? options = null
+        )
         {
             if (returnType is null)
             {
@@ -159,7 +166,10 @@ namespace System.Text.Json
         ///     Hence, <see cref="JsonReaderOptions.AllowTrailingCommas"/>, <see cref="JsonReaderOptions.MaxDepth"/>, and <see cref="JsonReaderOptions.CommentHandling"/> are used while reading.
         ///   </para>
         /// </remarks>
-        public static TValue? Deserialize<TValue>(ref Utf8JsonReader reader, JsonTypeInfo<TValue> jsonTypeInfo)
+        public static TValue? Deserialize<TValue>(
+            ref Utf8JsonReader reader,
+            JsonTypeInfo<TValue> jsonTypeInfo
+        )
         {
             if (jsonTypeInfo is null)
             {
@@ -268,7 +278,11 @@ namespace System.Text.Json
         ///     Hence, <see cref="JsonReaderOptions.AllowTrailingCommas"/>, <see cref="JsonReaderOptions.MaxDepth"/>, and <see cref="JsonReaderOptions.CommentHandling"/> are used while reading.
         ///   </para>
         /// </remarks>
-        public static object? Deserialize(ref Utf8JsonReader reader, Type returnType, JsonSerializerContext context)
+        public static object? Deserialize(
+            ref Utf8JsonReader reader,
+            Type returnType,
+            JsonSerializerContext context
+        )
         {
             if (returnType is null)
             {
@@ -282,7 +296,10 @@ namespace System.Text.Json
             return ReadAsObject(ref reader, GetTypeInfo(context, returnType));
         }
 
-        private static TValue? Read<TValue>(ref Utf8JsonReader reader, JsonTypeInfo<TValue> jsonTypeInfo)
+        private static TValue? Read<TValue>(
+            ref Utf8JsonReader reader,
+            JsonTypeInfo<TValue> jsonTypeInfo
+        )
         {
             Debug.Assert(jsonTypeInfo.IsConfigured);
 
@@ -332,7 +349,10 @@ namespace System.Text.Json
             }
         }
 
-        private static Utf8JsonReader GetReaderScopedToNextValue(ref Utf8JsonReader reader, scoped ref ReadStack state)
+        private static Utf8JsonReader GetReaderScopedToNextValue(
+            ref Utf8JsonReader reader,
+            scoped ref ReadStack state
+        )
         {
             // Advances the provided reader, validating that it is pointing to a complete JSON value.
             // If successful, returns a new Utf8JsonReader that is scoped to the next value, reusing existing buffers.
@@ -351,13 +371,16 @@ namespace System.Text.Json
                     // Using a reader loop the caller has identified a property they wish to
                     // hydrate into a JsonDocument. Move to the value first.
                     case JsonTokenType.PropertyName:
+                    {
+                        if (!reader.Read())
                         {
-                            if (!reader.Read())
-                            {
-                                ThrowHelper.ThrowJsonReaderException(ref reader, ExceptionResource.ExpectedOneCompleteToken);
-                            }
-                            break;
+                            ThrowHelper.ThrowJsonReaderException(
+                                ref reader,
+                                ExceptionResource.ExpectedOneCompleteToken
+                            );
                         }
+                        break;
+                    }
                 }
 
                 switch (reader.TokenType)
@@ -369,7 +392,10 @@ namespace System.Text.Json
 
                         if (!reader.TrySkip())
                         {
-                            ThrowHelper.ThrowJsonReaderException(ref reader, ExceptionResource.NotEnoughData);
+                            ThrowHelper.ThrowJsonReaderException(
+                                ref reader,
+                                ExceptionResource.NotEnoughData
+                            );
                         }
 
                         long totalLength = reader.BytesConsumed - startingOffset;
@@ -379,14 +405,17 @@ namespace System.Text.Json
                         {
                             valueSpan = reader.OriginalSpan.Slice(
                                 checked((int)startingOffset),
-                                checked((int)totalLength));
+                                checked((int)totalLength)
+                            );
                         }
                         else
                         {
                             valueSequence = sequence.Slice(startingOffset, totalLength);
                         }
 
-                        Debug.Assert(reader.TokenType is JsonTokenType.EndObject or JsonTokenType.EndArray);
+                        Debug.Assert(
+                            reader.TokenType is JsonTokenType.EndObject or JsonTokenType.EndArray
+                        );
                         break;
 
                     // Single-token values
@@ -420,13 +449,19 @@ namespace System.Text.Json
 
                             Debug.Assert(
                                 readerSpan[(int)reader.TokenStartIndex] == (byte)'"',
-                                $"Calculated span starts with {readerSpan[(int)reader.TokenStartIndex]}");
+                                $"Calculated span starts with {readerSpan[(int)reader.TokenStartIndex]}"
+                            );
 
                             Debug.Assert(
-                                readerSpan[(int)reader.TokenStartIndex + payloadLength - 1] == (byte)'"',
-                                $"Calculated span ends with {readerSpan[(int)reader.TokenStartIndex + payloadLength - 1]}");
+                                readerSpan[(int)reader.TokenStartIndex + payloadLength - 1]
+                                    == (byte)'"',
+                                $"Calculated span ends with {readerSpan[(int)reader.TokenStartIndex + payloadLength - 1]}"
+                            );
 
-                            valueSpan = readerSpan.Slice((int)reader.TokenStartIndex, payloadLength);
+                            valueSpan = readerSpan.Slice(
+                                (int)reader.TokenStartIndex,
+                                payloadLength
+                            );
                         }
                         else
                         {
@@ -434,14 +469,19 @@ namespace System.Text.Json
                                 ? reader.ValueSequence.Length + 2
                                 : reader.ValueSpan.Length + 2;
 
-                            valueSequence = originalSequence.Slice(reader.TokenStartIndex, payloadLength);
+                            valueSequence = originalSequence.Slice(
+                                reader.TokenStartIndex,
+                                payloadLength
+                            );
                             Debug.Assert(
                                 valueSequence.First.Span[0] == (byte)'"',
-                                $"Calculated sequence starts with {valueSequence.First.Span[0]}");
+                                $"Calculated sequence starts with {valueSequence.First.Span[0]}"
+                            );
 
                             Debug.Assert(
                                 valueSequence.ToArray()[payloadLength - 1] == (byte)'"',
-                                $"Calculated sequence ends with {valueSequence.ToArray()[payloadLength - 1]}");
+                                $"Calculated sequence ends with {valueSequence.ToArray()[payloadLength - 1]}"
+                            );
                         }
 
                         break;
@@ -454,7 +494,8 @@ namespace System.Text.Json
                         ThrowHelper.ThrowJsonReaderException(
                             ref reader,
                             ExceptionResource.ExpectedStartOfValueNotFound,
-                            displayByte);
+                            displayByte
+                        );
 
                         break;
                 }

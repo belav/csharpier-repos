@@ -8,7 +8,6 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Reflection;
 using System.Threading.Tasks;
-
 using Moq.Async;
 
 namespace Moq
@@ -33,7 +32,6 @@ namespace Moq
     /// </remarks>
     [EditorBrowsable(EditorBrowsableState.Advanced)]
     public abstract class LookupOrFallbackDefaultValueProvider : DefaultValueProvider
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private Dictionary<object, Func<Type, Mock, object>> factories;
@@ -114,7 +112,10 @@ namespace Moq
         }
 
         /// <inheritdoc/>
-        protected internal sealed override object GetDefaultParameterValue(ParameterInfo parameter, Mock mock)
+        protected internal sealed override object GetDefaultParameterValue(
+            ParameterInfo parameter,
+            Mock mock
+        )
         {
             Debug.Assert(parameter != null);
             Debug.Assert(parameter.ParameterType != typeof(void));
@@ -124,7 +125,10 @@ namespace Moq
         }
 
         /// <inheritdoc/>
-        protected internal sealed override object GetDefaultReturnValue(MethodInfo method, Mock mock)
+        protected internal sealed override object GetDefaultReturnValue(
+            MethodInfo method,
+            Mock mock
+        )
         {
             Debug.Assert(method != null);
             Debug.Assert(method.ReturnType != typeof(void));
@@ -140,14 +144,18 @@ namespace Moq
             Debug.Assert(type != typeof(void));
             Debug.Assert(mock != null);
 
-            var handlerKey = type.IsGenericType ? type.GetGenericTypeDefinition()
-                           : type.IsArray ? typeof(Array)
-                           : type;
+            var handlerKey =
+                type.IsGenericType ? type.GetGenericTypeDefinition()
+                : type.IsArray ? typeof(Array)
+                : type;
 
             Func<Type, Mock, object> factory;
-            if (this.factories.TryGetValue(handlerKey, out factory) || this.factories.TryGetValue(handlerKey.FullName, out factory))
+            if (
+                this.factories.TryGetValue(handlerKey, out factory)
+                || this.factories.TryGetValue(handlerKey.FullName, out factory)
+            )
             {
-                if (factory != null)  // This prevents delegation to an `IAwaitableFactory` for deregistered awaitable types; see note above.
+                if (factory != null) // This prevents delegation to an `IAwaitableFactory` for deregistered awaitable types; see note above.
                 {
                     return factory.Invoke(type, mock);
                 }
@@ -155,7 +163,8 @@ namespace Moq
             else if (AwaitableFactory.TryGet(type) is { } awaitableFactory)
             {
                 var resultType = awaitableFactory.ResultType;
-                var result = resultType != typeof(void) ? this.GetDefaultValue(resultType, mock) : null;
+                var result =
+                    resultType != typeof(void) ? this.GetDefaultValue(resultType, mock) : null;
                 return awaitableFactory.CreateCompleted(result);
             }
 

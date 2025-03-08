@@ -11,27 +11,23 @@ namespace System.Collections.Generic
 {
     internal partial class ArraySortHelper<T>
     {
-        private static readonly ArraySortHelper<T> s_defaultArraySortHelper = new ArraySortHelper<T>();
+        private static readonly ArraySortHelper<T> s_defaultArraySortHelper =
+            new ArraySortHelper<T>();
 
         public static ArraySortHelper<T> Default
         {
-            get
-            {
-                return s_defaultArraySortHelper;
-            }
+            get { return s_defaultArraySortHelper; }
         }
     }
 
     internal partial class ArraySortHelper<TKey, TValue>
     {
-        private static readonly ArraySortHelper<TKey, TValue> s_defaultArraySortHelper = new ArraySortHelper<TKey, TValue>();
+        private static readonly ArraySortHelper<TKey, TValue> s_defaultArraySortHelper =
+            new ArraySortHelper<TKey, TValue>();
 
         public static ArraySortHelper<TKey, TValue> Default
         {
-            get
-            {
-                return s_defaultArraySortHelper;
-            }
+            get { return s_defaultArraySortHelper; }
         }
     }
 }

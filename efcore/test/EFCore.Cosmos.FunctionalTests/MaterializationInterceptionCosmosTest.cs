@@ -3,24 +3,21 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class MaterializationInterceptionCosmosTest :
-    MaterializationInterceptionTestBase<MaterializationInterceptionCosmosTest.CosmosLibraryContext>,
-    IClassFixture<MaterializationInterceptionCosmosTest.MaterializationInterceptionCosmosFixture>
+public class MaterializationInterceptionCosmosTest
+    : MaterializationInterceptionTestBase<MaterializationInterceptionCosmosTest.CosmosLibraryContext>,
+        IClassFixture<MaterializationInterceptionCosmosTest.MaterializationInterceptionCosmosFixture>
 {
     public MaterializationInterceptionCosmosTest(MaterializationInterceptionCosmosFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
-    public override Task Intercept_query_materialization_with_owned_types_projecting_collection(bool async)
-        => Task.CompletedTask;
+    public override Task Intercept_query_materialization_with_owned_types_projecting_collection(
+        bool async
+    ) => Task.CompletedTask;
 
     public class CosmosLibraryContext : LibraryContext
     {
         public CosmosLibraryContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -30,20 +27,24 @@ public class MaterializationInterceptionCosmosTest :
         }
     }
 
-    public override LibraryContext CreateContext(IEnumerable<ISingletonInterceptor> interceptors, bool inject)
-        => new CosmosLibraryContext(Fixture.CreateOptions(interceptors, inject));
+    public override LibraryContext CreateContext(
+        IEnumerable<ISingletonInterceptor> interceptors,
+        bool inject
+    ) => new CosmosLibraryContext(Fixture.CreateOptions(interceptors, inject));
 
     public class MaterializationInterceptionCosmosFixture : SingletonInterceptorsFixtureBase
     {
-        protected override string StoreName
-            => "MaterializationInterception";
+        protected override string StoreName => "MaterializationInterception";
 
-        protected override ITestStoreFactory TestStoreFactory
-            => CosmosTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => CosmosTestStoreFactory.Instance;
 
         protected override IServiceCollection InjectInterceptors(
             IServiceCollection serviceCollection,
-            IEnumerable<ISingletonInterceptor> injectedInterceptors)
-            => base.InjectInterceptors(serviceCollection.AddEntityFrameworkCosmos(), injectedInterceptors);
+            IEnumerable<ISingletonInterceptor> injectedInterceptors
+        ) =>
+            base.InjectInterceptors(
+                serviceCollection.AddEntityFrameworkCosmos(),
+                injectedInterceptors
+            );
     }
 }

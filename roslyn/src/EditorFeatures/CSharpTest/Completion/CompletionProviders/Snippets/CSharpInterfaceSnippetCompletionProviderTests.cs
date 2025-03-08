@@ -10,23 +10,22 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders.Snippets
 {
     [Trait(Traits.Feature, Traits.Features.Completion)]
-    public class CSharpInterfaceSnippetCompletionProviderTests : AbstractCSharpSnippetCompletionProviderTests
+    public class CSharpInterfaceSnippetCompletionProviderTests
+        : AbstractCSharpSnippetCompletionProviderTests
     {
         protected override string ItemToCommit => "interface";
 
         [WpfFact]
         public async Task InsertInterfaceSnippetInNamespaceTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 namespace Namespace
                 {
                     $$
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 namespace Namespace
                 {
                     interface MyInterface
@@ -35,21 +34,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertInterfaceSnippetInFileScopedNamespaceTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 namespace Namespace;
 
                 $$
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 namespace Namespace;
 
                 interface MyInterface
@@ -57,58 +58,64 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     $$
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertInterfaceSnippetTest()
         {
-            var markupBeforeCommit =
-@"$$";
+            var markupBeforeCommit = @"$$";
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 interface MyInterface
                 {
                     $$
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertInterfaceTopLevelSnippetTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 System.Console.WriteLine();
                 $$
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 System.Console.WriteLine();
                 interface MyInterface
                 {
                     $$
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertInterfaceSnippetInClassTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 class MyClass
                 {
                     $$
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 class MyClass
                 {
                     interface MyInterface
@@ -117,22 +124,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertInterfaceSnippetInRecordTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 record MyRecord
                 {
                     $$
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 record MyRecord
                 {
                     interface MyInterface
@@ -141,22 +150,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertInterfaceSnippetInStructTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 struct MyStruct
                 {
                     $$
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 struct MyStruct
                 {
                     interface MyInterface
@@ -165,22 +176,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertInterfaceSnippetInInterfaceTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 interface MyInterface
                 {
                     $$
                 }
                 """;
 
-            var expectedCodeAfterCommit =
-                """
+            var expectedCodeAfterCommit = """
                 interface MyInterface
                 {
                     interface MyInterface1
@@ -189,7 +202,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                     }
                 }
                 """;
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
@@ -218,14 +235,17 @@ public interface MyInterface
     $$
 }}
 ";
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact]
         public async Task NoInterfaceSnippetInEnumTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 enum MyEnum
                 {
                     $$
@@ -238,8 +258,7 @@ public interface MyInterface
         [WpfFact]
         public async Task NoInteraceSnippetInMethodTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 class Program
                 {
                     public void Method()
@@ -254,8 +273,7 @@ public interface MyInterface
         [WpfFact]
         public async Task NoInterfaceSnippetInConstructorTest()
         {
-            var markupBeforeCommit =
-                """
+            var markupBeforeCommit = """
                 class Program
                 {
                     public Program()
@@ -284,7 +302,11 @@ public interface MyInterface
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfTheory]
@@ -317,7 +339,11 @@ public interface MyInterface
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfTheory]
@@ -333,7 +359,11 @@ public interface MyInterface
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfTheory]
@@ -355,7 +385,9 @@ public interface MyInterface
         [InlineData("protected")]
         [InlineData("private protected")]
         [InlineData("protected internal")]
-        public async Task NoAdditionalAccessibilityModifiersIfAfterPartialKeywordTest(string modifier)
+        public async Task NoAdditionalAccessibilityModifiersIfAfterPartialKeywordTest(
+            string modifier
+        )
         {
             var markupBeforeCommit = $$"""
                 <Workspace>
@@ -379,7 +411,11 @@ public interface MyInterface
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/69600")]
@@ -407,7 +443,11 @@ public interface MyInterface
                 }
                 """;
 
-            await VerifyCustomCommitProviderAsync(markupBeforeCommit, ItemToCommit, expectedCodeAfterCommit);
+            await VerifyCustomCommitProviderAsync(
+                markupBeforeCommit,
+                ItemToCommit,
+                expectedCodeAfterCommit
+            );
         }
     }
 }

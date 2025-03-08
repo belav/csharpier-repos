@@ -26,14 +26,18 @@ public class CosmosTypeMappingSource : TypeMappingSource
     public CosmosTypeMappingSource(TypeMappingSourceDependencies dependencies)
         : base(dependencies)
     {
-        _clrTypeMappings
-            = new Dictionary<Type, CosmosTypeMapping>
+        _clrTypeMappings = new Dictionary<Type, CosmosTypeMapping>
+        {
             {
-                {
-                    typeof(JObject), new CosmosTypeMapping(
-                        typeof(JObject), jsonValueReaderWriter: dependencies.JsonValueReaderWriterSource.FindReaderWriter(typeof(JObject)))
-                }
-            };
+                typeof(JObject),
+                new CosmosTypeMapping(
+                    typeof(JObject),
+                    jsonValueReaderWriter: dependencies.JsonValueReaderWriterSource.FindReaderWriter(
+                        typeof(JObject)
+                    )
+                )
+            },
+        };
     }
 
     /// <summary>
@@ -49,21 +53,27 @@ public class CosmosTypeMappingSource : TypeMappingSource
 
         return _clrTypeMappings.TryGetValue(clrType, out var mapping)
             ? mapping
-            : (FindPrimitiveMapping(mappingInfo)
+            : (
+                FindPrimitiveMapping(mappingInfo)
                 ?? FindCollectionMapping(mappingInfo)
-                ?? base.FindMapping(mappingInfo));
+                ?? base.FindMapping(mappingInfo)
+            );
     }
 
     private CoreTypeMapping? FindPrimitiveMapping(in TypeMappingInfo mappingInfo)
     {
         var clrType = mappingInfo.ClrType!;
-        if ((clrType.IsValueType
-                && clrType != typeof(Guid)
-                && !clrType.IsEnum)
-            || clrType == typeof(string))
+        if (
+            (clrType.IsValueType && clrType != typeof(Guid) && !clrType.IsEnum)
+            || clrType == typeof(string)
+        )
         {
             return new CosmosTypeMapping(
-                clrType, jsonValueReaderWriter: Dependencies.JsonValueReaderWriterSource.FindReaderWriter(clrType));
+                clrType,
+                jsonValueReaderWriter: Dependencies.JsonValueReaderWriterSource.FindReaderWriter(
+                    clrType
+                )
+            );
         }
 
         return null;
@@ -84,40 +94,54 @@ public class CosmosTypeMappingSource : TypeMappingSource
             return null;
         }
 
-        var jsonValueReaderWriter = Dependencies.JsonValueReaderWriterSource.FindReaderWriter(clrType);
+        var jsonValueReaderWriter = Dependencies.JsonValueReaderWriterSource.FindReaderWriter(
+            clrType
+        );
 
         if (clrType.IsArray)
         {
             var elementMappingInfo = new TypeMappingInfo(elementType);
-            var elementMapping = FindPrimitiveMapping(elementMappingInfo)
+            var elementMapping =
+                FindPrimitiveMapping(elementMappingInfo)
                 ?? FindCollectionMapping(elementMappingInfo);
             return elementMapping == null
                 ? null
                 : new CosmosTypeMapping(
-                    clrType, CreateArrayComparer(elementMapping, elementType), jsonValueReaderWriter: jsonValueReaderWriter);
+                    clrType,
+                    CreateArrayComparer(elementMapping, elementType),
+                    jsonValueReaderWriter: jsonValueReaderWriter
+                );
         }
 
         if (clrType is { IsGenericType: true, IsGenericTypeDefinition: false })
         {
             var genericTypeDefinition = clrType.GetGenericTypeDefinition();
-            if (genericTypeDefinition == typeof(List<>)
+            if (
+                genericTypeDefinition == typeof(List<>)
                 || genericTypeDefinition == typeof(IList<>)
                 || genericTypeDefinition == typeof(IReadOnlyList<>)
                 || genericTypeDefinition == typeof(ObservableCollection<>)
-                || genericTypeDefinition == typeof(Collection<>))
+                || genericTypeDefinition == typeof(Collection<>)
+            )
             {
                 var elementMappingInfo = new TypeMappingInfo(elementType);
-                var elementMapping = FindPrimitiveMapping(elementMappingInfo)
+                var elementMapping =
+                    FindPrimitiveMapping(elementMappingInfo)
                     ?? FindCollectionMapping(elementMappingInfo);
                 return elementMapping == null
                     ? null
                     : new CosmosTypeMapping(
-                        clrType, CreateListComparer(elementMapping, elementType, clrType), jsonValueReaderWriter: jsonValueReaderWriter);
+                        clrType,
+                        CreateListComparer(elementMapping, elementType, clrType),
+                        jsonValueReaderWriter: jsonValueReaderWriter
+                    );
             }
 
-            if (genericTypeDefinition == typeof(Dictionary<,>)
+            if (
+                genericTypeDefinition == typeof(Dictionary<,>)
                 || genericTypeDefinition == typeof(IDictionary<,>)
-                || genericTypeDefinition == typeof(IReadOnlyDictionary<,>))
+                || genericTypeDefinition == typeof(IReadOnlyDictionary<,>)
+            )
             {
                 var genericArguments = clrType.GenericTypeArguments;
                 if (genericArguments[0] != typeof(string))
@@ -127,59 +151,78 @@ public class CosmosTypeMappingSource : TypeMappingSource
 
                 elementType = genericArguments[1];
                 var elementMappingInfo = new TypeMappingInfo(elementType);
-                var elementMapping = FindPrimitiveMapping(elementMappingInfo)
+                var elementMapping =
+                    FindPrimitiveMapping(elementMappingInfo)
                     ?? FindCollectionMapping(elementMappingInfo);
                 return elementMapping == null
                     ? null
                     : new CosmosTypeMapping(
-                        clrType, CreateStringDictionaryComparer(elementMapping, elementType, clrType),
-                        jsonValueReaderWriter: jsonValueReaderWriter);
+                        clrType,
+                        CreateStringDictionaryComparer(elementMapping, elementType, clrType),
+                        jsonValueReaderWriter: jsonValueReaderWriter
+                    );
             }
         }
 
         return null;
     }
 
-    private static ValueComparer CreateArrayComparer(CoreTypeMapping elementMapping, Type elementType)
+    private static ValueComparer CreateArrayComparer(
+        CoreTypeMapping elementMapping,
+        Type elementType
+    )
     {
         var unwrappedType = elementType.UnwrapNullableType();
 
-        return (ValueComparer)Activator.CreateInstance(
-            elementType == unwrappedType
-                ? typeof(SingleDimensionalArrayComparer<>).MakeGenericType(elementType)
-                : typeof(NullableSingleDimensionalArrayComparer<>).MakeGenericType(unwrappedType),
-            elementMapping.Comparer)!;
+        return (ValueComparer)
+            Activator.CreateInstance(
+                elementType == unwrappedType
+                    ? typeof(SingleDimensionalArrayComparer<>).MakeGenericType(elementType)
+                    : typeof(NullableSingleDimensionalArrayComparer<>).MakeGenericType(
+                        unwrappedType
+                    ),
+                elementMapping.Comparer
+            )!;
     }
 
     private static ValueComparer CreateListComparer(
         CoreTypeMapping elementMapping,
         Type elementType,
         Type listType,
-        bool readOnly = false)
+        bool readOnly = false
+    )
     {
         var unwrappedType = elementType.UnwrapNullableType();
 
-        return (ValueComparer)Activator.CreateInstance(
-            elementType == unwrappedType
-                ? typeof(ListComparer<,>).MakeGenericType(elementType, listType)
-                : typeof(NullableListComparer<,>).MakeGenericType(unwrappedType, listType),
-            elementMapping.Comparer,
-            readOnly)!;
+        return (ValueComparer)
+            Activator.CreateInstance(
+                elementType == unwrappedType
+                    ? typeof(ListComparer<,>).MakeGenericType(elementType, listType)
+                    : typeof(NullableListComparer<,>).MakeGenericType(unwrappedType, listType),
+                elementMapping.Comparer,
+                readOnly
+            )!;
     }
 
     private static ValueComparer CreateStringDictionaryComparer(
         CoreTypeMapping elementMapping,
         Type elementType,
         Type dictType,
-        bool readOnly = false)
+        bool readOnly = false
+    )
     {
         var unwrappedType = elementType.UnwrapNullableType();
 
-        return (ValueComparer)Activator.CreateInstance(
-            elementType == unwrappedType
-                ? typeof(StringDictionaryComparer<,>).MakeGenericType(elementType, dictType)
-                : typeof(NullableStringDictionaryComparer<,>).MakeGenericType(unwrappedType, dictType),
-            elementMapping.Comparer,
-            readOnly)!;
+        return (ValueComparer)
+            Activator.CreateInstance(
+                elementType == unwrappedType
+                    ? typeof(StringDictionaryComparer<,>).MakeGenericType(elementType, dictType)
+                    : typeof(NullableStringDictionaryComparer<,>).MakeGenericType(
+                        unwrappedType,
+                        dictType
+                    ),
+                elementMapping.Comparer,
+                readOnly
+            )!;
     }
 }

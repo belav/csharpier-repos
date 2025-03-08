@@ -1,6 +1,6 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved
 // This program uses code hyperlinks available as part of the HyperAddin Visual Studio plug-in.
-// It is available from http://www.codeplex.com/hyperAddin 
+// It is available from http://www.codeplex.com/hyperAddin
 #define FEATURE_MANAGED_ETW
 
 #if !ES_BUILD_STANDALONE
@@ -13,13 +13,12 @@
 #endif
 
 #if ES_BUILD_STANDALONE
-using Environment = Microsoft.Diagnostics.Tracing.Internal.Environment;
-#endif
-
 using System;
+using System.Collections.ObjectModel;
 using System.Runtime.InteropServices;
 using System.Security;
-using System.Collections.ObjectModel;
+using Environment = Microsoft.Diagnostics.Tracing.Internal.Environment;
+#endif
 
 #if !ES_BUILD_AGAINST_DOTNET_V35
 using Contract = System.Diagnostics.Contracts.Contract;
@@ -47,10 +46,8 @@ namespace System.Diagnostics.Tracing
         /// <param name="eventSourceName">
         /// The name of the event source. Must not be null.
         /// </param>
-        public EventSource(
-            string eventSourceName)
-            : this(eventSourceName, EventSourceSettings.EtwSelfDescribingEventFormat)
-        { }
+        public EventSource(string eventSourceName)
+            : this(eventSourceName, EventSourceSettings.EtwSelfDescribingEventFormat) { }
 
         /// <summary>
         /// Construct an EventSource with a given name for non-contract based events (e.g. those using the Write() API).
@@ -59,35 +56,38 @@ namespace System.Diagnostics.Tracing
         /// The name of the event source. Must not be null.
         /// </param>
         /// <param name="config">
-        /// Configuration options for the EventSource as a whole. 
+        /// Configuration options for the EventSource as a whole.
         /// </param>
-        public EventSource(
-            string eventSourceName,
-            EventSourceSettings config)
+        public EventSource(string eventSourceName, EventSourceSettings config)
             : this(eventSourceName, config, null) { }
 
         /// <summary>
         /// Construct an EventSource with a given name for non-contract based events (e.g. those using the Write() API).
-        /// 
-        /// Also specify a list of key-value pairs called traits (you must pass an even number of strings).   
+        ///
+        /// Also specify a list of key-value pairs called traits (you must pass an even number of strings).
         /// The first string is the key and the second is the value.   These are not interpreted by EventSource
-        /// itself but may be interprated the listeners.  Can be fetched with GetTrait(string).   
+        /// itself but may be interprated the listeners.  Can be fetched with GetTrait(string).
         /// </summary>
         /// <param name="eventSourceName">
         /// The name of the event source. Must not be null.
         /// </param>
         /// <param name="config">
-        /// Configuration options for the EventSource as a whole. 
+        /// Configuration options for the EventSource as a whole.
         /// </param>
         /// <param name="traits">A collection of key-value strings (must be an even number).</param>
         public EventSource(
             string eventSourceName,
             EventSourceSettings config,
-            params string[] traits)
+            params string[] traits
+        )
             : this(
-                eventSourceName == null ? new Guid() : GenerateGuidFromName(eventSourceName.ToUpperInvariant()),
+                eventSourceName == null
+                    ? new Guid()
+                    : GenerateGuidFromName(eventSourceName.ToUpperInvariant()),
                 eventSourceName,
-                config, traits)
+                config,
+                traits
+            )
         {
             if (eventSourceName == null)
             {
@@ -169,9 +169,7 @@ namespace System.Diagnostics.Tracing
         /// create the fields of the event.
         /// </param>
         [SecuritySafeCritical]
-        public unsafe void Write<T>(
-            string eventName,
-            T data)
+        public unsafe void Write<T>(string eventName, T data)
         {
             if (!this.IsEnabled())
             {
@@ -206,10 +204,7 @@ namespace System.Diagnostics.Tracing
         /// create the fields of the event.
         /// </param>
         [SecuritySafeCritical]
-        public unsafe void Write<T>(
-            string eventName,
-            EventSourceOptions options,
-            T data)
+        public unsafe void Write<T>(string eventName, EventSourceOptions options, T data)
         {
             if (!this.IsEnabled())
             {
@@ -245,10 +240,7 @@ namespace System.Diagnostics.Tracing
         /// create the fields of the event.
         /// </param>
         [SecuritySafeCritical]
-        public unsafe void Write<T>(
-            string eventName,
-            ref EventSourceOptions options,
-            ref T data)
+        public unsafe void Write<T>(string eventName, ref EventSourceOptions options, ref T data)
         {
             if (!this.IsEnabled())
             {
@@ -261,7 +253,7 @@ namespace System.Diagnostics.Tracing
         /// <summary>
         /// Writes an event.
         /// This overload is meant for clients that need to manipuate the activityId
-        /// and related ActivityId for the event.  
+        /// and related ActivityId for the event.
         /// </summary>
         /// <typeparam name="T">
         /// The type that defines the event and its payload. This must be an
@@ -296,21 +288,26 @@ namespace System.Diagnostics.Tracing
             ref EventSourceOptions options,
             ref Guid activityId,
             ref Guid relatedActivityId,
-            ref T data)
+            ref T data
+        )
         {
             if (!this.IsEnabled())
             {
                 return;
             }
 
-            fixed (Guid* pActivity = &activityId, pRelated = &relatedActivityId)
+            fixed (
+                Guid* pActivity = &activityId,
+                    pRelated = &relatedActivityId
+            )
             {
                 this.WriteImpl(
                     eventName,
                     ref options,
                     ref data,
                     pActivity,
-                    relatedActivityId == Guid.Empty ? null : pRelated);
+                    relatedActivityId == Guid.Empty ? null : pRelated
+                );
             }
         }
 
@@ -346,24 +343,34 @@ namespace System.Diagnostics.Tracing
             string eventName,
             ref EventSourceOptions options,
             TraceLoggingEventTypes eventTypes,
-             Guid* activityID, 
-             Guid* childActivityID,
-            params object[] values)
+            Guid* activityID,
+            Guid* childActivityID,
+            params object[] values
+        )
         {
             if (!this.IsEnabled())
             {
                 return;
             }
-            byte level = (options.valuesSet & EventSourceOptions.levelSet) != 0
-                ? options.level
-                : eventTypes.level;
-            EventKeywords keywords = (options.valuesSet & EventSourceOptions.keywordsSet) != 0
-                ? options.keywords
-                : eventTypes.keywords;
+            byte level =
+                (options.valuesSet & EventSourceOptions.levelSet) != 0
+                    ? options.level
+                    : eventTypes.level;
+            EventKeywords keywords =
+                (options.valuesSet & EventSourceOptions.keywordsSet) != 0
+                    ? options.keywords
+                    : eventTypes.keywords;
 
             if (this.IsEnabled((EventLevel)level, keywords))
             {
-                WriteMultiMergeInner(eventName, ref options, eventTypes, activityID, childActivityID, values);
+                WriteMultiMergeInner(
+                    eventName,
+                    ref options,
+                    eventTypes,
+                    activityID,
+                    childActivityID,
+                    values
+                );
             }
         }
 
@@ -372,8 +379,8 @@ namespace System.Diagnostics.Tracing
         /// combined properties of any number of values. This method is
         /// intended for use in advanced logging scenarios that support a
         /// dynamic set of event context providers.
-        /// Attention: This API does not check whether the event is enabled or not. 
-        /// Please use WriteMultiMerge to avoid spending CPU cycles for events that are 
+        /// Attention: This API does not check whether the event is enabled or not.
+        /// Please use WriteMultiMerge to avoid spending CPU cycles for events that are
         /// not enabled.
         /// </summary>
         /// <param name="eventName">
@@ -398,26 +405,31 @@ namespace System.Diagnostics.Tracing
         /// </param>
         [SecuritySafeCritical]
         private unsafe void WriteMultiMergeInner(
-        string eventName,
-        ref EventSourceOptions options,
-        TraceLoggingEventTypes eventTypes,
-        Guid* activityID, 
-        Guid* childActivityID,
-        params object[] values)
+            string eventName,
+            ref EventSourceOptions options,
+            TraceLoggingEventTypes eventTypes,
+            Guid* activityID,
+            Guid* childActivityID,
+            params object[] values
+        )
         {
             int identity = 0;
-            byte level = (options.valuesSet & EventSourceOptions.levelSet) != 0
-                ? options.level
-                : eventTypes.level;
-            byte opcode = (options.valuesSet & EventSourceOptions.opcodeSet) != 0
-                ? options.opcode
-                : eventTypes.opcode;
-            EventTags tags = (options.valuesSet & EventSourceOptions.tagsSet) != 0
-                ? options.tags
-                : eventTypes.Tags;
-            EventKeywords keywords = (options.valuesSet & EventSourceOptions.keywordsSet) != 0
-                ? options.keywords
-                : eventTypes.keywords;
+            byte level =
+                (options.valuesSet & EventSourceOptions.levelSet) != 0
+                    ? options.level
+                    : eventTypes.level;
+            byte opcode =
+                (options.valuesSet & EventSourceOptions.opcodeSet) != 0
+                    ? options.opcode
+                    : eventTypes.opcode;
+            EventTags tags =
+                (options.valuesSet & EventSourceOptions.tagsSet) != 0
+                    ? options.tags
+                    : eventTypes.Tags;
+            EventKeywords keywords =
+                (options.valuesSet & EventSourceOptions.keywordsSet) != 0
+                    ? options.keywords
+                    : eventTypes.keywords;
 
             var nameInfo = eventTypes.GetNameInfo(eventName ?? eventTypes.Name, tags);
             if (nameInfo == null)
@@ -425,17 +437,23 @@ namespace System.Diagnostics.Tracing
                 return;
             }
             identity = nameInfo.identity;
-            EventDescriptor descriptor = new EventDescriptor(identity, level, opcode, (long)keywords);
+            EventDescriptor descriptor = new EventDescriptor(
+                identity,
+                level,
+                opcode,
+                (long)keywords
+            );
 
             var pinCount = eventTypes.pinCount;
             var scratch = stackalloc byte[eventTypes.scratchSize];
             var descriptors = stackalloc EventData[eventTypes.dataCount + 3];
             var pins = stackalloc GCHandle[pinCount];
 
-            fixed (byte*
-                pMetadata0 = this.providerMetadata,
-                pMetadata1 = nameInfo.nameMetadata,
-                pMetadata2 = eventTypes.typeMetadata)
+            fixed (
+                byte* pMetadata0 = this.providerMetadata,
+                    pMetadata1 = nameInfo.nameMetadata,
+                    pMetadata2 = eventTypes.typeMetadata
+            )
             {
                 descriptors[0].SetMetadata(pMetadata0, this.providerMetadata.Length, 2);
                 descriptors[1].SetMetadata(pMetadata1, nameInfo.nameMetadata.Length, 1);
@@ -452,11 +470,14 @@ namespace System.Diagnostics.Tracing
                         descriptors + 3,
                         eventTypes.dataCount,
                         pins,
-                        pinCount);
+                        pinCount
+                    );
 
                     for (int i = 0; i < eventTypes.typeInfos.Length; i++)
                     {
-                        eventTypes.typeInfos[i].WriteObjectData(TraceLoggingDataCollector.Instance, values[i]);
+                        eventTypes
+                            .typeInfos[i]
+                            .WriteObjectData(TraceLoggingDataCollector.Instance, values[i]);
                     }
 
                     this.WriteEventRaw(
@@ -465,14 +486,14 @@ namespace System.Diagnostics.Tracing
                         activityID,
                         childActivityID,
                         (int)(DataCollector.ThreadInstance.Finish() - descriptors),
-                        (IntPtr)descriptors);
+                        (IntPtr)descriptors
+                    );
                 }
                 finally
                 {
                     this.WriteCleanup(pins, pinCount);
                 }
             }
-
         }
 
         /// <summary>
@@ -496,7 +517,7 @@ namespace System.Diagnostics.Tracing
         /// </param>
         /// <param name="data">
         /// The previously serialized values to include in the event. Must not be null.
-        /// The number and types of the values must match the number and types of the 
+        /// The number and types of the values must match the number and types of the
         /// fields described by the eventTypes parameter.
         /// </param>
         [SecuritySafeCritical]
@@ -506,7 +527,8 @@ namespace System.Diagnostics.Tracing
             TraceLoggingEventTypes eventTypes,
             Guid* activityID,
             Guid* childActivityID,
-            EventData* data)
+            EventData* data
+        )
         {
             if (!this.IsEnabled())
             {
@@ -516,20 +538,29 @@ namespace System.Diagnostics.Tracing
             fixed (EventSourceOptions* pOptions = &options)
             {
                 EventDescriptor descriptor;
-                var nameInfo = this.UpdateDescriptor(eventName, eventTypes, ref options, out descriptor);
+                var nameInfo = this.UpdateDescriptor(
+                    eventName,
+                    eventTypes,
+                    ref options,
+                    out descriptor
+                );
                 if (nameInfo == null)
                 {
                     return;
                 }
 
                 // We make a descriptor for each EventData, and because we morph strings to counted strings
-                // we may have 2 for each arg, so we allocate enough for this.  
-                var descriptors = stackalloc EventData[eventTypes.dataCount + eventTypes.typeInfos.Length * 2 + 3];
+                // we may have 2 for each arg, so we allocate enough for this.
+                var descriptors =
+                    stackalloc EventData[
+                        eventTypes.dataCount + eventTypes.typeInfos.Length * 2 + 3
+                    ];
 
-                fixed (byte*
-                    pMetadata0 = this.providerMetadata,
-                    pMetadata1 = nameInfo.nameMetadata,
-                    pMetadata2 = eventTypes.typeMetadata)
+                fixed (
+                    byte* pMetadata0 = this.providerMetadata,
+                        pMetadata1 = nameInfo.nameMetadata,
+                        pMetadata2 = eventTypes.typeMetadata
+                )
                 {
                     descriptors[0].SetMetadata(pMetadata0, this.providerMetadata.Length, 2);
                     descriptors[1].SetMetadata(pMetadata1, nameInfo.nameMetadata.Length, 1);
@@ -539,16 +570,16 @@ namespace System.Diagnostics.Tracing
                     for (int i = 0; i < eventTypes.typeInfos.Length; i++)
                     {
                         // Until M3, we need to morph strings to a counted representation
-                        // When TDH supports null terminated strings, we can remove this.  
+                        // When TDH supports null terminated strings, we can remove this.
                         if (eventTypes.typeInfos[i].DataType == typeof(string))
                         {
-                            // Write out the size of the string 
+                            // Write out the size of the string
                             descriptors[numDescrs].m_Ptr = (long)&descriptors[numDescrs + 1].m_Size;
                             descriptors[numDescrs].m_Size = 2;
                             numDescrs++;
 
                             descriptors[numDescrs].m_Ptr = data[i].m_Ptr;
-                            descriptors[numDescrs].m_Size = data[i].m_Size - 2;   // Remove the null terminator
+                            descriptors[numDescrs].m_Size = data[i].m_Size - 2; // Remove the null terminator
                             numDescrs++;
                         }
                         else
@@ -556,8 +587,11 @@ namespace System.Diagnostics.Tracing
                             descriptors[numDescrs].m_Ptr = data[i].m_Ptr;
                             descriptors[numDescrs].m_Size = data[i].m_Size;
 
-                            // old conventions for bool is 4 bytes, but meta-data assumes 1.  
-                            if (data[i].m_Size == 4 && eventTypes.typeInfos[i].DataType == typeof(bool))
+                            // old conventions for bool is 4 bytes, but meta-data assumes 1.
+                            if (
+                                data[i].m_Size == 4
+                                && eventTypes.typeInfos[i].DataType == typeof(bool)
+                            )
                                 descriptors[numDescrs].m_Size = 1;
 
                             numDescrs++;
@@ -570,7 +604,8 @@ namespace System.Diagnostics.Tracing
                         activityID,
                         childActivityID,
                         numDescrs,
-                        (IntPtr)descriptors);
+                        (IntPtr)descriptors
+                    );
                 }
             }
         }
@@ -581,7 +616,8 @@ namespace System.Diagnostics.Tracing
             ref EventSourceOptions options,
             ref T data,
             Guid* pActivityId,
-            Guid* pRelatedActivityId)
+            Guid* pRelatedActivityId
+        )
         {
             try
             {
@@ -590,8 +626,15 @@ namespace System.Diagnostics.Tracing
                 fixed (EventSourceOptions* pOptions = &options)
                 {
                     EventDescriptor descriptor;
-                    options.Opcode = options.IsOpcodeSet ? options.Opcode : GetOpcodeWithDefault(options.Opcode, eventName);
-                    var nameInfo = this.UpdateDescriptor(eventName, eventTypes, ref options, out descriptor);
+                    options.Opcode = options.IsOpcodeSet
+                        ? options.Opcode
+                        : GetOpcodeWithDefault(options.Opcode, eventName);
+                    var nameInfo = this.UpdateDescriptor(
+                        eventName,
+                        eventTypes,
+                        ref options,
+                        out descriptor
+                    );
                     if (nameInfo == null)
                     {
                         return;
@@ -602,10 +645,11 @@ namespace System.Diagnostics.Tracing
                     var descriptors = stackalloc EventData[eventTypes.dataCount + 3];
                     var pins = stackalloc GCHandle[pinCount];
 
-                    fixed (byte*
-                        pMetadata0 = this.providerMetadata,
-                        pMetadata1 = nameInfo.nameMetadata,
-                        pMetadata2 = eventTypes.typeMetadata)
+                    fixed (
+                        byte* pMetadata0 = this.providerMetadata,
+                            pMetadata1 = nameInfo.nameMetadata,
+                            pMetadata2 = eventTypes.typeMetadata
+                    )
                     {
                         descriptors[0].SetMetadata(pMetadata0, this.providerMetadata.Length, 2);
                         descriptors[1].SetMetadata(pMetadata1, nameInfo.nameMetadata.Length, 1);
@@ -618,12 +662,22 @@ namespace System.Diagnostics.Tracing
 
                         Guid activityId = Guid.Empty;
                         Guid relatedActivityId = Guid.Empty;
-                        if (pActivityId == null && pRelatedActivityId == null &&
-                           ((options.ActivityOptions & EventActivityOptions.Disable) == 0))
+                        if (
+                            pActivityId == null
+                            && pRelatedActivityId == null
+                            && ((options.ActivityOptions & EventActivityOptions.Disable) == 0)
+                        )
                         {
                             if (opcode == EventOpcode.Start)
                             {
-                                m_activityTracker.OnStart(m_name, eventName, 0, ref activityId, ref relatedActivityId, options.ActivityOptions);
+                                m_activityTracker.OnStart(
+                                    m_name,
+                                    eventName,
+                                    0,
+                                    ref activityId,
+                                    ref relatedActivityId,
+                                    options.ActivityOptions
+                                );
                             }
                             else if (opcode == EventOpcode.Stop)
                             {
@@ -643,27 +697,37 @@ namespace System.Diagnostics.Tracing
                                 descriptors + 3,
                                 eventTypes.dataCount,
                                 pins,
-                                pinCount);
+                                pinCount
+                            );
 
-                            eventTypes.typeInfo.WriteData(TraceLoggingDataCollector.Instance, ref data);
-                            
+                            eventTypes.typeInfo.WriteData(
+                                TraceLoggingDataCollector.Instance,
+                                ref data
+                            );
+
                             this.WriteEventRaw(
                                 eventName,
                                 ref descriptor,
                                 pActivityId,
                                 pRelatedActivityId,
                                 (int)(DataCollector.ThreadInstance.Finish() - descriptors),
-                                (IntPtr)descriptors);
+                                (IntPtr)descriptors
+                            );
 
-                            // 
+                            //
                             if (m_Dispatchers != null)
                             {
                                 var eventData = (EventPayload)(eventTypes.typeInfo.GetData(data));
-                                WriteToAllListeners(eventName, ref descriptor, nameInfo.tags, pActivityId, eventData);
+                                WriteToAllListeners(
+                                    eventName,
+                                    ref descriptor,
+                                    nameInfo.tags,
+                                    pActivityId,
+                                    eventData
+                                );
                             }
-
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
                             if (ex is EventSourceException)
                                 throw;
@@ -687,12 +751,18 @@ namespace System.Diagnostics.Tracing
         }
 
         [SecurityCritical]
-        private unsafe void WriteToAllListeners(string eventName, ref EventDescriptor eventDescriptor, EventTags tags, Guid* pActivityId, EventPayload payload)
+        private unsafe void WriteToAllListeners(
+            string eventName,
+            ref EventDescriptor eventDescriptor,
+            EventTags tags,
+            Guid* pActivityId,
+            EventPayload payload
+        )
         {
             EventWrittenEventArgs eventCallbackArgs = new EventWrittenEventArgs(this);
             eventCallbackArgs.EventName = eventName;
-            eventCallbackArgs.m_keywords = (EventKeywords) eventDescriptor.Keywords;
-            eventCallbackArgs.m_opcode = (EventOpcode) eventDescriptor.Opcode;
+            eventCallbackArgs.m_keywords = (EventKeywords)eventDescriptor.Keywords;
+            eventCallbackArgs.m_opcode = (EventOpcode)eventDescriptor.Opcode;
             eventCallbackArgs.m_tags = tags;
 
             // Self described events do not have an id attached. We mark it internally with -1.
@@ -702,8 +772,12 @@ namespace System.Diagnostics.Tracing
 
             if (payload != null)
             {
-                eventCallbackArgs.Payload = new ReadOnlyCollection<object>((IList<object>)payload.Values);
-                eventCallbackArgs.PayloadNames = new ReadOnlyCollection<string>((IList<string>)payload.Keys);
+                eventCallbackArgs.Payload = new ReadOnlyCollection<object>(
+                    (IList<object>)payload.Values
+                );
+                eventCallbackArgs.PayloadNames = new ReadOnlyCollection<string>(
+                    (IList<string>)payload.Keys
+                );
             }
 
             DispatchToAllListeners(-1, pActivityId, eventCallbackArgs);
@@ -712,7 +786,8 @@ namespace System.Diagnostics.Tracing
 #if !ES_BUILD_PCL
         [System.Runtime.ConstrainedExecution.ReliabilityContract(
             System.Runtime.ConstrainedExecution.Consistency.WillNotCorruptState,
-            System.Runtime.ConstrainedExecution.Cer.Success)]
+            System.Runtime.ConstrainedExecution.Cer.Success
+        )]
 #endif
         [SecurityCritical]
         [NonEvent]
@@ -745,20 +820,23 @@ namespace System.Diagnostics.Tracing
                             if (etwTrait == "GROUP")
                                 traitNum = 1;
                             else
-                                throw new ArgumentException(Environment.GetResourceString("UnknownEtwTrait", etwTrait), "traits");
+                                throw new ArgumentException(
+                                    Environment.GetResourceString("UnknownEtwTrait", etwTrait),
+                                    "traits"
+                                );
                         }
                         string value = m_traits[i + 1];
                         int lenPos = traitMetaData.Count;
-                        traitMetaData.Add(0);                                           // Emit size (to be filled in later) 
+                        traitMetaData.Add(0); // Emit size (to be filled in later)
                         traitMetaData.Add(0);
-                        traitMetaData.Add(traitNum);                                    // Emit Trait number
-                        var valueLen = AddValueToMetaData(traitMetaData, value) + 3;    // Emit the value bytes +3 accounts for 3 bytes we emited above.  
-                        traitMetaData[lenPos] = unchecked((byte)valueLen);              // Fill in size
+                        traitMetaData.Add(traitNum); // Emit Trait number
+                        var valueLen = AddValueToMetaData(traitMetaData, value) + 3; // Emit the value bytes +3 accounts for 3 bytes we emited above.
+                        traitMetaData[lenPos] = unchecked((byte)valueLen); // Fill in size
                         traitMetaData[lenPos + 1] = unchecked((byte)(valueLen >> 8));
                     }
                 }
                 providerMetadata = Statics.MetadataForString(this.Name, 0, traitMetaData.Count, 0);
-                int startPos = providerMetadata.Length-traitMetaData.Count;
+                int startPos = providerMetadata.Length - traitMetaData.Count;
                 foreach (var b in traitMetaData)
                     providerMetadata[startPos++] = b;
             }
@@ -782,32 +860,38 @@ namespace System.Diagnostics.Tracing
             {
                 for (int i = 1; i < value.Length; i++)
                 {
-                    if (value[i] != ' ')        // Skp spaces between bytes.  
+                    if (value[i] != ' ') // Skp spaces between bytes.
                     {
                         if (!(i + 1 < value.Length))
-                            throw new ArgumentException(Environment.GetResourceString("EvenHexDigits"), "traits");
+                            throw new ArgumentException(
+                                Environment.GetResourceString("EvenHexDigits"),
+                                "traits"
+                            );
                         metaData.Add((byte)(HexDigit(value[i]) * 16 + HexDigit(value[i + 1])));
                         i++;
                     }
                 }
             }
-            else if (' ' <= firstChar)      // Is it alphabetic (excludes digits and most punctuation. 
+            else if (' ' <= firstChar) // Is it alphabetic (excludes digits and most punctuation.
                 metaData.AddRange(Encoding.UTF8.GetBytes(value));
             else
-                throw new ArgumentException(Environment.GetResourceString("IllegalValue", value), "traits");
+                throw new ArgumentException(
+                    Environment.GetResourceString("IllegalValue", value),
+                    "traits"
+                );
 
             return metaData.Count - startPos;
         }
 
         /// <summary>
-        /// Returns a value 0-15 if 'c' is a hexadecimal digit.   If  it throws an argument exception.  
+        /// Returns a value 0-15 if 'c' is a hexadecimal digit.   If  it throws an argument exception.
         /// </summary>
         private static int HexDigit(char c)
         {
             if ('0' <= c && c <= '9')
                 return (c - '0');
             if ('a' <= c)
-                c = unchecked((char) (c - ('a' - 'A')));        // Convert to lower case
+                c = unchecked((char)(c - ('a' - 'A'))); // Convert to lower case
             if ('A' <= c && c <= 'F')
                 return (c - 'A' + 10);
             throw new ArgumentException(Environment.GetResourceString("BadHexDigit", c), "traits");
@@ -817,22 +901,27 @@ namespace System.Diagnostics.Tracing
             string name,
             TraceLoggingEventTypes eventInfo,
             ref EventSourceOptions options,
-            out EventDescriptor descriptor)
+            out EventDescriptor descriptor
+        )
         {
             NameInfo nameInfo = null;
             int identity = 0;
-            byte level = (options.valuesSet & EventSourceOptions.levelSet) != 0
-                ? options.level
-                : eventInfo.level;
-            byte opcode = (options.valuesSet & EventSourceOptions.opcodeSet) != 0
-                ? options.opcode
-                : eventInfo.opcode;
-            EventTags tags = (options.valuesSet & EventSourceOptions.tagsSet) != 0
-                ? options.tags
-                : eventInfo.Tags;
-            EventKeywords keywords = (options.valuesSet & EventSourceOptions.keywordsSet) != 0
-                ? options.keywords
-                : eventInfo.keywords;
+            byte level =
+                (options.valuesSet & EventSourceOptions.levelSet) != 0
+                    ? options.level
+                    : eventInfo.level;
+            byte opcode =
+                (options.valuesSet & EventSourceOptions.opcodeSet) != 0
+                    ? options.opcode
+                    : eventInfo.opcode;
+            EventTags tags =
+                (options.valuesSet & EventSourceOptions.tagsSet) != 0
+                    ? options.tags
+                    : eventInfo.Tags;
+            EventKeywords keywords =
+                (options.valuesSet & EventSourceOptions.keywordsSet) != 0
+                    ? options.keywords
+                    : eventInfo.keywords;
 
             if (this.IsEnabled((EventLevel)level, keywords))
             {

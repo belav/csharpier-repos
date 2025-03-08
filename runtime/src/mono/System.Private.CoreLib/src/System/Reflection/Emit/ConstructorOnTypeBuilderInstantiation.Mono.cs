@@ -40,8 +40,11 @@ namespace System.Reflection.Emit
     internal partial class ConstructorOnTypeBuilderInstantiation
     {
         // Called from the runtime to return the corresponding finished ConstructorInfo object
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2075:UnrecognizedReflectionPattern",
-            Justification = "Reflection.Emit is not subject to trimming")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2075:UnrecognizedReflectionPattern",
+            Justification = "Reflection.Emit is not subject to trimming"
+        )]
         internal ConstructorInfo RuntimeResolve()
         {
             Type type = _type.InternalResolve();

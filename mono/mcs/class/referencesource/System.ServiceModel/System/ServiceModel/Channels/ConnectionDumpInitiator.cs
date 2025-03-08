@@ -7,11 +7,11 @@
 
 namespace System.ServiceModel.Channels
 {
-    using System.Text;
+    using System.IO;
     using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
     using System.Security;
-    using System.IO;
+    using System.Text;
 
     class ConnectionDumpInitiator : IConnectionInitiator
     {
@@ -29,7 +29,12 @@ namespace System.ServiceModel.Channels
             return CreateDumpingConnection(connectionInitiator.Connect(uri, timeout));
         }
 
-        public IAsyncResult BeginConnect(Uri uri, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginConnect(
+            Uri uri,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return connectionInitiator.BeginConnect(uri, timeout, callback, state);
         }
@@ -86,9 +91,25 @@ namespace System.ServiceModel.Channels
                 base.Abort();
             }
 
-            public override IAsyncResult BeginWrite(byte[] buffer, int offset, int size, bool immediate, TimeSpan timeout, AsyncCallback callback, object state)
+            public override IAsyncResult BeginWrite(
+                byte[] buffer,
+                int offset,
+                int size,
+                bool immediate,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
-                IAsyncResult result = base.BeginWrite(buffer, offset, size, immediate, timeout, callback, state);
+                IAsyncResult result = base.BeginWrite(
+                    buffer,
+                    offset,
+                    size,
+                    immediate,
+                    timeout,
+                    callback,
+                    state
+                );
                 OnWrite(buffer, offset, size);
                 return result;
             }
@@ -129,13 +150,26 @@ namespace System.ServiceModel.Channels
                 return bytesRead;
             }
 
-            public override void Write(byte[] buffer, int offset, int size, bool immediate, TimeSpan timeout)
+            public override void Write(
+                byte[] buffer,
+                int offset,
+                int size,
+                bool immediate,
+                TimeSpan timeout
+            )
             {
                 base.Write(buffer, offset, size, immediate, timeout);
                 OnWrite(buffer, offset, size);
             }
 
-            public override void Write(byte[] buffer, int offset, int size, bool immediate, TimeSpan timeout, BufferManager bufferManager)
+            public override void Write(
+                byte[] buffer,
+                int offset,
+                int size,
+                bool immediate,
+                TimeSpan timeout,
+                BufferManager bufferManager
+            )
             {
                 base.Write(buffer, offset, size, immediate, timeout, bufferManager);
                 OnWrite(buffer, offset, size);
@@ -146,7 +180,11 @@ namespace System.ServiceModel.Channels
                 [SuppressUnmanagedCodeSecurity]
                 [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)]
                 [ResourceExposure(ResourceScope.None)]
-                static extern int GetModuleFileName(IntPtr module, StringBuilder fileName, int count);
+                static extern int GetModuleFileName(
+                    IntPtr module,
+                    StringBuilder fileName,
+                    int count
+                );
 
                 public static string GetThisModulePath()
                 {

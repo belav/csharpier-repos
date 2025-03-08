@@ -17,5 +17,8 @@ public interface IComponentActivator
     /// </summary>
     /// <param name="componentType">The type of component to create.</param>
     /// <returns>A reference to the newly created component.</returns>
-    IComponent CreateInstance([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type componentType);
+    IComponent CreateInstance(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+            Type componentType
+    );
 }

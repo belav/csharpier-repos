@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.Components.QuickGrid;
 /// <typeparam name="TGridItem">The type of data represented by each row in the grid.</typeparam>
 public sealed class GridSort<TGridItem>
 {
-    private const string ExpressionNotRepresentableMessage = "The supplied expression can't be represented as a property name for sorting. Only simple member expressions, such as @(x => x.SomeProperty), can be converted to property names.";
+    private const string ExpressionNotRepresentableMessage =
+        "The supplied expression can't be represented as a property name for sorting. Only simple member expressions, such as @(x => x.SomeProperty), can be converted to property names.";
 
     private readonly Func<IQueryable<TGridItem>, bool, IOrderedQueryable<TGridItem>> _first;
     private List<Func<IOrderedQueryable<TGridItem>, bool, IOrderedQueryable<TGridItem>>>? _then;
@@ -23,7 +24,10 @@ public sealed class GridSort<TGridItem>
     private IReadOnlyCollection<SortedProperty>? _cachedPropertyListAscending;
     private IReadOnlyCollection<SortedProperty>? _cachedPropertyListDescending;
 
-    internal GridSort(Func<IQueryable<TGridItem>, bool, IOrderedQueryable<TGridItem>> first, (LambdaExpression, bool) firstExpression)
+    internal GridSort(
+        Func<IQueryable<TGridItem>, bool, IOrderedQueryable<TGridItem>> first,
+        (LambdaExpression, bool) firstExpression
+    )
     {
         _first = first;
         _firstExpression = firstExpression;
@@ -37,9 +41,12 @@ public sealed class GridSort<TGridItem>
     /// <typeparam name="U">The type of the expression's value.</typeparam>
     /// <param name="expression">An expression defining how a set of <typeparamref name="TGridItem"/> instances are to be sorted.</param>
     /// <returns>A <see cref="GridSort{T}"/> instance representing the specified sorting rule.</returns>
-    public static GridSort<TGridItem> ByAscending<U>(Expression<Func<TGridItem, U>> expression)
-        => new((queryable, asc) => asc ? queryable.OrderBy(expression) : queryable.OrderByDescending(expression),
-            (expression, true));
+    public static GridSort<TGridItem> ByAscending<U>(Expression<Func<TGridItem, U>> expression) =>
+        new(
+            (queryable, asc) =>
+                asc ? queryable.OrderBy(expression) : queryable.OrderByDescending(expression),
+            (expression, true)
+        );
 
     /// <summary>
     /// Produces a <see cref="GridSort{T}"/> instance that sorts according to the specified <paramref name="expression"/>, descending.
@@ -47,9 +54,12 @@ public sealed class GridSort<TGridItem>
     /// <typeparam name="U">The type of the expression's value.</typeparam>
     /// <param name="expression">An expression defining how a set of <typeparamref name="TGridItem"/> instances are to be sorted.</param>
     /// <returns>A <see cref="GridSort{T}"/> instance representing the specified sorting rule.</returns>
-    public static GridSort<TGridItem> ByDescending<U>(Expression<Func<TGridItem, U>> expression)
-        => new((queryable, asc) => asc ? queryable.OrderByDescending(expression) : queryable.OrderBy(expression),
-            (expression, false));
+    public static GridSort<TGridItem> ByDescending<U>(Expression<Func<TGridItem, U>> expression) =>
+        new(
+            (queryable, asc) =>
+                asc ? queryable.OrderByDescending(expression) : queryable.OrderBy(expression),
+            (expression, false)
+        );
 
     /// <summary>
     /// Updates a <see cref="GridSort{T}"/> instance by appending a further sorting rule.
@@ -61,7 +71,10 @@ public sealed class GridSort<TGridItem>
     {
         _then ??= new();
         _thenExpressions ??= new();
-        _then.Add((queryable, asc) => asc ? queryable.ThenBy(expression) : queryable.ThenByDescending(expression));
+        _then.Add(
+            (queryable, asc) =>
+                asc ? queryable.ThenBy(expression) : queryable.ThenByDescending(expression)
+        );
         _thenExpressions.Add((expression, true));
         _cachedPropertyListAscending = null;
         _cachedPropertyListDescending = null;
@@ -78,7 +91,10 @@ public sealed class GridSort<TGridItem>
     {
         _then ??= new();
         _thenExpressions ??= new();
-        _then.Add((queryable, asc) => asc ? queryable.ThenByDescending(expression) : queryable.ThenBy(expression));
+        _then.Add(
+            (queryable, asc) =>
+                asc ? queryable.ThenByDescending(expression) : queryable.ThenBy(expression)
+        );
         _thenExpressions.Add((expression, false));
         _cachedPropertyListAscending = null;
         _cachedPropertyListDescending = null;
@@ -118,14 +134,30 @@ public sealed class GridSort<TGridItem>
     {
         var result = new List<SortedProperty>
         {
-            new SortedProperty { PropertyName = ToPropertyName(_firstExpression.Item1), Direction = (_firstExpression.Item2 ^ ascending) ? SortDirection.Descending : SortDirection.Ascending }
+            new SortedProperty
+            {
+                PropertyName = ToPropertyName(_firstExpression.Item1),
+                Direction =
+                    (_firstExpression.Item2 ^ ascending)
+                        ? SortDirection.Descending
+                        : SortDirection.Ascending,
+            },
         };
 
         if (_thenExpressions is not null)
         {
             foreach (var (thenLambda, thenAscending) in _thenExpressions)
             {
-                result.Add(new SortedProperty { PropertyName = ToPropertyName(thenLambda), Direction = (thenAscending ^ ascending) ? SortDirection.Descending : SortDirection.Ascending });
+                result.Add(
+                    new SortedProperty
+                    {
+                        PropertyName = ToPropertyName(thenLambda),
+                        Direction =
+                            (thenAscending ^ ascending)
+                                ? SortDirection.Descending
+                                : SortDirection.Ascending,
+                    }
+                );
             }
         }
 
@@ -167,19 +199,23 @@ public sealed class GridSort<TGridItem>
         }
 
         // Now construct the string
-        return string.Create(length, body, (chars, body) =>
-        {
-            var nextPos = chars.Length;
-            while (body is not null)
+        return string.Create(
+            length,
+            body,
+            (chars, body) =>
             {
-                nextPos -= body.Member.Name.Length;
-                body.Member.Name.CopyTo(chars[nextPos..]);
-                if (nextPos > 0)
+                var nextPos = chars.Length;
+                while (body is not null)
                 {
-                    chars[--nextPos] = '.';
+                    nextPos -= body.Member.Name.Length;
+                    body.Member.Name.CopyTo(chars[nextPos..]);
+                    if (nextPos > 0)
+                    {
+                        chars[--nextPos] = '.';
+                    }
+                    body = (body.Expression as MemberExpression)!;
                 }
-                body = (body.Expression as MemberExpression)!;
             }
-        });
+        );
     }
 }

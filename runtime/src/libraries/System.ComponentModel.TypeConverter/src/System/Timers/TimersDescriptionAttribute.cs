@@ -19,19 +19,26 @@ namespace System.Timers
         /// <summary>
         /// Constructs a new sys description.
         /// </summary>
-        public TimersDescriptionAttribute(string description) : base(description) { }
+        public TimersDescriptionAttribute(string description)
+            : base(description) { }
 
-        internal TimersDescriptionAttribute(TimersDescriptionStringId id) : base(GetResourceString(id)) { }
+        internal TimersDescriptionAttribute(TimersDescriptionStringId id)
+            : base(GetResourceString(id)) { }
 
         private static string GetResourceString(TimersDescriptionStringId id)
         {
             switch (id)
             {
-                case TimersDescriptionStringId.TimerAutoReset: return SR.TimerAutoReset;
-                case TimersDescriptionStringId.TimerEnabled: return SR.TimerEnabled;
-                case TimersDescriptionStringId.TimerInterval: return SR.TimerInterval;
-                case TimersDescriptionStringId.TimerIntervalElapsed: return SR.TimerIntervalElapsed;
-                case TimersDescriptionStringId.TimerSynchronizingObject: return SR.TimerSynchronizingObject;
+                case TimersDescriptionStringId.TimerAutoReset:
+                    return SR.TimerAutoReset;
+                case TimersDescriptionStringId.TimerEnabled:
+                    return SR.TimerEnabled;
+                case TimersDescriptionStringId.TimerInterval:
+                    return SR.TimerInterval;
+                case TimersDescriptionStringId.TimerIntervalElapsed:
+                    return SR.TimerIntervalElapsed;
+                case TimersDescriptionStringId.TimerSynchronizingObject:
+                    return SR.TimerSynchronizingObject;
                 default:
                     Debug.Fail($"Unexpected resource {id}");
                     return "";
@@ -64,6 +71,6 @@ namespace System.Timers
         TimerEnabled,
         TimerInterval,
         TimerIntervalElapsed,
-        TimerSynchronizingObject
+        TimerSynchronizingObject,
     }
 }

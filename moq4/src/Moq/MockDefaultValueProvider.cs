@@ -6,7 +6,6 @@ using System.Diagnostics;
 
 namespace Moq
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal sealed class MockDefaultValueProvider : LookupOrFallbackDefaultValueProvider
@@ -28,15 +27,13 @@ namespace Moq
         sealed class MockDefaultValueProvider : LookupOrFallbackDefaultValueProvider
     */
     /// <summary>
-    /// A <see cref="DefaultValueProvider"/> that returns an empty default value 
+    /// A <see cref="DefaultValueProvider"/> that returns an empty default value
     /// for non-mockable types, and mocks for all other types (interfaces and
     /// non-sealed classes) that can be mocked.
     /// </summary>
     sealed class MockDefaultValueProvider : LookupOrFallbackDefaultValueProvider
     {
-        internal MockDefaultValueProvider()
-        {
-        }
+        internal MockDefaultValueProvider() { }
 
         internal override DefaultValue Kind => DefaultValue.Mock;
 
@@ -57,9 +54,14 @@ namespace Moq
                 var mockType = typeof(Mock<>).MakeGenericType(type);
                 Mock newMock = (Mock)Activator.CreateInstance(mockType, mock.Behavior);
                 newMock.DefaultValueProvider = mock.DefaultValueProvider;
-                if (mock.MutableSetups.FindLast(s => s is StubbedPropertiesSetup) is StubbedPropertiesSetup sts)
+                if (
+                    mock.MutableSetups.FindLast(s => s is StubbedPropertiesSetup)
+                    is StubbedPropertiesSetup sts
+                )
                 {
-                    newMock.MutableSetups.Add(new StubbedPropertiesSetup(newMock, sts.DefaultValueProvider));
+                    newMock.MutableSetups.Add(
+                        new StubbedPropertiesSetup(newMock, sts.DefaultValueProvider)
+                    );
                 }
                 if (!type.IsDelegateType())
                 {

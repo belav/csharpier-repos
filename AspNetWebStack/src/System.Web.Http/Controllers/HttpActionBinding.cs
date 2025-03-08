@@ -13,10 +13,10 @@ using System.Web.Http.Metadata;
 namespace System.Web.Http.Controllers
 {
     /// <summary>
-    /// This describes *how* the binding will happen. Does not actually bind. 
-    /// This is static for a given action descriptor and can be reused across requests. 
-    /// This may be a nice thing to log. Or set a breakpoint after we create and preview what's about to happen. 
-    /// In theory, this could be precompiled for each Action descriptor.  
+    /// This describes *how* the binding will happen. Does not actually bind.
+    /// This is static for a given action descriptor and can be reused across requests.
+    /// This may be a nice thing to log. Or set a breakpoint after we create and preview what's about to happen.
+    /// In theory, this could be precompiled for each Action descriptor.
     /// </summary>
     public class HttpActionBinding
     {
@@ -25,26 +25,24 @@ namespace System.Web.Http.Controllers
 
         private ModelMetadataProvider _metadataProvider;
 
-        public HttpActionBinding()
-        {
-        }
+        public HttpActionBinding() { }
 
-        public HttpActionBinding(HttpActionDescriptor actionDescriptor, HttpParameterBinding[] bindings)
+        public HttpActionBinding(
+            HttpActionDescriptor actionDescriptor,
+            HttpParameterBinding[] bindings
+        )
         {
             ActionDescriptor = actionDescriptor;
             ParameterBindings = bindings;
         }
 
         /// <summary>
-        /// Back pointer to the action this binding is for. 
+        /// Back pointer to the action this binding is for.
         /// This can also provide the Type[], string[] names for the parameters.
         /// </summary>
         public HttpActionDescriptor ActionDescriptor
         {
-            get
-            {
-                return _actionDescriptor;
-            }
+            get { return _actionDescriptor; }
             set
             {
                 if (value == null)
@@ -56,15 +54,16 @@ namespace System.Web.Http.Controllers
         }
 
         /// <summary>
-        /// Specifies synchronous bindings for each parameter.This is a parallel array to the ActionDescriptor's parameter array. 
+        /// Specifies synchronous bindings for each parameter.This is a parallel array to the ActionDescriptor's parameter array.
         /// </summary>
-        [SuppressMessage("Microsoft.Performance", "CA1819:PropertiesShouldNotReturnArrays", Justification = "Want an array")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1819:PropertiesShouldNotReturnArrays",
+            Justification = "Want an array"
+        )]
         public HttpParameterBinding[] ParameterBindings
         {
-            get
-            {
-                return _parameterBindings;
-            }
+            get { return _parameterBindings; }
             set
             {
                 if (value == null)
@@ -75,7 +74,10 @@ namespace System.Web.Http.Controllers
             }
         }
 
-        public virtual Task ExecuteBindingAsync(HttpActionContext actionContext, CancellationToken cancellationToken)
+        public virtual Task ExecuteBindingAsync(
+            HttpActionContext actionContext,
+            CancellationToken cancellationToken
+        )
         {
             if (_parameterBindings.Length == 0)
             {
@@ -103,14 +105,21 @@ namespace System.Web.Http.Controllers
             return ExecuteBindingAsyncCore(actionContext, cancellationToken);
         }
 
-        private async Task ExecuteBindingAsyncCore(HttpActionContext actionContext, CancellationToken cancellationToken)
+        private async Task ExecuteBindingAsyncCore(
+            HttpActionContext actionContext,
+            CancellationToken cancellationToken
+        )
         {
             // Execute all the binders.
             for (int index = 0; index < ParameterBindings.Length; index++)
             {
                 HttpParameterBinding parameterBinder = ParameterBindings[index];
 
-                await parameterBinder.ExecuteBindingAsync(_metadataProvider, actionContext, cancellationToken);
+                await parameterBinder.ExecuteBindingAsync(
+                    _metadataProvider,
+                    actionContext,
+                    cancellationToken
+                );
             }
         }
     }

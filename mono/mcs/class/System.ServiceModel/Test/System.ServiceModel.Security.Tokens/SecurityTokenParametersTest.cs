@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -39,53 +39,60 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ServiceModel
 {
-	[TestFixture]
-	public class SecurityTokenParametersTest
-	{
-		class MySecurityTokenParameters : SecurityTokenParameters
-		{
-			protected override bool HasAsymmetricKey {
-				get { throw new NotImplementedException (); }
-			}
+    [TestFixture]
+    public class SecurityTokenParametersTest
+    {
+        class MySecurityTokenParameters : SecurityTokenParameters
+        {
+            protected override bool HasAsymmetricKey
+            {
+                get { throw new NotImplementedException(); }
+            }
 
-			protected override bool SupportsClientAuthentication {
-				get { throw new NotImplementedException (); }
-			}
+            protected override bool SupportsClientAuthentication
+            {
+                get { throw new NotImplementedException(); }
+            }
 
-			protected override bool SupportsClientWindowsIdentity {
-				get { throw new NotImplementedException (); }
-			}
+            protected override bool SupportsClientWindowsIdentity
+            {
+                get { throw new NotImplementedException(); }
+            }
 
-			protected override bool SupportsServerAuthentication {
-				get { throw new NotImplementedException (); }
-			}
+            protected override bool SupportsServerAuthentication
+            {
+                get { throw new NotImplementedException(); }
+            }
 
-			protected override SecurityTokenParameters CloneCore ()
-			{
-				throw new NotImplementedException ();
-			}
+            protected override SecurityTokenParameters CloneCore()
+            {
+                throw new NotImplementedException();
+            }
 
-			protected override SecurityKeyIdentifierClause CreateKeyIdentifierClause (
-				SecurityToken token, SecurityTokenReferenceStyle referenceStyle)
-			{
-				throw new NotImplementedException ();
-			}
+            protected override SecurityKeyIdentifierClause CreateKeyIdentifierClause(
+                SecurityToken token,
+                SecurityTokenReferenceStyle referenceStyle
+            )
+            {
+                throw new NotImplementedException();
+            }
 
-			protected override void InitializeSecurityTokenRequirement (SecurityTokenRequirement requirement)
-			{
-				throw new NotImplementedException ();
-			}
-		}
+            protected override void InitializeSecurityTokenRequirement(
+                SecurityTokenRequirement requirement
+            )
+            {
+                throw new NotImplementedException();
+            }
+        }
 
-		[Test]
-		public void DefaultValues ()
-		{
-			MySecurityTokenParameters tp = new MySecurityTokenParameters ();
-			Assert.AreEqual (SecurityTokenInclusionMode.AlwaysToRecipient, tp.InclusionMode, "#1");
-			Assert.AreEqual (SecurityTokenReferenceStyle.Internal, tp.ReferenceStyle, "#2");
-			Assert.AreEqual (true, tp.RequireDerivedKeys, "#3");
-
-		}
-	}
+        [Test]
+        public void DefaultValues()
+        {
+            MySecurityTokenParameters tp = new MySecurityTokenParameters();
+            Assert.AreEqual(SecurityTokenInclusionMode.AlwaysToRecipient, tp.InclusionMode, "#1");
+            Assert.AreEqual(SecurityTokenReferenceStyle.Internal, tp.ReferenceStyle, "#2");
+            Assert.AreEqual(true, tp.RequireDerivedKeys, "#3");
+        }
+    }
 }
 #endif

@@ -17,7 +17,12 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
         /// <param name="projectId"><see cref="ProjectId"/> this file belongs to</param>
         /// <param name="projectFilePath">full path to project file (ex, csproj)</param>
         /// <param name="filePath">full path to non source file (ex, cshtml)</param>
-        Task<RazorDynamicFileInfo?> GetDynamicFileInfoAsync(ProjectId projectId, string? projectFilePath, string filePath, CancellationToken cancellationToken);
+        Task<RazorDynamicFileInfo?> GetDynamicFileInfoAsync(
+            ProjectId projectId,
+            string? projectFilePath,
+            string filePath,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// let provider know certain file has been removed
@@ -25,7 +30,12 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
         /// <param name="projectId"><see cref="ProjectId"/> this file belongs to</param>
         /// <param name="projectFilePath">full path to project file (ex, csproj)</param>
         /// <param name="filePath">full path to non source file (ex, cshtml)</param>
-        Task RemoveDynamicFileInfoAsync(ProjectId projectId, string? projectFilePath, string filePath, CancellationToken cancellationToken);
+        Task RemoveDynamicFileInfoAsync(
+            ProjectId projectId,
+            string? projectFilePath,
+            string filePath,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// indicate content of a file has updated. the event argument "string" should be same as "filepath" given to <see cref="GetDynamicFileInfoAsync(ProjectId, string, string, CancellationToken)"/>

@@ -7,43 +7,49 @@
 // <owner current="false" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data.SqlClient {
+namespace System.Data.SqlClient
+{
     using System;
-    using System.ComponentModel;
     using System.Collections;
+    using System.ComponentModel;
     using System.Data;
 
- public class SqlNotificationEventArgs : EventArgs {
+    public class SqlNotificationEventArgs : EventArgs
+    {
         private SqlNotificationType _type;
         private SqlNotificationInfo _info;
         private SqlNotificationSource _source;
 
-        public SqlNotificationEventArgs(SqlNotificationType type, SqlNotificationInfo info, SqlNotificationSource source) {
+        public SqlNotificationEventArgs(
+            SqlNotificationType type,
+            SqlNotificationInfo info,
+            SqlNotificationSource source
+        )
+        {
             _info = info;
             _source = source;
             _type = type;
         }
 
-        public SqlNotificationType Type {
-            get {
-                return _type;
-            }
+        public SqlNotificationType Type
+        {
+            get { return _type; }
         }
 
-        public SqlNotificationInfo Info {
-            get {
-                return _info;
-            }
+        public SqlNotificationInfo Info
+        {
+            get { return _info; }
         }
 
-        public SqlNotificationSource Source {
-            get {
-                return _source;
-            }
+        public SqlNotificationSource Source
+        {
+            get { return _source; }
         }
 
-        internal static SqlNotificationEventArgs NotifyError = new SqlNotificationEventArgs(SqlNotificationType.Subscribe, SqlNotificationInfo.Error, SqlNotificationSource.Object);
+        internal static SqlNotificationEventArgs NotifyError = new SqlNotificationEventArgs(
+            SqlNotificationType.Subscribe,
+            SqlNotificationInfo.Error,
+            SqlNotificationSource.Object
+        );
     }
 }
-
-

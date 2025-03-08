@@ -14,13 +14,12 @@ namespace Microsoft.VisualStudio.LanguageServices.DocumentOutline
         /// Helper for <see cref="DocumentOutlineViewState.ViewModelItemsTree"/>.  Allows us to lookup a set of
         /// view-models that intersect the care efficiently.
         /// </summary>
-        private readonly struct IntervalIntrospector : IIntervalIntrospector<DocumentSymbolDataViewModel>
+        private readonly struct IntervalIntrospector
+            : IIntervalIntrospector<DocumentSymbolDataViewModel>
         {
-            public int GetStart(DocumentSymbolDataViewModel value)
-                => value.Data.RangeSpan.Start;
+            public int GetStart(DocumentSymbolDataViewModel value) => value.Data.RangeSpan.Start;
 
-            public int GetLength(DocumentSymbolDataViewModel value)
-                => value.Data.RangeSpan.Length;
+            public int GetLength(DocumentSymbolDataViewModel value) => value.Data.RangeSpan.Length;
         }
     }
 }

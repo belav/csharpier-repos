@@ -16,19 +16,26 @@ public class GroupTest
 {
     private EndpointDataSource GetEndpointDataSource(IEndpointRouteBuilder endpointRouteBuilder)
     {
-        return Assert.IsAssignableFrom<EndpointDataSource>(Assert.Single(endpointRouteBuilder.DataSources));
+        return Assert.IsAssignableFrom<EndpointDataSource>(
+            Assert.Single(endpointRouteBuilder.DataSources)
+        );
     }
 
     [Fact]
     public async Task Prefix_CanBeEmpty()
     {
-        var builder = new DefaultEndpointRouteBuilder(new ApplicationBuilder(EmptyServiceProvider.Instance));
+        var builder = new DefaultEndpointRouteBuilder(
+            new ApplicationBuilder(EmptyServiceProvider.Instance)
+        );
         var group = builder.MapGroup("");
 
-        group.MapGet("/{id}", (int id, HttpContext httpContext) =>
-        {
-            httpContext.Items["id"] = id;
-        });
+        group.MapGet(
+            "/{id}",
+            (int id, HttpContext httpContext) =>
+            {
+                httpContext.Items["id"] = id;
+            }
+        );
 
         var dataSource = GetEndpointDataSource(builder);
         var endpoint = Assert.Single(dataSource.Endpoints);
@@ -53,14 +60,19 @@ public class GroupTest
     [Fact]
     public async Task PrefixWithRouteParameter_CanBeUsed()
     {
-        var builder = new DefaultEndpointRouteBuilder(new ApplicationBuilder(EmptyServiceProvider.Instance));
+        var builder = new DefaultEndpointRouteBuilder(
+            new ApplicationBuilder(EmptyServiceProvider.Instance)
+        );
         var group = builder.MapGroup("/{org}");
 
-        group.MapGet("/{id}", (string org, int id, HttpContext httpContext) =>
-        {
-            httpContext.Items["org"] = org;
-            httpContext.Items["id"] = id;
-        });
+        group.MapGet(
+            "/{id}",
+            (string org, int id, HttpContext httpContext) =>
+            {
+                httpContext.Items["org"] = org;
+                httpContext.Items["id"] = id;
+            }
+        );
 
         var dataSource = GetEndpointDataSource(builder);
         var endpoint = Assert.Single(dataSource.Endpoints);
@@ -87,14 +99,19 @@ public class GroupTest
     [Fact]
     public async Task NestedPrefixWithRouteParameters_CanBeUsed()
     {
-        var builder = new DefaultEndpointRouteBuilder(new ApplicationBuilder(EmptyServiceProvider.Instance));
+        var builder = new DefaultEndpointRouteBuilder(
+            new ApplicationBuilder(EmptyServiceProvider.Instance)
+        );
         var group = builder.MapGroup("/{org}").MapGroup("/{id}");
 
-        group.MapGet("/", (string org, int id, HttpContext httpContext) =>
-        {
-            httpContext.Items["org"] = org;
-            httpContext.Items["id"] = id;
-        });
+        group.MapGet(
+            "/",
+            (string org, int id, HttpContext httpContext) =>
+            {
+                httpContext.Items["org"] = org;
+                httpContext.Items["id"] = id;
+            }
+        );
 
         var dataSource = GetEndpointDataSource(builder);
         var endpoint = Assert.Single(dataSource.Endpoints);
@@ -121,19 +138,26 @@ public class GroupTest
     [Fact]
     public void RepeatedRouteParameter_ThrowsRoutePatternException()
     {
-        var builder = new DefaultEndpointRouteBuilder(new ApplicationBuilder(EmptyServiceProvider.Instance));
+        var builder = new DefaultEndpointRouteBuilder(
+            new ApplicationBuilder(EmptyServiceProvider.Instance)
+        );
         builder.MapGroup("/{ID}").MapGroup("/{id}").MapGet("/", () => { });
 
         var ex = Assert.Throws<RoutePatternException>(() => builder.DataSources.Single().Endpoints);
 
         Assert.Equal("/{ID}/{id}", ex.Pattern);
-        Assert.Equal("The route parameter name 'id' appears more than one time in the route template.", ex.Message);
+        Assert.Equal(
+            "The route parameter name 'id' appears more than one time in the route template.",
+            ex.Message
+        );
     }
 
     [Fact]
     public void NullParameters_ThrowsArgumentNullException()
     {
-        var builder = new DefaultEndpointRouteBuilder(new ApplicationBuilder(EmptyServiceProvider.Instance));
+        var builder = new DefaultEndpointRouteBuilder(
+            new ApplicationBuilder(EmptyServiceProvider.Instance)
+        );
 
         var ex = Assert.Throws<ArgumentNullException>(() => builder.MapGroup((string)null!));
         Assert.Equal("prefix", ex.ParamName);
@@ -142,7 +166,9 @@ public class GroupTest
 
         builder = null;
 
-        ex = Assert.Throws<ArgumentNullException>(() => builder!.MapGroup(RoutePatternFactory.Parse("/")));
+        ex = Assert.Throws<ArgumentNullException>(() =>
+            builder!.MapGroup(RoutePatternFactory.Parse("/"))
+        );
         Assert.Equal("endpoints", ex.ParamName);
         ex = Assert.Throws<ArgumentNullException>(() => builder!.MapGroup("/"));
         Assert.Equal("endpoints", ex.ParamName);
@@ -151,7 +177,9 @@ public class GroupTest
     [Fact]
     public void RoutePatternInConvention_IncludesFullGroupPrefix()
     {
-        var builder = new DefaultEndpointRouteBuilder(new ApplicationBuilder(EmptyServiceProvider.Instance));
+        var builder = new DefaultEndpointRouteBuilder(
+            new ApplicationBuilder(EmptyServiceProvider.Instance)
+        );
 
         var outer = builder.MapGroup("/outer");
         var inner = outer.MapGroup("/inner");
@@ -201,15 +229,20 @@ public class GroupTest
     [Fact]
     public async Task BuildingEndpointInConvention_Works()
     {
-        var builder = new DefaultEndpointRouteBuilder(new ApplicationBuilder(EmptyServiceProvider.Instance));
+        var builder = new DefaultEndpointRouteBuilder(
+            new ApplicationBuilder(EmptyServiceProvider.Instance)
+        );
 
         var group = builder.MapGroup("/group");
         var mapGetCalled = false;
 
-        group.MapGet("/", () =>
-        {
-            mapGetCalled = true;
-        });
+        group.MapGet(
+            "/",
+            () =>
+            {
+                mapGetCalled = true;
+            }
+        );
 
         Endpoint? conventionBuiltEndpoint = null;
 
@@ -236,7 +269,9 @@ public class GroupTest
     [Fact]
     public void ModifyingRoutePatternInConvention_Works()
     {
-        var builder = new DefaultEndpointRouteBuilder(new ApplicationBuilder(EmptyServiceProvider.Instance));
+        var builder = new DefaultEndpointRouteBuilder(
+            new ApplicationBuilder(EmptyServiceProvider.Instance)
+        );
 
         var group = builder.MapGroup("/group");
         group.MapGet("/foo", () => "Hello World!");
@@ -256,16 +291,21 @@ public class GroupTest
     [Fact]
     public async Task ChangingMostEndpointBuilderPropertiesInConvention_Works()
     {
-        var builder = new DefaultEndpointRouteBuilder(new ApplicationBuilder(EmptyServiceProvider.Instance));
+        var builder = new DefaultEndpointRouteBuilder(
+            new ApplicationBuilder(EmptyServiceProvider.Instance)
+        );
 
         var group = builder.MapGroup("/group");
         var mapGetCallCount = 0;
         var replacementCalled = false;
 
-        group.MapGet("/", () =>
-        {
-            mapGetCallCount++;
-        });
+        group.MapGet(
+            "/",
+            () =>
+            {
+                mapGetCallCount++;
+            }
+        );
 
         ((IEndpointConventionBuilder)group).Add(builder =>
         {
@@ -300,7 +340,9 @@ public class GroupTest
     [Fact]
     public void GivenNonRouteEndpoint_ThrowsNotSupportedException()
     {
-        var builder = new DefaultEndpointRouteBuilder(new ApplicationBuilder(EmptyServiceProvider.Instance));
+        var builder = new DefaultEndpointRouteBuilder(
+            new ApplicationBuilder(EmptyServiceProvider.Instance)
+        );
 
         var group = builder.MapGroup("/group");
         ((IEndpointRouteBuilder)group).DataSources.Add(new TestCustomEndpintDataSource());
@@ -308,15 +350,18 @@ public class GroupTest
         var dataSource = GetEndpointDataSource(builder);
         var ex = Assert.Throws<NotSupportedException>(() => dataSource.Endpoints);
         Assert.Equal(
-            "MapGroup does not support custom Endpoint type 'Microsoft.AspNetCore.Builder.GroupTest+TestCustomEndpoint'. " +
-            "Only RouteEndpoints can be grouped.",
-            ex.Message);
+            "MapGroup does not support custom Endpoint type 'Microsoft.AspNetCore.Builder.GroupTest+TestCustomEndpoint'. "
+                + "Only RouteEndpoints can be grouped.",
+            ex.Message
+        );
     }
 
     [Fact]
     public void OuterGroupMetadata_AddedFirst()
     {
-        var builder = new DefaultEndpointRouteBuilder(new ApplicationBuilder(EmptyServiceProvider.Instance));
+        var builder = new DefaultEndpointRouteBuilder(
+            new ApplicationBuilder(EmptyServiceProvider.Instance)
+        );
 
         var outer = builder.MapGroup("/outer");
         var inner = outer.MapGroup("/inner");
@@ -328,13 +373,18 @@ public class GroupTest
         var dataSource = GetEndpointDataSource(builder);
         var endpoint = Assert.Single(dataSource.Endpoints);
 
-        Assert.Equal(new[] { "/outer", "/inner", "/foo" }, endpoint.Metadata.GetOrderedMetadata<string>());
+        Assert.Equal(
+            new[] { "/outer", "/inner", "/foo" },
+            endpoint.Metadata.GetOrderedMetadata<string>()
+        );
     }
 
     [Fact]
     public void MultipleEndpoints_AreSupported()
     {
-        var builder = new DefaultEndpointRouteBuilder(new ApplicationBuilder(EmptyServiceProvider.Instance));
+        var builder = new DefaultEndpointRouteBuilder(
+            new ApplicationBuilder(EmptyServiceProvider.Instance)
+        );
 
         var group = builder.MapGroup("/group");
         group.MapGet("/foo", () => "foo");
@@ -343,7 +393,8 @@ public class GroupTest
         group.WithMetadata("/group");
 
         var dataSource = GetEndpointDataSource(builder);
-        Assert.Collection(dataSource.Endpoints.OfType<RouteEndpoint>(),
+        Assert.Collection(
+            dataSource.Endpoints.OfType<RouteEndpoint>(),
             routeEndpoint =>
             {
                 Assert.Equal("/group/foo", routeEndpoint.RoutePattern.RawText);
@@ -355,13 +406,16 @@ public class GroupTest
                 Assert.Equal("/group/bar", routeEndpoint.RoutePattern.RawText);
                 Assert.True(routeEndpoint.Metadata.Count >= 1);
                 Assert.Equal("/group", routeEndpoint.Metadata.GetMetadata<string>());
-            });
+            }
+        );
     }
 
     [Fact]
     public void DataSourceFiresChangeToken_WhenInnerDataSourceFiresChangeToken()
     {
-        var builder = new DefaultEndpointRouteBuilder(new ApplicationBuilder(EmptyServiceProvider.Instance));
+        var builder = new DefaultEndpointRouteBuilder(
+            new ApplicationBuilder(EmptyServiceProvider.Instance)
+        );
         var dynamicDataSource = new DynamicEndpointDataSource();
 
         var group = builder.MapGroup("/group");
@@ -372,31 +426,41 @@ public class GroupTest
         var groupChangeToken = groupDataSource.GetChangeToken();
         Assert.False(groupChangeToken.HasChanged);
 
-        dynamicDataSource.AddEndpoint(new RouteEndpoint(
-            TestConstants.EmptyRequestDelegate,
-            RoutePatternFactory.Parse("/foo"),
-            0, null, null));
+        dynamicDataSource.AddEndpoint(
+            new RouteEndpoint(
+                TestConstants.EmptyRequestDelegate,
+                RoutePatternFactory.Parse("/foo"),
+                0,
+                null,
+                null
+            )
+        );
 
         Assert.True(groupChangeToken.HasChanged);
 
-        var prefixedEndpoint = Assert.IsType<RouteEndpoint>(Assert.Single(groupDataSource.Endpoints));
+        var prefixedEndpoint = Assert.IsType<RouteEndpoint>(
+            Assert.Single(groupDataSource.Endpoints)
+        );
         Assert.Equal("/group/foo", prefixedEndpoint.RoutePattern.RawText);
     }
 
     private sealed class TestCustomEndpoint : Endpoint
     {
-        public TestCustomEndpoint() : base(null, null, null) { }
+        public TestCustomEndpoint()
+            : base(null, null, null) { }
     }
 
     private sealed class TestCustomEndpintDataSource : EndpointDataSource
     {
         public override IReadOnlyList<Endpoint> Endpoints => new[] { new TestCustomEndpoint() };
+
         public override IChangeToken GetChangeToken() => throw new NotImplementedException();
     }
 
     private sealed class EmptyServiceProvider : IServiceProvider
     {
         public static EmptyServiceProvider Instance { get; } = new EmptyServiceProvider();
+
         public object? GetService(Type serviceType) => null;
     }
 }

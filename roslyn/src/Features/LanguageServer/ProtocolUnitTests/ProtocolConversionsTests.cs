@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests
         public void CreateAbsoluteUri_LocalPaths_AllAscii()
         {
             var invalidFileNameChars = Path.GetInvalidFileNameChars();
-            var unescaped = "!$&'()*+,-./0123456789:;=?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]_abcdefghijklmnopqrstuvwxyz~";
+            var unescaped =
+                "!$&'()*+,-./0123456789:;=?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[]_abcdefghijklmnopqrstuvwxyz~";
 
             for (var c = '\0'; c < '\u0080'; c++)
             {
@@ -33,9 +34,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests
                 var filePath = PathUtilities.IsUnixLikePlatform ? $"/_{c}/" : $"C:\\_{c}\\";
                 var uriPrefix = PathUtilities.IsUnixLikePlatform ? "" : "C:/_";
 
-                var expectedAbsoluteUri = "file:///" + uriPrefix + (unescaped.Contains(c) ? c : "%" + ((int)c).ToString("X2")) + "/";
+                var expectedAbsoluteUri =
+                    "file:///"
+                    + uriPrefix
+                    + (unescaped.Contains(c) ? c : "%" + ((int)c).ToString("X2"))
+                    + "/";
 
-                Assert.Equal(expectedAbsoluteUri, ProtocolConversions.GetAbsoluteUriString(filePath));
+                Assert.Equal(
+                    expectedAbsoluteUri,
+                    ProtocolConversions.GetAbsoluteUriString(filePath)
+                );
 
                 var uri = ProtocolConversions.CreateAbsoluteUri(filePath);
                 Assert.Equal(expectedAbsoluteUri, uri.AbsoluteUri);
@@ -60,7 +68,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests
         [InlineData("B:\\/\u200e", "file:///B://%E2%80%8E")]
         [InlineData("C:/\\\\-Ā\r", "file:///C:///-%C4%80%0D")]
         [InlineData("D:\\\\\\\\\\\u200e", "file:///D://///%E2%80%8E")]
-        public void CreateAbsoluteUri_LocalPaths_Windows(string filePath, string expectedAbsoluteUri)
+        public void CreateAbsoluteUri_LocalPaths_Windows(
+            string filePath,
+            string expectedAbsoluteUri
+        )
         {
             Assert.Equal(expectedAbsoluteUri, ProtocolConversions.GetAbsoluteUriString(filePath));
 
@@ -72,9 +83,21 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests
         [ConditionalTheory(typeof(WindowsOnly))]
         [InlineData("C:\\a\\.\\b", "file:///C:/a/./b", "file:///C:/a/b")]
         [InlineData("C:\\a\\..\\b", "file:///C:/a/../b", "file:///C:/b")]
-        [InlineData("C:\\\ue25b\\.\\\ue25c", "file:///C:/%EE%89%9B/./%EE%89%9C", "file:///C:/%EE%89%9B/%EE%89%9C")]
-        [InlineData("C:\\\ue25b\\..\\\ue25c", "file:///C:/%EE%89%9B/../%EE%89%9C", "file:///C:/%EE%89%9C")]
-        public void CreateAbsoluteUri_LocalPaths_Normalized_Windows(string filePath, string expectedRawUri, string expectedNormalizedUri)
+        [InlineData(
+            "C:\\\ue25b\\.\\\ue25c",
+            "file:///C:/%EE%89%9B/./%EE%89%9C",
+            "file:///C:/%EE%89%9B/%EE%89%9C"
+        )]
+        [InlineData(
+            "C:\\\ue25b\\..\\\ue25c",
+            "file:///C:/%EE%89%9B/../%EE%89%9C",
+            "file:///C:/%EE%89%9C"
+        )]
+        public void CreateAbsoluteUri_LocalPaths_Normalized_Windows(
+            string filePath,
+            string expectedRawUri,
+            string expectedNormalizedUri
+        )
         {
             Assert.Equal(expectedRawUri, ProtocolConversions.GetAbsoluteUriString(filePath));
 
@@ -106,9 +129,17 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests
         [ConditionalTheory(typeof(UnixLikeOnly))]
         [InlineData("/a/./b", "file:///a/./b", "file:///a/b")]
         [InlineData("/a/../b", "file:///a/../b", "file:///b")]
-        [InlineData("/\ue25b/./\ue25c", "file:///%EE%89%9B/./%EE%89%9C", "file:///%EE%89%9B/%EE%89%9C")]
+        [InlineData(
+            "/\ue25b/./\ue25c",
+            "file:///%EE%89%9B/./%EE%89%9C",
+            "file:///%EE%89%9B/%EE%89%9C"
+        )]
         [InlineData("/\ue25b/../\ue25c", "file:///%EE%89%9B/../%EE%89%9C", "file:///%EE%89%9C")]
-        public void CreateAbsoluteUri_LocalPaths_Normalized_Unix(string filePath, string expectedRawUri, string expectedNormalizedUri)
+        public void CreateAbsoluteUri_LocalPaths_Normalized_Unix(
+            string filePath,
+            string expectedRawUri,
+            string expectedNormalizedUri
+        )
         {
             Assert.Equal(expectedRawUri, ProtocolConversions.GetAbsoluteUriString(filePath));
 
@@ -130,9 +161,18 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests
         [InlineData("a\\b", "source-generated:///a/b")]
         [InlineData("a//b", "source-generated:///a//b")]
         [InlineData("a/b", "source-generated:///a/b")]
-        [InlineData("%25\ue25b//\u0089\uC7BD/a", "source-generated:///%2525%EE%89%9B//%C2%89%EC%9E%BD/a")]
-        [InlineData("%25\ue25b\\\u0089\uC7BD", "source-generated:///%2525%EE%89%9B/%C2%89%EC%9E%BD")]
-        public void GetUriFromSourceGeneratedFilePath_Windows(string filePath, string expectedAbsoluteUri)
+        [InlineData(
+            "%25\ue25b//\u0089\uC7BD/a",
+            "source-generated:///%2525%EE%89%9B//%C2%89%EC%9E%BD/a"
+        )]
+        [InlineData(
+            "%25\ue25b\\\u0089\uC7BD",
+            "source-generated:///%2525%EE%89%9B/%C2%89%EC%9E%BD"
+        )]
+        public void GetUriFromSourceGeneratedFilePath_Windows(
+            string filePath,
+            string expectedAbsoluteUri
+        )
         {
             var url = ProtocolConversions.CreateUriFromSourceGeneratedFilePath(filePath);
             Assert.Equal(expectedAbsoluteUri, url.AbsoluteUri);
@@ -141,7 +181,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests
         [ConditionalTheory(typeof(UnixLikeOnly))]
         [InlineData("a/b", "source-generated:///a/b")]
         [InlineData("%25\ue25b/\u0089\uC7BD", "source-generated:///%2525%EE%89%9B/%C2%89%EC%9E%BD")]
-        public void GetUriFromSourceGeneratedFilePath_Unix(string filePath, string expectedAbsoluteUri)
+        public void GetUriFromSourceGeneratedFilePath_Unix(
+            string filePath,
+            string expectedAbsoluteUri
+        )
         {
             var url = ProtocolConversions.CreateUriFromSourceGeneratedFilePath(filePath);
             Assert.Equal(expectedAbsoluteUri, url.AbsoluteUri);
@@ -154,7 +197,10 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests
             var containsMethod = map.Values.Any(c => c.Contains(CompletionItemKind.Method));
             var containsFunction = map.Values.Any(c => c.Contains(CompletionItemKind.Function));
 
-            Assert.False(containsFunction && containsMethod, "Don't use Method and Function completion item kinds as it causes user confusion.");
+            Assert.False(
+                containsFunction && containsMethod,
+                "Don't use Method and Function completion item kinds as it causes user confusion."
+            );
         }
 
         [Fact]
@@ -202,11 +248,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests
         public void RangeToTextSpanLineEndOfDocumentWithEndOfLineChars()
         {
             var markup =
-@"void M()
+                @"void M()
 {
     var x = 5;
 }
-"; // add additional end line 
+"; // add additional end line
 
             var sourceText = SourceText.From(markup);
 
@@ -224,8 +270,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests
             var markup = GetTestMarkup();
             var sourceText = SourceText.From(markup);
 
-            var range = new Range() { Start = new Position(0, 0), End = new Position(sourceText.Lines.Count, 0) };
-            Assert.Throws<ArgumentException>(() => ProtocolConversions.RangeToTextSpan(range, sourceText));
+            var range = new Range()
+            {
+                Start = new Position(0, 0),
+                End = new Position(sourceText.Lines.Count, 0),
+            };
+            Assert.Throws<ArgumentException>(() =>
+                ProtocolConversions.RangeToTextSpan(range, sourceText)
+            );
         }
 
         [Fact]
@@ -236,12 +288,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests
 
             // This start position will be beyond the end position
             var range = new Range() { Start = new Position(2, 20), End = new Position(3, 0) };
-            Assert.Throws<ArgumentException>(() => ProtocolConversions.RangeToTextSpan(range, sourceText));
+            Assert.Throws<ArgumentException>(() =>
+                ProtocolConversions.RangeToTextSpan(range, sourceText)
+            );
         }
 
         private static string GetTestMarkup()
         {
-            // Markup is 31 characters long. Line break (\n) is 2 characters 
+            // Markup is 31 characters long. Line break (\n) is 2 characters
             /*
             void M()        [Line = 0; Start = 0; End = 8; End including line break = 10]
             {               [Line = 1; Start = 10; End = 11; End including line break = 13]
@@ -250,7 +304,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests
              */
 
             var markup =
-@"void M()
+                @"void M()
 {
     var x = 5;
 }";

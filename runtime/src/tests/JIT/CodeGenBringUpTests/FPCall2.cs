@@ -2,20 +2,20 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 
-
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;
+
 public class BringUpTest_FPCall2
 {
     const int Pass = 100;
     const int Fail = -1;
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static float FPAvg2(float x, float y) 
-    { 
-       float z = (x+y)/2.0f;
-       return z; 
+    public static float FPAvg2(float x, float y)
+    {
+        float z = (x + y) / 2.0f;
+        return z;
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
@@ -33,7 +33,9 @@ public class BringUpTest_FPCall2
     {
         float y = FPCall2(1f, 2f, 3f, 4f);
         Console.WriteLine(y);
-        if (System.Math.Abs(y-2.5f) <= Single.Epsilon) return Pass;
-        else return Fail;
+        if (System.Math.Abs(y - 2.5f) <= Single.Epsilon)
+            return Pass;
+        else
+            return Fail;
     }
 }

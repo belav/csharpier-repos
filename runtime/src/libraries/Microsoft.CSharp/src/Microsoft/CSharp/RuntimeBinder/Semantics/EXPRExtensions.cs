@@ -49,21 +49,28 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         [Conditional("DEBUG")]
         public static void AssertIsBin(this Expr expr)
         {
-            Debug.Assert(expr?.Kind >= ExpressionKind.TypeLimit && 0 != (expr.Flags & EXPRFLAG.EXF_BINOP));
+            Debug.Assert(
+                expr?.Kind >= ExpressionKind.TypeLimit && 0 != (expr.Flags & EXPRFLAG.EXF_BINOP)
+            );
         }
+
         public static bool isLvalue(this Expr expr)
         {
             return (expr == null) ? false : 0 != (expr.Flags & EXPRFLAG.EXF_LVALUE);
         }
+
         public static bool isChecked(this Expr expr)
         {
             return (expr == null) ? false : 0 != (expr.Flags & EXPRFLAG.EXF_CHECKOVERFLOW);
         }
 
-        public static bool isNull(this Expr expr)
-            => expr is ExprConstant constant && expr.Type.FundamentalType == FUNDTYPE.FT_REF && constant.Val.IsNullRef;
+        public static bool isNull(this Expr expr) =>
+            expr is ExprConstant constant
+            && expr.Type.FundamentalType == FUNDTYPE.FT_REF
+            && constant.Val.IsNullRef;
 
-        public static bool IsZero(this Expr expr) => expr is ExprConstant constant && constant.IsZero;
+        public static bool IsZero(this Expr expr) =>
+            expr is ExprConstant constant && constant.IsZero;
 
         private static Expr GetSeqVal(this Expr expr)
         {

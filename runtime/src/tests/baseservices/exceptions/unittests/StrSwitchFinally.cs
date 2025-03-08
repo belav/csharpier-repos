@@ -29,8 +29,8 @@ public class TestSet
         int nSuccesses = 0;
         int nFailures = 0;
 
-        CountResults(new StrSwitchFinalTest().Run(),            ref nSuccesses, ref nFailures);
-        
+        CountResults(new StrSwitchFinalTest().Run(), ref nSuccesses, ref nFailures);
+
         if (0 == nFailures)
         {
             Console.WriteLine("OVERALL PASS: " + nSuccesses + " tests");
@@ -48,12 +48,12 @@ class StrSwitchFinalTest
 {
     Trace _trace;
     static string _expected;
-    
+
     static StrSwitchFinalTest()
     {
         // Create test writer object to hold expected output
         System.IO.StringWriter expectedOut = new System.IO.StringWriter();
-        
+
         // Write expected output to string writer object
         expectedOut.WriteLine("s == one");
         expectedOut.WriteLine("In inner finally");
@@ -70,22 +70,22 @@ class StrSwitchFinalTest
         expectedOut.WriteLine("Caught an exception\r\n");
         expectedOut.WriteLine("Ok\r\n");
         expectedOut.WriteLine("In outer finally\r\n");
-        
+
         expectedOut.WriteLine("In four's finally");
         expectedOut.WriteLine("In inner finally");
         expectedOut.WriteLine("Caught an exception\r\n");
-        
+
         expectedOut.WriteLine("Ok\r\n");
-        
+
         expectedOut.WriteLine("In outer finally\r\n");
-        
+
         expectedOut.WriteLine("s == five");
         expectedOut.WriteLine("Five's finally 0");
         expectedOut.WriteLine("Five's finally 1");
         expectedOut.WriteLine("Five's finally 2");
         expectedOut.WriteLine("In inner finally");
         expectedOut.WriteLine("In outer finally\r\n");
-        
+
         expectedOut.WriteLine("Greater than five");
         expectedOut.WriteLine("in six's finally");
         expectedOut.WriteLine("In inner finally");
@@ -97,193 +97,186 @@ class StrSwitchFinalTest
     public int Run()
     {
         _trace = new Trace("StrSwitchFinalTest", _expected);
-        
-        string[] s = {"one", "two", "three", "four", "five", "six"};
 
-        for(int i = 0; i < s.Length; i++) 
+        string[] s = { "one", "two", "three", "four", "five", "six" };
+
+        for (int i = 0; i < s.Length; i++)
         {
-
-        beginloop:
-            try 
+            beginloop:
+            try
             {
-                try 
+                try
                 {
-                    try 
+                    try
                     {
-                        switch(s[i]) 
+                        switch (s[i])
                         {
                             case "one":
-                                try 
+                                try
                                 {
                                     _trace.WriteLine("s == one");
-                                } 
-                                catch 
+                                }
+                                catch
                                 {
                                     _trace.WriteLine("Exception at one");
                                 }
                                 break;
                             case "two":
-                                try 
+                                try
                                 {
                                     _trace.WriteLine("s == two");
-                                } 
-                                finally 
+                                }
+                                finally
                                 {
                                     _trace.WriteLine("After two");
                                 }
                                 break;
                             case "three":
-                                try 
+                                try
                                 {
-                                    try 
+                                    try
                                     {
                                         _trace.WriteLine("s == three");
-                                    } 
-                                    catch(System.Exception e) 
+                                    }
+                                    catch (System.Exception e)
                                     {
                                         _trace.WriteLine(e.ToString());
                                         goto continueloop;
                                     }
-                                } 
-                                finally 
+                                }
+                                finally
                                 {
                                     _trace.WriteLine("After three");
-                                    try 
-                                    { 
-                                        switch(s[s.Length-1]) 
+                                    try
+                                    {
+                                        switch (s[s.Length - 1])
                                         {
                                             case "six":
                                                 _trace.WriteLine("Ok");
                                                 _trace.WriteLine(s[s.Length]);
                                                 goto label2;
                                             default:
-                                                try 
-                                                { 
+                                                try
+                                                {
                                                     _trace.WriteLine("Ack");
                                                     goto label;
-                                                } 
-                                                catch 
+                                                }
+                                                catch
                                                 {
                                                     _trace.WriteLine("I don't think so ...");
                                                 }
                                                 break;
                                         }
-                                    label:
+                                        label:
                                         _trace.WriteLine("Unreached");
                                         throw new Exception();
-                                    } 
-                                    finally 
+                                    }
+                                    finally
                                     {
                                         _trace.WriteLine("After after three");
                                     }
-                                label2:
+                                    label2:
                                     _trace.WriteLine("Unreached");
-                        
                                 }
                                 goto continueloop;
 
                             case "four":
-                                try 
+                                try
                                 {
-                                    try 
+                                    try
                                     {
                                         _trace.WriteLine("s == " + s[s.Length]);
-                                        try 
-                                        {
-                                        } 
-                                        finally 
+                                        try { }
+                                        finally
                                         {
                                             _trace.WriteLine("Unreached");
                                         }
-                                    } 
-                                    catch (Exception e) 
+                                    }
+                                    catch (Exception e)
                                     {
                                         goto test;
-                                    rethrowex:
+                                        rethrowex:
                                         throw;
-                                    test:
-                                        if (e is System.ArithmeticException) 
+                                        test:
+                                        if (e is System.ArithmeticException)
                                         {
-
-                                            try 
+                                            try
                                             {
                                                 _trace.WriteLine("unreached ");
                                                 goto finishfour;
-                                            } 
-                                            finally 
+                                            }
+                                            finally
                                             {
                                                 _trace.WriteLine("also unreached");
                                             }
-                                        } 
-                                        else 
+                                        }
+                                        else
                                         {
                                             goto rethrowex;
                                         }
                                     }
-                                } 
-                                finally 
+                                }
+                                finally
                                 {
                                     _trace.WriteLine("In four's finally");
                                 }
                                 finishfour:
-                                    break;
+                                break;
                             case "five":
-                                try 
+                                try
                                 {
-                                    try 
+                                    try
                                     {
-                                        try 
+                                        try
                                         {
-
                                             _trace.WriteLine("s == five");
-                                        } 
-                                        finally 
+                                        }
+                                        finally
                                         {
                                             _trace.WriteLine("Five's finally 0");
                                         }
-                                    } 
-                                    catch (Exception) 
+                                    }
+                                    catch (Exception)
                                     {
                                         _trace.WriteLine("Unreached");
-                                    } 
-                                    finally 
+                                    }
+                                    finally
                                     {
                                         _trace.WriteLine("Five's finally 1");
                                     }
                                     break;
-                                } 
-                                finally 
+                                }
+                                finally
                                 {
                                     _trace.WriteLine("Five's finally 2");
                                 }
                             default:
-                                try 
+                                try
                                 {
                                     _trace.WriteLine("Greater than five");
                                     goto finish;
-                                } 
-                                finally 
+                                }
+                                finally
                                 {
                                     _trace.WriteLine("in six's finally");
-                        
                                 }
-                    
-                        };
+                        }
+                        ;
                         continue;
-                    } 
-                    finally 
+                    }
+                    finally
                     {
                         _trace.WriteLine("In inner finally");
                     }
                 }
-                catch (Exception e) 
+                catch (Exception e)
                 {
                     _trace.WriteLine("Caught an exception\r\n");
-                                            
-                    switch(s[i]) 
+
+                    switch (s[i])
                     {
                         case "three":
-                            if (e is System.IndexOutOfRangeException) 
+                            if (e is System.IndexOutOfRangeException)
                             {
                                 _trace.WriteLine("Ok\r\n");
                                 i++;
@@ -292,7 +285,7 @@ class StrSwitchFinalTest
                             _trace.WriteLine("Unreached\r\n");
                             break;
                         case "four":
-                            if (e is System.IndexOutOfRangeException) 
+                            if (e is System.IndexOutOfRangeException)
                             {
                                 _trace.WriteLine("Ok\r\n");
                                 i++;
@@ -304,24 +297,20 @@ class StrSwitchFinalTest
                             _trace.WriteLine("****** Unreached");
                             goto continueloop;
                     }
-                    
                 }
 
                 _trace.WriteLine("Unreached");
-            } 
-            finally 
+            }
+            finally
             {
                 _trace.WriteLine("In outer finally\r\n");
             }
 
-        continueloop:
+            continueloop:
             _trace.WriteLine("Continuing");
-         
         }
         finish:
 
         return _trace.Match();
     }
 }
-
-

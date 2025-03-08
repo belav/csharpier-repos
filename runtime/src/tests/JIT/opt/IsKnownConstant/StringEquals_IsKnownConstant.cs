@@ -46,7 +46,7 @@ public class Program
         AssertThrowsNRE(() => TestStartWith(null));
     }
 
-    private static void AssertEquals(bool expected, bool actual, [CallerLineNumber]int l = 0)
+    private static void AssertEquals(bool expected, bool actual, [CallerLineNumber] int l = 0)
     {
         if (expected != actual)
             throw new InvalidOperationException();
@@ -66,9 +66,10 @@ public class Program
     }
 
     private static string NullStr() => null;
-    private static string EmptyStr() => "";
-    private static string NonEmptyStr() => "1";
 
+    private static string EmptyStr() => "";
+
+    private static string NonEmptyStr() => "1";
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static bool TestEquals1(string str) => str == "";
@@ -78,7 +79,7 @@ public class Program
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static bool TestEquals3(string str) => "" == str;
-    
+
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static bool TestEquals4(string str) => string.Empty == str;
 
