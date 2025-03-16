@@ -52,10 +52,16 @@
 /mono/mcs/class/referencesource/mscorlib/system/runtime/serialization/formatters/isoapmessage.cs
 /mono/mcs/class/referencesource/mscorlib/system/runtime/serialization/formatters/soapmessage.cs
 /mono/mcs/class/referencesource/mscorlib/system/security/principal/windowsidentity.cs 
+/mono/mcs/class/referencesource/System/net/System/Net/_SecureChannel.cs
+/mono/mcs/class/referencesource/System/net/System/Net/SecureProtocols/SslStream.cs
+/mono/mcs/class/referencesource/System/net/System/Net/SecureProtocols/_SslState.cs
+/mono/mcs/class/referencesource/mscorlib/system/text/isciiencoding.cs
 /mono/mcs/class/referencesource/System.Core/System/Security/Cryptography/BCryptNative.cs 
+/mono/mcs/class/referencesource/System.Data.SqlXml/System/Xml/Xsl/Xslt/XsltLoader.cs
 /mono/mcs/class/referencesource/System.Runtime.Serialization/System/Runtime/Serialization/CodeGenerator.cs 
 /mono/mcs/class/referencesource/System.Runtime.Serialization/System/Xml/EncodingStreamWrapper.cs 
 /mono/mcs/class/referencesource/System.Runtime.Serialization/System/Xml/XmlMtomWriter.cs 
+mono/mcs/class/referencesource/System.Web/Util/ArglessEventHandlerProxy.cs
 /mono/mcs/class/referencesource/System.Web.DataVisualization/Common/General/Axis.cs
 /mono/mcs/class/referencesource/System.Web.DataVisualization/Common/General/SubAxis.cs
 /mono/mcs/class/referencesource/System.Web/Handlers/PrecompHandler.cs
@@ -86,6 +92,7 @@
 /mono/mcs/class/System/System.Net.Mail/SmtpClient.cs
 /mono/mcs/class/System/System.Security.Cryptography.X509Certificates/X509Certificate2ImplMono.cs
 /mono/mcs/class/System/System.Security.Cryptography.X509Certificates/X509Helper2.cs
+/mono/mcs/class/corlib/System/TermInfoDriver.cs
 /mono/mcs/errors/*.cs
 /mono/mcs/jay/skeleton.cs
 /mono/mcs/tests/test-547.cs 
@@ -198,6 +205,7 @@
 /runtime/src/libraries/System.Private.CoreLib/src/System/UIntPtr.cs
 /runtime/src/libraries/System.Private.Xml.Linq/tests/XPath/XDocument/NavigatorComparer.cs
 /runtime/src/libraries/System.Private.Xml/src/System/Xml/MTNameTable.cs 
+/runtime/src/libraries/System.Private.Xml/src/System/Xml/Xsl/Xslt/XsltLoader.cs
 /runtime/src/libraries/System.Runtime/ref/System.Runtime.cs
 /runtime/src/libraries/System.Security.Cryptography.Pkcs/tests/SignedCms/SignedDocuments.cs
 /runtime/src/libraries/System.Text.Encoding.CodePages/src/System/Text/EncodingTable.Data.cs
