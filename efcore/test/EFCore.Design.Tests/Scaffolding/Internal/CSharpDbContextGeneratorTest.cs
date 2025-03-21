@@ -46,7 +46,7 @@ public partial class TestDbContext : DbContext
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning {{DesignStrings.SensitiveInformationWarning}}
+#warning {DesignStrings.SensitiveInformationWarning}
         => optionsBuilder.UseSqlServer("Initial Catalog=TestDatabase");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -848,7 +848,7 @@ public partial class TestDbContext : DbContext
     public virtual DbSet<EntityWithIndexes> EntityWithIndexes { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning {{DesignStrings.SensitiveInformationWarning}}
+#warning {DesignStrings.SensitiveInformationWarning}
         => optionsBuilder.UseSqlServer("Initial Catalog=TestDatabase");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -926,7 +926,7 @@ public partial class TestDbContext : DbContext
     public virtual DbSet<EntityWithIndexes> EntityWithIndexes { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning {{DesignStrings.SensitiveInformationWarning}}
+#warning {DesignStrings.SensitiveInformationWarning}
         => optionsBuilder.UseSqlServer("Initial Catalog=TestDatabase");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -1002,7 +1002,7 @@ public partial class TestDbContext : DbContext
     public virtual DbSet<EntityWithIndexes> EntityWithIndexes { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning {{DesignStrings.SensitiveInformationWarning}}
+#warning {DesignStrings.SensitiveInformationWarning}
         => optionsBuilder.UseSqlServer("Initial Catalog=TestDatabase");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -1121,7 +1121,7 @@ public partial class TestDbContext : DbContext
     public virtual DbSet<PrincipalEntity> PrincipalEntity { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning {{DesignStrings.SensitiveInformationWarning}}
+#warning {DesignStrings.SensitiveInformationWarning}
         => optionsBuilder.UseSqlServer("Initial Catalog=TestDatabase");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -1191,7 +1191,7 @@ public partial class TestDbContext : DbContext
     public virtual DbSet<Employee> Employee { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning {{DesignStrings.SensitiveInformationWarning}}
+#warning {DesignStrings.SensitiveInformationWarning}
         => optionsBuilder.UseSqlServer("Initial Catalog=TestDatabase");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -1273,7 +1273,7 @@ public partial class TestDbContext : DbContext
     public virtual DbSet<MyEntity> MyEntity { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning {{DesignStrings.SensitiveInformationWarning}}
+#warning {DesignStrings.SensitiveInformationWarning}
         => optionsBuilder.UseSqlServer("Initial Catalog=TestDatabase");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -1434,7 +1434,7 @@ public partial class TestDbContext : DbContext
     public virtual DbSet<Customer> Customer { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning {{DesignStrings.SensitiveInformationWarning}}
+#warning {DesignStrings.SensitiveInformationWarning}
         => optionsBuilder.UseSqlServer("Initial Catalog=TestDatabase");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -1550,7 +1550,7 @@ public partial class TestDbContext : DbContext
     public virtual DbSet<Employee> Employee { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning {{DesignStrings.SensitiveInformationWarning}}
+#warning {DesignStrings.SensitiveInformationWarning}
         => optionsBuilder.UseSqlServer("Initial Catalog=TestDatabase");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -1628,7 +1628,7 @@ public partial class TestDbContext : DbContext
     public virtual DbSet<Channel> Channel { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning {{DesignStrings.SensitiveInformationWarning}}
+#warning {DesignStrings.SensitiveInformationWarning}
         => optionsBuilder.UseSqlServer("Initial Catalog=TestDatabase");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

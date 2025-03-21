@@ -2763,9 +2763,9 @@ mb.InsertData(
     columns: new[] { "Id", "Description" },
     values: new object[,]
     {
-        { 0, "Contains{{"\\r\\n"}}a Windows linebreak" },
-        { 1, "Contains a{{"\\n"}}Linux linebreak" },
-        { 2, "Contains a single Backslash r,{{"\\r"}}just in case" }
+        { 0, "Contains{"\\r\\n"}a Windows linebreak" },
+        { 1, "Contains a{"\\n"}Linux linebreak" },
+        { 2, "Contains a single Backslash r,{"\\r"}just in case" }
     });
 """,
             operation =>
@@ -2945,9 +2945,9 @@ mb.DeleteData(
     keyColumns: new[] { "Id", "Description" },
     keyValues: new object[,]
     {
-        { 0, "Contains{{"\\r\\n"}}a Windows linebreak" },
-        { 1, "Contains a{{"\\n"}}Linux linebreak" },
-        { 2, "Contains a single Backslash r,{{"\\r"}}just in case" }
+        { 0, "Contains{"\\r\\n"}a Windows linebreak" },
+        { 1, "Contains a{"\\n"}Linux linebreak" },
+        { 2, "Contains a single Backslash r,{"\\r"}just in case" }
     });
 """,
             operation =>
@@ -3398,9 +3398,9 @@ mb.UpdateData(
     column: "Description",
     values: new object[]
     {
-        "Contains{{"\\r\\n"}}a Windows linebreak",
-        "Contains a{{"\\n"}}Linux linebreak",
-        "Contains a single Backslash r,{{"\\r"}}just in case"
+        "Contains{"\\r\\n"}a Windows linebreak",
+        "Contains a{"\\n"}Linux linebreak",
+        "Contains a single Backslash r,{"\\r"}just in case"
     });
 """,
             operation =>
@@ -3501,7 +3501,7 @@ mb.AlterTable(
                     {
                         public static void Create(MigrationBuilder mb)
                         {
-                            {{code}}
+                            {code}
                         }
                     }
 """

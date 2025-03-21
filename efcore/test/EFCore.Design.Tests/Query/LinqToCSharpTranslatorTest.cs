@@ -123,7 +123,7 @@ public class LinqToCSharpTranslatorTest
             $$"""
 {
     int i;
-    {{expected}};
+    {expected};
 }
 """
         );
